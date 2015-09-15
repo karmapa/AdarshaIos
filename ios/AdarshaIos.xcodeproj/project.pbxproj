@@ -23,9 +23,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		9B09704E1BA809B3002182A3 /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B09704B1BA809B3002182A3 /* kfs_ios.m */; };
-		9B09704F1BA809B3002182A3 /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B09704D1BA809B3002182A3 /* kfs_rct.m */; };
-		9B0970511BA809C5002182A3 /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B0970501BA809C5002182A3 /* moedict.kdb */; };
+		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
+		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,11 +129,10 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		9B09704A1BA809B3002182A3 /* kfs_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_ios.h; sourceTree = "<group>"; };
-		9B09704B1BA809B3002182A3 /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
-		9B09704C1BA809B3002182A3 /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
-		9B09704D1BA809B3002182A3 /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
-		9B0970501BA809C5002182A3 /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = moedict.kdb; sourceTree = "<group>"; };
+		9B002A1F1BA81313006EAADF /* kfs_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_ios.h; sourceTree = "<group>"; };
+		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
+		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
+		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,11 +239,10 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
-				9B0970501BA809C5002182A3 /* moedict.kdb */,
-				9B09704A1BA809B3002182A3 /* kfs_ios.h */,
-				9B09704B1BA809B3002182A3 /* kfs_ios.m */,
-				9B09704C1BA809B3002182A3 /* kfs_rct.h */,
-				9B09704D1BA809B3002182A3 /* kfs_rct.m */,
+				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
+				9B002A201BA81313006EAADF /* kfs_ios.m */,
+				9B002A211BA81313006EAADF /* kfs_rct.h */,
+				9B002A221BA81313006EAADF /* kfs_rct.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -521,7 +518,6 @@
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				9B0970511BA809C5002182A3 /* moedict.kdb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,9 +536,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B09704F1BA809B3002182A3 /* kfs_rct.m in Sources */,
+				9B002A241BA81313006EAADF /* kfs_rct.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				9B09704E1BA809B3002182A3 /* kfs_ios.m in Sources */,
+				9B002A231BA81313006EAADF /* kfs_ios.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

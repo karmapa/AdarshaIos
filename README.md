@@ -6,6 +6,6 @@ It has a search engine with an intuitive front-end that facilitates searching an
 # do this for the first time only
 npm run init
 ```
-Add node_modules/kfs_* and kdb file to project
+Add node_modules/kfs_* to project
 
 ![xcode-add-files](https://raw.githubusercontent.com/kmsheng/AdarshaIos/master/docs/xcode-add-files.png)
