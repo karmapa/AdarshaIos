@@ -4,6 +4,14 @@
  */
 'use strict';
 
+var kfs = require('NativeModules').KsanaFileSystem;
+
+global.kfs = kfs;
+
+if (! kfs) {
+  throw 'Ksana file system not found. Have you imported ksana-react-native in xcode ?';
+}
+
 var React = require('react-native');
 var {
   AppRegistry,
