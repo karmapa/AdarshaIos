@@ -3,5 +3,5 @@ It has a search engine with an intuitive front-end that facilitates searching an
 
 ## Setup
 ```
-npm install
+npm run init
 ```
