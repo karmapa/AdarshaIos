@@ -16,6 +16,8 @@ var React = require('react-native');
 var kde = require('ksana-database');
 var kse = require('ksana-search');
 
+var SearchResult = require('./search-result');
+
 var {
   AppRegistry,
   StyleSheet,
