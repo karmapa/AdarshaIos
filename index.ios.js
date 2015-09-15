@@ -13,6 +13,8 @@ if (! kfs) {
 }
 
 var React = require('react-native');
+var kde = require('ksana-database');
+
 var {
   AppRegistry,
   StyleSheet,
