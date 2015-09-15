@@ -22,7 +22,12 @@ var {AppRegistry, StyleSheet, Text, TextInput, TouchableHighlight, View} = React
 
 var AdarshaIos = React.createClass({
   getInitialState: function() {
-    return {db: null, text: '', excerpts: [], tofind: '菩提'}
+    return {
+      db: null,
+      text: '',
+      excerpts: [],
+      tofind: '菩提'
+    };
   },
   componentDidMount: function() {
 
