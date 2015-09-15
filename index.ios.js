@@ -34,12 +34,9 @@ var AdarshaIos = React.createClass({
     var that = this;
 
     kde.open('moedict', function(err, db) {
-
-      setTimeout(function(){
-        if (db) {
-          that.setState({db: db});
-        }
-      }, 500);
+      if (db) {
+        that.setState({db});
+      }
     }, this);
   },
   search: function(tofind) {
