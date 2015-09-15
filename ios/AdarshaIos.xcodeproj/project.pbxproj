@@ -25,6 +25,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
 		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
+		9B002A261BA81850006EAADF /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B002A251BA81850006EAADF /* moedict.kdb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
 		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
 		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
+		9B002A251BA81850006EAADF /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = moedict.kdb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
+				9B002A251BA81850006EAADF /* moedict.kdb */,
 				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
 				9B002A201BA81313006EAADF /* kfs_ios.m */,
 				9B002A211BA81313006EAADF /* kfs_rct.h */,
@@ -518,6 +521,7 @@
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				9B002A261BA81850006EAADF /* moedict.kdb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
