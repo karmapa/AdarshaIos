@@ -18,7 +18,7 @@ var kse = require('ksana-search');
 
 var SearchResult = require('./search-result');
 
-var {AppRegistry, StyleSheet, Text, View} = React;
+var {AppRegistry, StyleSheet, Text, TextInput, View} = React;
 
 var AdarshaIos = React.createClass({
   render: function() {
