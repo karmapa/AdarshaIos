@@ -21,19 +21,88 @@ var SearchResult = require('./search-result');
 var {AppRegistry, StyleSheet, Text, TextInput, TouchableHighlight, View} = React;
 
 var AdarshaIos = React.createClass({
+  getInitialState: function() {
+    return {db: null, text: '', excerpts: [], tofind: '菩提'}
+  },
+  componentDidMount: function() {
+
+    var that = this;
+
+    kde.open('moedict', function(err, db) {
+
+      setTimeout(function(){
+        if (db) {
+          that.setState({db: db});
+        }
+      }, 500);
+    }, this);
+  },
+  search: function(tofind) {
+
+    var options = {nohighlight: true, range: {maxhit: 10}};
+
+    kse.search(this.state.db, tofind, options, function(err, data) {
+
+      this.setState({
+        excerpts: data.excerpt || [],
+        text: ''
+      });
+    }.bind(this));
+  },
+  getText: function(tofind) {
+
+    if (! this.state.db) {
+      return '';
+    }
+
+    var that = this;
+    var sp = tofind.split('.');
+
+    if (1 === sp.length) {
+      return this.search(tofind);
+    }
+
+    var f = parseInt(sp[0] || '0');
+    var p = parseInt(sp[1] || '0');
+    this.state.db.get(['filecontents', f, p], function(data) {
+
+      that.setState({
+        text: data,
+        excerpts: []
+      });
+
+      setTimeout(function(){
+        that.refs.tofind.focus();
+      }, 10);
+    });
+  },
+  onSearchPressed: function(e) {
+    this.getText(this.state.tofind);
+  },
+  onSearchTextChanged:function(event) {
+    this.setState({
+      tofind: event.nativeEvent.text
+    });
+  },
+  onSubmit: function(event) {
+    this.getText(this.state.tofind);
+  },
   render: function() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+
+        <View style={styles.flowRight}>
+
+          <TextInput autoFocus={true} ref="tofind" style={styles.searchInput} value={this.state.tofind}
+              onChange={this.onSearchTextChanged} onEndEditing={this.onSubmit} placeholder='input page number' />
+
+          <TouchableHighlight style={styles.button} underlayColor='#a72e21' onPress={this.onSearchPressed}>
+            <Text style={styles.buttonText}>fetch</Text>
+          </TouchableHighlight>
+        </View>
+
+        <Text style={styles.title}>{this.state.text}</Text>
+        <SearchResult excerpts={this.state.excerpts} />
       </View>
     );
   }
