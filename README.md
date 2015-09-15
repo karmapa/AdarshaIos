@@ -3,5 +3,6 @@ It has a search engine with an intuitive front-end that facilitates searching an
 
 ## Setup
 ```
+# do this for the first time only
 npm run init
 ```
