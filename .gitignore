@@ -29,3 +29,8 @@ npm-debug.log
 
 *.*.swp
 *.*.swo
+
+ios/kfs_ios.h
+ios/kfs_ios.m
+ios/kfs_rct.h
+ios/kfs_rct.m
