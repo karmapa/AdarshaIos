@@ -25,8 +25,11 @@ class MainApp extends Component {
 
   render() {
 
+    let {tintColor, barTintColor} = stylesTabBar;
+    let tabBarProps = {tintColor, barTintColor};
+
     return (
-      <TabBarIOS tintColor={'#c1d82f'} barTintColor={'#000000'}>
+      <TabBarIOS {...tabBarProps}>
         <TabBarIOS.Item title={''} iconName={'ion|ios-book-outline'} iconSize={32}
             selected={'One' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'One')}>
           <ScrollView contentContainerStyle={styles.container}>
