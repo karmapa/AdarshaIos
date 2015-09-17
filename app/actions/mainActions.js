@@ -35,3 +35,12 @@ export function openDb(name) {
     });
   };
 }
+
+export const SET_DB = 'SET_DB';
+
+export function setDb(db) {
+  return {
+    type: SET_DB,
+    db
+  };
+}
