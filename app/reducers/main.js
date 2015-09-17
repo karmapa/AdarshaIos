@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 
 const initialState = {
   count: 0
