@@ -22,7 +22,7 @@ class MainApp extends Component {
   }
 
   onTabPress(selectedTab) {
-    this.setState({selectedTab});
+    this.props.dispatch(mainActions.setSelectedTab(selectedTab));
   }
 
   render() {
