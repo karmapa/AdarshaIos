@@ -1,3 +1,4 @@
+import * as types from '../actions/mainActions';
 import Immutable from 'immutable';
 
 const initialState = {
