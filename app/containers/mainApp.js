@@ -27,7 +27,7 @@ class MainApp extends Component {
 
     return (
       <TabBarIOS tintColor={'#c1d82f'} barTintColor={'#000000'}>
-        <TabBarIOS.Item title={''} iconName={'ion|ios-home-outline'} iconSize={32}
+        <TabBarIOS.Item title={''} iconName={'ion|ios-book-outline'} iconSize={32}
             selected={'One' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'One')}>
           <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.topContainer}>
@@ -35,7 +35,7 @@ class MainApp extends Component {
             </View>
           </ScrollView>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title={''} iconName={'ion|ios-paper-outline'} iconSize={32}
+        <TabBarIOS.Item title={''} iconName={'ion|ios-search'} iconSize={32}
             selected={'Two' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'Two')}>
           <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.topContainer}>
