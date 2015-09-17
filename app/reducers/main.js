@@ -9,14 +9,11 @@ const actionsMap = {
   [types.SET_SELECTED_TAB]: setSelectedTab
 };
 
-export default function counter(state = initialState, action = {}) {
-  switch (action.type) {
-    case 'test':
-      return {
-        ...state,
-        count: state.count + 1
-      };
-    default:
-      return state;
-  }
+export default function main(state = initialState, action) {
+  const reduceFn = actionsMap[action.type];
+  return reduceFn ? reduceFn(state, action) : state;
+}
+
+function setSelectedTab(state, action) {
+  return state.set('selectedTab', action.selectedTab);
 }
