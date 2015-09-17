@@ -3,11 +3,13 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
   db: null,
+  dbError: null,
   selectedTab: 'keyboardSearch'
 });
 
 const actionsMap = {
   [types.SET_DB]: setDb,
+  [types.SET_DB_ERROR]: setDbError,
   [types.SET_SELECTED_TAB]: setSelectedTab
 };
 
@@ -24,3 +26,6 @@ function setDb(state, action) {
   return state.set('db', action.db);
 }
 
+function setDbError(state, action) {
+  return state.set('dbError', action.err);
+}
