@@ -29,27 +29,28 @@ class MainApp extends Component {
 
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
+    let {selectedTab} = this.props.state.toObject();
 
     return (
       <TabBarIOS {...tabBarProps}>
-        <TabBarIOS.Item title={''} iconName={'ion|ios-book-outline'} iconSize={32}
-            selected={'One' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'One')}>
+        <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
+            selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
           <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.topContainer}>
               <Text>One</Text>
             </View>
           </ScrollView>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title={''} iconName={'ion|ios-search'} iconSize={32}
-            selected={'Two' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'Two')}>
+        <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
+            selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
           <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.topContainer}>
               <Text>Two</Text>
             </View>
           </ScrollView>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title={''} iconName={'ion|social-buffer'} iconSize={32}
-            selected={'Three' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'Three')}>
+        <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
+            selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
           <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.topContainer}>
               <Text>Two</Text>
