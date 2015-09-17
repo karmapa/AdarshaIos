@@ -43,6 +43,14 @@ class MainApp extends Component {
             </View>
           </ScrollView>
         </TabBarIOS.Item>
+        <TabBarIOS.Item title={''} iconName={'ion|social-buffer'} iconSize={32}
+            selected={'Three' === this.state.selectedTab} onPress={this.onTabPress.bind(this, 'Two')}>
+          <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.topContainer}>
+              <Text>Two</Text>
+            </View>
+          </ScrollView>
+        </TabBarIOS.Item>
       </TabBarIOS>
     );
   }
