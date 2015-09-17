@@ -1,8 +1,9 @@
 import * as types from '../actions/mainActions';
 import Immutable from 'immutable';
 
-const initialState = {
-  count: 0
+
+const actionsMap = {
+  [types.SET_SELECTED_TAB]: setSelectedTab
 };
 
 export default function counter(state = initialState, action = {}) {
