@@ -1,11 +1,13 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react-native';
+import React, { Component, Navigator, PropTypes } from 'react-native';
 
 import { connect } from 'react-redux/native';
 import * as mainActions from '../actions/mainActions';
 import { MasterView } from '../containers';
 import { bindActionCreators } from 'redux';
+
+import { styles } from './mainApp.style';
 
 @connect(state => ({
   settings: state.main
@@ -25,18 +27,33 @@ class MainApp extends Component {
     this.props.dispatch(mainActions.openDb('moedict'));
   }
 
+
   render() {
 
-    const {settings} = this.props;
-    const appActions = bindActionCreators(mainActions, this.props.dispatch);
-
-    let masterViewProps = {
-      settings: settings.toObject(),
-      ...appActions
+    let navigatorProps = {
+      style: styles.navigatorIos,
+      initialRoute: {
+        index: 0
+      },
+      renderScene: this.renderScene.bind(this)
     };
 
     return (
-      <MasterView {...masterViewProps} />
+      <Navigator {...navigatorProps} />
+    );
+  }
+
+  renderScene(route, navigator) {
+
+    const {settings, dispatch} = this.props;
+    const actions = bindActionCreators(mainActions, dispatch);
+
+    let masterViewProps = Object.assign({
+      settings: settings.toObject()
+    }, actions);
+
+    return (
+      <MasterView {...masterViewProps}></MasterView>
     );
   }
 }
