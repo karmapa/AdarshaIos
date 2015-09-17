@@ -15,6 +15,7 @@
     "ksana-search": "git+https://github.com/ksanaforge/ksana-search.git#ca19e45",
     "react-native": "git+https://github.com/kmsheng/react-native.git#v0.11.0-redux",
     "react-native-icons": "^0.3.6",
+    "react-pure-render": "^1.0.2",
     "react-redux": "^2.1.2",
     "redux": "^3.0.0",
     "redux-thunk": "^0.1.0"
