@@ -21,10 +21,6 @@ class MainApp extends Component {
     super(props);
   }
 
-  state = {
-    selectedTab: 'One'
-  };
-
   onTabPress(selectedTab) {
     this.setState({selectedTab});
   }
