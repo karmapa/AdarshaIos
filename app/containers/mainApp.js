@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, ScrollView, View, Text } from 'react-native';
+import React, { Component, ScrollView, View, Text, PropTypes } from 'react-native';
 
 import { connect } from 'react-redux/native';
 import { TabBarIOS, Spinner, Icon} from 'react-native-icons';
@@ -10,6 +10,11 @@ import { styles, stylesTabBar } from './mainApp.style';
   state: state.main
 }))
 class MainApp extends Component {
+
+  static PropTypes = {
+    state: PropTypes.object.isRequire,
+    dispatch: PropTypes.func.isRequire
+  };
 
   constructor(props) {
     super(props);
