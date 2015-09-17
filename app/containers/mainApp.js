@@ -1,15 +1,14 @@
 'use strict';
 
-import React, { Component, ScrollView, View, Text, PropTypes } from 'react-native';
+import React, { Component, PropTypes } from 'react-native';
 
 import { connect } from 'react-redux/native';
-import { TabBarIOS, Spinner, Icon} from 'react-native-icons';
-import { styles, stylesTabBar } from './mainApp.style';
 import * as mainActions from '../actions/mainActions';
-import { KeyboardSearchView } from '../components';
+import { MasterView } from '../containers';
+import { bindActionCreators } from 'redux';
 
 @connect(state => ({
-  state: state.main
+  settings: state.main
 }))
 class MainApp extends Component {
 
@@ -22,39 +21,22 @@ class MainApp extends Component {
     super(props);
   }
 
-  onTabPress(selectedTab) {
-    this.props.dispatch(mainActions.setSelectedTab(selectedTab));
+  componentDidMount() {
+    this.props.dispatch(mainActions.openDb('moedict'));
   }
 
   render() {
 
-    let {tintColor, barTintColor} = stylesTabBar;
-    let tabBarProps = {tintColor, barTintColor};
-    let {selectedTab} = this.props.state.toObject();
+    const {settings} = this.props;
+    const appActions = bindActionCreators(mainActions, this.props.dispatch);
+
+    let masterViewProps = {
+      settings: settings.toObject(),
+      ...appActions
+    };
 
     return (
-      <TabBarIOS {...tabBarProps}>
-        <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
-            selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
-          <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.topContainer}>
-              <Text>One</Text>
-            </View>
-          </ScrollView>
-        </TabBarIOS.Item>
-        <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
-            selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
-          <KeyboardSearchView />
-        </TabBarIOS.Item>
-        <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
-            selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
-          <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.topContainer}>
-              <Text>Two</Text>
-            </View>
-          </ScrollView>
-        </TabBarIOS.Item>
-      </TabBarIOS>
+      <MasterView {...masterViewProps} />
     );
   }
 }
