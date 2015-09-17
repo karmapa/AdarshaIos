@@ -44,3 +44,12 @@ export function setDb(db) {
     db
   };
 }
+
+export const SET_DB_ERROR = 'SET_DB_ERROR';
+
+export function setDbError(err) {
+  return {
+    type: SET_DB_ERROR,
+    err
+  };
+}
