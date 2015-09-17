@@ -6,6 +6,7 @@ import { connect } from 'react-redux/native';
 import * as mainActions from '../actions/mainActions';
 import { MasterView } from '../containers';
 import { bindActionCreators } from 'redux';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { styles } from './mainApp.style';
 
@@ -27,6 +28,7 @@ class MainApp extends Component {
     this.props.dispatch(mainActions.openDb('moedict'));
   }
 
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
 
