@@ -21,3 +21,17 @@ export function setSelectedTab(selectedTab) {
     selectedTab
   };
 }
+
+export function openDb(name) {
+
+  return dispatch => {
+    kde.open('moedict', function(err, db) {
+      if (db) {
+        dispatch(setDb(db));
+      }
+      else {
+        dispatch(setDbError(err));
+      }
+    });
+  };
+}
