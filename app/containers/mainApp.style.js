@@ -13,3 +13,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between'
   }
 });
+
+export const stylesTabBar = {
+  tintColor: '#19bd9b',
+  barTintColor: '#000000'
+};
