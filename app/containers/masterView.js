@@ -6,6 +6,7 @@ import { TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import { styles, stylesTabBar } from './masterView.style';
 import * as mainActions from '../actions/mainActions';
 import { KeyboardSearchView } from '../components';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class MasterView extends Component {
 
@@ -21,6 +22,8 @@ class MasterView extends Component {
   onTabPress(selectedTab) {
     this.props.setSelectedTab(selectedTab);
   }
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
 
