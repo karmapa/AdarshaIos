@@ -5,6 +5,7 @@ import React, { Component, ScrollView, View, Text, PropTypes } from 'react-nativ
 import { connect } from 'react-redux/native';
 import { TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import { styles, stylesTabBar } from './mainApp.style';
+import * as mainActions from '../actions/mainActions';
 
 @connect(state => ({
   state: state.main
