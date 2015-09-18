@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   text: {
     color: '#656565',
-    fontSize: 20,
+    fontSize: 16,
   },
   highlight: {
     color:"#FF7F7F"
