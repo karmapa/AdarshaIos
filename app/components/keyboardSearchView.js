@@ -36,10 +36,6 @@ class KeyboardSearchView extends Component {
     let {db} = this.props;
     let self = this;
 
-    if (! db) {
-      return;
-    }
-
     var options = {
       nohighlight: true,
       range: {
