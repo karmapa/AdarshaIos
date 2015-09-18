@@ -7,8 +7,6 @@ global.kfs = kfs;
 // MUST write require so ksana-database can get the kfs object
 let kde  = require('ksana-database');
 
-import kse from 'ksana-search';
-
 if (! kfs) {
   throw 'Ksana file system not found. Have you imported ksana-react-native in xcode ?';
 }
