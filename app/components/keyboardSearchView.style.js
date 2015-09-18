@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   view: {
-    paddingTop: 30,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 10
+    paddingTop: 28,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingBottom: 14
   },
   searchInput: {
     borderColor: '#cccccc',
