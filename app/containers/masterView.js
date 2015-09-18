@@ -31,7 +31,6 @@ class MasterView extends Component {
     let tabBarProps = {tintColor, barTintColor};
     let {selectedTab, db} = this.props.settings;
 
-
     return (
       <TabBarIOS {...tabBarProps}>
         <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
