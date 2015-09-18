@@ -1,5 +1,5 @@
 
-import CategoryView from './CategoryView';
+import CategoryView from './categoryView';
 import KeyboardSearchView from './keyboardSearchView';
 import SearchResult from './searchResult';
 
