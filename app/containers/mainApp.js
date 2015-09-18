@@ -65,14 +65,12 @@ class MainApp extends Component {
     );
   }
 
-  renderScene(route, navigator) {
+  renderScene(settings, route, navigator) {
 
-    const {settings, dispatch} = this.props;
+    const {dispatch} = this.props;
     const actions = bindActionCreators(mainActions, dispatch);
 
-    let masterViewProps = Object.assign({
-      settings: settings.toObject()
-    }, actions);
+    let masterViewProps = Object.assign({settings}, actions);
 
     return (
       <MasterView {...masterViewProps}></MasterView>
