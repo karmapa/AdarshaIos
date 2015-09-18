@@ -4,9 +4,12 @@ import React, { Component, PropTypes, View, Text, TextInput, TouchableHighlight 
 import { styles } from './keyboardSearchView.style';
 import { SearchResult } from '.';
 
+import kse from 'ksana-search';
+
 class KeyboardSearchView extends Component {
 
   static PropTypes = {
+    db: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -15,11 +18,13 @@ class KeyboardSearchView extends Component {
 
   state = {
     excerpts: [],
-    keyword: ''
+    keyword: '',
+    text: ''
   };
 
   onSearchInputChange(keyword) {
     this.setState({keyword});
+    this.search(keyword);
   }
 
   onSearchInputSubmit() {
@@ -27,6 +32,27 @@ class KeyboardSearchView extends Component {
   }
 
   search(keyword) {
+
+    let {db} = this.props;
+    let self = this;
+
+    if (! db) {
+      return;
+    }
+
+    var options = {
+      nohighlight: true,
+      range: {
+        maxhit: 10
+      }
+    };
+
+    kse.search(db, keyword, options, function(err, data) {
+      self.setState({
+        excerpts: data.excerpt || [],
+        text: ''
+      });
+    });
   }
 
   render() {
