@@ -29,7 +29,8 @@ class MasterView extends Component {
 
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
-    let {selectedTab} = this.props.settings;
+    let {selectedTab, db} = this.props.settings;
+
 
     return (
       <TabBarIOS {...tabBarProps}>
@@ -43,7 +44,7 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
-          <KeyboardSearchView />
+          <KeyboardSearchView db={db} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
