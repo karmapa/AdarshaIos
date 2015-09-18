@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     color: '#555555',
-    flex: 3,
+    flex: 1,
     fontSize: 18,
     height: 36,
     marginRight: 5,
