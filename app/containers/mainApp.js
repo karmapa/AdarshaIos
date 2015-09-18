@@ -1,11 +1,13 @@
 'use strict';
 
-import React, { Component, Navigator, PropTypes } from 'react-native';
+import React, { Component, Navigator, PropTypes, View } from 'react-native';
 
 import { connect } from 'react-redux/native';
 import * as mainActions from '../actions/mainActions';
 import { MasterView } from '../containers';
 import { bindActionCreators } from 'redux';
+import { Spinner } from 'react-native-icons';
+
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { styles } from './mainApp.style';
@@ -32,16 +34,34 @@ class MainApp extends Component {
 
   render() {
 
+    let settings = this.props.settings.toObject();
+    let {db} = settings;
+
     let navigatorProps = {
       style: styles.navigatorIos,
       initialRoute: {
         index: 0
       },
-      renderScene: this.renderScene.bind(this)
+      renderScene: this.renderScene.bind(this, settings)
+    };
+
+    if (db) {
+      return (
+        <Navigator {...navigatorProps} />
+      );
+    }
+
+    let spinnerProps = {
+      name: 'ion|load-c',
+      size: 24,
+      color: '#777',
+      style: styles.stylesSpinner
     };
 
     return (
-      <Navigator {...navigatorProps} />
+      <View style={styles.viewSpinner}>
+        <Spinner {...spinnerProps} />
+      </View>
     );
   }
 
