@@ -15,7 +15,7 @@ class SearchResult extends Component {
 
   render() {
     let {excerpts} = this.props;
-    return <ScrollView>{excerpts.map(this.renderItem.bind(this))}</ScrollView>;
+    return <ScrollView height={436} style={styles.searchResult}>{excerpts.map(this.renderItem.bind(this))}</ScrollView>;
   }
 
   highlight(text, hits) {
