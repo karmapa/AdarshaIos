@@ -1,9 +1,11 @@
 'use strict';
 
 import React, { Component, PropTypes, Text, TextInput, View, PickerIOS,
-  PickerItemIOS, ScrollView, TouchableHighlight } from 'react-native';
+  ScrollView, TouchableHighlight } from 'react-native';
 
 import { styles } from './advancedSearchView.style';
+
+let PickerItemIOS = PickerIOS.Item;
 
 class AdvancedSearchView extends Component {
 
