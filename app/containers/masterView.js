@@ -5,7 +5,7 @@ import React, { Component, ScrollView, View, Text, PropTypes } from 'react-nativ
 import { TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import { styles, stylesTabBar } from './masterView.style';
 import * as mainActions from '../actions/mainActions';
-import { CategoryView, KeyboardSearchView } from '../components';
+import { AdvancedSearchView, CategoryView, KeyboardSearchView } from '../components';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 class MasterView extends Component {
@@ -43,11 +43,7 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
-          <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.topContainer}>
-              <Text>Two</Text>
-            </View>
-          </ScrollView>
+          <AdvancedSearchView db={db} />
         </TabBarIOS.Item>
       </TabBarIOS>
     );
