@@ -5,7 +5,7 @@ import React, { Component, PropTypes, Text, TextInput, View, PickerIOS,
 
 import { styles } from './advancedSearchView.style';
 
-let PickerItemIOS = PickerIOS.Item;
+const PickerItemIOS = PickerIOS.Item;
 
 class AdvancedSearchView extends Component {
 
