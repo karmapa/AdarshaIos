@@ -9,8 +9,8 @@ class SearchResult extends Component {
     excerpts: []
   };
 
-  renderItem(item) {
-    return <Text style={styles.text} children={this.highlight(item.text, item.realHits)} />;
+  renderItem(item, index) {
+    return <Text key={index} style={styles.text} children={this.highlight(item.text, item.realHits)} />;
   }
 
   render() {
