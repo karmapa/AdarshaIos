@@ -45,6 +45,7 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
+		9BCBE7D41BAEE66200436ACD /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BCBE7D31BAEE66200436ACD /* jiangkangyur.kdb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +182,7 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9BCBE7D31BAEE66200436ACD /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +351,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9BCBE7D31BAEE66200436ACD /* jiangkangyur.kdb */,
 				9BB108A11BA99C8800087046 /* FAKFontAwesome.h */,
 				9BB108A21BA99C8800087046 /* FAKFontAwesome.m */,
 				9BB108A31BA99C8800087046 /* FAKFoundationIcons.h */,
@@ -626,6 +629,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				9B002A261BA81850006EAADF /* moedict.kdb in Resources */,
+				9BCBE7D41BAEE66200436ACD /* jiangkangyur.kdb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
