@@ -27,7 +27,7 @@ class MainApp extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(mainActions.openDb('jiangkangyur'));
+    this.props.dispatch(mainActions.openDb('moedict'));
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
