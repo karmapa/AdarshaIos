@@ -25,7 +25,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
 		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
-		9B002A261BA81850006EAADF /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B002A251BA81850006EAADF /* moedict.kdb */; };
 		9BB108A01BA99C4900087046 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB1089F1BA99C0C00087046 /* libReactNativeIcons.a */; };
 		9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A11BA99C8800087046 /* FAKFontAwesome.h */; };
 		9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A21BA99C8800087046 /* FAKFontAwesome.m */; };
@@ -45,7 +44,8 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
-		9BCBE7D41BAEE66200436ACD /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BCBE7D31BAEE66200436ACD /* jiangkangyur.kdb */; };
+		9BBB8E0F1BB0C28900329584 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */; };
+		9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E101BB0C2A700329584 /* moedict.kdb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,7 +161,6 @@
 		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
 		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
 		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
-		9B002A251BA81850006EAADF /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = moedict.kdb; sourceTree = "<group>"; };
 		9B88B5F51BA9986A006B3635 /* FontAwesomeKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FontAwesomeKit; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit"; sourceTree = "<group>"; };
 		9BB1089A1BA99C0C00087046 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		9BB108A11BA99C8800087046 /* FAKFontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FAKFontAwesome.h; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FAKFontAwesome.h"; sourceTree = "<group>"; };
@@ -182,7 +181,8 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
-		9BCBE7D31BAEE66200436ACD /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
+		9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
+		9BBB8E101BB0C2A700329584 /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = moedict.kdb; path = ../moedict.kdb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,7 +290,8 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
-				9B002A251BA81850006EAADF /* moedict.kdb */,
+				9BBB8E101BB0C2A700329584 /* moedict.kdb */,
+				9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */,
 				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
 				9B002A201BA81313006EAADF /* kfs_ios.m */,
 				9B002A211BA81313006EAADF /* kfs_rct.h */,
@@ -351,7 +352,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				9BCBE7D31BAEE66200436ACD /* jiangkangyur.kdb */,
 				9BB108A11BA99C8800087046 /* FAKFontAwesome.h */,
 				9BB108A21BA99C8800087046 /* FAKFontAwesome.m */,
 				9BB108A31BA99C8800087046 /* FAKFoundationIcons.h */,
@@ -612,8 +612,10 @@
 				9BB108B51BA99C8800087046 /* FAKFoundationIcons.h in Resources */,
 				9BB108B61BA99C8800087046 /* FAKFoundationIcons.m in Resources */,
 				9BB108B71BA99C8800087046 /* FAKIcon.h in Resources */,
+				9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */,
 				9BB108B81BA99C8800087046 /* FAKIcon.m in Resources */,
 				9BB108B91BA99C8800087046 /* FAKIonIcons.h in Resources */,
+				9BBB8E0F1BB0C28900329584 /* jiangkangyur.kdb in Resources */,
 				9BB108BA1BA99C8800087046 /* FAKIonIcons.m in Resources */,
 				9BB108BB1BA99C8800087046 /* FAKMaterial.h in Resources */,
 				9BB108BC1BA99C8800087046 /* FAKMaterial.m in Resources */,
@@ -628,8 +630,6 @@
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				9B002A261BA81850006EAADF /* moedict.kdb in Resources */,
-				9BCBE7D41BAEE66200436ACD /* jiangkangyur.kdb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
