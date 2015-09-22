@@ -15,6 +15,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     height: 36,
+    marginTop: 10,
+    marginBottom: 10,
     marginRight: 5,
     padding: 10
   }
