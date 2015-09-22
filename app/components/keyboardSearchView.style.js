@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     paddingRight: 14,
     paddingBottom: 14
   },
-  searchInput: {
+  input: {
     borderColor: '#cccccc',
     borderRadius: 4,
     borderWidth: 1,

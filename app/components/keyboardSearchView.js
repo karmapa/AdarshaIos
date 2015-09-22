@@ -61,7 +61,7 @@ class KeyboardSearchView extends Component {
       onEndEditing: this.onSearchInputSubmit.bind(this),
       placeholder: 'Search Keyword',
       ref: 'keyword',
-      style: styles.searchInput,
+      style: styles.input,
       value: keyword
     };
 
