@@ -70,7 +70,7 @@ class KeyboardSearchView extends Component {
     };
 
     return (
-      <View style={styles.view}>
+      <View style={styles.container}>
         <TextInput {...textInputProps} />
         <SearchResult {...searchResultProps} />
       </View>
