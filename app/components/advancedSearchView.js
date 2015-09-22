@@ -42,12 +42,12 @@ class AdvancedSearchView extends Component {
           <PickerItemIOS key="2" value="譯者:" label="譯者" />
         </PickerIOS>
         <TextInput style={styles.input} placeholder="校對者:" value="" />
-        <View>
-          <TouchableHighlight>
-            <Text>Cancel</Text>
+        <View style={styles.buttonGroups}>
+          <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]}>
+            <Text style={[styles.buttonPrimaryText, styles.buttonText]}>Search</Text>
           </TouchableHighlight>
-          <TouchableHighlight>
-            <Text>Search</Text>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button, styles.buttonDefault]}>
+            <Text style={styles.buttonText}>Reset</Text>
           </TouchableHighlight>
         </View>
       </ScrollView>
