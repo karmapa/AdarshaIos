@@ -20,7 +20,7 @@ class AdvancedSearchView extends Component {
   render() {
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <TextInput style={styles.input} placeholder="經名:" value="" />
         <TextInput style={styles.input} placeholder="別名:" value="" />
         <TextInput style={styles.input} placeholder="梵文經名:" value="" />
