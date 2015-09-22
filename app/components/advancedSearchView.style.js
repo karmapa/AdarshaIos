@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  container: {
+    paddingTop: 14,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingBottom: 14
+  },
   input: {
     borderColor: '#cccccc',
     borderRadius: 4,
