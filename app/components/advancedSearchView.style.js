@@ -15,9 +15,36 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     height: 36,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 7,
+    marginBottom: 7,
     marginRight: 5,
     padding: 10
+  },
+  button: {
+    borderRadius: 4,
+    paddingTop: 7,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingBottom: 7,
+    marginBottom: 10
+  },
+  buttonPrimary: {
+    backgroundColor: '#19bd9b'
+  },
+  buttonPrimaryText: {
+    color: '#ffffff'
+  },
+  buttonGroups: {
+    marginTop: 21
+  },
+  buttonDefault: {
+    borderWidth: 1,
+    borderColor: '#cccccc'
+  },
+  buttonText: {
+    textAlign: 'center'
   }
 });
+
+
+export const activeOpacity = 0.2;
