@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { Component, ListView, PropTypes, Text, View } from 'react-native';
+import React, { Component, ListView, PropTypes, Text, View, TouchableHighlight } from 'react-native';
+import { Icon } from 'react-native-icons';
 
 import kse from 'ksana-search';
 import { styles } from './categoryView.style';
@@ -24,7 +25,11 @@ class CategoryView extends Component {
   componentDidMount() {
     this._rows = [];
     this.setState({
-      dataSource: this.getDataSource([1, 2, 3])
+      dataSource: this.getDataSource([
+        'སྲིད་གསུམ་འགྲོ་ལ་རབ་དགའ་སར་པའི་ད',
+        'སྲིད་སར་པའི་ད',
+        'སྲིད་གསུམ་འགྲོ'
+      ])
     });
   }
 
@@ -35,9 +40,12 @@ class CategoryView extends Component {
 
   renderRow(row) {
     return (
-      <View>
-        <Text>{row}</Text>
-      </View>
+      <TouchableHighlight style={styles.rowContainer}>
+        <View style={styles.rowView}>
+          <Text style={{paddingLeft: 14, height: 32}}>{row}</Text>
+          <Icon name="ion|chevron-right" style={{width: 32, height: 32, marginRight: 10}} size={32} color={'#000000'} />
+        </View>
+      </TouchableHighlight>
     );
   }
 
