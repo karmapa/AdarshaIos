@@ -1,10 +1,20 @@
 'use strict';
 
-import React, { Component, PropTypes, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import React, { Component, PropTypes, ListView, View, Text, TextInput, TouchableHighlight } from 'react-native';
 import { styles } from './keyboardSearchView.style';
 import { SearchResult } from '.';
 
 import kse from 'ksana-search';
+
+let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+let tips = ds.cloneWithRows([
+  'Wildcards: ? * ? match single unknown syllable:',
+  'e.g: bde ? snying 1 syllable in between',
+  'e.g: མི་2?་པ 2 syllables in between',
+  '* match a range of unknown syllables:',
+  'e.g: mi 5* pa 1 to 5 syllables in between'
+]);
 
 class KeyboardSearchView extends Component {
 
@@ -51,6 +61,14 @@ class KeyboardSearchView extends Component {
     });
   }
 
+  renderTips() {
+    if (! this.state.keyword) {
+      return (
+        <ListView dataSource={tips} renderRow={(row) => <Text>{row}</Text>}></ListView>
+      );
+    }
+  }
+
   render() {
 
     let {excerpts, keyword, text} = this.state;
@@ -72,6 +90,7 @@ class KeyboardSearchView extends Component {
     return (
       <View style={styles.container}>
         <TextInput {...textInputProps} />
+        {this.renderTips()}
         <SearchResult {...searchResultProps} />
       </View>
     );
