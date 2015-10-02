@@ -11,8 +11,9 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 class MasterView extends Component {
 
   static PropTypes = {
-    settings: PropTypes.object.isRequired,
-    setSelectedTab: PropTypes.func.isRequired
+    navigator: PropTypes.object.isRequired,
+    setSelectedTab: PropTypes.func.isRequired,
+    settings: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -30,11 +31,12 @@ class MasterView extends Component {
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
     let {selectedTab, db} = this.props.settings;
+    let {navigator} = this.props;
 
     return (
       <TabBarIOS {...tabBarProps}>
         <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
-            selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
+            selected={'category' === selectedTab} navigator={navigator} onPress={this.onTabPress.bind(this, 'category')}>
           <CategoryView db={db} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}

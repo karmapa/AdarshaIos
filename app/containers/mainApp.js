@@ -70,7 +70,10 @@ class MainApp extends Component {
     const {dispatch} = this.props;
     const actions = bindActionCreators(mainActions, dispatch);
 
-    let masterViewProps = Object.assign({settings}, actions);
+    let masterViewProps = Object.assign({
+      settings,
+      navigator
+    }, actions);
 
     return (
       <MasterView {...masterViewProps}></MasterView>
