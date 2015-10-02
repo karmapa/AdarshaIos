@@ -63,7 +63,6 @@ class CategoryView extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>Test</Text>
         <ListView {...listViewProps} />
       </View>
     );
