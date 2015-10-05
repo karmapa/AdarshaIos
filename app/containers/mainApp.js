@@ -10,6 +10,8 @@ import { Spinner } from 'react-native-icons';
 
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
+import ksa from 'ksana-simple-api';
+
 import { styles } from './mainApp.style';
 
 @connect(state => ({
@@ -27,7 +29,14 @@ class MainApp extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(mainActions.openDb('moedict'));
+    this.props.dispatch(mainActions.openDb('jiangkangyur'));
+
+    let options = {
+      db: 'jiangkangyur'
+    };
+    ksa.toc(options, (err, res) => {
+      console.log('res', res);
+    });
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
