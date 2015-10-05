@@ -4,7 +4,7 @@ import React, { Component, Navigator, PropTypes, View } from 'react-native';
 
 import { connect } from 'react-redux/native';
 import * as mainActions from '../actions/mainActions';
-import { MasterView } from '../containers';
+import { DetailView, MasterView } from '../containers';
 import { bindActionCreators } from 'redux';
 import { Spinner } from 'react-native-icons';
 
@@ -70,9 +70,28 @@ class MainApp extends Component {
     const {dispatch} = this.props;
     const actions = bindActionCreators(mainActions, dispatch);
 
+    if ('DetailView' === route.name) {
+      let title = 'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པ';
+      let text = 'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་' +
+       'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པ' +
+       'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོ' ;
+
+      let detailViewProps = {
+        navigator,
+        route,
+        text,
+        title
+      };
+
+      return (
+        <DetailView {...detailViewProps} />
+      );
+    }
+
     let masterViewProps = Object.assign({
       settings,
-      navigator
+      navigator,
+      route
     }, actions);
 
     return (
