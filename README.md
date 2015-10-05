@@ -16,6 +16,8 @@ Add node_modules/kfs_* and kdb file to project
 
 Add assets/images/* to image.xcassets ( xcode )
 
+See [adding static resources to your ios app using images xcassets](https://facebook.github.io/react-native/docs/image.html#adding-static-resources-to-your-ios-app-using-images-xcassets)
+
 # do this before deploying to iphone
 
 ```
