@@ -25,6 +25,10 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
 		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
+		9B6854D01BC23C95005A87D5 /* icon-font-size-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6854CC1BC23C95005A87D5 /* icon-font-size-add.png */; settings = {ASSET_TAGS = (); }; };
+		9B6854D11BC23C95005A87D5 /* icon-font-size-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6854CD1BC23C95005A87D5 /* icon-font-size-minus.png */; settings = {ASSET_TAGS = (); }; };
+		9B6854D21BC23C95005A87D5 /* icon-line-height-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6854CE1BC23C95005A87D5 /* icon-line-height-add.png */; settings = {ASSET_TAGS = (); }; };
+		9B6854D31BC23C95005A87D5 /* icon-line-height-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6854CF1BC23C95005A87D5 /* icon-line-height-minus.png */; settings = {ASSET_TAGS = (); }; };
 		9BB108A01BA99C4900087046 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB1089F1BA99C0C00087046 /* libReactNativeIcons.a */; };
 		9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A11BA99C8800087046 /* FAKFontAwesome.h */; };
 		9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A21BA99C8800087046 /* FAKFontAwesome.m */; };
@@ -46,6 +50,7 @@
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
 		9BBB8E0F1BB0C28900329584 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */; };
 		9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E101BB0C2A700329584 /* moedict.kdb */; };
+		9BDF66871BC27A06009E73AB /* icon-tibetan-wylie-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BDF66861BC27A06009E73AB /* icon-tibetan-wylie-switch.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +166,10 @@
 		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
 		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
 		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
+		9B6854CC1BC23C95005A87D5 /* icon-font-size-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-add.png"; path = "../assets/images/icon-font-size-add.png"; sourceTree = "<group>"; };
+		9B6854CD1BC23C95005A87D5 /* icon-font-size-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-minus.png"; path = "../assets/images/icon-font-size-minus.png"; sourceTree = "<group>"; };
+		9B6854CE1BC23C95005A87D5 /* icon-line-height-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-line-height-add.png"; path = "../assets/images/icon-line-height-add.png"; sourceTree = "<group>"; };
+		9B6854CF1BC23C95005A87D5 /* icon-line-height-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-line-height-minus.png"; path = "../assets/images/icon-line-height-minus.png"; sourceTree = "<group>"; };
 		9B88B5F51BA9986A006B3635 /* FontAwesomeKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FontAwesomeKit; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit"; sourceTree = "<group>"; };
 		9BB1089A1BA99C0C00087046 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		9BB108A11BA99C8800087046 /* FAKFontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FAKFontAwesome.h; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FAKFontAwesome.h"; sourceTree = "<group>"; };
@@ -183,6 +192,7 @@
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
 		9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9BBB8E101BB0C2A700329584 /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = moedict.kdb; path = ../moedict.kdb; sourceTree = "<group>"; };
+		9BDF66861BC27A06009E73AB /* icon-tibetan-wylie-switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-tibetan-wylie-switch.png"; path = "../assets/images/icon-tibetan-wylie-switch.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +310,11 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				9BDF66861BC27A06009E73AB /* icon-tibetan-wylie-switch.png */,
+				9B6854CC1BC23C95005A87D5 /* icon-font-size-add.png */,
+				9B6854CD1BC23C95005A87D5 /* icon-font-size-minus.png */,
+				9B6854CE1BC23C95005A87D5 /* icon-line-height-add.png */,
+				9B6854CF1BC23C95005A87D5 /* icon-line-height-minus.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -610,20 +625,25 @@
 				9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */,
 				9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */,
 				9BB108B51BA99C8800087046 /* FAKFoundationIcons.h in Resources */,
+				9BDF66871BC27A06009E73AB /* icon-tibetan-wylie-switch.png in Resources */,
 				9BB108B61BA99C8800087046 /* FAKFoundationIcons.m in Resources */,
 				9BB108B71BA99C8800087046 /* FAKIcon.h in Resources */,
 				9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */,
 				9BB108B81BA99C8800087046 /* FAKIcon.m in Resources */,
+				9B6854D11BC23C95005A87D5 /* icon-font-size-minus.png in Resources */,
 				9BB108B91BA99C8800087046 /* FAKIonIcons.h in Resources */,
+				9B6854D31BC23C95005A87D5 /* icon-line-height-minus.png in Resources */,
 				9BBB8E0F1BB0C28900329584 /* jiangkangyur.kdb in Resources */,
 				9BB108BA1BA99C8800087046 /* FAKIonIcons.m in Resources */,
 				9BB108BB1BA99C8800087046 /* FAKMaterial.h in Resources */,
 				9BB108BC1BA99C8800087046 /* FAKMaterial.m in Resources */,
+				9B6854D01BC23C95005A87D5 /* icon-font-size-add.png in Resources */,
 				9BB108BD1BA99C8800087046 /* FAKZocial.h in Resources */,
 				9BB108BE1BA99C8800087046 /* FAKZocial.m in Resources */,
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
 				9BB108C01BA99C8800087046 /* FontAwesomeKit.h in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
+				9B6854D21BC23C95005A87D5 /* icon-line-height-add.png in Resources */,
 				9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */,
 				9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */,
 				9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */,
