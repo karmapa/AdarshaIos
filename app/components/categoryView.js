@@ -9,7 +9,9 @@ import { styles } from './categoryView.style';
 class CategoryView extends Component {
 
   static PropTypes = {
-    db: PropTypes.object.isRequired
+    db: PropTypes.object.isRequired,
+    navigator: PropTypes.object.isRequired,
+    route: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -31,6 +33,7 @@ class CategoryView extends Component {
         'སྲིད་གསུམ་འགྲོ'
       ])
     });
+    this.onRowClicked({});
   }
 
   getDataSource(rows) {
@@ -38,9 +41,16 @@ class CategoryView extends Component {
     return this.state.dataSource.cloneWithRows(this._rows);
   }
 
+  onRowClicked(row) {
+    this.props.navigator.push({
+      name: 'DetailView',
+      index: this.props.route.index + 1
+    });
+  }
+
   renderRow(row) {
     return (
-      <TouchableHighlight style={styles.rowContainer}>
+      <TouchableHighlight style={styles.rowContainer} underlayColor={'#cccccc'} onPress={this.onRowClicked.bind(this, row)}>
         <View style={styles.rowView}>
           <Text style={{paddingLeft: 14, height: 32}}>{row}</Text>
           <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginTop: 4, marginRight: 10}} size={16} color={'#555555'} />
