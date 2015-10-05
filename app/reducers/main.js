@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 const initialState = Immutable.Map({
   db: null,
   dbError: null,
-  selectedTab: 'category'
+  selectedTab: 'keyboardSearch'
 });
 
 const actionsMap = {
