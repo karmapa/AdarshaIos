@@ -33,7 +33,6 @@ class CategoryView extends Component {
         'སྲིད་གསུམ་འགྲོ'
       ])
     });
-    this.onRowClicked({});
   }
 
   getDataSource(rows) {
