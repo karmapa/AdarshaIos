@@ -4,13 +4,15 @@ import Immutable from 'immutable';
 const initialState = Immutable.Map({
   db: null,
   dbError: null,
-  selectedTab: 'keyboardSearch'
+  selectedTab: 'category'
 });
 
 const actionsMap = {
   [types.SET_DB]: setDb,
   [types.SET_DB_ERROR]: setDbError,
-  [types.SET_SELECTED_TAB]: setSelectedTab
+  [types.SET_SELECTED_TAB]: setSelectedTab,
+  [types.SET_TOC]: setToc,
+  [types.SET_TOC_ERROR]: setTocError
 };
 
 export default function main(state = initialState, action) {
@@ -28,4 +30,12 @@ function setDb(state, action) {
 
 function setDbError(state, action) {
   return state.set('dbError', action.err);
+}
+
+function setToc(state, action) {
+  return state.set('toc', action.toc);
+}
+
+function setTocError(state, action) {
+  return state.set('tocError', action.tocError);
 }

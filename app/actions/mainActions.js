@@ -4,6 +4,8 @@ import { KsanaFileSystem as kfs } from 'NativeModules';
 // shouldn't bind kfs to global
 global.kfs = kfs;
 
+let ksa = require('ksana-simple-api');
+
 // MUST write require so ksana-database can get the kfs object
 let kde  = require('ksana-database');
 
@@ -20,10 +22,10 @@ export function setSelectedTab(selectedTab) {
   };
 }
 
-export function openDb(name) {
+export function openDb(dbName) {
 
   return dispatch => {
-    kde.open('jiangkangyur', function(err, db) {
+    kde.open(dbName, function(err, db) {
       if (db) {
         dispatch(setDb(db));
       }
@@ -48,6 +50,41 @@ export const SET_DB_ERROR = 'SET_DB_ERROR';
 export function setDbError(err) {
   return {
     type: SET_DB_ERROR,
+    err
+  };
+}
+
+export function openToc(dbName) {
+
+  return dispatch => {
+    let options = {
+      db: dbName
+    };
+    ksa.toc(options, (err, res) => {
+      if (err) {
+        dispatch(setTocError(err));
+      }
+      else {
+        dispatch(setToc(res));
+      }
+    });
+  };
+}
+
+export const SET_TOC = 'SET_TOC';
+
+export function setToc(toc) {
+  return {
+    type: SET_TOC,
+    toc
+  };
+}
+
+export const SET_TOC_ERROR = 'SET_TOC_ERROR';
+
+export function setTocError(err) {
+  return {
+    type: SET_TOC_ERROR,
     err
   };
 }
