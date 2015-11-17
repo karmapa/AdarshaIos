@@ -31,14 +31,14 @@ class MasterView extends Component {
 
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
-    let {selectedTab, db} = this.props.settings;
+    let {selectedTab, db, toc} = this.props.settings;
     let {navigator, route} = this.props;
 
     return (
       <TabBarIOS {...tabBarProps}>
         <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
             selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
-          <CategoryView navigator={navigator} db={db} route={route} />
+          <CategoryView navigator={navigator} toc={toc} route={route} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
