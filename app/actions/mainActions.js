@@ -23,7 +23,7 @@ export function setSelectedTab(selectedTab) {
 export function openDb(name) {
 
   return dispatch => {
-    kde.open('moedict', function(err, db) {
+    kde.open('jiangkangyur', function(err, db) {
       if (db) {
         dispatch(setDb(db));
       }
