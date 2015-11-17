@@ -24,7 +24,10 @@ class CategoryView extends Component {
     })
   };
 
+  toc = [];
+
   componentDidMount() {
+    this.setToc(this.props.toc);
     this._rows = [];
     this.setState({
       dataSource: this.getDataSource([
@@ -33,6 +36,10 @@ class CategoryView extends Component {
         'སྲིད་གསུམ་འགྲོ'
       ])
     });
+  }
+
+  setToc = (toc = []) => {
+    this.toc = toc;
   }
 
   getDataSource(rows) {
