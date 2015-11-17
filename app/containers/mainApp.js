@@ -34,6 +34,7 @@ class MainApp extends Component {
     let options = {
       db: 'jiangkangyur'
     };
+
     ksa.toc(options, (err, res) => {
       console.log('res', res);
     });
