@@ -9,7 +9,7 @@ import { styles } from './categoryView.style';
 class CategoryView extends Component {
 
   static PropTypes = {
-    db: PropTypes.object.isRequired,
+    toc: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired
   };
