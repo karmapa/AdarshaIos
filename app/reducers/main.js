@@ -1,5 +1,6 @@
 import * as types from '../actions/mainActions';
 import Immutable from 'immutable';
+import _ from 'lodash';
 
 const initialState = Immutable.Map({
   db: null,
@@ -33,7 +34,33 @@ function setDbError(state, action) {
 }
 
 function setToc(state, action) {
-  return state.set('toc', action.toc);
+
+  let res = action.toc;
+  let tocRows = _.get(res, 'toc', []);
+
+  let depths = [];
+  let prev = 0;
+
+  return state.set('toc', tocRows.map((row, index) => {
+
+    let depth = row.depth;
+
+    // link to previous sibling
+    if (prev > depth) {
+      if (tocRows[depth]) {
+        tocRows[depths[depth]].next = index;
+      }
+      _.times(prev - depth, index => {
+        depths[index] = 0;
+      });
+      if ((index < tocRows.length - 1) && (tocRows[index + 1].depth > depth)) {
+        row.hasChild = true;
+      }
+      depths[depth] = index;
+      prev = depth;
+    }
+    return row;
+  }));
 }
 
 function setTocError(state, action) {
