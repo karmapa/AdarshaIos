@@ -9,7 +9,7 @@ import { styles } from './categoryView.style';
 class CategoryView extends Component {
 
   static PropTypes = {
-    toc: PropTypes.object.isRequired,
+    tocRows: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired
   };
@@ -24,10 +24,10 @@ class CategoryView extends Component {
     })
   };
 
-  toc = [];
+  tocRows = [];
 
   componentDidMount() {
-    this.setToc(this.props.toc);
+    this.setTocRows(this.props.tocRows);
     this._rows = [];
     this.setState({
       dataSource: this.getDataSource([
@@ -38,8 +38,8 @@ class CategoryView extends Component {
     });
   }
 
-  setToc = (toc = []) => {
-    this.toc = toc;
+  setTocRows = (tocRows = []) => {
+    this.tocRows = tocRows;
   }
 
   getDataSource(rows) {

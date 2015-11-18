@@ -65,18 +65,18 @@ export function openToc(dbName) {
         dispatch(setTocError(err));
       }
       else {
-        dispatch(setToc(res));
+        dispatch(setTocRows(res));
       }
     });
   };
 }
 
-export const SET_TOC = 'SET_TOC';
+export const SET_TOC_ROWS = 'SET_TOC_ROWS';
 
-export function setToc(toc) {
+export function setTocRows(res) {
   return {
-    type: SET_TOC,
-    toc
+    type: SET_TOC_ROWS,
+    res
   };
 }
 

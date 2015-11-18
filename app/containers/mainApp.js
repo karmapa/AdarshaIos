@@ -37,7 +37,7 @@ class MainApp extends Component {
   render() {
 
     let settings = this.props.settings.toObject();
-    let {db, toc} = settings;
+    let {db, tocRows} = settings;
 
     let navigatorProps = {
       style: styles.navigatorIos,
@@ -47,7 +47,7 @@ class MainApp extends Component {
       renderScene: this.renderScene.bind(this, settings)
     };
 
-    if (db && toc) {
+    if (db && tocRows) {
       return (
         <Navigator {...navigatorProps} />
       );

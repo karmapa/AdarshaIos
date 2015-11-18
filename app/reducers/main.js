@@ -12,7 +12,7 @@ const actionsMap = {
   [types.SET_DB]: setDb,
   [types.SET_DB_ERROR]: setDbError,
   [types.SET_SELECTED_TAB]: setSelectedTab,
-  [types.SET_TOC]: setToc,
+  [types.SET_TOC_ROWS]: setTocRows,
   [types.SET_TOC_ERROR]: setTocError
 };
 
@@ -33,15 +33,15 @@ function setDbError(state, action) {
   return state.set('dbError', action.err);
 }
 
-function setToc(state, action) {
+function setTocRows(state, action) {
 
-  let res = action.toc;
+  let res = action.res;
   let tocRows = _.get(res, 'toc', []);
 
   let depths = [];
   let prev = 0;
 
-  return state.set('toc', tocRows.map((row, index) => {
+  return state.set('tocRows', tocRows.map((row, index) => {
 
     let depth = row.depth;
 
