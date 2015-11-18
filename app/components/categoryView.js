@@ -54,7 +54,7 @@ class CategoryView extends Component {
     });
   }
 
-  renderRow(row) {
+  renderRow = row => {
     return (
       <TouchableHighlight style={styles.rowContainer} underlayColor={'#cccccc'} onPress={this.onRowClicked.bind(this, row)}>
         <View style={styles.rowView}>
@@ -65,7 +65,7 @@ class CategoryView extends Component {
     );
   }
 
-  onEndReached() {
+  onEndReached = () => {
     console.log('onEndReached');
   }
 
@@ -73,8 +73,8 @@ class CategoryView extends Component {
 
     let listViewProps = {
       dataSource: this.state.dataSource,
-      renderRow: this.renderRow.bind(this),
-      onEndReached: this.onEndReached.bind(this)
+      renderRow: this.renderRow,
+      onEndReached: this.onEndReached
     };
 
     return (
