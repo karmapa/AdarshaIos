@@ -30,8 +30,7 @@ export const styles = StyleSheet.create({
   },
   buttonImage: {
     height: 40,
-    width: 40,
-    textAlign: 'center'
+    width: 40
   },
   button: {
     justifyContent: 'center',
