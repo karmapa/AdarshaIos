@@ -35,32 +35,40 @@ function setDbError(state, action) {
 
 function setTocRows(state, action) {
 
-  let res = action.res;
-  let tocRows = _.get(res, 'toc', []);
+  // d: depth
+  // n: next
+  // o: open
+  // t: text
 
-  let depths = [];
-  let prev = 0;
+  let tocRows = _.get(action.res, 'toc', []);
+  let root = tocRows.shift();
+  root.children = [];
 
-  return state.set('tocRows', tocRows.map((row, index) => {
+  let current = root;
+  let prev = root;
+  let stacks = [];
 
-    let depth = row.depth;
+  _.each(tocRows, (row, index) => {
 
-    // link to previous sibling
-    if (prev > depth) {
-      if (tocRows[depth]) {
-        tocRows[depths[depth]].next = index;
-      }
-      _.times(prev - depth, index => {
-        depths[index] = 0;
-      });
-      if ((index < tocRows.length - 1) && (tocRows[index + 1].depth > depth)) {
-        row.hasChild = true;
-      }
-      depths[depth] = index;
-      prev = depth;
+    row.index = index;
+
+    if (prev.d < row.d) {
+      current = prev;
+      current.children = [];
+      stacks.push(current);
     }
-    return row;
-  }));
+
+    if (prev.d > row.d) {
+      stacks.pop();
+      current = _.last(stacks);
+    }
+
+    row.parent = current;
+    current.children.push(row);
+    prev = row;
+  });
+
+  return state.set('tocRows', root.children);
 }
 
 function setTocHits(state, action) {
