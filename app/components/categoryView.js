@@ -5,6 +5,7 @@ import { Icon } from 'react-native-icons';
 
 import kse from 'ksana-search';
 import { styles } from './categoryView.style';
+import _ from 'lodash';
 
 class CategoryView extends Component {
 
@@ -30,11 +31,7 @@ class CategoryView extends Component {
     this.setTocRows(this.props.tocRows);
     this._rows = [];
     this.setState({
-      dataSource: this.getDataSource([
-        'སྲིད་གསུམ་འགྲོ་ལ་རབ་དགའ་སར་པའི་ད',
-        'སྲིད་སར་པའི་ད',
-        'སྲིད་གསུམ་འགྲོ'
-      ])
+      dataSource: this.getDataSource(this.tocRows)
     });
   }
 
@@ -42,7 +39,7 @@ class CategoryView extends Component {
     this.tocRows = tocRows;
   }
 
-  getDataSource(rows) {
+  getDataSource = (rows) => {
     this._rows = this._rows.concat(rows);
     return this.state.dataSource.cloneWithRows(this._rows);
   }
@@ -55,10 +52,16 @@ class CategoryView extends Component {
   }
 
   renderRow = row => {
+
+    let text = row.t;
+    let depth = row.d;
+    let next = row.n;
+    let vpos = row.vpos;
+
     return (
-      <TouchableHighlight style={styles.rowContainer} underlayColor={'#cccccc'} onPress={this.onRowClicked.bind(this, row)}>
+      <TouchableHighlight key={row.index} style={styles.rowContainer} underlayColor={'#cccccc'} onPress={this.onRowClicked.bind(this, row)}>
         <View style={styles.rowView}>
-          <Text style={{paddingLeft: 14, height: 32}}>{row}</Text>
+          <Text style={{paddingLeft: 14, height: 32}}>{text}</Text>
           <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginTop: 4, marginRight: 10}} size={16} color={'#555555'} />
         </View>
       </TouchableHighlight>
