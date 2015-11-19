@@ -63,6 +63,11 @@ function setTocRows(state, action) {
   }));
 }
 
+function setTocHits(state, action) {
+  let tocHits = _.get(action.res, 'hits', []);
+  return state.set('tocHits', tocHits);
+}
+
 function setTocError(state, action) {
   return state.set('tocError', action.tocError);
 }

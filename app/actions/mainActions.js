@@ -66,6 +66,7 @@ export function openToc(dbName) {
       }
       else {
         dispatch(setTocRows(res));
+        dispatch(setTocHits(res));
       }
     });
   };
@@ -76,6 +77,15 @@ export const SET_TOC_ROWS = 'SET_TOC_ROWS';
 export function setTocRows(res) {
   return {
     type: SET_TOC_ROWS,
+    res
+  };
+}
+
+export const SET_TOC_HITS = 'SET_TOC_HITS';
+
+export function setTocHits(res) {
+  return {
+    type: SET_TOC_HITS,
     res
   };
 }
