@@ -4,6 +4,7 @@ import React, { Component, ListView, PropTypes, Text, View, TouchableHighlight }
 import { Icon } from 'react-native-icons';
 
 import kse from 'ksana-search';
+import ksa from 'ksana-simple-api';
 import { styles } from './categoryView.style';
 import _ from 'lodash';
 
@@ -11,7 +12,7 @@ class CategoryView extends Component {
 
   static PropTypes = {
     tocRows: PropTypes.object.isRequired,
-    navigator: PropTypes.object.isRequired,
+    navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired
   };
 
@@ -45,10 +46,22 @@ class CategoryView extends Component {
   }
 
   onRowClicked(row) {
-    this.props.navigator.push({
-      name: 'DetailView',
-      index: this.props.route.index + 1
-    });
+    if (_.isEmpty(row.children)) {
+      console.log('vpos', row.vpos);
+      ksa.fetch({db: 'jiangkangyur', vpos: row.vpos}, (err, data) => {
+        console.log('err', err);
+        console.log('data', data);
+      });
+      this.props.navigator.push({
+        name: 'DetailView'
+      });
+    }
+    else {
+      this.props.navigator.push({
+        name: 'CategoryView',
+        tocRows: row.children
+      });
+    }
   }
 
   renderRow = row => {
@@ -72,6 +85,10 @@ class CategoryView extends Component {
     console.log('onEndReached');
   }
 
+  goBack = () => {
+    this.props.navigator.pop();
+  }
+
   render() {
 
     let listViewProps = {
@@ -82,9 +99,27 @@ class CategoryView extends Component {
 
     return (
       <View style={styles.container}>
+        {this.renderBackButton()}
         <ListView {...listViewProps} />
       </View>
     );
+  }
+
+  canShowBackButton = () => {
+    return this.props.navigator.getCurrentRoutes().length > 1;
+  }
+
+  renderBackButton() {
+
+    if (this.canShowBackButton()) {
+      return (
+        <View style={styles.navbar}>
+          <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ecf0f1'}>
+            <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
+          </TouchableHighlight>
+        </View>
+      );
+    }
   }
 }
 

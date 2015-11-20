@@ -5,6 +5,7 @@ import React, { Component, Navigator, PropTypes, View } from 'react-native';
 import { connect } from 'react-redux/native';
 import * as mainActions from '../actions/mainActions';
 import { DetailView, MasterView } from '../containers';
+import { CategoryView } from '../components';
 import { bindActionCreators } from 'redux';
 import { Spinner } from 'react-native-icons';
 
@@ -87,6 +88,12 @@ class MainApp extends Component {
 
       return (
         <DetailView {...detailViewProps} />
+      );
+    }
+
+    if ('CategoryView' === route.name) {
+      return (
+        <CategoryView navigator={navigator} tocRows={route.tocRows} route={route} />
       );
     }
 

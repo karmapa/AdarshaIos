@@ -48,9 +48,7 @@ function setTocRows(state, action) {
   let prev = root;
   let stacks = [];
 
-  _.each(tocRows, (row, index) => {
-
-    row.index = index;
+  _.each(tocRows, row => {
 
     if (prev.d < row.d) {
       current = prev;
@@ -63,7 +61,6 @@ function setTocRows(state, action) {
       current = _.last(stacks);
     }
 
-    row.parent = current;
     current.children.push(row);
     prev = row;
   });
