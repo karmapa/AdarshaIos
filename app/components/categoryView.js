@@ -2,6 +2,7 @@
 
 import React, { Component, ListView, PropTypes, Text, View, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-icons';
+import { Spinner } from 'react-native-icons';
 
 import kse from 'ksana-search';
 import ksa from 'ksana-simple-api';
@@ -24,7 +25,8 @@ class CategoryView extends Component {
   state = {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    })
+    }),
+    loading: false
   };
 
   tocRows = [];
@@ -47,11 +49,23 @@ class CategoryView extends Component {
   }
 
   onRowClicked(row) {
+
     if (_.isEmpty(row.children)) {
+
+      this.setState({
+        loading: true
+      });
+
       ksa.fetch({db: 'jiangkangyur', vpos: row.vpos}, (err, data) => {
+
+        this.setState({
+          loading: false
+        });
+
         if (err) {
           throw err;
         }
+
         data = _.first(data);
         this.props.navigator.push({
           name: 'DetailView',
@@ -95,6 +109,22 @@ class CategoryView extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+
+      let spinnerProps = {
+        name: 'ion|load-c',
+        size: 24,
+        color: '#777',
+        style: styles.stylesSpinner
+      };
+
+      return (
+        <View style={styles.viewSpinner}>
+          <Spinner {...spinnerProps} />
+        </View>
+      );
+    }
 
     let listViewProps = {
       dataSource: this.state.dataSource,
