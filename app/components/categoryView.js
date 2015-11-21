@@ -49,7 +49,7 @@ class CategoryView extends Component {
     if (_.isEmpty(row.children)) {
       console.log('vpos', row.vpos);
       ksa.fetch({db: 'jiangkangyur', vpos: row.vpos}, (err, data) => {
-        console.log('err', err);
+        console.trace('err', err);
         console.log('data', data);
       });
       this.props.navigator.push({
