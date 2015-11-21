@@ -8,6 +8,7 @@ import { DetailView, MasterView } from '../containers';
 import { CategoryView } from '../components';
 import { bindActionCreators } from 'redux';
 import { Spinner } from 'react-native-icons';
+import { DB_NAME } from '../constants/AppConstants';
 
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
@@ -29,8 +30,8 @@ class MainApp extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch(mainActions.openDb('jiangkangyur'));
-    dispatch(mainActions.openToc('jiangkangyur'));
+    dispatch(mainActions.openDb(DB_NAME));
+    dispatch(mainActions.openToc(DB_NAME));
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;

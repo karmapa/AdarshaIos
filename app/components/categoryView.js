@@ -7,6 +7,8 @@ import { Spinner } from 'react-native-icons';
 import kse from 'ksana-search';
 import ksa from 'ksana-simple-api';
 import { styles } from './categoryView.style';
+import { DB_NAME } from '../constants/AppConstants';
+
 import _ from 'lodash';
 
 class CategoryView extends Component {
@@ -56,7 +58,7 @@ class CategoryView extends Component {
         loading: true
       });
 
-      ksa.fetch({db: 'jiangkangyur', vpos: row.vpos}, (err, data) => {
+      ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, data) => {
 
         this.setState({
           loading: false
