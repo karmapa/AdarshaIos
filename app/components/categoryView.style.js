@@ -1,6 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  navbar: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 26,
+    paddingBottom: 26,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   viewSpinner: {
     flex: 1,
     justifyContent: 'center',
@@ -13,14 +21,6 @@ export const styles = StyleSheet.create({
   },
   title: {
     marginRight: 10
-  },
-  navbar: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 26,
-    paddingBottom: 26,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
   },
   container: {
     flex: 1
