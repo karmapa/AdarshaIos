@@ -58,7 +58,7 @@ class CategoryView extends Component {
         loading: true
       });
 
-      ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, data) => {
+      ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, arr) => {
 
         this.setState({
           loading: false
@@ -68,7 +68,8 @@ class CategoryView extends Component {
           throw err;
         }
 
-        data = _.first(data);
+        let data = _.first(arr);
+
         this.props.navigator.push({
           name: 'DetailView',
           title: row.t,
