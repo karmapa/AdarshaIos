@@ -74,7 +74,6 @@ class MainApp extends Component {
     const actions = bindActionCreators(mainActions, dispatch);
 
     if ('DetailView' === route.name) {
-      let title = 'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པ';
       let text = 'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་' +
        'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པ' +
        'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོ' ;
@@ -83,7 +82,7 @@ class MainApp extends Component {
         navigator,
         route,
         text,
-        title
+        title: route.title
       };
 
       return (
@@ -93,7 +92,7 @@ class MainApp extends Component {
 
     if ('CategoryView' === route.name) {
       return (
-        <CategoryView navigator={navigator} tocRows={route.tocRows} route={route} />
+        <CategoryView title={route.title} navigator={navigator} tocRows={route.tocRows} route={route} />
       );
     }
 

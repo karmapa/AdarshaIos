@@ -11,6 +11,7 @@ import _ from 'lodash';
 class CategoryView extends Component {
 
   static PropTypes = {
+    title: PropTypes.string,
     tocRows: PropTypes.object.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired
@@ -59,6 +60,7 @@ class CategoryView extends Component {
     else {
       this.props.navigator.push({
         name: 'CategoryView',
+        title: row.t,
         tocRows: row.children
       });
     }
@@ -112,11 +114,13 @@ class CategoryView extends Component {
   renderBackButton() {
 
     if (this.canShowBackButton()) {
+      let {title} = this.props;
       return (
         <View style={styles.navbar}>
           <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ecf0f1'}>
             <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
           </TouchableHighlight>
+          <Text style={styles.title}>{title}</Text>
         </View>
       );
     }
