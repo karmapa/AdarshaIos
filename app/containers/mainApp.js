@@ -74,14 +74,11 @@ class MainApp extends Component {
     const actions = bindActionCreators(mainActions, dispatch);
 
     if ('DetailView' === route.name) {
-      let text = 'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་' +
-       'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པ' +
-       'བོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོད་པབོ' ;
 
       let detailViewProps = {
         navigator,
         route,
-        text,
+        text: route.text,
         title: route.title
       };
 
