@@ -35,3 +35,4 @@ ios/kfs_ios.m
 ios/kfs_rct.h
 ios/kfs_rct.m
 *.kdb
+assets/images/lijiang/*
