@@ -87,15 +87,10 @@ class CategoryView extends Component {
 
   renderRow = row => {
 
-    let text = row.t;
-    let depth = row.d;
-    let next = row.n;
-    let vpos = row.vpos;
-
     return (
       <TouchableHighlight key={row.index} style={styles.rowContainer} underlayColor={'#cccccc'} onPress={this.onRowClicked.bind(this, row)}>
         <View style={styles.rowView}>
-          <Text style={{paddingLeft: 14, height: 32}}>{text}</Text>
+          <Text style={{paddingLeft: 14, height: 32}}>{row.t}</Text>
           <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginTop: 4, marginRight: 10}} size={16} color={'#555555'} />
         </View>
       </TouchableHighlight>
