@@ -48,13 +48,16 @@ class CategoryView extends Component {
 
   onRowClicked(row) {
     if (_.isEmpty(row.children)) {
-      console.log('vpos', row.vpos);
       ksa.fetch({db: 'jiangkangyur', vpos: row.vpos}, (err, data) => {
-        console.trace('err', err);
-        console.log('data', data);
-      });
-      this.props.navigator.push({
-        name: 'DetailView'
+        if (err) {
+          throw err;
+        }
+        data = _.first(data);
+        this.props.navigator.push({
+          name: 'DetailView',
+          title: row.t,
+          text: data.text
+        });
       });
     }
     else {
