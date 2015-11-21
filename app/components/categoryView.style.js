@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 26,
-    paddingBottom: 26,
+    paddingBottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
