@@ -5,7 +5,9 @@ import _ from 'lodash';
 const initialState = Immutable.Map({
   db: null,
   dbError: null,
-  selectedTab: 'category'
+  selectedTab: 'category',
+  fontSize: 16,
+  lineHeight: 2
 });
 
 const actionsMap = {
@@ -13,7 +15,9 @@ const actionsMap = {
   [types.SET_DB_ERROR]: setDbError,
   [types.SET_SELECTED_TAB]: setSelectedTab,
   [types.SET_TOC_ROWS]: setTocRows,
-  [types.SET_TOC_ERROR]: setTocError
+  [types.SET_TOC_ERROR]: setTocError,
+  [types.SET_FONT_SIZE]: setFontSize,
+  [types.SET_LINE_HEIGHT]: setLineHeight
 };
 
 export default function main(state = initialState, action) {
@@ -87,4 +91,12 @@ function setTocHits(state, action) {
 
 function setTocError(state, action) {
   return state.set('tocError', action.tocError);
+}
+
+function setFontSize(state, action) {
+  return state.set('fontSize', action.fontSize);
+}
+
+function setLineHeight(state, action) {
+  return state.set('lineHeight', action.lineHeight);
 }

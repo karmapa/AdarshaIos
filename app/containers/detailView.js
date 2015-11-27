@@ -13,7 +13,10 @@ class DetailView extends Component {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     navigator: PropTypes.array.isRequired,
-    route: PropTypes.object.isRequired
+    route: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
+    setFontSize: PropTypes.func.isRequired,
+    setLineHeight: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -26,9 +29,40 @@ class DetailView extends Component {
     this.props.navigator.pop();
   }
 
+  decreaseFontSize = () => {
+    let fontSize = this.props.settings.fontSize - 1;
+    if (fontSize >= 0) {
+      this.props.setFontSize(fontSize);
+    }
+  }
+
+  increaseFontSize = () => {
+    let fontSize = this.props.settings.fontSize + 1;
+    if (fontSize < 30) {
+      this.props.setFontSize(fontSize);
+    }
+  }
+
+  decreaseLineHeight = () => {
+    let lineHeight = this.props.settings.lineHeight - 0.1;
+    if (lineHeight >= 0) {
+      this.props.setLineHeight(lineHeight);
+    }
+  }
+
+  increaseLineHeight = () => {
+    let lineHeight = this.props.settings.lineHeight + 0.1;
+    console.log('incraseLineHeight', lineHeight);
+    if (lineHeight < 30) {
+      console.log('increase');
+      this.props.setLineHeight(lineHeight);
+    }
+  }
+
   render() {
 
-    let {title, text} = this.props;
+    let {title, text, settings} = this.props;
+    let {fontSize, lineHeight} = settings;
 
     return (
       <View style={styles.container}>
@@ -39,19 +73,19 @@ class DetailView extends Component {
           <Text style={styles.title}>{title}</Text>
         </View>
         <ScrollView style={styles.textView}>
-          <Text>{text}</Text>
+          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{text}</Text>
         </ScrollView>
         <View style={styles.boxButton}>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]}>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>
             <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]}>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.increaseLineHeight}>
             <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]}>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseFontSize}>
             <Image style={styles.buttonImage} source={require('image!icon-font-size-minus')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]}>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.increaseFontSize}>
             <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
           </TouchableHighlight>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]}>

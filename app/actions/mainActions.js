@@ -98,3 +98,21 @@ export function setTocError(err) {
     err
   };
 }
+
+export const SET_FONT_SIZE = 'SET_FONT_SIZE';
+
+export function setFontSize(fontSize) {
+  return {
+    type: SET_FONT_SIZE,
+    fontSize
+  }
+}
+
+export const SET_LINE_HEIGHT = 'SET_LINE_HEIGHT';
+
+export function setLineHeight(lineHeight) {
+  return {
+    type: SET_LINE_HEIGHT,
+    lineHeight
+  }
+}

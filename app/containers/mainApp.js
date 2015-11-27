@@ -77,8 +77,11 @@ class MainApp extends Component {
     if ('DetailView' === route.name) {
 
       let detailViewProps = {
+        settings,
         navigator,
         route,
+        setFontSize: actions.setFontSize,
+        setLineHeight: actions.setLineHeight,
         text: route.text,
         title: route.title,
         uti: route.uti
