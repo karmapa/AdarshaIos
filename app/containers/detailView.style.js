@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   title: {
-    marginRight: 10
+    marginRight: 10,
+    marginLeft: 20
   },
   textView: {
     paddingLeft: 14,
