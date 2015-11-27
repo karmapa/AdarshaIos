@@ -5,7 +5,8 @@ import _ from 'lodash';
 const initialState = Immutable.Map({
   db: null,
   dbError: null,
-  selectedTab: 'category'
+  selectedTab: 'category',
+  tocRows: []
 });
 
 const actionsMap = {
