@@ -9,6 +9,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 class DetailView extends Component {
 
   static PropTypes = {
+    uti: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     navigator: PropTypes.array.isRequired,

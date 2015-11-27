@@ -73,7 +73,8 @@ class CategoryView extends Component {
         this.props.navigator.push({
           name: 'DetailView',
           title: row.t,
-          text: data.text
+          text: data.text,
+          uti: data.uti
         });
       });
     }
