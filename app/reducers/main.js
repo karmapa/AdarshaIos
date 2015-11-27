@@ -41,31 +41,43 @@ function setTocRows(state, action) {
   // t: text
 
   let tocRows = _.get(action.res, 'toc', []);
-  let root = tocRows.shift();
+  let root = _.first(tocRows);
+  root.isRoot = true;
   root.children = [];
 
-  let current = root;
-  let prev = root;
-  let stacks = [];
+  let parent;
 
-  _.each(tocRows, row => {
+  tocRows = tocRows.filter(row => row.d <= 3);
+
+  _.each(tocRows, (row, index) => {
+
+    if (0 === index) {
+      return true;
+    }
+
+    let prev = tocRows[index - 1];
+    row.children = [];
 
     if (prev.d < row.d) {
-      current = prev;
-      current.children = [];
-      stacks.push(current);
+      parent = prev;
     }
-
     if (prev.d > row.d) {
-      stacks.pop();
-      current = _.last(stacks);
+      parent = findParent(tocRows, row.d, index - 1);
     }
-
-    current.children.push(row);
-    prev = row;
+    parent.children.push(row);
   });
 
   return state.set('tocRows', root.children);
+}
+
+function findParent(rows, depth, index) {
+  while (index >= 0) {
+    let row = rows[index];
+    if (row.d < depth) {
+      return row;
+    }
+    index--;
+  }
 }
 
 function setTocHits(state, action) {
