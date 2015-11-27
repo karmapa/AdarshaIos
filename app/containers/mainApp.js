@@ -80,7 +80,8 @@ class MainApp extends Component {
         navigator,
         route,
         text: route.text,
-        title: route.title
+        title: route.title,
+        uti: route.uti
       };
 
       return (
