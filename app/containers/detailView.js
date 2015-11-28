@@ -5,6 +5,7 @@ import React, { Text, Component, ScrollView, View, PropTypes, TouchableHighlight
 import { Spinner, Icon} from 'react-native-icons';
 import { styles } from './detailView.style';
 import shouldPureComponentUpdate from 'react-pure-render/function';
+import wylie from 'tibetan/wylie';
 
 class DetailView extends Component {
 
@@ -16,7 +17,8 @@ class DetailView extends Component {
     route: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired,
     setFontSize: PropTypes.func.isRequired,
-    setLineHeight: PropTypes.func.isRequired
+    setLineHeight: PropTypes.func.isRequired,
+    setWylieStatus: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -57,10 +59,15 @@ class DetailView extends Component {
     }
   }
 
+  toggleWylieStatus = () => {
+    let status = this.props.settings.toWylie;
+    this.props.setWylieStatus(! status);
+  }
+
   render() {
 
     let {title, text, settings} = this.props;
-    let {fontSize, lineHeight} = settings;
+    let {fontSize, lineHeight, toWylie} = settings;
 
     return (
       <View style={styles.container}>
@@ -71,7 +78,7 @@ class DetailView extends Component {
           <Text style={styles.title}>{title}</Text>
         </View>
         <ScrollView style={styles.textView}>
-          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{text}</Text>
+          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(text) : text}</Text>
         </ScrollView>
         <View style={styles.boxButton}>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>
@@ -86,7 +93,7 @@ class DetailView extends Component {
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.increaseFontSize}>
             <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]}>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.toggleWylieStatus}>
             <Image style={styles.buttonImage} source={require('image!icon-tibetan-wylie-switch')} />
           </TouchableHighlight>
         </View>

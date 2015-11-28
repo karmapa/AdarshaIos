@@ -6,6 +6,7 @@ const initialState = Immutable.Map({
   db: null,
   dbError: null,
   selectedTab: 'category',
+  toWylie: false,
   fontSize: 16,
   lineHeight: 2
 });
@@ -17,7 +18,8 @@ const actionsMap = {
   [types.SET_TOC_ROWS]: setTocRows,
   [types.SET_TOC_ERROR]: setTocError,
   [types.SET_FONT_SIZE]: setFontSize,
-  [types.SET_LINE_HEIGHT]: setLineHeight
+  [types.SET_LINE_HEIGHT]: setLineHeight,
+  [types.SET_WYLIE_STATUS]: setWylieStatus
 };
 
 export default function main(state = initialState, action) {
@@ -99,4 +101,8 @@ function setFontSize(state, action) {
 
 function setLineHeight(state, action) {
   return state.set('lineHeight', action.lineHeight);
+}
+
+function setWylieStatus(state, action) {
+  return state.set('toWylie', action.status);
 }

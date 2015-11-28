@@ -82,6 +82,7 @@ class MainApp extends Component {
         route,
         setFontSize: actions.setFontSize,
         setLineHeight: actions.setLineHeight,
+        setWylieStatus: actions.setWylieStatus,
         text: route.text,
         title: route.title,
         uti: route.uti

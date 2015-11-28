@@ -116,3 +116,12 @@ export function setLineHeight(lineHeight) {
     lineHeight
   }
 }
+
+export const SET_WYLIE_STATUS = 'SET_WYLIE_STATUS';
+
+export function setWylieStatus(status) {
+  return {
+    type: SET_WYLIE_STATUS,
+    status
+  };
+}
