@@ -21,6 +21,7 @@
     "react-redux": "^2.1.2",
     "redux": "^3.0.0",
     "redux-thunk": "^0.1.0",
+    "tibetan": "1.0.4",
     "zpad": "^0.5.0"
   }
 }
