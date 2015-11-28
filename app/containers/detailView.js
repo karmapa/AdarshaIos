@@ -52,9 +52,7 @@ class DetailView extends Component {
 
   increaseLineHeight = () => {
     let lineHeight = this.props.settings.lineHeight + 0.1;
-    console.log('incraseLineHeight', lineHeight);
     if (lineHeight < 30) {
-      console.log('increase');
       this.props.setLineHeight(lineHeight);
     }
   }
