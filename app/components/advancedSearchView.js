@@ -6,6 +6,23 @@ import React, { Component, PropTypes, Text, TextInput, View, PickerIOS,
 import { styles } from './advancedSearchView.style';
 
 const PickerItemIOS = PickerIOS.Item;
+const fields = [
+  {name: 'division', placeholder: 'སྡེ་ཚན།:'},
+  {name: 'tname', placeholder: 'མདོ་མིང་།:'},
+  {name: 'aname', placeholder: 'མདོ་མིང་གཞན།:'},
+  {name: 'sname', placeholder: 'རྒྱ་གར་མདོ་མིང་།:'},
+  {name: 'cname', placeholder: 'རྒྱ་ནག་མདོ་མིང་།:'},
+  {name: 'sname', placeholder: 'བརྗོད་བྱ།:'},
+  {name: 'yana', placeholder: 'ཐེག་པ།:'},
+  {name: 'charka', placeholder: 'དཀའ། འཁོར་ལོ།:'},
+  {name: 'location', placeholder: 'གནས་ཕུན་སུམ་ཚོགས་པ།:'},
+  {name: 'purpose', placeholder: 'ཆོས་ཀྱི་དགོས་དོན།:'},
+  {name: 'collect', placeholder: 'བསྡུས་པའི་དོན། ལེའུ།:'},
+  {name: 'relation', placeholder: 'མཚམས་སྦྱར་བའི་གོ་རིམ།:'},
+  {name: 'debate', placeholder: 'རྒལ་ལན།:'},
+  {name: 'translator', placeholder: 'ལོ་ཙཱ་བ།:'},
+  {name: 'reviser', placeholder: 'ཞུ་དག་པ།:'}
+];
 
 class AdvancedSearchView extends Component {
 
