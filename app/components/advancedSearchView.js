@@ -1,11 +1,10 @@
 'use strict';
 
-import React, { Component, PropTypes, Text, TextInput, View, PickerIOS,
+import React, { Component, PropTypes, Text, TextInput, View,
   ScrollView, TouchableHighlight } from 'react-native';
 
 import { styles } from './advancedSearchView.style';
 
-const PickerItemIOS = PickerIOS.Item;
 const fields = [
   {name: 'division', placeholder: 'སྡེ་ཚན།:'},
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},
@@ -56,27 +55,15 @@ class AdvancedSearchView extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <TextInput style={styles.input} placeholder="經名:" value="" />
-        <TextInput style={styles.input} placeholder="別名:" value="" />
-        <TextInput style={styles.input} placeholder="梵文經名:" value="" />
-        <TextInput style={styles.input} placeholder="中文經名:" value="" />
-        <TextInput style={styles.input} placeholder="主題:" value="" />
-        <PickerIOS>
-          <PickerItemIOS key="1" value="初轉法輪" label="初轉法輪" />
-          <PickerItemIOS key="2" value="初轉法輪2" label="初轉法輪2" />
-        </PickerIOS>
-        <PickerIOS>
-          <PickerItemIOS key="2" value="說法處" label="說法處" />
-        </PickerIOS>
-        <TextInput style={styles.input} placeholder="閱法者:" value="" />
-        <TextInput style={styles.input} placeholder="講法者:" value="" />
-        <TextInput style={styles.input} placeholder="梵文注釋:" value="" />
-        <TextInput style={styles.input} placeholder="藏文注釋:" value="" />
-        <TextInput style={styles.input} placeholder="漢文注釋:" value="" />
-        <PickerIOS>
-          <PickerItemIOS key="2" value="譯者:" label="譯者" />
-        </PickerIOS>
-        <TextInput style={styles.input} placeholder="校對者:" value="" />
+
+        <TextInput style={styles.input} placeholder="སྡེ་ཚན།:" />
+        <TextInput style={styles.input} placeholder="མདོ་མིང་།:" />
+        <TextInput style={styles.input} placeholder="མདོ་མིང་གཞན།:" />
+        <TextInput style={styles.input} placeholder="རྒྱ་གར་མདོ་མིང་།:" />
+        <TextInput style={styles.input} placeholder="རྒྱ་ནག་མདོ་མིང་།:" />
+        <TextInput style={styles.input} placeholder="བརྗོད་བྱ།:" />
+
+
         <View style={styles.buttonGroups}>
           <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]}>
             <Text style={[styles.buttonPrimaryText, styles.buttonText]}>Search</Text>
