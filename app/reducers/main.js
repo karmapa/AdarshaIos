@@ -24,7 +24,7 @@ const actionsMap = {
   [types.SET_SUTRA_MAP]: setSutraMap
 };
 
-export default function main(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   const reduceFn = actionsMap[action.type];
   return reduceFn ? reduceFn(state, action) : state;
 }
