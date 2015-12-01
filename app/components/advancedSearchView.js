@@ -11,7 +11,7 @@ const fields = [
   {name: 'aname', placeholder: 'མདོ་མིང་གཞན།:'},
   {name: 'sname', placeholder: 'རྒྱ་གར་མདོ་མིང་།:'},
   {name: 'cname', placeholder: 'རྒྱ་ནག་མདོ་མིང་།:'},
-  {name: 'sname', placeholder: 'བརྗོད་བྱ།:'},
+  {name: 'subject', placeholder: 'བརྗོད་བྱ།:'},
   {name: 'yana', placeholder: 'ཐེག་པ།:'},
   {name: 'charka', placeholder: 'དཀའ། འཁོར་ལོ།:'},
   {name: 'location', placeholder: 'གནས་ཕུན་སུམ་ཚོགས་པ།:'},
@@ -26,29 +26,31 @@ const fields = [
 class AdvancedSearchView extends Component {
 
   static PropTypes = {
-    db: PropTypes.object.isRequired
-  };
-
-  state = {
-    division: '',
-    tname: '',
-    aname: '',
-    sname: '',
-    cname: '',
-    subject: '',
-    yana: '',
-    charka: '',
-    location: '',
-    purpose: '',
-    collect: '',
-    relation: '',
-    debate: '',
-    translator: '',
-    reviser: ''
+    db: PropTypes.object.isRequired,
+    division: PropTypes.string.isRequired,
+    tname: PropTypes.string.isRequired,
+    aname: PropTypes.string.isRequired,
+    sname: PropTypes.string.isRequired,
+    cname: PropTypes.string.isRequired,
+    subject: PropTypes.string.isRequired,
+    yana: PropTypes.string.isRequired,
+    charka: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    purpose: PropTypes.string.isRequired,
+    collect: PropTypes.string.isRequired,
+    relation: PropTypes.string.isRequired,
+    debate: PropTypes.string.isRequired,
+    translator: PropTypes.string.isRequired,
+    reviser: PropTypes.string.isRequired,
+    setFieldsData: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
+  }
+
+  onInputChange = (name, value) => {
+    this.props.setFieldsData({[name]: value});
   }
 
   render() {
@@ -56,13 +58,8 @@ class AdvancedSearchView extends Component {
     return (
       <ScrollView style={styles.container}>
 
-        <TextInput style={styles.input} placeholder="སྡེ་ཚན།:" />
-        <TextInput style={styles.input} placeholder="མདོ་མིང་།:" />
-        <TextInput style={styles.input} placeholder="མདོ་མིང་གཞན།:" />
-        <TextInput style={styles.input} placeholder="རྒྱ་གར་མདོ་མིང་།:" />
-        <TextInput style={styles.input} placeholder="རྒྱ་ནག་མདོ་མིང་།:" />
-        <TextInput style={styles.input} placeholder="བརྗོད་བྱ།:" />
-
+        {fields.map(row => <TextInput key={row.name} style={styles.input}
+          placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)} value={this.props[row.name]} />)}
 
         <View style={styles.buttonGroups}>
           <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]}>

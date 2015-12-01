@@ -4,7 +4,6 @@ import React, { Component, ScrollView, View, Text, PropTypes } from 'react-nativ
 
 import { TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import { styles, stylesTabBar } from './masterView.style';
-import * as mainActions from '../actions/mainActions';
 import { AdvancedSearchView, CategoryView, KeyboardSearchView } from '../components';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
@@ -14,6 +13,7 @@ class MasterView extends Component {
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     setSelectedTab: PropTypes.func.isRequired,
+    setFieldsData: PropTypes.func.isRequired,
     settings: PropTypes.object.isRequired
   };
 
@@ -32,7 +32,7 @@ class MasterView extends Component {
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
     let {selectedTab, db, tocRows} = this.props.settings;
-    let {navigator, route} = this.props;
+    let {navigator, route, setFieldsData} = this.props;
 
     return (
       <TabBarIOS {...tabBarProps}>
@@ -46,7 +46,7 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
-          <AdvancedSearchView db={db} />
+          <AdvancedSearchView db={db} setFieldsData={setFieldsData} />
         </TabBarIOS.Item>
       </TabBarIOS>
     );

@@ -4,6 +4,7 @@ import React, { Component, Navigator, PropTypes, View } from 'react-native';
 
 import { connect } from 'react-redux/native';
 import * as mainActions from '../actions/mainActions';
+import * as advanceSearchActions from '../actions/advanceSearchActions';
 import { DetailView, MasterView } from '../containers';
 import { CategoryView } from '../components';
 import { bindActionCreators } from 'redux';
@@ -72,7 +73,8 @@ class MainApp extends Component {
   renderScene(settings, route, navigator) {
 
     const {dispatch} = this.props;
-    const actions = bindActionCreators(mainActions, dispatch);
+    const bindedMainActions = bindActionCreators(mainActions, dispatch);
+    const bindedAdvanceSearchActions = bindActionCreators(advanceSearchActions, dispatch);
 
     if ('DetailView' === route.name) {
 
@@ -80,9 +82,9 @@ class MainApp extends Component {
         settings,
         navigator,
         route,
-        setFontSize: actions.setFontSize,
-        setLineHeight: actions.setLineHeight,
-        setWylieStatus: actions.setWylieStatus,
+        setFontSize: bindedMainActions.setFontSize,
+        setLineHeight: bindedMainActions.setLineHeight,
+        setWylieStatus: bindedMainActions.setWylieStatus,
         text: route.text,
         title: route.title,
         uti: route.uti
@@ -103,7 +105,7 @@ class MainApp extends Component {
       settings,
       navigator,
       route
-    }, actions);
+    }, bindedMainActions, bindedAdvanceSearchActions);
 
     return (
       <MasterView {...masterViewProps}></MasterView>
