@@ -1,4 +1,3 @@
-
 import { KsanaFileSystem as kfs } from 'NativeModules';
 
 // shouldn't bind kfs to global
@@ -33,6 +32,15 @@ export function openDb(dbName) {
         dispatch(setDbError(err));
       }
     });
+  };
+}
+
+export const SET_SUTRA_MAP = 'SET_SUTRA_MAP';
+
+export function setSutraMap(sutraMap) {
+  return {
+    type: SET_SUTRA_MAP,
+    sutraMap
   };
 }
 
