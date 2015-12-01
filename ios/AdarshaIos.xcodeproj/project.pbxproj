@@ -25,11 +25,12 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
 		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
-		9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */; settings = {ASSET_TAGS = (); }; };
-		9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */; settings = {ASSET_TAGS = (); }; };
-		9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */; settings = {ASSET_TAGS = (); }; };
-		9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF11C00F153003DC74C /* icon-line-height-minus.png */; settings = {ASSET_TAGS = (); }; };
-		9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF21C00F153003DC74C /* icon-tibetan-wylie-switch.png */; settings = {ASSET_TAGS = (); }; };
+		9B2936861C0D5FF300FBBE5B /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */; };
+		9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */; };
+		9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */; };
+		9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */; };
+		9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF11C00F153003DC74C /* icon-line-height-minus.png */; };
+		9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF21C00F153003DC74C /* icon-tibetan-wylie-switch.png */; };
 		9BB108A01BA99C4900087046 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB1089F1BA99C0C00087046 /* libReactNativeIcons.a */; };
 		9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A11BA99C8800087046 /* FAKFontAwesome.h */; };
 		9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A21BA99C8800087046 /* FAKFontAwesome.m */; };
@@ -49,7 +50,6 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
-		9BBB8E0F1BB0C28900329584 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */; };
 		9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E101BB0C2A700329584 /* moedict.kdb */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +166,7 @@
 		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
 		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
 		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
+		9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-add.png"; path = "../assets/images/icon-font-size-add.png"; sourceTree = "<group>"; };
 		9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-minus.png"; path = "../assets/images/icon-font-size-minus.png"; sourceTree = "<group>"; };
 		9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-line-height-add.png"; path = "../assets/images/icon-line-height-add.png"; sourceTree = "<group>"; };
@@ -191,7 +192,6 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
-		9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9BBB8E101BB0C2A700329584 /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = moedict.kdb; path = ../moedict.kdb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -300,8 +300,8 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
+				9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */,
 				9BBB8E101BB0C2A700329584 /* moedict.kdb */,
-				9BBB8E0E1BB0C28900329584 /* jiangkangyur.kdb */,
 				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
 				9B002A201BA81313006EAADF /* kfs_ios.m */,
 				9B002A211BA81313006EAADF /* kfs_rct.h */,
@@ -633,7 +633,6 @@
 				9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */,
 				9BB108B91BA99C8800087046 /* FAKIonIcons.h in Resources */,
 				9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */,
-				9BBB8E0F1BB0C28900329584 /* jiangkangyur.kdb in Resources */,
 				9BB108BA1BA99C8800087046 /* FAKIonIcons.m in Resources */,
 				9BB108BB1BA99C8800087046 /* FAKMaterial.h in Resources */,
 				9BB108BC1BA99C8800087046 /* FAKMaterial.m in Resources */,
@@ -644,6 +643,7 @@
 				9BB108C01BA99C8800087046 /* FontAwesomeKit.h in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
 				9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */,
+				9B2936861C0D5FF300FBBE5B /* jiangkangyur.kdb in Resources */,
 				9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */,
 				9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */,
 				9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */,
