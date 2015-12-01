@@ -13,6 +13,24 @@ class AdvancedSearchView extends Component {
     db: PropTypes.object.isRequired
   };
 
+  state = {
+    division: '',
+    tname: '',
+    aname: '',
+    sname: '',
+    cname: '',
+    subject: '',
+    yana: '',
+    charka: '',
+    location: '',
+    purpose: '',
+    collect: '',
+    relation: '',
+    debate: '',
+    translator: '',
+    reviser: ''
+  };
+
   constructor(props) {
     super(props);
   }
