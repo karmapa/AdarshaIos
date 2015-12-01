@@ -5,6 +5,7 @@ import _ from 'lodash';
 const initialState = Immutable.Map({
   db: null,
   dbError: null,
+  sutraMap: {},
   selectedTab: 'category',
   toWylie: false,
   fontSize: 16,
@@ -19,7 +20,8 @@ const actionsMap = {
   [types.SET_TOC_ERROR]: setTocError,
   [types.SET_FONT_SIZE]: setFontSize,
   [types.SET_LINE_HEIGHT]: setLineHeight,
-  [types.SET_WYLIE_STATUS]: setWylieStatus
+  [types.SET_WYLIE_STATUS]: setWylieStatus,
+  [types.SET_SUTRA_MAP]: setSutraMap
 };
 
 export default function main(state = initialState, action) {
@@ -105,4 +107,8 @@ function setLineHeight(state, action) {
 
 function setWylieStatus(state, action) {
   return state.set('toWylie', action.status);
+}
+
+function setSutraMap(state, action) {
+  return state.set('sutraMap', action.sutraMap);
 }
