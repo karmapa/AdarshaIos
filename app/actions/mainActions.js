@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { KsanaFileSystem as kfs } from 'NativeModules';
 
 // shouldn't bind kfs to global
@@ -26,6 +27,12 @@ export function openDb(dbName) {
   return dispatch => {
     kde.open(dbName, function(err, db) {
       if (db) {
+
+        db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos']], (fields) => {
+          let [sutraIds, sutraVposs] = fields;
+          let sutraMap = _.object(sutraIds, sutraVposs);
+          dispatch(setSutraMap(sutraMap));
+        });
         dispatch(setDb(db));
       }
       else {
