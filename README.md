@@ -40,4 +40,4 @@ react-native bundle --minify
 * མཚམས་སྦྱར་བའི་གོ་རིམ།關連性  relation
 * རྒལ་ལན།  爭議  debate
 * ལོ་ཙཱ་བ།  譯師  translator
-* ཞུ་དག་པ།   校對者  reviser
+* ཞུ་དག་པ།   校對者  revisor
