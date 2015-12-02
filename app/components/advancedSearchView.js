@@ -4,10 +4,14 @@ import React, { Component, PropTypes, Text, TextInput, View, Modal,
   ScrollView, TouchableHighlight, PickerIOS } from 'react-native';
 
 import { styles } from './advancedSearchView.style';
+import { Spinner } from 'react-native-icons';
 
 import _ from 'lodash';
+import ksa from 'ksana-simple-api';
 
 const PickerItemIOS = PickerIOS.Item;
+import { DB_NAME } from '../constants/AppConstants';
+
 const fields = [
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},
   {name: 'aname', placeholder: 'མདོ་མིང་གཞན།:'},
@@ -26,6 +30,7 @@ const fields = [
 ];
 
 let biography = require('../../biography.json');
+console.log(biography);
 let divisionNames = biography.divisions.map(division => division.divisionName);
 
 class AdvancedSearchView extends Component {
@@ -34,7 +39,8 @@ class AdvancedSearchView extends Component {
     db: PropTypes.object.isRequired,
     sutraMap: PropTypes.object.isRequired,
     advanceSearchSettings: PropTypes.object.isRequired,
-    setFieldsData: PropTypes.func.isRequired
+    setFieldsData: PropTypes.func.isRequired,
+    navigator: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -43,7 +49,8 @@ class AdvancedSearchView extends Component {
 
   state = {
     modalVisible: false,
-    modalMessage: ''
+    modalMessage: '',
+    loading: false
   };
 
   onInputChange = (name, value) => {
@@ -51,6 +58,10 @@ class AdvancedSearchView extends Component {
   }
 
   alert = (message) => {
+    // workaround: make sure modal view exists
+    this.setState({
+      loading: false
+    });
     this.setState({
       modalMessage: message,
       modalVisible: true
@@ -97,8 +108,26 @@ class AdvancedSearchView extends Component {
     }
   }
 
+  getPossBySutraIds = (sutraIds) => {
+    return sutraIds.map((sutraId) => this.props.sutraMap[sutraId]);
+  }
+
+  fetch = (pos) => {
+    return new Promise((resolve, reject) => {
+      ksa.fetch({db: DB_NAME, vpos: pos}, (err, arr) => {
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve(arr);
+        }
+      });
+    });
+  };
+
   search = () => {
 
+    let self = this;
     let filledInputs = this.getFilledInputs();
 
     if (0 === filledInputs.length) {
@@ -106,10 +135,59 @@ class AdvancedSearchView extends Component {
       return;
     }
 
+    self.setState({
+      loading: true
+    });
+
     let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
+    let poss = this.getPossBySutraIds(sutraIds);
+    let promises = poss.map((pos) => this.fetch(pos));
+
+    Promise.all(promises)
+      .then((rows) => {
+        rows = _.flatten(rows);
+
+        if (0 === rows.length) {
+          self.alert('Did not find any sutras.');
+          return;
+        }
+
+        let firstRow = _.first(rows);
+
+        self.props.navigator.push({
+          name: 'DetailView',
+          title: 'Advance Search',
+          rows
+        });
+      })
+      .catch((err) => {
+        self.alert('An error occurred.');
+      })
+      .finally(() => {
+        self.setState({
+          loading: false
+        });
+      });
   }
 
-  cancel = () => {
+  reset = () => {
+    this.props.setFieldsData({
+      division: 0,
+      tname: '',
+      aname: '',
+      sname: '',
+      cname: '',
+      subject: '',
+      yana: '',
+      charka: '',
+      location: '',
+      purpose: '',
+      collect: '',
+      relation: '',
+      debate: '',
+      translator: '',
+      reviser: ''
+    });
   }
 
   onDivisionChange = (newValue) => {
@@ -117,6 +195,22 @@ class AdvancedSearchView extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+
+      let spinnerProps = {
+        name: 'ion|load-c',
+        size: 24,
+        color: '#777',
+        style: styles.stylesSpinner
+      };
+
+      return (
+        <View style={styles.viewSpinner}>
+          <Spinner {...spinnerProps} />
+        </View>
+      );
+    }
 
     return (
       <ScrollView style={styles.container}>
@@ -146,7 +240,7 @@ class AdvancedSearchView extends Component {
           <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]} onPress={this.search}>
             <Text style={[styles.buttonPrimaryText, styles.buttonText]}>Search</Text>
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button, styles.buttonDefault]} onPress={this.cancel}>
+          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button, styles.buttonDefault]} onPress={this.reset}>
             <Text style={styles.buttonText}>Reset</Text>
           </TouchableHighlight>
         </View>

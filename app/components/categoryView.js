@@ -4,7 +4,6 @@ import React, { Component, ListView, PropTypes, Text, View, TouchableHighlight }
 import { Icon } from 'react-native-icons';
 import { Spinner } from 'react-native-icons';
 
-import kse from 'ksana-search';
 import ksa from 'ksana-simple-api';
 import { styles } from './categoryView.style';
 import { DB_NAME } from '../constants/AppConstants';
@@ -57,7 +56,7 @@ class CategoryView extends Component {
         loading: true
       });
 
-      ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, arr) => {
+      ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, rows) => {
 
         this.setState({
           loading: false
@@ -67,13 +66,12 @@ class CategoryView extends Component {
           throw err;
         }
 
-        let data = _.first(arr);
+        let firstRow = _.first(rows);
 
         this.props.navigator.push({
           name: 'DetailView',
-          title: row.t,
-          text: data.text,
-          uti: data.uti
+          title: firstRow.t,
+          rows
         });
       });
     }

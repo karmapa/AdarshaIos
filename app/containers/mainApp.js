@@ -87,9 +87,9 @@ class MainApp extends Component {
         setFontSize: bindedMainActions.setFontSize,
         setLineHeight: bindedMainActions.setLineHeight,
         setWylieStatus: bindedMainActions.setWylieStatus,
-        text: route.text,
         title: route.title,
-        uti: route.uti
+        rows: route.rows,
+        message: route.message
       };
 
       return (

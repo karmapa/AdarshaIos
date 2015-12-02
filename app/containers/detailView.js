@@ -2,7 +2,7 @@
 
 import React, { Text, Component, ScrollView, View, PropTypes, TouchableHighlight, Image } from 'react-native';
 
-import { Spinner, Icon} from 'react-native-icons';
+import { Icon } from 'react-native-icons';
 import { styles } from './detailView.style';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
@@ -10,9 +10,8 @@ import wylie from 'tibetan/wylie';
 class DetailView extends Component {
 
   static PropTypes = {
-    uti: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    rows: PropTypes.array.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired,
@@ -66,7 +65,7 @@ class DetailView extends Component {
 
   render() {
 
-    let {title, text, settings} = this.props;
+    let {title, rows, settings} = this.props;
     let {fontSize, lineHeight, toWylie} = settings;
 
     return (
@@ -78,7 +77,7 @@ class DetailView extends Component {
           <Text style={styles.title}>{title}</Text>
         </View>
         <ScrollView style={styles.textView}>
-          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(text) : text}</Text>
+          {rows.map((row, index) => <Text key={index} style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>)}
         </ScrollView>
         <View style={styles.boxButton}>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>

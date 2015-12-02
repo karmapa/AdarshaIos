@@ -47,7 +47,8 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
-          <AdvancedSearchView db={db} sutraMap={sutraMap} setFieldsData={setFieldsData} advanceSearchSettings={advanceSearchSettings} />
+          <AdvancedSearchView db={db} sutraMap={sutraMap} setFieldsData={setFieldsData}
+            advanceSearchSettings={advanceSearchSettings} navigator={navigator} />
         </TabBarIOS.Item>
       </TabBarIOS>
     );
