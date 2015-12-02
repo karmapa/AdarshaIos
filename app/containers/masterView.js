@@ -39,7 +39,7 @@ class MasterView extends Component {
       <TabBarIOS {...tabBarProps}>
         <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
             selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
-          <CategoryView navigator={navigator} tocRows={tocRows} route={route} />
+          <CategoryView navigator={navigator} tocRows={tocRows} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>

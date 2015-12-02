@@ -16,8 +16,7 @@ class CategoryView extends Component {
   static PropTypes = {
     title: PropTypes.string,
     tocRows: PropTypes.object.isRequired,
-    navigator: PropTypes.array.isRequired,
-    route: PropTypes.object.isRequired
+    navigator: PropTypes.array.isRequired
   };
 
   constructor(props) {
