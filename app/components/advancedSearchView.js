@@ -5,6 +5,8 @@ import React, { Component, PropTypes, Text, TextInput, View, Modal,
 
 import { styles } from './advancedSearchView.style';
 
+import _ from 'lodash';
+
 const PickerItemIOS = PickerIOS.Item;
 const fields = [
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},
@@ -24,7 +26,7 @@ const fields = [
 ];
 
 let biography = require('../../biography.json');
-let divisionItems = biography.divisions.map(division => division.divisionName);
+let divisionNames = biography.divisions.map(division => division.divisionName);
 
 class AdvancedSearchView extends Component {
 
@@ -61,21 +63,50 @@ class AdvancedSearchView extends Component {
     });
   }
 
-  getFilledInputCount = () => {
+  getFilledInputs = () => {
     let self = this;
-
     return fields.filter((row) => {
       return (self.props.advanceSearchSettings[row.name] || '').length > 0;
-    }).length;
+    })
+    .map((row) => {
+      return {
+        name: row.name,
+        value: self.props.advanceSearchSettings[row.name]
+      };
+    });
+  }
+
+  findSutraIds = (division, filledInputs) => {
+    let all = (0 === division);
+    let divisionIndices = all ? divisionNames.map((name, index) => index) : [(division - 1)];
+
+    return _.chain(divisionIndices)
+      .map((divisionIndex) => {
+        return biography.divisions[divisionIndex].sutras;
+      })
+      .flatten()
+      .filter(matchInputs)
+      .pluck('sutraid')
+      .value();
+
+    function matchInputs(sutra) {
+      return _.some(filledInputs, (row) => {
+        let value = sutra[row.name] || '';
+        return (value.length > 0) && (-1 !== value.indexOf(row.value));
+      });
+    }
   }
 
   search = () => {
 
-    if (0 === this.getFilledInputCount()) {
+    let filledInputs = this.getFilledInputs();
+
+    if (0 === filledInputs.length) {
       this.alert('Please fill-out at least one input field before searching.');
       return;
     }
 
+    let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
   }
 
   cancel = () => {
@@ -92,7 +123,7 @@ class AdvancedSearchView extends Component {
 
         <PickerIOS selectedValue={this.props.advanceSearchSettings.division} onValueChange={this.onDivisionChange}>
           <PickerItemIOS key={0} value={0} label={'All'} />
-          {divisionItems.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
+          {divisionNames.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
         </PickerIOS>
 
         {fields.map(row => <TextInput key={row.name} style={styles.input}
