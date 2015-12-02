@@ -752,7 +752,7 @@
 				INFOPLIST_FILE = AdarshaIos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = S85G2288V4.org.karamapa.AdarshaIos;
+				PRODUCT_BUNDLE_IDENTIFIER = org.karamapa.AdarshaIos;
 				PRODUCT_NAME = AdarshaIos;
 			};
 			name = Debug;
@@ -771,7 +771,7 @@
 				INFOPLIST_FILE = AdarshaIos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = S85G2288V4.org.karamapa.AdarshaIos;
+				PRODUCT_BUNDLE_IDENTIFIER = org.karamapa.AdarshaIos;
 				PRODUCT_NAME = AdarshaIos;
 			};
 			name = Release;
