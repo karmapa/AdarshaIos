@@ -30,7 +30,6 @@ const fields = [
 ];
 
 let biography = require('../../biography.json');
-console.log(biography);
 let divisionNames = biography.divisions.map(division => division.divisionName);
 
 class AdvancedSearchView extends Component {
