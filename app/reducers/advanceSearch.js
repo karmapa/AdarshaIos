@@ -2,7 +2,7 @@ import * as types from '../actions/advanceSearchActions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
-  division: '',
+  division: 0,
   tname: '',
   aname: '',
   sname: '',

@@ -14,7 +14,8 @@ class MasterView extends Component {
     route: PropTypes.object.isRequired,
     setSelectedTab: PropTypes.func.isRequired,
     setFieldsData: PropTypes.func.isRequired,
-    settings: PropTypes.object.isRequired
+    settings: PropTypes.object.isRequired,
+    advanceSearchSettings: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -31,8 +32,8 @@ class MasterView extends Component {
 
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
-    let {selectedTab, db, tocRows} = this.props.settings;
-    let {navigator, route, setFieldsData} = this.props;
+    let {selectedTab, db, tocRows, sutraMap} = this.props.settings;
+    let {navigator, route, setFieldsData, advanceSearchSettings} = this.props;
 
     return (
       <TabBarIOS {...tabBarProps}>
@@ -46,7 +47,7 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
-          <AdvancedSearchView db={db} setFieldsData={setFieldsData} />
+          <AdvancedSearchView db={db} sutraMap={sutraMap} setFieldsData={setFieldsData} advanceSearchSettings={advanceSearchSettings} />
         </TabBarIOS.Item>
       </TabBarIOS>
     );

@@ -16,7 +16,8 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import { styles } from './mainApp.style';
 
 @connect(state => ({
-  settings: state.main
+  settings: state.main,
+  advanceSearchSettings: state.advanceSearch
 }))
 class MainApp extends Component {
 
@@ -40,6 +41,7 @@ class MainApp extends Component {
   render() {
 
     let settings = this.props.settings.toObject();
+    let advanceSearchSettings = this.props.advanceSearchSettings.toObject();
     let {db, tocRows} = settings;
 
     let navigatorProps = {
@@ -47,7 +49,7 @@ class MainApp extends Component {
       initialRoute: {
         index: 0
       },
-      renderScene: this.renderScene.bind(this, settings)
+      renderScene: this.renderScene.bind(this, settings, advanceSearchSettings)
     };
 
     if (db && tocRows) {
@@ -70,7 +72,7 @@ class MainApp extends Component {
     );
   }
 
-  renderScene(settings, route, navigator) {
+  renderScene(settings, advanceSearchSettings, route, navigator) {
 
     const {dispatch} = this.props;
     const bindedMainActions = bindActionCreators(mainActions, dispatch);
@@ -103,6 +105,7 @@ class MainApp extends Component {
 
     let masterViewProps = Object.assign({
       settings,
+      advanceSearchSettings,
       navigator,
       route
     }, bindedMainActions, bindedAdvanceSearchActions);
