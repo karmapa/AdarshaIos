@@ -42,6 +42,7 @@ class AdvancedSearchView extends Component {
     debate: PropTypes.string.isRequired,
     translator: PropTypes.string.isRequired,
     reviser: PropTypes.string.isRequired,
+    advanceSearchSettings: PropTypes.object.isRequired,
     setFieldsData: PropTypes.func.isRequired
   };
 
