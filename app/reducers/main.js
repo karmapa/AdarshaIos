@@ -6,7 +6,7 @@ const initialState = Immutable.Map({
   db: null,
   dbError: null,
   sutraMap: {},
-  selectedTab: 'advancedSearch',
+  selectedTab: 'category',
   toWylie: false,
   fontSize: 16,
   lineHeight: 2
