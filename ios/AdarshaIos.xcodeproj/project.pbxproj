@@ -26,6 +26,15 @@
 		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
 		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
 		9B2936861C0D5FF300FBBE5B /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */; };
+		9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395C1C0F827C003E7A90 /* Icon-60.png */; };
+		9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395D1C0F827C003E7A90 /* Icon-72.png */; };
+		9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */; };
+		9B6639681C0F827C003E7A90 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */; };
+		9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */; };
+		9B66396A1C0F827C003E7A90 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639611C0F827C003E7A90 /* Icon.png */; };
+		9B66396B1C0F827C003E7A90 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639621C0F827C003E7A90 /* Icon@2x.png */; };
+		9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639631C0F827C003E7A90 /* iTunesArtwork.png */; };
+		9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */; };
 		9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */; };
 		9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */; };
 		9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */; };
@@ -50,7 +59,6 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
-		9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB8E101BB0C2A700329584 /* moedict.kdb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +175,15 @@
 		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
 		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
 		9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
+		9B66395C1C0F827C003E7A90 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60.png"; path = "../assets/images/Icon-60.png"; sourceTree = "<group>"; };
+		9B66395D1C0F827C003E7A90 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../assets/images/Icon-72.png"; sourceTree = "<group>"; };
+		9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../assets/images/Icon-72@2x.png"; sourceTree = "<group>"; };
+		9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "../assets/images/Icon-Small-50.png"; sourceTree = "<group>"; };
+		9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50@2x.png"; path = "../assets/images/Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		9B6639611C0F827C003E7A90 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../assets/images/Icon.png; sourceTree = "<group>"; };
+		9B6639621C0F827C003E7A90 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../assets/images/Icon@2x.png"; sourceTree = "<group>"; };
+		9B6639631C0F827C003E7A90 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = ../assets/images/iTunesArtwork.png; sourceTree = "<group>"; };
+		9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iTunesArtwork@2x.png"; path = "../assets/images/iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-add.png"; path = "../assets/images/icon-font-size-add.png"; sourceTree = "<group>"; };
 		9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-minus.png"; path = "../assets/images/icon-font-size-minus.png"; sourceTree = "<group>"; };
 		9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-line-height-add.png"; path = "../assets/images/icon-line-height-add.png"; sourceTree = "<group>"; };
@@ -300,6 +317,15 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
+				9B66395C1C0F827C003E7A90 /* Icon-60.png */,
+				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
+				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
+				9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */,
+				9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */,
+				9B6639611C0F827C003E7A90 /* Icon.png */,
+				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
+				9B6639631C0F827C003E7A90 /* iTunesArtwork.png */,
+				9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */,
 				9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */,
 				9BBB8E101BB0C2A700329584 /* moedict.kdb */,
 				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
@@ -627,21 +653,25 @@
 			files = (
 				9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */,
 				9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */,
+				9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */,
+				9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */,
 				9BB108B51BA99C8800087046 /* FAKFoundationIcons.h in Resources */,
 				9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */,
 				9BB108B61BA99C8800087046 /* FAKFoundationIcons.m in Resources */,
 				9BB108B71BA99C8800087046 /* FAKIcon.h in Resources */,
-				9BBB8E111BB0C2A700329584 /* moedict.kdb in Resources */,
 				9BB108B81BA99C8800087046 /* FAKIcon.m in Resources */,
 				9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */,
 				9BB108B91BA99C8800087046 /* FAKIonIcons.h in Resources */,
 				9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */,
 				9BB108BA1BA99C8800087046 /* FAKIonIcons.m in Resources */,
 				9BB108BB1BA99C8800087046 /* FAKMaterial.h in Resources */,
+				9B66396B1C0F827C003E7A90 /* Icon@2x.png in Resources */,
 				9BB108BC1BA99C8800087046 /* FAKMaterial.m in Resources */,
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
 				9BB108BD1BA99C8800087046 /* FAKZocial.h in Resources */,
 				9BB108BE1BA99C8800087046 /* FAKZocial.m in Resources */,
+				9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */,
+				9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */,
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
 				9BB108C01BA99C8800087046 /* FontAwesomeKit.h in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
@@ -652,6 +682,10 @@
 				9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */,
+				9B6639681C0F827C003E7A90 /* Icon-Small-50.png in Resources */,
+				9B66396A1C0F827C003E7A90 /* Icon.png in Resources */,
+				9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +784,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = AdarshaIos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = org.karmapa.AdarshaIos;
@@ -769,6 +804,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = AdarshaIos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = org.karmapa.AdarshaIos;
