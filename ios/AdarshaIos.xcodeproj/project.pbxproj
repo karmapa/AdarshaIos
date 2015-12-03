@@ -41,20 +41,7 @@
 		9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF11C00F153003DC74C /* icon-line-height-minus.png */; };
 		9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF21C00F153003DC74C /* icon-tibetan-wylie-switch.png */; };
 		9BB108A01BA99C4900087046 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB1089F1BA99C0C00087046 /* libReactNativeIcons.a */; };
-		9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A11BA99C8800087046 /* FAKFontAwesome.h */; };
-		9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A21BA99C8800087046 /* FAKFontAwesome.m */; };
-		9BB108B51BA99C8800087046 /* FAKFoundationIcons.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A31BA99C8800087046 /* FAKFoundationIcons.h */; };
-		9BB108B61BA99C8800087046 /* FAKFoundationIcons.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A41BA99C8800087046 /* FAKFoundationIcons.m */; };
-		9BB108B71BA99C8800087046 /* FAKIcon.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A51BA99C8800087046 /* FAKIcon.h */; };
-		9BB108B81BA99C8800087046 /* FAKIcon.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A61BA99C8800087046 /* FAKIcon.m */; };
-		9BB108B91BA99C8800087046 /* FAKIonIcons.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A71BA99C8800087046 /* FAKIonIcons.h */; };
-		9BB108BA1BA99C8800087046 /* FAKIonIcons.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A81BA99C8800087046 /* FAKIonIcons.m */; };
-		9BB108BB1BA99C8800087046 /* FAKMaterial.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108A91BA99C8800087046 /* FAKMaterial.h */; };
-		9BB108BC1BA99C8800087046 /* FAKMaterial.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AA1BA99C8800087046 /* FAKMaterial.m */; };
-		9BB108BD1BA99C8800087046 /* FAKZocial.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AB1BA99C8800087046 /* FAKZocial.h */; };
-		9BB108BE1BA99C8800087046 /* FAKZocial.m in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AC1BA99C8800087046 /* FAKZocial.m */; };
 		9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AD1BA99C8800087046 /* FontAwesome.otf */; };
-		9BB108C01BA99C8800087046 /* FontAwesomeKit.h in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AE1BA99C8800087046 /* FontAwesomeKit.h */; };
 		9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AF1BA99C8800087046 /* foundation-icons.ttf */; };
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
@@ -651,29 +638,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BB108B31BA99C8800087046 /* FAKFontAwesome.h in Resources */,
-				9BB108B41BA99C8800087046 /* FAKFontAwesome.m in Resources */,
 				9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */,
 				9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */,
-				9BB108B51BA99C8800087046 /* FAKFoundationIcons.h in Resources */,
 				9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */,
-				9BB108B61BA99C8800087046 /* FAKFoundationIcons.m in Resources */,
-				9BB108B71BA99C8800087046 /* FAKIcon.h in Resources */,
-				9BB108B81BA99C8800087046 /* FAKIcon.m in Resources */,
 				9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */,
-				9BB108B91BA99C8800087046 /* FAKIonIcons.h in Resources */,
 				9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */,
-				9BB108BA1BA99C8800087046 /* FAKIonIcons.m in Resources */,
-				9BB108BB1BA99C8800087046 /* FAKMaterial.h in Resources */,
 				9B66396B1C0F827C003E7A90 /* Icon@2x.png in Resources */,
-				9BB108BC1BA99C8800087046 /* FAKMaterial.m in Resources */,
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
-				9BB108BD1BA99C8800087046 /* FAKZocial.h in Resources */,
-				9BB108BE1BA99C8800087046 /* FAKZocial.m in Resources */,
 				9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */,
 				9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */,
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
-				9BB108C01BA99C8800087046 /* FontAwesomeKit.h in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
 				9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */,
 				9B2936861C0D5FF300FBBE5B /* jiangkangyur.kdb in Resources */,
