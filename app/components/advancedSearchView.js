@@ -139,7 +139,9 @@ class AdvancedSearchView extends Component {
     });
 
     let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
-    let poss = this.getPossBySutraIds(sutraIds);
+    let poss = this.getPossBySutraIds(sutraIds)
+      .filter(sutraId => undefined !== sutraId);
+
     let promises = poss.map((pos) => this.fetch(pos));
 
     Promise.all(promises)
