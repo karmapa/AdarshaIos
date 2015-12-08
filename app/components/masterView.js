@@ -28,6 +28,18 @@ class MasterView extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  renderAdvance = () => {
+    let {navigator, route, setFieldsData, advanceSearchSettings, settings} = this.props;
+    let {db, sutraMap} = settings;
+    if ('AdvancedSearchView' === route.name) {
+      return <CategoryView navigator={navigator} tocRows={route.tocRows} title={route.title} />;
+    }
+    return (
+      <AdvancedSearchView db={db} sutraMap={sutraMap} setFieldsData={setFieldsData}
+        advanceSearchSettings={advanceSearchSettings} navigator={navigator} />
+    );
+  }
+
   render() {
 
     let {tintColor, barTintColor} = stylesTabBar;
@@ -53,8 +65,7 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advanced Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advancedSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advancedSearch')}>
-          <AdvancedSearchView db={db} sutraMap={sutraMap} setFieldsData={setFieldsData}
-            advanceSearchSettings={advanceSearchSettings} navigator={navigator} />
+            {this.renderAdvance()}
         </TabBarIOS.Item>
       </TabBarIOS>
     );

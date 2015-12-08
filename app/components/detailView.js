@@ -72,6 +72,10 @@ class DetailView extends Component {
     let {title, rows, settings} = this.props;
     let {fontSize, lineHeight, toWylie} = settings;
 
+    let limitedRows = rows.filter((row, index) => {
+      return index < 10;
+    });
+
     return (
       <View style={styles.container}>
         <View style={styles.navbar}>
@@ -88,7 +92,7 @@ class DetailView extends Component {
           </View>
         </View>
         <ScrollView style={styles.textView}>
-          {rows.map((row, index) => <Text key={index} style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>)}
+          {limitedRows.map((row, index) => <Text key={index} style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>)}
         </ScrollView>
         <View style={styles.boxButton}>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>

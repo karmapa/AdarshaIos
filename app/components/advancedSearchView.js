@@ -111,9 +111,9 @@ class AdvancedSearchView extends Component {
     return sutraIds.map((sutraId) => this.props.sutraMap[sutraId]);
   }
 
-  fetch = (pos) => {
+  fetch = (poss) => {
     return new Promise((resolve, reject) => {
-      ksa.fetch({db: DB_NAME, vpos: pos}, (err, arr) => {
+      ksa.fetch({db: DB_NAME, vpos: poss}, (err, arr) => {
         if (err) {
           reject(err);
         }
@@ -140,25 +140,22 @@ class AdvancedSearchView extends Component {
 
     let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
     let poss = this.getPossBySutraIds(sutraIds)
-      .filter(sutraId => undefined !== sutraId);
+      .filter(sutraId => undefined !== sutraId)
+      .filter((sutraId, index) => index < 50);
 
-    let promises = poss.map((pos) => this.fetch(pos));
-
-    Promise.all(promises)
+    this.fetch(poss)
       .then((rows) => {
-        rows = _.flatten(rows);
 
         if (0 === rows.length) {
           self.alert('Did not find any sutras.');
           return;
         }
 
-        let firstRow = _.first(rows);
 
         self.props.navigator.push({
-          name: 'DetailView',
+          name: 'AdvancedSearchView',
           title: 'Advance Search',
-          rows
+          tocRows: rows
         });
       })
       .catch((err) => {
