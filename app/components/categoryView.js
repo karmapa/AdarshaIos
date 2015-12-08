@@ -129,8 +129,15 @@ class CategoryView extends Component {
     };
 
     return (
-      <View style={styles.container}>
-        {this.renderBackButton()}
+      <View style={[styles.container]}>
+        {this.canShowBackButton() &&
+          <View style={styles.navbar}>
+            <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ecf0f1'}>
+              <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
+            </TouchableHighlight>
+            <Text style={styles.title}>{this.props.title}</Text>
+          </View>
+        }
         <ListView {...listViewProps} />
       </View>
     );
@@ -138,21 +145,6 @@ class CategoryView extends Component {
 
   canShowBackButton = () => {
     return this.props.navigator.getCurrentRoutes().length > 1;
-  }
-
-  renderBackButton() {
-
-    if (this.canShowBackButton()) {
-      let {title} = this.props;
-      return (
-        <View style={styles.navbar}>
-          <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ecf0f1'}>
-            <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
-          </TouchableHighlight>
-          <Text style={styles.title}>{title}</Text>
-        </View>
-      );
-    }
   }
 }
 
