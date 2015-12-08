@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   navbar: {
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 26,
+    paddingTop: 10,
     paddingBottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -23,7 +23,8 @@ export const styles = StyleSheet.create({
     marginRight: 10
   },
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: 20
   },
   rowContainer: {
     marginBottom: 7,
