@@ -97,12 +97,6 @@ class MainApp extends Component {
       );
     }
 
-    if ('CategoryView' === route.name) {
-      return (
-        <CategoryView title={route.title} navigator={navigator} tocRows={route.tocRows} route={route} />
-      );
-    }
-
     let masterViewProps = Object.assign({
       settings,
       advanceSearchSettings,

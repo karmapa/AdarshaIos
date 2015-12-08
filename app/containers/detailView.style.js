@@ -9,16 +9,8 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 26,
-    paddingBottom: 26,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  backButton: {
-    flex: 1
-  },
-  title: {
-    marginRight: 10,
-    marginLeft: 20
+    paddingBottom: 10,
+    flexDirection: 'row'
   },
   textView: {
     paddingLeft: 14,

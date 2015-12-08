@@ -66,11 +66,9 @@ class CategoryView extends Component {
           throw err;
         }
 
-        let firstRow = _.first(rows);
-
         this.props.navigator.push({
           name: 'DetailView',
-          title: firstRow.t,
+          title: row.t,
           rows
         });
       });
@@ -87,7 +85,7 @@ class CategoryView extends Component {
   renderRow = row => {
 
     return (
-      <TouchableHighlight key={row.index} style={styles.rowContainer} underlayColor={'#cccccc'} onPress={this.onRowClicked.bind(this, row)}>
+      <TouchableHighlight key={row.index} style={styles.rowContainer} underlayColor={'#ffffff'} onPress={this.onRowClicked.bind(this, row)}>
         <View style={styles.rowView}>
           <Text style={{paddingLeft: 14, height: 32}}>{row.t}</Text>
           <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginTop: 4, marginRight: 10}} size={16} color={'#555555'} />
@@ -132,7 +130,7 @@ class CategoryView extends Component {
       <View style={[styles.container]}>
         {this.canShowBackButton() &&
           <View style={styles.navbar}>
-            <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ecf0f1'}>
+            <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ffffff'}>
               <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
             </TouchableHighlight>
             <Text style={styles.title}>{this.props.title}</Text>

@@ -34,12 +34,18 @@ class MasterView extends Component {
     let tabBarProps = {tintColor, barTintColor};
     let {selectedTab, db, tocRows, sutraMap} = this.props.settings;
     let {navigator, route, setFieldsData, advanceSearchSettings} = this.props;
+    let title;
+
+    if ('CategoryView' === route.name) {
+      tocRows = route.tocRows;
+      title = route.title;
+    }
 
     return (
       <TabBarIOS {...tabBarProps}>
         <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
             selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
-          <CategoryView navigator={navigator} tocRows={tocRows} />
+          <CategoryView navigator={navigator} tocRows={tocRows} title={title} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>

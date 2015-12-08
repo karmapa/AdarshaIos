@@ -26,8 +26,12 @@ class DetailView extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  goBack() {
+  goBack = () => {
     this.props.navigator.pop();
+  }
+
+  goHome = () => {
+    this.props.navigator.popToTop();
   }
 
   decreaseFontSize = () => {
@@ -71,10 +75,17 @@ class DetailView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.navbar}>
-          <TouchableHighlight onPress={this.goBack.bind(this)} style={styles.backButton} underlayColor={'#ecf0f1'}>
-            <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
-          </TouchableHighlight>
-          <Text style={styles.title}>{title}</Text>
+          <View style={{flex: 1}}>
+            <TouchableHighlight onPress={this.goBack} style={{width: 30}} underlayColor={'#ecf0f1'}>
+              <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
+            </TouchableHighlight>
+          </View>
+          <Text style={{flex: 1}}>{title}</Text>
+          <View style={{flex: 1}}>
+            <TouchableHighlight onPress={this.goHome} style={{width: 30, alignSelf: 'flex-end'}} underlayColor={'#ecf0f1'}>
+              <Icon name="ion|home" style={{width: 22, height: 22}} size={22} color={'#555555'} />
+            </TouchableHighlight>
+          </View>
         </View>
         <ScrollView style={styles.textView}>
           {rows.map((row, index) => <Text key={index} style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>)}
