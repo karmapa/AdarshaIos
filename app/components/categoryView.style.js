@@ -1,12 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  scriptureName: {
+    backgroundColor: '#e7e7e7',
+    paddingBottom: 7,
+    paddingTop: 7,
+    textAlign: 'center'
+  },
   navbar: {
     paddingLeft: 0,
     paddingRight: 0,
-    paddingTop: 10,
-    paddingBottom: 10,
-    position: 'relative',
+    paddingTop: 7,
+    paddingBottom: 7,
     flexDirection: 'row'
   },
   viewSpinner: {
@@ -44,6 +49,6 @@ export const styles = StyleSheet.create({
     paddingLeft: 14
   },
   backButton: {
-    width: 30
+    width: 40
   }
 });

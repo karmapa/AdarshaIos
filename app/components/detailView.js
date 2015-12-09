@@ -1,23 +1,23 @@
 'use strict';
 
-import React, { Text, Component, ScrollView, View, PropTypes, TouchableHighlight, Image } from 'react-native';
-
-import { Icon } from 'react-native-icons';
-import { styles } from './detailView.style';
+import React, {Text, Component, ScrollView, View, PropTypes, TouchableHighlight, Image} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
+import {Icon} from 'react-native-icons';
+import {styles} from './detailView.style';
+import {values, styles as globalStyles} from '../styles/global.style';
 
 class DetailView extends Component {
 
   static PropTypes = {
-    title: PropTypes.string.isRequired,
-    rows: PropTypes.array.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
-    settings: PropTypes.object.isRequired,
+    rows: PropTypes.array.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
-    setWylieStatus: PropTypes.func.isRequired
+    setWylieStatus: PropTypes.func.isRequired,
+    settings: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -78,18 +78,14 @@ class DetailView extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.navbar}>
-          <View style={{width: 30}}>
-            <TouchableHighlight onPress={this.goBack} style={{width: 30}} underlayColor={'#ecf0f1'}>
-              <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
-            </TouchableHighlight>
-          </View>
-          <Text numberOfLines={1} style={{flex: 1, textAlign: 'center'}}>{title}</Text>
-          <View style={{width: 30}}>
-            <TouchableHighlight onPress={this.goHome} style={{width: 30}} underlayColor={'#ecf0f1'}>
-              <Icon name="ion|home" style={{width: 22, height: 22, alignSelf: 'center'}} size={22} color={'#555555'} />
-            </TouchableHighlight>
-          </View>
+        <View style={styles.nav}>
+          <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={values.underlayColor}>
+            <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
+          </TouchableHighlight>
+          <Text numberOfLines={1} style={styles.navTitle}>{title}</Text>
+          <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={values.underlayColor}>
+            <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
+          </TouchableHighlight>
         </View>
         <ScrollView style={styles.textView}>
           {limitedRows.map((row, index) => <Text key={index} style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>)}

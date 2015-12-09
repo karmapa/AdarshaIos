@@ -5,12 +5,19 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  navbar: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 26,
+  nav: {
+    flexDirection: 'row',
     paddingBottom: 10,
-    flexDirection: 'row'
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 26
+  },
+  navButton: {
+    width: 40
+  },
+  navTitle: {
+    flex: 1,
+    textAlign: 'center'
   },
   textView: {
     paddingLeft: 14,

@@ -54,6 +54,7 @@ class KeyboardSearchView extends Component {
     };
 
     kse.search(db, keyword, options, function(err, data) {
+      console.log('data.exerpts', data.excerpt);
       self.setState({
         excerpts: data.excerpt || [],
         text: ''
