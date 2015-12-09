@@ -1,14 +1,16 @@
 import * as advanceSearchActions from '../actions/advanceSearchActions';
 import * as mainActions from '../actions/mainActions';
 import React, {Component, Navigator, PropTypes, View} from 'react-native';
+import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {CategoryView, DetailView, MasterView} from '../components';
 import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux/native';
-import {styles} from './mainApp.style';
 import {styles as globalStyles} from '../styles/global.style';
+import {styles} from './mainApp.style';
+import {renderSpinner} from '../helpers';
 
 @connect(state => ({
   settings: state.main,
@@ -42,7 +44,7 @@ class MainApp extends Component {
 
     let settings = this.props.settings.toObject();
     let advanceSearchSettings = this.props.advanceSearchSettings.toObject();
-    let {db, tocRows} = settings;
+    let {tocRows, loading} = settings;
 
     let navigatorProps = {
       style: styles.navigatorIos,
@@ -52,24 +54,11 @@ class MainApp extends Component {
       renderScene: this.renderScene.bind(this, settings, advanceSearchSettings)
     };
 
-    if (db && tocRows) {
-      return (
-        <Navigator {...navigatorProps} />
-      );
+    if (loading || _.isNull(tocRows)) {
+      return renderSpinner();
     }
 
-    let spinnerProps = {
-      name: 'ion|load-c',
-      size: 24,
-      color: '#777',
-      style: globalStyles.spinner
-    };
-
-    return (
-      <View style={styles.viewSpinner}>
-        <Spinner {...spinnerProps} />
-      </View>
-    );
+    return <Navigator {...navigatorProps} />;
   }
 
   renderScene(settings, advanceSearchSettings, route, navigator) {

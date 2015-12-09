@@ -25,14 +25,14 @@ export function setSelectedTab(selectedTab) {
 export function openDb(dbName) {
 
   return dispatch => {
-    kde.open(dbName, function(err, db) {
-      if (db) {
 
+    kde.open(dbName, function(err, db) {
+
+      if (db) {
         db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
           let [sutraIds, sutraVposs, heads] = fields;
           let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
           let sutraMap = _.object(sutraIds, rows);
-          console.log('rows', rows);
           dispatch(setSutraMap(sutraMap));
         });
         dispatch(setDb(db));

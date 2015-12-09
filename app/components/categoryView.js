@@ -1,23 +1,26 @@
 'use strict';
 
-import React, { Component, ListView, PropTypes, Text, View, TouchableHighlight } from 'react-native';
-import { Icon } from 'react-native-icons';
-import { Spinner } from 'react-native-icons';
-
-import ksa from 'ksana-simple-api';
-import { styles } from './categoryView.style';
-import { values, styles as globalStyles } from '../styles/global.style';
-import { DB_NAME } from '../constants/AppConstants';
-
+import React, {Component, ListView, PropTypes, Text, View, TouchableHighlight} from 'react-native';
 import _ from 'lodash';
+import ksa from 'ksana-simple-api';
+import {DB_NAME} from '../constants/AppConstants';
+import {Icon} from 'react-native-icons';
+import {Spinner} from 'react-native-icons';
+import {connect} from 'react-redux/native';
+import {setLoading} from '../actions/mainActions';
+import {styles} from './categoryView.style';
+import {values, styles as globalStyles} from '../styles/global.style';
+import {renderSpinner} from '../helpers';
 
+@connect(() => ({}), {setLoading})
 class CategoryView extends Component {
 
   static PropTypes = {
-    title: PropTypes.string,
-    tocRows: PropTypes.object.isRequired,
+    from: PropTypes.bool,
     navigator: PropTypes.array.isRequired,
-    from: PropTypes.bool
+    setLoading: PropTypes.func.isRequired,
+    title: PropTypes.string,
+    tocRows: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -36,6 +39,7 @@ class CategoryView extends Component {
   componentDidMount() {
     this.setTocRows(this.props.tocRows);
     this._rows = [];
+
     this.setState({
       dataSource: this.getDataSource(this.tocRows)
     });
@@ -52,6 +56,8 @@ class CategoryView extends Component {
 
   onRowClicked(row) {
 
+    let {setLoading} = this.props;
+
     if ('AdvanceSearchView' === this.props.from) {
       this.props.navigator.push({
         name: 'DetailView',
@@ -61,15 +67,9 @@ class CategoryView extends Component {
     }
     else if (_.isEmpty(row.children)) {
 
-      this.setState({
-        loading: true
-      });
+      this.setState({loading: true});
 
       ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, rows) => {
-
-        this.setState({
-          loading: false
-        });
 
         if (err) {
           throw err;
@@ -80,6 +80,7 @@ class CategoryView extends Component {
           title: row.t,
           rows
         });
+        this.setState({loading: false});
       });
     }
     else {
@@ -114,19 +115,7 @@ class CategoryView extends Component {
   render() {
 
     if (this.state.loading) {
-
-      let spinnerProps = {
-        name: 'ion|load-c',
-        size: 24,
-        color: '#777',
-        style: styles.stylesSpinner
-      };
-
-      return (
-        <View style={styles.viewSpinner}>
-          <Spinner {...spinnerProps} />
-        </View>
-      );
+      return renderSpinner();
     }
 
     let listViewProps = {

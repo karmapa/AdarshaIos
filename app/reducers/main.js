@@ -5,12 +5,13 @@ import _ from 'lodash';
 const initialState = Immutable.Map({
   db: null,
   dbError: null,
-  sutraMap: {},
-  selectedTab: 'category',
-  toWylie: false,
   fontSize: 16,
   lineHeight: 2,
-  loading: false
+  loading: false,
+  selectedTab: 'category',
+  sutraMap: {},
+  toWylie: false,
+  tocRows: null
 });
 
 const actionsMap = {

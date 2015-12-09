@@ -29,8 +29,23 @@ class KeyboardSearchView extends Component {
   state = {
     excerpts: [],
     keyword: '',
-    text: ''
+    text: '',
+    dataSource: new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2
+    })
   };
+
+  componentDidMount() {
+    this._rows = [];
+    this.setState({
+      dataSource: this.getDataSource(this.rows)
+    });
+  }
+
+  getDataSource = rows => {
+    this._rows = this._rows.concat(rows);
+    return this.state.dataSource.cloneWithRows(this._rows);
+  }
 
   onSearchInputChange(keyword) {
     this.setState({keyword});
@@ -54,7 +69,7 @@ class KeyboardSearchView extends Component {
     };
 
     kse.search(db, keyword, options, function(err, data) {
-      console.log('data.exerpts', data.excerpt);
+
       self.setState({
         excerpts: data.excerpt || [],
         text: ''
@@ -70,9 +85,23 @@ class KeyboardSearchView extends Component {
     }
   }
 
+  onRowClicked = row => {
+  }
+
+  renderRow = row => {
+
+    return (
+      <TouchableHighlight onPress={this.onRowClicked.bind(this, row)}>
+        <View>
+          <Text>123</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
   render() {
 
-    let {excerpts, keyword, text} = this.state;
+    let {keyword, text} = this.state;
 
     let textInputProps = {
       autoFocus: true,
@@ -84,15 +113,17 @@ class KeyboardSearchView extends Component {
       value: keyword
     };
 
-    let searchResultProps = {
-      excerpts
+    let listViewProps = {
+      dataSource: this.state.dataSource,
+      renderRow: this.renderRow,
+      onEndReached: this.onEndReached
     };
 
     return (
       <View style={styles.container}>
         <TextInput {...textInputProps} />
         {this.renderTips()}
-        <SearchResult {...searchResultProps} />
+        <ListView {...listViewProps} />
       </View>
     );
   }
