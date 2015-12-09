@@ -1,8 +1,11 @@
 'use strict';
 
-import React, { Component, PropTypes, ListView, View, Text, TextInput, TouchableHighlight } from 'react-native';
-import { styles } from './keyboardSearchView.style';
-import { SearchResult } from '.';
+import _ from 'lodash';
+import React, {Component, PropTypes, ListView, View, Text, TextInput, TouchableHighlight} from 'react-native';
+import {styles} from './keyboardSearchView.style';
+import {values} from '../styles/global.style';
+import {search, setExcerpts} from '../actions/keyboardSearchActions';
+import {connect} from 'react-redux/native';
 
 import kse from 'ksana-search';
 
@@ -16,10 +19,14 @@ let tips = ds.cloneWithRows([
   'e.g: mi 5* pa 1 to 5 syllables in between'
 ]);
 
+@connect(state => ({excerpts: state.keyboardSearch.get('excerpts')}), {search, setExcerpts})
 class KeyboardSearchView extends Component {
 
   static PropTypes = {
-    db: PropTypes.object.isRequired
+    db: PropTypes.object.isRequired,
+    search: PropTypes.func.isRequired,
+    setExcerpts: PropTypes.func.isRequired,
+    excerpts: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -27,7 +34,6 @@ class KeyboardSearchView extends Component {
   }
 
   state = {
-    excerpts: [],
     keyword: '',
     text: '',
     dataSource: new ListView.DataSource({
@@ -38,7 +44,18 @@ class KeyboardSearchView extends Component {
   componentDidMount() {
     this._rows = [];
     this.setState({
-      dataSource: this.getDataSource(this.rows)
+      dataSource: this.getDataSource(this.props.excerpts)
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setRows(nextProps.excerpts);
+  }
+
+  setRows = rows => {
+    this._rows = [];
+    this.setState({
+      dataSource: this.getDataSource(rows)
     });
   }
 
@@ -47,34 +64,30 @@ class KeyboardSearchView extends Component {
     return this.state.dataSource.cloneWithRows(this._rows);
   }
 
-  onSearchInputChange(keyword) {
+  onSearchInputChange = keyword => {
     this.setState({keyword});
-    this.search(keyword);
+    if (keyword) {
+      this.search(keyword);
+    }
+    else {
+      this.setRows([]);
+    }
   }
 
-  onSearchInputSubmit() {
+  onSearchInputSubmit = () => {
     this.search(this.state.keyword);
   }
 
   search(keyword) {
 
     let {db} = this.props;
-    let self = this;
-
-    var options = {
+    let options = {
       nohighlight: true,
       range: {
         maxhit: 10
       }
     };
-
-    kse.search(db, keyword, options, function(err, data) {
-
-      self.setState({
-        excerpts: data.excerpt || [],
-        text: ''
-      });
-    });
+    this.props.search(db, keyword, options);
   }
 
   renderTips() {
@@ -88,12 +101,58 @@ class KeyboardSearchView extends Component {
   onRowClicked = row => {
   }
 
+  renderText = row => {
+    return <Text style={{flex: 1}} numberOfLines={2} children={this.highlight(row.text, row.realHits)} />;
+  }
+
+  trimByHit = (text, hits) => {
+
+    let firstHit = _.first(hits);
+
+    if (! firstHit) {
+      return text;
+    }
+
+    let [start] = firstHit;
+
+    if (start > 20) {
+      let delta = start - 10;
+      text = text.substring(delta);
+      hits = hits.map(hit => {
+        let [start, length] = hit;
+        return [start - delta, length];
+      })
+    }
+    return [text, hits];
+  }
+
+  highlight(text, hits) {
+
+    [text, hits] = this.trimByHit(text, hits);
+
+    let tags = [];
+    let pos = 0;
+
+    hits.forEach(hit => {
+      let [start, length] = hit;
+      if (start > pos) {
+        tags.push(<Text key={pos}>{text.substring(pos, start)}</Text>);
+      }
+      tags.push(<Text key={'h' + pos} style={styles.highlight}>{text.substr(start, length)}</Text>);
+      pos = start += length;
+    });
+    tags.push(<Text key={pos}>{text.substr(pos)}</Text>);
+
+    return tags;
+  }
+
   renderRow = row => {
 
     return (
-      <TouchableHighlight onPress={this.onRowClicked.bind(this, row)}>
-        <View>
-          <Text>123</Text>
+      <TouchableHighlight style={{paddingTop: 7, paddingBottom: 7}} onPress={this.onRowClicked.bind(this, row)} underlayColor={values.underlayColor}>
+        <View style={{flex: 1}}>
+          <Text style={{color: '#57867e'}}>{row.segname}</Text>
+          {this.renderText(row)}
         </View>
       </TouchableHighlight>
     );
@@ -105,8 +164,8 @@ class KeyboardSearchView extends Component {
 
     let textInputProps = {
       autoFocus: true,
-      onChangeText: this.onSearchInputChange.bind(this),
-      onEndEditing: this.onSearchInputSubmit.bind(this),
+      onChangeText: this.onSearchInputChange,
+      onEndEditing: this.onSearchInputSubmit,
       placeholder: 'Search Keyword',
       ref: 'keyword',
       style: styles.input,
