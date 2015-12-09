@@ -1,3 +1,5 @@
+'use strict';
+
 import * as reducers from '../reducers';
 import MainApp from './mainApp';
 import React, {Component} from 'react-native';

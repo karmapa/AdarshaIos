@@ -1,18 +1,13 @@
-'use strict';
-
-import React, { Component, Navigator, PropTypes, View } from 'react-native';
-
-import { connect } from 'react-redux/native';
-import * as mainActions from '../actions/mainActions';
 import * as advanceSearchActions from '../actions/advanceSearchActions';
-import { CategoryView, DetailView, MasterView } from '../components';
-import { bindActionCreators } from 'redux';
-import { Spinner } from 'react-native-icons';
-import { DB_NAME } from '../constants/AppConstants';
-
+import * as mainActions from '../actions/mainActions';
+import React, {Component, Navigator, PropTypes, View} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-
-import { styles } from './mainApp.style';
+import {CategoryView, DetailView, MasterView} from '../components';
+import {DB_NAME} from '../constants/AppConstants';
+import {Spinner} from 'react-native-icons';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux/native';
+import {styles} from './mainApp.style';
 
 @connect(state => ({
   settings: state.main,
@@ -21,8 +16,8 @@ import { styles } from './mainApp.style';
 class MainApp extends Component {
 
   static PropTypes = {
-    state: PropTypes.object.isRequire,
-    dispatch: PropTypes.func.isRequire
+    dispatch: PropTypes.func.isRequire,
+    state: PropTypes.object.isRequire
   };
 
   constructor(props) {

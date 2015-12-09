@@ -29,8 +29,8 @@ const fields = [
   {name: 'reviser', placeholder: 'ཞུ་དག་པ།:'}
 ];
 
-let biography = require('../../biography.json');
-let divisionNames = biography.divisions.map(division => division.divisionName);
+const biography = require('../../biography.json');
+const divisionNames = biography.divisions.map(division => division.divisionName);
 
 class AdvancedSearchView extends Component {
 
