@@ -8,16 +8,22 @@ import {Spinner} from 'react-native-icons';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux/native';
 import {styles} from './mainApp.style';
+import {styles as globalStyles} from '../styles/global.style';
 
 @connect(state => ({
   settings: state.main,
   advanceSearchSettings: state.advanceSearch
-}))
+}), mainActions)
 class MainApp extends Component {
 
   static PropTypes = {
-    dispatch: PropTypes.func.isRequire,
-    state: PropTypes.object.isRequire
+    openDb: PropTypes.func.isRequired,
+    openToc: PropTypes.func.isRequired,
+    setFontSize: PropTypes.func.isRequired,
+    setLineHeight: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired,
+    setWylieStatus: PropTypes.func.isRequired,
+    state: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -25,9 +31,9 @@ class MainApp extends Component {
   }
 
   componentDidMount() {
-    let {dispatch} = this.props;
-    dispatch(mainActions.openDb(DB_NAME));
-    dispatch(mainActions.openToc(DB_NAME));
+    let {openDb, openToc} = this.props;
+    openDb(DB_NAME);
+    openToc(DB_NAME);
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -56,7 +62,7 @@ class MainApp extends Component {
       name: 'ion|load-c',
       size: 24,
       color: '#777',
-      style: styles.stylesSpinner
+      style: globalStyles.spinner
     };
 
     return (
@@ -68,9 +74,7 @@ class MainApp extends Component {
 
   renderScene(settings, advanceSearchSettings, route, navigator) {
 
-    const {dispatch} = this.props;
-    const bindedMainActions = bindActionCreators(mainActions, dispatch);
-    const bindedAdvanceSearchActions = bindActionCreators(advanceSearchActions, dispatch);
+    const {setFontSize, setLineHeight, setWylieStatus} = this.props;
 
     if ('DetailView' === route.name) {
 
@@ -78,9 +82,9 @@ class MainApp extends Component {
         settings,
         navigator,
         route,
-        setFontSize: bindedMainActions.setFontSize,
-        setLineHeight: bindedMainActions.setLineHeight,
-        setWylieStatus: bindedMainActions.setWylieStatus,
+        setFontSize,
+        setLineHeight,
+        setWylieStatus,
         title: route.title,
         rows: route.rows,
         message: route.message
@@ -96,7 +100,7 @@ class MainApp extends Component {
       advanceSearchSettings,
       navigator,
       route
-    }, bindedMainActions, bindedAdvanceSearchActions);
+    });
 
     return (
       <MasterView {...masterViewProps}></MasterView>

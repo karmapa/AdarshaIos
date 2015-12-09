@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 22,
     width: 22
+  },
+  spinner: {
+    backgroundColor: 'transparent',
+    height: 24,
+    width: 24
   }
 });
 

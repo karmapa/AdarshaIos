@@ -28,9 +28,11 @@ export function openDb(dbName) {
     kde.open(dbName, function(err, db) {
       if (db) {
 
-        db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos']], (fields) => {
-          let [sutraIds, sutraVposs] = fields;
-          let sutraMap = _.object(sutraIds, sutraVposs);
+        db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
+          let [sutraIds, sutraVposs, heads] = fields;
+          let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
+          let sutraMap = _.object(sutraIds, rows);
+          console.log('rows', rows);
           dispatch(setSutraMap(sutraMap));
         });
         dispatch(setDb(db));
@@ -138,5 +140,14 @@ export function setWylieStatus(status) {
   return {
     type: SET_WYLIE_STATUS,
     status
+  };
+}
+
+export const SET_LOADING = 'SET_LOADING';
+
+export function setLoading(loading) {
+  return {
+    type: SET_LOADING,
+    loading
   };
 }

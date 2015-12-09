@@ -9,7 +9,8 @@ const initialState = Immutable.Map({
   selectedTab: 'category',
   toWylie: false,
   fontSize: 16,
-  lineHeight: 2
+  lineHeight: 2,
+  loading: false
 });
 
 const actionsMap = {
@@ -21,7 +22,8 @@ const actionsMap = {
   [types.SET_FONT_SIZE]: setFontSize,
   [types.SET_LINE_HEIGHT]: setLineHeight,
   [types.SET_WYLIE_STATUS]: setWylieStatus,
-  [types.SET_SUTRA_MAP]: setSutraMap
+  [types.SET_SUTRA_MAP]: setSutraMap,
+  [types.SET_LOADING]: setLoading
 };
 
 export default function reducer(state = initialState, action) {
@@ -111,4 +113,8 @@ function setWylieStatus(state, action) {
 
 function setSutraMap(state, action) {
   return state.set('sutraMap', action.sutraMap);
+}
+
+function setLoading(state, action) {
+  return state.set('loading', action.loading);
 }

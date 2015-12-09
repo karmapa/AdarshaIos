@@ -16,7 +16,8 @@ class CategoryView extends Component {
   static PropTypes = {
     title: PropTypes.string,
     tocRows: PropTypes.object.isRequired,
-    navigator: PropTypes.array.isRequired
+    navigator: PropTypes.array.isRequired,
+    from: PropTypes.bool
   };
 
   constructor(props) {
@@ -51,7 +52,14 @@ class CategoryView extends Component {
 
   onRowClicked(row) {
 
-    if (_.isEmpty(row.children)) {
+    if ('AdvanceSearchView' === this.props.from) {
+      this.props.navigator.push({
+        name: 'DetailView',
+        title: row.t,
+        rows: [row]
+      });
+    }
+    else if (_.isEmpty(row.children)) {
 
       this.setState({
         loading: true

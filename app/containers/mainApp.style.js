@@ -7,11 +7,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  stylesSpinner: {
-    width: 24,
-    height: 24,
-    backgroundColor: 'transparent'
-  },
   navigatorIos: {
     flex: 1
   }

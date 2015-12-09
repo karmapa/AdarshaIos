@@ -1,16 +1,18 @@
 'use strict';
 
-import React, { Component, PropTypes, Text, TextInput, View, Modal,
-  ScrollView, TouchableHighlight, PickerIOS } from 'react-native';
+import React, {Component, PropTypes, Text, TextInput, View, Modal,
+  ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
 
-import { styles } from './advancedSearchView.style';
-import { Spinner } from 'react-native-icons';
+import {styles} from './advanceSearchView.style';
+import {Spinner} from 'react-native-icons';
 
 import _ from 'lodash';
 import ksa from 'ksana-simple-api';
 
 const PickerItemIOS = PickerIOS.Item;
 import { DB_NAME } from '../constants/AppConstants';
+import {connect} from 'react-redux/native';
+import {setFieldsData} from '../actions/advanceSearchActions';
 
 const fields = [
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},
@@ -32,7 +34,8 @@ const fields = [
 const biography = require('../../biography.json');
 const divisionNames = biography.divisions.map(division => division.divisionName);
 
-class AdvancedSearchView extends Component {
+@connect(() => ({}), {setFieldsData})
+class AdvanceSearchView extends Component {
 
   static PropTypes = {
     db: PropTypes.object.isRequired,
@@ -107,7 +110,7 @@ class AdvancedSearchView extends Component {
     }
   }
 
-  getPossBySutraIds = (sutraIds) => {
+  attachSutraRows = (sutraIds) => {
     return sutraIds.map((sutraId) => this.props.sutraMap[sutraId]);
   }
 
@@ -139,26 +142,39 @@ class AdvancedSearchView extends Component {
     });
 
     let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
-    let poss = this.getPossBySutraIds(sutraIds)
+    let sutraRows = this.attachSutraRows(sutraIds)
       .filter(sutraId => undefined !== sutraId)
       .filter((sutraId, index) => index < 50);
+
+    let poss = _.pluck(sutraRows, 'vpos');
+
+    if (_.isEmpty(poss)) {
+      self.alert('Did not find any sutras.');
+      return;
+    }
 
     this.fetch(poss)
       .then((rows) => {
 
-        if (0 === rows.length) {
+        if (_.isEmpty(rows)) {
           self.alert('Did not find any sutras.');
           return;
         }
 
+        // attach heads
+        rows = rows.map((row, index) => {
+          row.t = sutraRows[index].head;
+          return row;
+        });
 
         self.props.navigator.push({
-          name: 'AdvancedSearchView',
+          name: 'AdvanceSearchView',
           title: 'Advance Search',
           tocRows: rows
         });
       })
       .catch((err) => {
+        console.error(err);
         self.alert('An error occurred.');
       })
       .finally(() => {
@@ -247,4 +263,4 @@ class AdvancedSearchView extends Component {
   }
 }
 
-export default AdvancedSearchView;
+export default AdvanceSearchView;
