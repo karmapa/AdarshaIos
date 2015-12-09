@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   navbar: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 0,
+    paddingRight: 0,
     paddingTop: 10,
-    paddingBottom: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    paddingBottom: 10,
+    position: 'relative',
+    flexDirection: 'row'
   },
   viewSpinner: {
     flex: 1,
@@ -20,7 +20,11 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   title: {
-    marginRight: 10
+    flex: 1,
+    left: 0,
+    right: 0,
+    marginRight: 30,
+    textAlign: 'center'
   },
   container: {
     flex: 1,
@@ -40,6 +44,6 @@ export const styles = StyleSheet.create({
     paddingLeft: 14
   },
   backButton: {
-    flex: 1
+    width: 30
   }
 });

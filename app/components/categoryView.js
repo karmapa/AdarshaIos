@@ -131,9 +131,10 @@ class CategoryView extends Component {
         {this.canShowBackButton() &&
           <View style={styles.navbar}>
             <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={'#ffffff'}>
-              <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
+              <Icon name="ion|chevron-left" style={{width: 22, height: 22, alignSelf: 'center'}} size={22} color={'#555555'} />
             </TouchableHighlight>
             <Text style={styles.title}>{this.props.title}</Text>
+
           </View>
         }
         <ListView {...listViewProps} />

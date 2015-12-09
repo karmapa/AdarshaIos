@@ -79,15 +79,15 @@ class DetailView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.navbar}>
-          <View style={{flex: 1}}>
+          <View style={{width: 30}}>
             <TouchableHighlight onPress={this.goBack} style={{width: 30}} underlayColor={'#ecf0f1'}>
               <Icon name="ion|chevron-left" style={{width: 22, height: 22}} size={22} color={'#555555'} />
             </TouchableHighlight>
           </View>
-          <Text style={{flex: 1}}>{title}</Text>
-          <View style={{flex: 1}}>
-            <TouchableHighlight onPress={this.goHome} style={{width: 30, alignSelf: 'flex-end'}} underlayColor={'#ecf0f1'}>
-              <Icon name="ion|home" style={{width: 22, height: 22}} size={22} color={'#555555'} />
+          <Text numberOfLines={1} style={{flex: 1, textAlign: 'center'}}>{title}</Text>
+          <View style={{width: 30}}>
+            <TouchableHighlight onPress={this.goHome} style={{width: 30}} underlayColor={'#ecf0f1'}>
+              <Icon name="ion|home" style={{width: 22, height: 22, alignSelf: 'center'}} size={22} color={'#555555'} />
             </TouchableHighlight>
           </View>
         </View>
