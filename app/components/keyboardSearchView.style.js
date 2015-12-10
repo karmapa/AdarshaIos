@@ -21,10 +21,10 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     color: '#555555',
     fontSize: 18,
-    height: 36,
+    height: 50,
     marginTop: 7,
     marginBottom: 0,
     marginRight: 5,
-    padding: 10
+    padding: 7
   }
 });

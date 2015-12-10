@@ -24,11 +24,11 @@ export const styles = StyleSheet.create({
     color: '#555555',
     flex: 1,
     fontSize: 18,
-    height: 36,
+    height: 50,
     marginTop: 7,
     marginBottom: 7,
     marginRight: 5,
-    padding: 10
+    padding: 7
   },
   button: {
     borderRadius: 4,
