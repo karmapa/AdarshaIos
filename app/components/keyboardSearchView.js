@@ -24,8 +24,9 @@ class KeyboardSearchView extends Component {
 
   static PropTypes = {
     db: PropTypes.object.isRequired,
-    search: PropTypes.func.isRequired,
-    excerpts: PropTypes.array.isRequired
+    excerpts: PropTypes.array.isRequired,
+    navigator: PropTypes.array.isRequired,
+    search: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -98,7 +99,11 @@ class KeyboardSearchView extends Component {
   }
 
   onRowClicked = row => {
-    console.log('row', row);
+    this.props.navigator.push({
+      name: 'DetailView',
+      title: row.t,
+      row
+    });
   }
 
   renderText = row => {

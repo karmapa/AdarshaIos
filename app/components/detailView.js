@@ -1,11 +1,13 @@
-'use strict';
-
-import React, {Text, Component, ScrollView, View, PropTypes, TouchableHighlight, Image} from 'react-native';
+import React, {ListView, Text, Component, ScrollView, View, PropTypes, TouchableHighlight, Image} from 'react-native';
+import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
+import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
+
+let ksa = require('ksana-simple-api');
 
 class DetailView extends Component {
 
@@ -24,7 +26,27 @@ class DetailView extends Component {
     super(props);
   }
 
+  state = {
+    dataSource: new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2
+    })
+  }
+
   shouldComponentUpdate = shouldPureComponentUpdate;
+
+  componentDidMount() {
+    this._rows = [];
+    this._loading = false;
+    this.offsetY = null;
+    this.setState({
+      dataSource: this.getDataSource([this.props.row])
+    });
+  }
+
+  getDataSource = (rows) => {
+    this._rows = this._rows.concat(rows);
+    return this.state.dataSource.cloneWithRows(this._rows);
+  }
 
   goBack = () => {
     this.props.navigator.pop();
@@ -67,10 +89,57 @@ class DetailView extends Component {
     this.props.setWylieStatus(! status);
   }
 
+  renderRow = (row, index) => {
+    let {fontSize, lineHeight, toWylie} = this.props.settings;
+    return <Text style={{fontSize, lineHeight: lineHeight * fontSize, paddingLeft: 14, paddingRight: 14}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
+  }
+
+  onEndReached = (event) => {
+    console.info('onEndReached');
+  }
+
+  loadPrev = () => {
+
+    if (this._loading) {
+      return;
+    }
+    this._loading = true;
+    let firstRow = _.first(this._rows);
+    console.log('here', firstRow);
+    ksa.prev({db: DB_NAME, count: 10, uti: 5}, (err, data) => {
+      console.log('data', data);
+      this._loading = false;
+    });
+  }
+
+  handleScroll = (event: Object) => {
+
+    let offsetY = event.nativeEvent.contentOffset.y;
+
+    if (_.isNull(this.offsetY)) {
+      this.offsetY = offsetY;
+      return;
+    }
+
+    if (offsetY > this.offsetY) {
+      this.loadPrev();
+    }
+    if (offsetY < this.offsetY) {
+    }
+    this.offsetY = offsetY;
+  };
+
   render() {
 
     let {title, row, settings} = this.props;
-    let {fontSize, lineHeight, toWylie} = settings;
+
+    let listViewProps = {
+      dataSource: this.state.dataSource,
+      renderRow: this.renderRow,
+      onEndReached: this.onEndReached,
+      onScroll: this.handleScroll,
+      scrollEventThrottle: 16
+    };
 
     return (
       <View style={styles.container}>
@@ -83,9 +152,7 @@ class DetailView extends Component {
             <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
           </TouchableHighlight>
         </View>
-        <ScrollView style={styles.textView}>
-          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
-        </ScrollView>
+        <ListView {...listViewProps} />
         <View style={styles.boxButton}>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>
             <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />

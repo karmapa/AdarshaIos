@@ -37,21 +37,9 @@ class CategoryView extends Component {
   tocRows = [];
 
   componentDidMount() {
-    this.setTocRows(this.props.tocRows);
-    this._rows = [];
-
     this.setState({
-      dataSource: this.getDataSource(this.tocRows)
+      dataSource: this.state.dataSource.cloneWithRows(this.props.tocRows)
     });
-  }
-
-  setTocRows = (tocRows = []) => {
-    this.tocRows = tocRows;
-  }
-
-  getDataSource = (rows) => {
-    this._rows = this._rows.concat(rows);
-    return this.state.dataSource.cloneWithRows(this._rows);
   }
 
   onRowClicked(row) {
@@ -62,7 +50,7 @@ class CategoryView extends Component {
       this.props.navigator.push({
         name: 'DetailView',
         title: row.t,
-        rows: [row]
+        row
       });
     }
     else if (_.isEmpty(row.children)) {

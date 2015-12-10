@@ -63,7 +63,7 @@ class MasterView extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
           selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
-          <KeyboardSearchView db={db} />
+          <KeyboardSearchView db={db} navigator={navigator} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advance Search'} iconName={'ion|social-buffer'} iconSize={32}
           selected={'advanceSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advanceSearch')}>
