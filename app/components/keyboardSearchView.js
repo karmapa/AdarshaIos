@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, {Component, PropTypes, ListView, View, Text, TextInput, TouchableHighlight} from 'react-native';
 import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
-import {search, setExcerpts} from '../actions/keyboardSearchActions';
+import {search} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
 
 import kse from 'ksana-search';
@@ -19,13 +19,12 @@ let tips = ds.cloneWithRows([
   'e.g: mi 5* pa 1 to 5 syllables in between'
 ]);
 
-@connect(state => ({excerpts: state.keyboardSearch.get('excerpts')}), {search, setExcerpts})
+@connect(state => ({excerpts: state.keyboardSearch.get('excerpts')}), {search})
 class KeyboardSearchView extends Component {
 
   static PropTypes = {
     db: PropTypes.object.isRequired,
     search: PropTypes.func.isRequired,
-    setExcerpts: PropTypes.func.isRequired,
     excerpts: PropTypes.array.isRequired
   };
 

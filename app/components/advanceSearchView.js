@@ -1,18 +1,15 @@
 'use strict';
 
-import React, {Component, PropTypes, Text, TextInput, View, Modal,
-  ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
-
-import {styles} from './advanceSearchView.style';
-import {Spinner} from 'react-native-icons';
-
+import React, {Component, PropTypes, Text, TextInput, View, Modal, ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
 import _ from 'lodash';
 import ksa from 'ksana-simple-api';
+import {DB_NAME} from '../constants/AppConstants';
+import {Spinner} from 'react-native-icons';
+import {connect} from 'react-redux/native';
+import {setFieldsData} from '../modules/advanceSearch';
+import {styles} from './advanceSearchView.style';
 
 const PickerItemIOS = PickerIOS.Item;
-import { DB_NAME } from '../constants/AppConstants';
-import {connect} from 'react-redux/native';
-import {setFieldsData} from '../actions/advanceSearchActions';
 
 const fields = [
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},

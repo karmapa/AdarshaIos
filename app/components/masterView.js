@@ -5,7 +5,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import {AdvanceSearchView, CategoryView, KeyboardSearchView} from '../components';
 import {TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {setSelectedTab} from '../actions/mainActions';
+import {setSelectedTab} from '../modules/main';
 import {styles, stylesTabBar} from './masterView.style';
 
 @connect(() => ({}), {setSelectedTab})

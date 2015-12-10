@@ -7,7 +7,7 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {Spinner} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {setLoading} from '../actions/mainActions';
+import {setLoading} from '../modules/main';
 import {styles} from './categoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {renderSpinner} from '../helpers';

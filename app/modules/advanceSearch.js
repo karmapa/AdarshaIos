@@ -1,5 +1,6 @@
-import * as types from '../actions/advanceSearchActions';
 import Immutable from 'immutable';
+
+const SET_FIELDS_DATA = 'SET_FIELDS_DATA';
 
 const initialState = Immutable.Map({
   division: 0,
@@ -20,7 +21,7 @@ const initialState = Immutable.Map({
 });
 
 const actionsMap = {
-  [types.SET_FIELDS_DATA]: setFieldsData
+  [SET_FIELDS_DATA]: (state, action) => state.merge(action.data)
 };
 
 export default function reducer(state = initialState, action) {
@@ -28,6 +29,9 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-function setFieldsData(state, action) {
-  return state.merge(action.data);
+export function setFieldsData(data) {
+  return {
+    type: SET_FIELDS_DATA,
+    data
+  };
 }

@@ -3,6 +3,6 @@
 import React from 'react-native';
 import App from './app/containers/app';
 
-let { AppRegistry } = React;
+let {AppRegistry} = React;
 
 AppRegistry.registerComponent('AdarshaIos', () => App);

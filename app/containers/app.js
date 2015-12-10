@@ -1,14 +1,13 @@
 'use strict';
 
-import * as reducers from '../reducers';
 import MainApp from './mainApp';
 import React, {Component} from 'react-native';
+import reducer from '../modules/reducer';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux/native';
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
 export default class App extends Component {

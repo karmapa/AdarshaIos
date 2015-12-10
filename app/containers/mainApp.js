@@ -1,5 +1,4 @@
-import * as advanceSearchActions from '../actions/advanceSearchActions';
-import * as mainActions from '../actions/mainActions';
+import {openDb, openToc, setFontSize, setLineHeight, setLoading, setWylieStatus} from '../modules/main';
 import React, {Component, Navigator, PropTypes, View} from 'react-native';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -15,7 +14,7 @@ import {renderSpinner} from '../helpers';
 @connect(state => ({
   settings: state.main,
   advanceSearchSettings: state.advanceSearch
-}), mainActions)
+}), {openDb, openToc, setFontSize, setLineHeight, setLoading, setWylieStatus})
 class MainApp extends Component {
 
   static PropTypes = {
