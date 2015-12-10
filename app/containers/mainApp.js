@@ -74,7 +74,7 @@ class MainApp extends Component {
         setLineHeight,
         setWylieStatus,
         title: route.title,
-        rows: route.rows,
+        row: route.row,
         message: route.message
       };
 

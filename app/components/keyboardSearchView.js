@@ -98,6 +98,7 @@ class KeyboardSearchView extends Component {
   }
 
   onRowClicked = row => {
+    console.log('row', row);
   }
 
   renderText = row => {
@@ -129,20 +130,19 @@ class KeyboardSearchView extends Component {
 
     [text, hits] = this.trimByHit(text, hits);
 
-    let tags = [];
-    let pos = 0;
-
-    hits.forEach(hit => {
+    return hits.reduce((data, hit, index, arr) => {
+      let {tags, pos} = data;
       let [start, length] = hit;
       if (start > pos) {
         tags.push(<Text key={pos}>{text.substring(pos, start)}</Text>);
       }
       tags.push(<Text key={'h' + pos} style={styles.highlight}>{text.substr(start, length)}</Text>);
-      pos = start += length;
-    });
-    tags.push(<Text key={pos}>{text.substr(pos)}</Text>);
-
-    return tags;
+      data.pos = start += length;
+      if (index === (arr.length - 1)) {
+        tags.push(<Text key={data.pos}>{text.substr(data.pos)}</Text>);
+      }
+      return data;
+    }, {tags: [], pos: 0}).tags;
   }
 
   renderRow = row => {

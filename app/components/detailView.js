@@ -12,7 +12,7 @@ class DetailView extends Component {
   static PropTypes = {
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
-    rows: PropTypes.array.isRequired,
+    row: PropTypes.array.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,
@@ -69,12 +69,8 @@ class DetailView extends Component {
 
   render() {
 
-    let {title, rows, settings} = this.props;
+    let {title, row, settings} = this.props;
     let {fontSize, lineHeight, toWylie} = settings;
-
-    let limitedRows = rows.filter((row, index) => {
-      return index < 10;
-    });
 
     return (
       <View style={styles.container}>
@@ -88,7 +84,7 @@ class DetailView extends Component {
           </TouchableHighlight>
         </View>
         <ScrollView style={styles.textView}>
-          {limitedRows.map((row, index) => <Text key={index} style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>)}
+          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
         </ScrollView>
         <View style={styles.boxButton}>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>

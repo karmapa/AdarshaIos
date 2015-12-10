@@ -78,7 +78,7 @@ class CategoryView extends Component {
         this.props.navigator.push({
           name: 'DetailView',
           title: row.t,
-          rows
+          row: _.first(rows)
         });
         this.setState({loading: false});
       });
