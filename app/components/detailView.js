@@ -100,7 +100,7 @@ class DetailView extends Component {
 
   loadPrev = () => {
 
-    if (this._loading) {
+    /*if (this._loading) {
       return;
     }
     this._loading = true;
@@ -109,7 +109,7 @@ class DetailView extends Component {
     ksa.prev({db: DB_NAME, count: 10, uti: 5}, (err, data) => {
       console.log('data', data);
       this._loading = false;
-    });
+    });*/
   }
 
   handleScroll = (event: Object) => {
