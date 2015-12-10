@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#e7e7e7',
     paddingBottom: 7,
     paddingTop: 7,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   navbar: {
     paddingTop: 7,
@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center'
   },
   container: {
+    overflow: 'hidden',
     flex: 1,
     backgroundColor: '#ffffff'
   },

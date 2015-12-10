@@ -12,7 +12,10 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   container: {
-    paddingTop: 14,
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  scrollView: {
     paddingLeft: 14,
     paddingRight: 14,
     paddingBottom: 14

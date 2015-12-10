@@ -224,38 +224,40 @@ class AdvanceSearchView extends Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <ScrollView style={styles.scrollView}>
 
-        <PickerIOS selectedValue={this.props.advanceSearchSettings.division} onValueChange={this.onDivisionChange}>
-          <PickerItemIOS key={0} value={0} label={'All'} />
-          {divisionNames.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
-        </PickerIOS>
+          <PickerIOS selectedValue={this.props.advanceSearchSettings.division} onValueChange={this.onDivisionChange}>
+            <PickerItemIOS key={0} value={0} label={'All'} />
+            {divisionNames.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
+          </PickerIOS>
 
-        {fields.map(row => <TextInput key={row.name} style={styles.input}
-          placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)} value={this.props.advanceSearchSettings[row.name]} />)}
+          {fields.map(row => <TextInput key={row.name} style={styles.input}
+            placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)} value={this.props.advanceSearchSettings[row.name]} />)}
 
-        <View>
-          <Modal transparent={true} animated={false} visible={this.state.modalVisible}>
-            <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', padding: 20}}>
-              <View style={{borderRadius: 10, alignItems: 'center', backgroundColor: '#ffffff', padding: 10}}>
-                <Text>{this.state.modalMessage}</Text>
-                <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, {backgroundColor: '#2196f3', marginTop: 7, marginBottom: 0}]} onPress={this.closeAlert}>
-                  <Text style={{color: '#fff'}}>OK</Text>
-                </TouchableHighlight>
+          <View>
+            <Modal transparent={true} animated={false} visible={this.state.modalVisible}>
+              <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', padding: 20}}>
+                <View style={{borderRadius: 10, alignItems: 'center', backgroundColor: '#ffffff', padding: 10}}>
+                  <Text>{this.state.modalMessage}</Text>
+                  <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, {backgroundColor: '#2196f3', marginTop: 7, marginBottom: 0}]} onPress={this.closeAlert}>
+                    <Text style={{color: '#fff'}}>OK</Text>
+                  </TouchableHighlight>
+                </View>
               </View>
-            </View>
-          </Modal>
-        </View>
+            </Modal>
+          </View>
 
-        <View style={styles.buttonGroups}>
-          <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]} onPress={this.search}>
-            <Text style={[styles.buttonPrimaryText, styles.buttonText]}>Search</Text>
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button, styles.buttonDefault]} onPress={this.reset}>
-            <Text style={styles.buttonText}>Reset</Text>
-          </TouchableHighlight>
-        </View>
-      </ScrollView>
+          <View style={styles.buttonGroups}>
+            <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]} onPress={this.search}>
+              <Text style={[styles.buttonPrimaryText, styles.buttonText]}>Search</Text>
+            </TouchableHighlight>
+            <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button, styles.buttonDefault]} onPress={this.reset}>
+              <Text style={styles.buttonText}>Reset</Text>
+            </TouchableHighlight>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

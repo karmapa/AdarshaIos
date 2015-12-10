@@ -79,7 +79,9 @@ class MainApp extends Component {
       };
 
       return (
-        <DetailView {...detailViewProps} />
+        <View style={globalStyles.container}>
+          <DetailView {...detailViewProps} />
+        </View>
       );
     }
 
@@ -91,7 +93,9 @@ class MainApp extends Component {
     });
 
     return (
-      <MasterView {...masterViewProps}></MasterView>
+      <View style={globalStyles.container}>
+        <MasterView {...masterViewProps}></MasterView>
+      </View>
     );
   }
 }

@@ -131,13 +131,13 @@ class DetailView extends Component {
 
   render() {
 
-    let {title, row, settings} = this.props;
+    let {row, settings} = this.props;
 
     let listViewProps = {
       dataSource: this.state.dataSource,
-      renderRow: this.renderRow,
       onEndReached: this.onEndReached,
       onScroll: this.handleScroll,
+      renderRow: this.renderRow,
       scrollEventThrottle: 16
     };
 
@@ -147,7 +147,7 @@ class DetailView extends Component {
           <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={values.underlayColor}>
             <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
           </TouchableHighlight>
-          <Text numberOfLines={1} style={styles.navTitle}>{title}</Text>
+          <Text numberOfLines={1} style={styles.navTitle}>{this.props.title}</Text>
           <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={values.underlayColor}>
             <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
           </TouchableHighlight>

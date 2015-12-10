@@ -100,7 +100,7 @@ class CategoryView extends Component {
     this.props.navigator.pop();
   }
 
-  renderHeader = () => {
+  renderSectionHeader = () => {
 
     if (this.canShowBackButton()) {
       return (
@@ -126,12 +126,12 @@ class CategoryView extends Component {
     let listViewProps = {
       dataSource: this.state.dataSource,
       onEndReached: this.onEndReached,
-      renderHeader: this.renderHeader,
       renderRow: this.renderRow
     };
 
     return (
-      <View style={[styles.container]}>
+      <View style={styles.container}>
+        {this.renderSectionHeader()}
         <ListView {...listViewProps} />
       </View>
     );

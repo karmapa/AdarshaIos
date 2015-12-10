@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: 0
   },
   nav: {
+    backgroundColor: '#ffffff',
     flexDirection: 'row',
-    paddingBottom: 10,
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: 26
+    paddingBottom: 7,
+    paddingTop: 7
   },
   navButton: {
     width: 40

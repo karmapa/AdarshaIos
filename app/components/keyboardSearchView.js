@@ -93,7 +93,7 @@ class KeyboardSearchView extends Component {
   renderTips() {
     if (! this.state.keyword) {
       return (
-        <ListView dataSource={tips} renderRow={(row) => <Text>{row}</Text>}></ListView>
+        <ListView style={{marginTop: 10}} dataSource={tips} renderRow={(row) => <Text>{row}</Text>}></ListView>
       );
     }
   }
