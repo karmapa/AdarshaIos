@@ -9,7 +9,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux/native';
 import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './mainApp.style';
-import {renderSpinner} from '../helpers';
 
 @connect(state => ({
   settings: state.main,
@@ -43,7 +42,6 @@ class MainApp extends Component {
 
     let settings = this.props.settings.toObject();
     let advanceSearchSettings = this.props.advanceSearchSettings.toObject();
-    let {tocRows, loading} = settings;
 
     let navigatorProps = {
       style: styles.navigatorIos,
@@ -53,16 +51,33 @@ class MainApp extends Component {
       renderScene: this.renderScene.bind(this, settings, advanceSearchSettings)
     };
 
-    if (loading || _.isNull(tocRows)) {
-      return renderSpinner();
-    }
-
     return <Navigator {...navigatorProps} />;
   }
+
+  renderSpinner = () => {
+
+    let spinnerProps = {
+      name: 'ion|load-c',
+      size: 24,
+      color: '#777',
+      style: globalStyles.spinner
+    };
+
+    return (
+      <View style={globalStyles.viewSpinner}>
+        <Spinner {...spinnerProps} />
+      </View>
+    );
+  };
 
   renderScene(settings, advanceSearchSettings, route, navigator) {
 
     const {setFontSize, setLineHeight, setWylieStatus} = this.props;
+    const {tocRows, loading} = settings;
+
+    if (loading || _.isNull(tocRows)) {
+      return this.renderSpinner();
+    }
 
     if ('DetailView' === route.name) {
 

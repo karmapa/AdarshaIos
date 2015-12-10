@@ -10,7 +10,6 @@ import {connect} from 'react-redux/native';
 import {setLoading} from '../modules/main';
 import {styles} from './categoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
-import {renderSpinner} from '../helpers';
 
 @connect(() => ({}), {setLoading})
 class CategoryView extends Component {
@@ -30,8 +29,7 @@ class CategoryView extends Component {
   state = {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    }),
-    loading: false
+    })
   };
 
   tocRows = [];
@@ -55,9 +53,11 @@ class CategoryView extends Component {
     }
     else if (_.isEmpty(row.children)) {
 
-      this.setState({loading: true});
+      setLoading(true);
 
       ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, rows) => {
+
+        setLoading(false);
 
         if (err) {
           throw err;
@@ -68,7 +68,6 @@ class CategoryView extends Component {
           title: row.t,
           row: _.first(rows)
         });
-        this.setState({loading: false});
       });
     }
     else {
@@ -118,10 +117,6 @@ class CategoryView extends Component {
   };
 
   render() {
-
-    if (this.state.loading) {
-      return renderSpinner();
-    }
 
     let listViewProps = {
       dataSource: this.state.dataSource,
