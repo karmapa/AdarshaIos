@@ -8,8 +8,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center'
   },
   navbar: {
-    paddingLeft: 0,
-    paddingRight: 0,
     paddingTop: 7,
     paddingBottom: 7,
     flexDirection: 'row'
@@ -33,12 +31,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 20,
     backgroundColor: '#ffffff'
-  },
-  rowContainer: {
-    marginBottom: 7,
-    marginTop: 7
   },
   rowView: {
     flexDirection: 'row',
