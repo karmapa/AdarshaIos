@@ -6,6 +6,7 @@ import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
+import wylie from 'tibetan/wylie';
 
 import kse from 'ksana-search';
 
@@ -79,6 +80,8 @@ class KeyboardSearchView extends Component {
   }
 
   search(keyword) {
+
+    keyword = wylie.fromWylie(keyword);
 
     let {db} = this.props;
     let options = {
