@@ -84,7 +84,7 @@ class CategoryView extends Component {
     return (
       <TouchableHighlight key={row.index} underlayColor={values.underlayColor} onPress={this.onRowClicked.bind(this, row)}>
         <View style={[styles.rowView, {alignItems: 'center'}]}>
-          <Text numberOfLines={2} style={{paddingLeft: 14, paddingTop: 10, paddingBottom: 10, flex: 1}}>{row.t}</Text>
+          <Text style={{paddingLeft: 14, paddingTop: 10, paddingBottom: 10, flex: 1}}>{row.t}</Text>
           <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginRight: 10}} size={16} color={'#555555'} />
         </View>
       </TouchableHighlight>
