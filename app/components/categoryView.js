@@ -10,6 +10,7 @@ import {connect} from 'react-redux/native';
 import {setLoading} from '../modules/main';
 import {styles} from './categoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
+import {fetch} from '../helpers';
 
 @connect(() => ({}), {setLoading})
 class CategoryView extends Component {
@@ -55,20 +56,18 @@ class CategoryView extends Component {
 
       setLoading(true);
 
-      ksa.fetch({db: DB_NAME, vpos: row.vpos}, (err, rows) => {
-
-        setLoading(false);
-
-        if (err) {
-          throw err;
-        }
-
-        this.props.navigator.push({
-          name: 'DetailView',
-          title: row.t,
-          row: _.first(rows)
-        });
-      });
+      fetch({vpos: row.vpos})
+        .then(rows => {
+          let firstRow = _.first(rows);
+          this.props.navigator.push({
+            name: 'DetailView',
+            title: row.t,
+            rows: [firstRow]
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        })
     }
     else {
       this.props.navigator.push({
