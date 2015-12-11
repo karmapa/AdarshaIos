@@ -1,4 +1,4 @@
-import {openDb, openToc, setFontSize, setLineHeight, setLoading, setWylieStatus} from '../modules/main';
+import {openDb, openToc, setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
 import React, {Component, Navigator, PropTypes, View} from 'react-native';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -13,7 +13,7 @@ import {styles} from './mainApp.style';
 @connect(state => ({
   settings: state.main,
   advanceSearchSettings: state.advanceSearch
-}), {openDb, openToc, setFontSize, setLineHeight, setLoading, setWylieStatus})
+}), {openDb, openToc, setFontSize, setLineHeight, setWylieStatus})
 class MainApp extends Component {
 
   static PropTypes = {
@@ -21,7 +21,6 @@ class MainApp extends Component {
     openToc: PropTypes.func.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
-    setLoading: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,
     state: PropTypes.object.isRequired
   };
