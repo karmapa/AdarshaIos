@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, {Component, PropTypes, ListView, View, Text, TextInput, TouchableHighlight} from 'react-native';
 import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
-import {search} from '../modules/keyboardSearch';
+import {search, setKeyword} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
 import wylie from 'tibetan/wylie';
 
@@ -20,14 +20,19 @@ let tips = ds.cloneWithRows([
   'e.g: mi 5* pa 1 to 5 syllables in between'
 ]);
 
-@connect(state => ({excerpts: state.keyboardSearch.get('excerpts')}), {search})
+@connect(state => ({
+  excerpts: state.keyboardSearch.get('excerpts'),
+  keyword: state.keyboardSearch.get('keyword')
+}), {search, setKeyword})
 class KeyboardSearchView extends Component {
 
   static PropTypes = {
     db: PropTypes.object.isRequired,
     excerpts: PropTypes.array.isRequired,
+    keyword: PropTypes.string.isRequired,
     navigator: PropTypes.array.isRequired,
-    search: PropTypes.func.isRequired
+    search: PropTypes.func.isRequired,
+    setKeyword: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -35,7 +40,6 @@ class KeyboardSearchView extends Component {
   }
 
   state = {
-    keyword: '',
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
     })
@@ -65,17 +69,8 @@ class KeyboardSearchView extends Component {
   }
 
   onSearchInputChange = keyword => {
-    this.setState({keyword});
-    if (keyword) {
-      this.search(keyword);
-    }
-    else {
-      this.setRows([]);
-    }
-  }
-
-  onSearchInputSubmit = () => {
-    this.search(this.state.keyword);
+    this.props.setKeyword(keyword);
+    this.search(keyword);
   }
 
   search(keyword) {
@@ -93,10 +88,8 @@ class KeyboardSearchView extends Component {
   }
 
   renderTips() {
-    if (! this.state.keyword) {
-      return (
-        <ListView style={{marginTop: 10}} dataSource={tips} renderRow={(row) => <Text>{row}</Text>}></ListView>
-      );
+    if (_.isEmpty(this.props.excerpts)) {
+      return <ListView style={{marginTop: 10}} dataSource={tips} renderRow={(row) => <Text>{row}</Text>}></ListView>;
     }
   }
 
@@ -166,16 +159,13 @@ class KeyboardSearchView extends Component {
 
   render() {
 
-    let {keyword, text} = this.state;
-
     let textInputProps = {
       autoFocus: true,
       onChangeText: this.onSearchInputChange,
-      onEndEditing: this.onSearchInputSubmit,
       placeholder: 'Search Keyword',
       ref: 'keyword',
       style: styles.input,
-      value: keyword
+      value: this.props.keyword
     };
 
     let listViewProps = {
