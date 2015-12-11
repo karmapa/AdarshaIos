@@ -54,6 +54,15 @@ class DetailView extends Component {
     return this.state.dataSource.cloneWithRows(this._rows);
   }
 
+  rerenderListView = () => {
+    // workaround of forcing a ListView to update
+    // https://github.com/facebook/react-native/issues/1133
+    this._rows = JSON.parse(JSON.stringify(this._rows));
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this._rows)
+    });
+  }
+
   goBack = () => {
     this.props.navigator.pop();
   }
@@ -67,6 +76,7 @@ class DetailView extends Component {
     if (fontSize >= 0) {
       this.props.setFontSize(fontSize);
     }
+    this.rerenderListView();
   }
 
   increaseFontSize = () => {
@@ -74,6 +84,7 @@ class DetailView extends Component {
     if (fontSize < 30) {
       this.props.setFontSize(fontSize);
     }
+    this.rerenderListView();
   }
 
   decreaseLineHeight = () => {
@@ -81,6 +92,7 @@ class DetailView extends Component {
     if (lineHeight >= 0) {
       this.props.setLineHeight(lineHeight);
     }
+    this.rerenderListView();
   }
 
   increaseLineHeight = () => {
@@ -88,11 +100,13 @@ class DetailView extends Component {
     if (lineHeight < 30) {
       this.props.setLineHeight(lineHeight);
     }
+    this.rerenderListView();
   }
 
   toggleWylieStatus = () => {
     let status = this.props.settings.toWylie;
     this.props.setWylieStatus(! status);
+    this.rerenderListView();
   }
 
   renderRow = (row, index) => {
