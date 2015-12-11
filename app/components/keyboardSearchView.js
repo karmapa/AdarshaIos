@@ -36,7 +36,6 @@ class KeyboardSearchView extends Component {
 
   state = {
     keyword: '',
-    text: '',
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
     })
