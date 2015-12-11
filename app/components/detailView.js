@@ -204,7 +204,15 @@ class DetailView extends Component {
   }
 
   handleScroll = () => {
-    let scrollProps = this.refs.listView.scrollProperties;
+    let listView = this.refs.listView;
+    let scrollProps = listView.scrollProperties;
+    let {offset} = scrollProps;
+    let dataRowsCount = listView.props.dataSource.getRowCount();
+    let renderedRowsCount = listView.state.curRenderedRowsCount;
+
+    if (-20 === offset) {
+      this.loadPrev();
+    }
   };
 
   render() {
