@@ -1,4 +1,5 @@
-import {openDb, openToc, setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
+import {openDb, setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
+import {openToc} from '../modules/category';
 import React, {Component, Navigator, PropTypes, View} from 'react-native';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -12,8 +13,8 @@ import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './mainApp.style';
 
 @connect(state => ({
-  settings: state.main,
-  advanceSearchSettings: state.advanceSearch
+  advanceSearchSettings: state.advanceSearch,
+  settings: state.main
 }), {openDb, openToc, setFontSize, setLineHeight, setWylieStatus})
 class MainApp extends Component {
 
@@ -57,9 +58,9 @@ class MainApp extends Component {
   renderScene(settings, advanceSearchSettings, route, navigator) {
 
     const {setFontSize, setLineHeight, setWylieStatus} = this.props;
-    const {tocRows, loading} = settings;
+    const {loading} = settings;
 
-    if (loading || _.isNull(tocRows)) {
+    if (loading) {
       return renderSpinner();
     }
 

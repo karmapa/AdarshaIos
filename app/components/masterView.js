@@ -8,15 +8,16 @@ import {connect} from 'react-redux/native';
 import {setSelectedTab} from '../modules/main';
 import {styles, stylesTabBar} from './masterView.style';
 
-@connect(() => ({}), {setSelectedTab})
+@connect(state => ({tocRows: state.category.get('tocRows')}), {setSelectedTab})
 class MasterView extends Component {
 
   static PropTypes = {
+    advanceSearchSettings: PropTypes.object.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     setSelectedTab: PropTypes.func.isRequired,
     settings: PropTypes.object.isRequired,
-    advanceSearchSettings: PropTypes.object.isRequired
+    tocRows: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -46,7 +47,8 @@ class MasterView extends Component {
 
     let {tintColor, barTintColor} = stylesTabBar;
     let tabBarProps = {tintColor, barTintColor};
-    let {selectedTab, db, tocRows, sutraMap} = this.props.settings;
+    let {settings, tocRows} = this.props;
+    let {selectedTab, db, sutraMap} = settings;
     let {navigator, route} = this.props;
     let title;
 

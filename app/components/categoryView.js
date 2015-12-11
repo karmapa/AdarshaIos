@@ -41,6 +41,14 @@ class CategoryView extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.tocRows !== nextProps.tocRows) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.tocRows)
+      });
+    }
+  }
+
   onRowClicked(row) {
 
     let {setLoading} = this.props;
