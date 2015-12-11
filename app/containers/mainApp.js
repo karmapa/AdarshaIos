@@ -1,4 +1,4 @@
-import {openDb, setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
+import {openDb, setFontSize, setLineHeight, setLoading, setWylieStatus} from '../modules/main';
 import {openToc} from '../modules/category';
 import React, {Component, Navigator, PropTypes, View} from 'react-native';
 import _ from 'lodash';
@@ -15,7 +15,7 @@ import {styles} from './mainApp.style';
 @connect(state => ({
   advanceSearchSettings: state.advanceSearch,
   settings: state.main
-}), {openDb, openToc, setFontSize, setLineHeight, setWylieStatus})
+}), {openDb, openToc, setFontSize, setLoading, setLineHeight, setWylieStatus})
 class MainApp extends Component {
 
   static PropTypes = {
@@ -23,6 +23,7 @@ class MainApp extends Component {
     openToc: PropTypes.func.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,
     state: PropTypes.object.isRequired
   };
@@ -32,9 +33,16 @@ class MainApp extends Component {
   }
 
   componentDidMount() {
-    let {openDb, openToc} = this.props;
-    openDb(DB_NAME);
-    openToc(DB_NAME);
+
+    let {openDb, openToc, setLoading} = this.props;
+
+    setLoading(true);
+
+    openDb(DB_NAME)
+      .then(() => openToc(DB_NAME))
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;

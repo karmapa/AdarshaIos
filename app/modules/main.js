@@ -63,20 +63,25 @@ export function openDb(dbName) {
 
   return dispatch => {
 
-    kde.open(dbName, function(err, db) {
+    return new Promise((resolve, reject) => {
 
-      if (db) {
-        db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
-          let [sutraIds, sutraVposs, heads] = fields;
-          let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
-          let sutraMap = _.object(sutraIds, rows);
-          dispatch(setSutraMap(sutraMap));
-        });
-        dispatch(setDb(db));
-      }
-      else {
-        dispatch(setDbError(err));
-      }
+      kde.open(dbName, function(err, db) {
+
+        if (db) {
+          db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
+            let [sutraIds, sutraVposs, heads] = fields;
+            let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
+            let sutraMap = _.object(sutraIds, rows);
+            dispatch(setSutraMap(sutraMap));
+          });
+          dispatch(setDb(db));
+          resolve(db);
+        }
+        else {
+          dispatch(setDbError(err));
+          resject(err);
+        }
+      });
     });
   };
 }

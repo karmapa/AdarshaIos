@@ -76,17 +76,21 @@ function findParent(rows, depth, index) {
 export function openToc(dbName) {
 
   return dispatch => {
-    let options = {
-      db: dbName
-    };
-    ksa.toc(options, (err, res) => {
-      if (err) {
-        dispatch(setTocError(err));
-      }
-      else {
-        dispatch(setTocRows(res));
-        dispatch(setTocHits(res));
-      }
+    return new Promise((resolve, reject) => {
+      let options = {
+        db: dbName
+      };
+      ksa.toc(options, (err, res) => {
+        if (err) {
+          dispatch(setTocError(err));
+          reject(err);
+        }
+        else {
+          dispatch(setTocRows(res));
+          dispatch(setTocHits(res));
+          resolve(res);
+        }
+      });
     });
   };
 }
