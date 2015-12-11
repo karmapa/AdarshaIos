@@ -4,9 +4,9 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
 import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
+import {loadNext, loadPrev, renderSpinner} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
-import {loadNext, loadPrev} from '../helpers';
 
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
@@ -31,17 +31,32 @@ class DetailView extends Component {
   state = {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    })
+    }),
+    loading: false
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   componentDidMount() {
+
     this.loading = false;
-    this._rows = [];
-    this.setState({
-      dataSource: this.getDataSource(this.props.rows)
-    });
+
+    // preload
+    let {rows} = this.props;
+    let lastRow = _.last(rows);
+    let uti = lastRow.uti || lastRow.segname;
+
+    this.setLoading(true);
+
+    this._rows = rows;
+    this.loadNext()
+      .finally(() => {
+        this.setLoading(false);
+      });
+  }
+
+  setLoading = loading => {
+    this.setState({loading});
   }
 
   getDataSource = (rows, append = true) => {
@@ -135,7 +150,7 @@ class DetailView extends Component {
   loadNext = () => {
 
     if (this.loading) {
-      return;
+      return Promise.reject('loading');
     }
     this.loading = true;
 
@@ -143,10 +158,10 @@ class DetailView extends Component {
     let uti = lastRow.uti || lastRow.segname;
 
     if (! uti) {
-      return;
+      return Promise.reject('uti is missing');
     }
 
-    loadNext({count: 100, uti})
+    return loadNext({count: 100, uti})
       .then(rows => {
         this.setState({
           dataSource: this.getDataSource(rows)
@@ -164,6 +179,10 @@ class DetailView extends Component {
   render() {
 
     let {settings} = this.props;
+
+    if (this.state.loading) {
+      return renderSpinner();
+    }
 
     let listViewProps = {
       ref: 'listView',

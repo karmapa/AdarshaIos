@@ -7,6 +7,7 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux/native';
+import {renderSpinner} from '../helpers';
 import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './mainApp.style';
 
@@ -53,29 +54,13 @@ class MainApp extends Component {
     return <Navigator {...navigatorProps} />;
   }
 
-  renderSpinner = () => {
-
-    let spinnerProps = {
-      name: 'ion|load-c',
-      size: 24,
-      color: '#777',
-      style: globalStyles.spinner
-    };
-
-    return (
-      <View style={globalStyles.viewSpinner}>
-        <Spinner {...spinnerProps} />
-      </View>
-    );
-  };
-
   renderScene(settings, advanceSearchSettings, route, navigator) {
 
     const {setFontSize, setLineHeight, setWylieStatus} = this.props;
     const {tocRows, loading} = settings;
 
     if (loading || _.isNull(tocRows)) {
-      return this.renderSpinner();
+      return renderSpinner();
     }
 
     if ('DetailView' === route.name) {
