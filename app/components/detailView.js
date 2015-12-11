@@ -154,6 +154,28 @@ class DetailView extends Component {
   }
 
   loadPrev = () => {
+
+    if (this.loading) {
+      return Promise.reject('loading');
+    }
+    this.loading = true;
+
+    let firstRow = _.first(this._rows);
+    let uti = firstRow.uti || firstRow.segname;
+
+    if (! uti) {
+      return Promise.reject('uti is missing');
+    }
+
+    return loadPrev({count: 1, uti})
+      .then(rows => {
+        this.setState({
+          dataSource: this.getDataSource(rows, false)
+        });
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 
   loadNext = () => {
