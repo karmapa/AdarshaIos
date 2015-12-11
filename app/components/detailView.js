@@ -14,7 +14,7 @@ class DetailView extends Component {
   static PropTypes = {
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
-    row: PropTypes.array.isRequired,
+    rows: PropTypes.array.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,

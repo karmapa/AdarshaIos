@@ -48,7 +48,7 @@ class CategoryView extends Component {
       this.props.navigator.push({
         name: 'DetailView',
         title: row.t,
-        row
+        rows: [row]
       });
     }
     else if (_.isEmpty(row.children)) {
