@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     paddingTop: 0
   },
   nav: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#e7e7e7',
     flexDirection: 'row',
     paddingBottom: 7,
     paddingTop: 7

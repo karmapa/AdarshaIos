@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   navbar: {
+    backgroundColor: '#e7e7e7',
     paddingTop: 7,
     paddingBottom: 7,
     flexDirection: 'row'
