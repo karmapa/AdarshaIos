@@ -6,8 +6,10 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
+import {loadNext, loadPrev} from '../helpers';
 
-let ksa = require('ksana-simple-api');
+const TOP = -20;
+const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
 
 class DetailView extends Component {
 
@@ -36,15 +38,26 @@ class DetailView extends Component {
 
   componentDidMount() {
     this._rows = [];
-    this._loading = false;
-    this.offsetY = null;
-    this.setState({
-      dataSource: this.getDataSource([this.props.row])
-    });
+    this.loading = false;
+
+    let lastRow = _.last(this.props.rows);
+    let uti = lastRow.uti || lastRow.segname;
+
+    loadNext({})
+      .then(() => {
+        this.setState({
+          dataSource: this.getDataSource(this.props.rows)
+        });
+      });
   }
 
-  getDataSource = (rows) => {
-    this._rows = this._rows.concat(rows);
+  getDataSource = (rows, append = true) => {
+    if (append) {
+      this._rows = this._rows.concat(rows);
+    }
+    else {
+      this._rows = rows.concat(this._rows);
+    }
     return this.state.dataSource.cloneWithRows(this._rows);
   }
 
@@ -91,51 +104,66 @@ class DetailView extends Component {
 
   renderRow = (row, index) => {
     let {fontSize, lineHeight, toWylie} = this.props.settings;
-    return <Text style={{fontSize, lineHeight: lineHeight * fontSize, paddingLeft: 14, paddingRight: 14}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
+    return (
+      <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
+        <View style={{borderColor: '#cccccc', borderBottomWidth: 1, paddingBottom: 14}}>
+          <Text>{row.uti || row.segname}</Text>
+          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
+        </View>
+      </View>
+    );
   }
 
-  onEndReached = (event) => {
+  onTopReached = () => {
+  }
+
+  onEndReached = () => {
     console.info('onEndReached');
+    this.loadNext();
   }
 
   loadPrev = () => {
-
-    /*if (this._loading) {
-      return;
-    }
-    this._loading = true;
-    let firstRow = _.first(this._rows);
-    console.log('here', firstRow);
-    ksa.prev({db: DB_NAME, count: 10, uti: 5}, (err, data) => {
-      console.log('data', data);
-      this._loading = false;
-    });*/
   }
 
-  handleScroll = (event: Object) => {
+  loadNext = () => {
 
-    let offsetY = event.nativeEvent.contentOffset.y;
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
 
-    if (_.isNull(this.offsetY)) {
-      this.offsetY = offsetY;
+    let lastRow = _.last(this._rows);
+    let uti = lastRow.uti || lastRow.segname;
+
+    if (! uti) {
       return;
     }
 
-    if (offsetY > this.offsetY) {
-      this.loadPrev();
-    }
-    if (offsetY < this.offsetY) {
-    }
-    this.offsetY = offsetY;
+    loadNext({count: 100, uti})
+      .then(rows => {
+        this.setState({
+          dataSource: this.getDataSource(rows)
+        });
+      })
+      .finally(() => {
+        this.loading = false;
+      })
+  }
+
+  handleScroll = () => {
+    let scrollProps = this.refs.listView.scrollProperties;
   };
 
   render() {
 
-    let {row, settings} = this.props;
+    let {settings} = this.props;
 
     let listViewProps = {
+      ref: 'listView',
       dataSource: this.state.dataSource,
       onEndReached: this.onEndReached,
+      scrollRenderAheadDistance: 2000,
+      onEndReachedThreshold: 2000,
       onScroll: this.handleScroll,
       renderRow: this.renderRow,
       scrollEventThrottle: 16
