@@ -149,7 +149,6 @@ class DetailView extends Component {
   }
 
   onEndReached = () => {
-    console.info('onEndReached');
     this.loadNext();
   }
 
