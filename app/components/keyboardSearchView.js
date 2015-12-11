@@ -5,6 +5,7 @@ import React, {Component, PropTypes, ListView, View, Text, TextInput, TouchableH
 import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword} from '../modules/keyboardSearch';
+import {breadcrumb} from '../helpers';
 import {connect} from 'react-redux/native';
 import wylie from 'tibetan/wylie';
 
@@ -92,11 +93,16 @@ class KeyboardSearchView extends Component {
   }
 
   onRowClicked = row => {
-    this.props.navigator.push({
-      name: 'DetailView',
-      title: row.t,
-      rows: [row]
-    });
+
+    let uti = row.uti || row.segname;
+    breadcrumb({uti})
+      .then(data => {
+        this.props.navigator.push({
+          name: 'DetailView',
+          title: _.get(data, 'breadcrumb[3].t'),
+          rows: [row]
+        });
+      });
   }
 
   renderText = row => {
