@@ -13,19 +13,15 @@ import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './mainApp.style';
 
 @connect(state => ({
-  advanceSearchSettings: state.advanceSearch,
-  settings: state.main
-}), {openDb, openToc, setFontSize, setLoading, setLineHeight, setWylieStatus})
+  loading: state.main.get('loading')
+}), {openDb, openToc, setLoading})
 class MainApp extends Component {
 
   static PropTypes = {
     openDb: PropTypes.func.isRequired,
     openToc: PropTypes.func.isRequired,
-    setFontSize: PropTypes.func.isRequired,
-    setLineHeight: PropTypes.func.isRequired,
-    setLoading: PropTypes.func.isRequired,
-    setWylieStatus: PropTypes.func.isRequired,
-    state: PropTypes.object.isRequired
+    loading: PropTypes.bool.isRequired,
+    setLoading: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -49,41 +45,33 @@ class MainApp extends Component {
 
   render() {
 
-    let settings = this.props.settings.toObject();
-    let advanceSearchSettings = this.props.advanceSearchSettings.toObject();
-
     let navigatorProps = {
       style: styles.navigatorIos,
       initialRoute: {
         index: 0
       },
-      renderScene: this.renderScene.bind(this, settings, advanceSearchSettings)
+      renderScene: this.renderScene.bind(this)
     };
 
     return <Navigator {...navigatorProps} />;
   }
 
-  renderScene(settings, advanceSearchSettings, route, navigator) {
+  renderScene = (route, navigator) => {
 
     const {setFontSize, setLineHeight, setWylieStatus} = this.props;
-    const {loading} = settings;
 
-    if (loading) {
+    if (this.props.loading) {
       return renderSpinner();
     }
 
     if ('DetailView' === route.name) {
 
       let detailViewProps = {
-        settings,
+        message: route.message,
         navigator,
         route,
-        setFontSize,
-        setLineHeight,
-        setWylieStatus,
-        title: route.title,
         rows: route.rows,
-        message: route.message
+        title: route.title
       };
 
       return (
@@ -93,19 +81,12 @@ class MainApp extends Component {
       );
     }
 
-    let masterViewProps = Object.assign({
-      settings,
-      advanceSearchSettings,
-      navigator,
-      route
-    });
-
     return (
       <View style={globalStyles.container}>
-        <MasterView {...masterViewProps}></MasterView>
+        <MasterView navigator={navigator} route={route} />
       </View>
     );
-  }
+  };
 }
 
 export default MainApp;

@@ -27,7 +27,6 @@ let tips = ds.cloneWithRows([
 class KeyboardSearchView extends Component {
 
   static PropTypes = {
-    db: PropTypes.object.isRequired,
     excerpts: PropTypes.array.isRequired,
     keyword: PropTypes.string.isRequired,
     navigator: PropTypes.array.isRequired,
@@ -77,14 +76,13 @@ class KeyboardSearchView extends Component {
 
     keyword = wylie.fromWylie(keyword);
 
-    let {db} = this.props;
     let options = {
       nohighlight: true,
       range: {
         maxhit: 10
       }
     };
-    this.props.search(db, keyword, options);
+    this.props.search(keyword, options);
   }
 
   renderTips() {
@@ -97,7 +95,7 @@ class KeyboardSearchView extends Component {
     this.props.navigator.push({
       name: 'DetailView',
       title: row.t,
-      row
+      rows: [row]
     });
   }
 

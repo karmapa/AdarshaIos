@@ -8,15 +8,16 @@ import {connect} from 'react-redux/native';
 import {setSelectedTab} from '../modules/main';
 import {styles, stylesTabBar} from './masterView.style';
 
-@connect(state => ({tocRows: state.category.get('tocRows')}), {setSelectedTab})
+@connect(state => ({
+  selectedTab: state.main.get('selectedTab'),
+  tocRows: state.category.get('tocRows')
+}), {setSelectedTab})
 class MasterView extends Component {
 
   static PropTypes = {
-    advanceSearchSettings: PropTypes.object.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     setSelectedTab: PropTypes.func.isRequired,
-    settings: PropTypes.object.isRequired,
     tocRows: PropTypes.array.isRequired
   };
 
@@ -31,25 +32,20 @@ class MasterView extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   renderAdvance = () => {
-    let {navigator, route, advanceSearchSettings, settings} = this.props;
-    let {db, sutraMap} = settings;
+
+    let {navigator, route} = this.props;
 
     if ('AdvanceSearchView' === route.name) {
       return <CategoryView from={'AdvanceSearchView'} navigator={navigator} tocRows={route.tocRows} title={route.title} />;
     }
     return (
-      <AdvanceSearchView db={db} sutraMap={sutraMap}
-        advanceSearchSettings={advanceSearchSettings} navigator={navigator} />
+      <AdvanceSearchView navigator={navigator} />
     );
   }
 
   render() {
 
-    let {tintColor, barTintColor} = stylesTabBar;
-    let tabBarProps = {tintColor, barTintColor};
-    let {settings, tocRows} = this.props;
-    let {selectedTab, db, sutraMap} = settings;
-    let {navigator, route} = this.props;
+    let {navigator, route, tocRows, selectedTab} = this.props;
     let title;
 
     if ('CategoryView' === route.name) {
@@ -58,14 +54,14 @@ class MasterView extends Component {
     }
 
     return (
-      <TabBarIOS {...tabBarProps}>
+      <TabBarIOS {...stylesTabBar}>
         <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
           selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
           <CategoryView navigator={navigator} tocRows={tocRows} title={title} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
           selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
-          <KeyboardSearchView db={db} navigator={navigator} />
+          <KeyboardSearchView navigator={navigator} />
         </TabBarIOS.Item>
         <TabBarIOS.Item title={'Advance Search'} iconName={'ion|social-buffer'} iconSize={32}
           selected={'advanceSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advanceSearch')}>

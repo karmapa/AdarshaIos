@@ -4,13 +4,20 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
 import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
+import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
+import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
 
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
 
+@connect(state => ({
+  fontSize: state.main.get('fontSize'),
+  lineHeight: state.main.get('lineHeight'),
+  toWylie: state.main.get('toWylie')
+}), {setFontSize, setLineHeight, setWylieStatus})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -20,7 +27,9 @@ class DetailView extends Component {
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,
-    settings: PropTypes.object.isRequired,
+    fontSize: PropTypes.number.isRequired,
+    lineHeight: PropTypes.number.isRequired,
+    toWylie: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
   };
 
@@ -87,7 +96,7 @@ class DetailView extends Component {
   }
 
   decreaseFontSize = () => {
-    let fontSize = this.props.settings.fontSize - 1;
+    let fontSize = this.props.fontSize - 1;
     if (fontSize >= 0) {
       this.props.setFontSize(fontSize);
     }
@@ -95,7 +104,7 @@ class DetailView extends Component {
   }
 
   increaseFontSize = () => {
-    let fontSize = this.props.settings.fontSize + 1;
+    let fontSize = this.props.fontSize + 1;
     if (fontSize < 30) {
       this.props.setFontSize(fontSize);
     }
@@ -103,7 +112,7 @@ class DetailView extends Component {
   }
 
   decreaseLineHeight = () => {
-    let lineHeight = this.props.settings.lineHeight - 0.1;
+    let lineHeight = this.props.lineHeight - 0.1;
     if (lineHeight >= 0) {
       this.props.setLineHeight(lineHeight);
     }
@@ -111,7 +120,7 @@ class DetailView extends Component {
   }
 
   increaseLineHeight = () => {
-    let lineHeight = this.props.settings.lineHeight + 0.1;
+    let lineHeight = this.props.lineHeight + 0.1;
     if (lineHeight < 30) {
       this.props.setLineHeight(lineHeight);
     }
@@ -119,13 +128,13 @@ class DetailView extends Component {
   }
 
   toggleWylieStatus = () => {
-    let status = this.props.settings.toWylie;
+    let status = this.props.toWylie;
     this.props.setWylieStatus(! status);
     this.rerenderListView();
   }
 
   renderRow = (row, index) => {
-    let {fontSize, lineHeight, toWylie} = this.props.settings;
+    let {fontSize, lineHeight, toWylie} = this.props;
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#cccccc', borderBottomWidth: 1, paddingBottom: 14}}>
@@ -177,8 +186,6 @@ class DetailView extends Component {
   };
 
   render() {
-
-    let {settings} = this.props;
 
     if (this.state.loading) {
       return renderSpinner();

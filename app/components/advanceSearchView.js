@@ -6,6 +6,7 @@ import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
 import {connect} from 'react-redux/native';
+import {fetch} from '../helpers';
 import {setFieldsData} from '../modules/advanceSearch';
 import {styles} from './advanceSearchView.style';
 
@@ -31,11 +32,13 @@ const fields = [
 const biography = require('../../biography.json');
 const divisionNames = biography.divisions.map(division => division.divisionName);
 
-@connect(() => ({}), {setFieldsData})
+@connect(state => ({
+  advanceSearchSettings: state.advanceSearch.toObject(),
+  sutraMap: state.main.get('sutraMap')
+}), {setFieldsData})
 class AdvanceSearchView extends Component {
 
   static PropTypes = {
-    db: PropTypes.object.isRequired,
     sutraMap: PropTypes.object.isRequired,
     advanceSearchSettings: PropTypes.object.isRequired,
     setFieldsData: PropTypes.func.isRequired,
@@ -112,16 +115,7 @@ class AdvanceSearchView extends Component {
   }
 
   fetch = (poss) => {
-    return new Promise((resolve, reject) => {
-      ksa.fetch({db: DB_NAME, vpos: poss}, (err, arr) => {
-        if (err) {
-          reject(err);
-        }
-        else {
-          resolve(arr);
-        }
-      });
-    });
+    return fetch({vpos: poss});
   };
 
   search = () => {

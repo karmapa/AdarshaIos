@@ -25,14 +25,17 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-export function search(db, keyword, options) {
+export function search(keyword, options) {
 
-  return dispatch => {
+  return (dispatch, getState) => {
 
     if (! keyword) {
       dispatch(setExcerpts([]));
       return;
     }
+
+    let state = getState();
+    let db = state.main.get('db');
 
     kse.search(db, keyword, options, (err, data) => {
       if (err) {
