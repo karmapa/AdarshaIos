@@ -37,18 +37,11 @@ class DetailView extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   componentDidMount() {
-    this._rows = [];
     this.loading = false;
-
-    let lastRow = _.last(this.props.rows);
-    let uti = lastRow.uti || lastRow.segname;
-
-    loadNext({})
-      .then(() => {
-        this.setState({
-          dataSource: this.getDataSource(this.props.rows)
-        });
-      });
+    this._rows = [];
+    this.setState({
+      dataSource: this.getDataSource(this.props.rows)
+    });
   }
 
   getDataSource = (rows, append = true) => {
