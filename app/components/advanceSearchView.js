@@ -114,10 +114,6 @@ class AdvanceSearchView extends Component {
     return sutraIds.map((sutraId) => this.props.sutraMap[sutraId]);
   }
 
-  fetch = (poss) => {
-    return fetch({vpos: poss});
-  };
-
   search = () => {
 
     let self = this;
@@ -144,7 +140,7 @@ class AdvanceSearchView extends Component {
       return;
     }
 
-    this.fetch(poss)
+    fetch({vpos: poss})
       .then((rows) => {
 
         if (_.isEmpty(rows)) {
