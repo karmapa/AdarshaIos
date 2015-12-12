@@ -66,7 +66,7 @@ class DetailView extends Component {
 
   setLoading = loading => {
     this.setState({loading});
-  }
+  };
 
   getDataSource = (rows, append = true) => {
     if (append) {
@@ -76,7 +76,7 @@ class DetailView extends Component {
       this._rows = rows.concat(this._rows);
     }
     return this.state.dataSource.cloneWithRows(this._rows);
-  }
+  };
 
   rerenderListView = () => {
     // workaround of forcing a ListView to update
@@ -85,15 +85,15 @@ class DetailView extends Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
-  }
+  };
 
   goBack = () => {
     this.props.navigator.pop();
-  }
+  };
 
   goHome = () => {
     this.props.navigator.popToTop();
-  }
+  };
 
   decreaseFontSize = () => {
     let fontSize = this.props.fontSize - 1;
@@ -101,7 +101,7 @@ class DetailView extends Component {
       this.props.setFontSize(fontSize);
     }
     this.rerenderListView();
-  }
+  };
 
   increaseFontSize = () => {
     let fontSize = this.props.fontSize + 1;
@@ -109,7 +109,7 @@ class DetailView extends Component {
       this.props.setFontSize(fontSize);
     }
     this.rerenderListView();
-  }
+  };
 
   decreaseLineHeight = () => {
     let lineHeight = this.props.lineHeight - 0.1;
@@ -117,7 +117,7 @@ class DetailView extends Component {
       this.props.setLineHeight(lineHeight);
     }
     this.rerenderListView();
-  }
+  };
 
   increaseLineHeight = () => {
     let lineHeight = this.props.lineHeight + 0.1;
@@ -125,13 +125,13 @@ class DetailView extends Component {
       this.props.setLineHeight(lineHeight);
     }
     this.rerenderListView();
-  }
+  };
 
   toggleWylieStatus = () => {
     let status = this.props.toWylie;
     this.props.setWylieStatus(! status);
     this.rerenderListView();
-  }
+  };
 
   renderRow = (row, index) => {
     let {fontSize, lineHeight, toWylie} = this.props;
@@ -143,10 +143,10 @@ class DetailView extends Component {
         </View>
       </View>
     );
-  }
+  };
 
   onTopReached = () => {
-  }
+  };
 
   onEndReached = () => {
     this.loadNext();
@@ -175,7 +175,7 @@ class DetailView extends Component {
       .finally(() => {
         this.loading = false;
       });
-  }
+  };
 
   loadNext = () => {
 
