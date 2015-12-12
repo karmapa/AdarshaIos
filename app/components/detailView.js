@@ -1,4 +1,4 @@
-import React, {ListView, Text, Component, ScrollView, View, PropTypes, TouchableHighlight, Image} from 'react-native';
+import React, {ListView, Text, Component, View, PropTypes, TouchableHighlight, Image, ScrollView} from 'react-native';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
@@ -9,6 +9,8 @@ import {loadNext, loadPrev, renderSpinner} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
+
+const RCTUIManager = require('NativeModules').UIManager;
 
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
@@ -153,6 +155,14 @@ class DetailView extends Component {
     this.loadNext();
   }
 
+  getListViewContentLength = () => {
+    return this.refs.listView.scrollProperties.contentLength;
+  };
+
+  getListViewOffset = () => {
+    return this.refs.listView.scrollProperties.offset;
+  };
+
   loadPrev = () => {
 
     if (this.loading) {
@@ -167,8 +177,10 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
 
-    return loadPrev({count: 1, uti})
+    return loadPrev({count: 100, uti})
       .then(rows => {
+        this.loadedPrev = true;
+        this.lastContentLength = this.getListViewContentLength();
         this.setState({
           dataSource: this.getDataSource(rows, false)
         });
@@ -206,10 +218,34 @@ class DetailView extends Component {
   handleScroll = () => {
     let listView = this.refs.listView;
     let scrollProps = listView.scrollProperties;
+    let {totalRows} = listView.getMetrics();
     let {offset} = scrollProps;
 
     if (-20 === offset) {
       this.onTopReached();
+    }
+  };
+
+  handleChangeVisibleRows = () => {
+    if (! this.overriddenScrollContentLength) {
+      let listView = this.refs.listView;
+      let setScrollContentLength = listView._setScrollContentLength;
+      this.refs.listView._setScrollContentLength = (...args) => {
+        setScrollContentLength.apply(listView, args);
+        this.handleScrollContentLengthChange();
+      };
+      this.overriddenScrollContentLength = true;
+    }
+  };
+
+  handleScrollContentLengthChange = () => {
+    if (this.loadedPrev) {
+      let contentLength = this.getListViewContentLength();
+      let delta = contentLength - this.lastContentLength;
+      let responder = this.refs.listView.getScrollResponder();
+      let offset = this.getListViewOffset();
+      responder.scrollWithoutAnimationTo(offset + delta);
+      this.loadedPrev = false;
     }
   };
 
@@ -223,11 +259,13 @@ class DetailView extends Component {
       dataSource: this.state.dataSource,
       onEndReached: this.onEndReached,
       onEndReachedThreshold: 2000,
+      pageSize: 100,
       onScroll: this.handleScroll,
       ref: 'listView',
       renderRow: this.renderRow,
       scrollEventThrottle: 16,
-      scrollRenderAheadDistance: 2000
+      onChangeVisibleRows: this.handleChangeVisibleRows,
+      scrollRenderAheadDistance: 4000
     };
 
     return (
