@@ -146,6 +146,7 @@ class DetailView extends Component {
   };
 
   onTopReached = () => {
+    this.loadPrev();
   };
 
   onEndReached = () => {
@@ -210,7 +211,7 @@ class DetailView extends Component {
     let renderedRowsCount = listView.state.curRenderedRowsCount;
 
     if (-20 === offset) {
-      this.loadPrev();
+      this.onTopReached(event);
     }
   };
 
