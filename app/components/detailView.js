@@ -201,7 +201,7 @@ class DetailView extends Component {
       .finally(() => {
         this.loading = false;
       });
-  }
+  };
 
   handleScroll = () => {
     let listView = this.refs.listView;
