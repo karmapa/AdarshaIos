@@ -177,7 +177,7 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
 
-    return loadPrev({count: 100, uti})
+    return loadPrev({count: 5, uti})
       .then(rows => {
         this.loadedPrev = true;
         this.lastContentLength = this.getListViewContentLength();
