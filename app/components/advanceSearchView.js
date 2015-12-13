@@ -103,7 +103,7 @@ class AdvanceSearchView extends Component {
       .value();
 
     function matchInputs(sutra) {
-      return _.some(filledInputs, (row) => {
+      return _.some(filledInputs, row => {
         let value = sutra[row.name] || '';
         return (value.length > 0) && (-1 !== value.indexOf(row.value));
       });
@@ -111,7 +111,7 @@ class AdvanceSearchView extends Component {
   }
 
   attachSutraRows = (sutraIds) => {
-    return sutraIds.map((sutraId) => this.props.sutraMap[sutraId]);
+    return sutraIds.map(sutraId => this.props.sutraMap[sutraId]);
   }
 
   search = () => {
