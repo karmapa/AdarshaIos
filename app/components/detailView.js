@@ -258,14 +258,13 @@ class DetailView extends Component {
     let listViewProps = {
       dataSource: this.state.dataSource,
       onEndReached: this.onEndReached,
-      onEndReachedThreshold: 2000,
-      pageSize: 100,
+      pageSize: 5,
       onScroll: this.handleScroll,
       ref: 'listView',
       renderRow: this.renderRow,
       scrollEventThrottle: 16,
+      removeClippedSubviews: true,
       onChangeVisibleRows: this.handleChangeVisibleRows,
-      scrollRenderAheadDistance: 4000
     };
 
     return (
