@@ -67,6 +67,7 @@ class MainApp extends Component {
     if ('DetailView' === route.name) {
 
       let detailViewProps = {
+        fetchTitle: route.fetchTitle,
         message: route.message,
         navigator,
         route,
