@@ -13,7 +13,7 @@
     "ksana-jsonrom": "git+https://github.com/ksanaforge/ksana-jsonrom.git#9bc61a9",
     "ksana-react-native": "git+https://github.com/kmsheng/ksana-react-native.git#fix-nonnull",
     "ksana-search": "git+https://github.com/ksanaforge/ksana-search.git#9d8376f8dd4",
-    "ksana-simple-api": "git+https://github.com/ksanaforge/ksana-simple-api.git#b73991b",
+    "ksana-simple-api": "git+https://github.com/ksanaforge/ksana-simple-api.git#5a68fe3",
     "lodash": "^3.10.1",
     "react-native": "git+https://github.com/kmsheng/react-native.git#v0.11.0-redux",
     "react-native-icons": "^0.3.6",
