@@ -1,7 +1,6 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
-
-let ksa = require('ksana-simple-api');
+import {toc} from '../helpers';
 
 const SET_TOC_ERROR = 'SET_TOC_ERROR';
 const SET_TOC_HITS = 'SET_TOC_HITS';
@@ -73,24 +72,21 @@ function findParent(rows, depth, index) {
   }
 }
 
-export function openToc(dbName) {
+export function openToc() {
 
   return dispatch => {
     return new Promise((resolve, reject) => {
-      let options = {
-        db: dbName
-      };
-      ksa.toc(options, (err, res) => {
-        if (err) {
-          dispatch(setTocError(err));
-          reject(err);
-        }
-        else {
+
+      toc()
+        .then(res => {
           dispatch(setTocRows(res));
           dispatch(setTocHits(res));
           resolve(res);
-        }
-      });
+        })
+        .catch(err => {
+          dispatch(setTocError(err));
+          reject(err);
+        });
     });
   };
 }
