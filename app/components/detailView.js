@@ -10,6 +10,7 @@ import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
 import RefreshableListView from 'react-native-refreshable-listview';
+import {toc, getUti} from '../helpers';
 
 const RCTUIManager = require('NativeModules').UIManager;
 
@@ -35,7 +36,8 @@ class DetailView extends Component {
     fontSize: PropTypes.number.isRequired,
     lineHeight: PropTypes.number.isRequired,
     toWylie: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string,
+    fetchTitle: PropTypes.bool
   };
 
   constructor(props) {
@@ -46,28 +48,48 @@ class DetailView extends Component {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
     }),
-    loading: false
+    loading: false,
+    title: ''
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  getUti = row => {
-    return _.get(row, 'uti') || _.get(row, 'segname');
+  componentDidMount() {
+    this.loading = false;
+    this.preload();
   }
 
-  componentDidMount() {
+  preload = () => {
 
-    this.loading = false;
+    let promises = [];
 
-    // preload
     this.setLoading(true);
-
     this._rows = this.props.rows;
-    this.loadNext()
+    promises.push(this.loadNext());
+
+    if (this.props.fetchTitle) {
+      promises.push(this.fetchTitle());
+    }
+
+    Promise.all(promises)
       .finally(() => {
         this.setLoading(false);
       });
-  }
+  };
+
+  fetchTitle = () => {
+    return new Promise((resolve, reject) => {
+      let row = _.first(this.props.rows);
+      let uti = getUti(row);
+      toc({uti})
+        .then(data => {
+          this.setState({
+            title: _.get(data, 'breadcrumb[3].t')
+          });
+          resolve();
+        });
+    });
+  };
 
   setLoading = loading => {
     this.setState({loading});
@@ -140,7 +162,7 @@ class DetailView extends Component {
 
   renderRow = (row, index) => {
     let {fontSize, lineHeight, toWylie} = this.props;
-    let uti = row.uti || row.segname;
+    let uti = getUti(row);
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#cccccc', borderBottomWidth: 1, paddingBottom: 14}}>
@@ -158,7 +180,7 @@ class DetailView extends Component {
   loadPrev = () => {
 
     let firstRow = _.first(this._rows);
-    let uti = firstRow.uti || firstRow.segname;
+    let uti = getUti(firstRow);
 
     if (! uti) {
       return Promise.reject('uti is missing');
@@ -180,7 +202,7 @@ class DetailView extends Component {
     this.loading = true;
 
     let lastRow = _.last(this._rows);
-    let uti = lastRow.uti || lastRow.segname;
+    let uti = getUti(lastRow);
 
     if (! uti) {
       return Promise.reject('uti is missing');
@@ -196,6 +218,8 @@ class DetailView extends Component {
         this.loading = false;
       });
   };
+
+  renderTitle = () => this.props.fetchTitle ? this.state.title : this.props.title;
 
   render() {
 
@@ -218,7 +242,7 @@ class DetailView extends Component {
           <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={values.underlayColor}>
             <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
           </TouchableHighlight>
-          <Text numberOfLines={1} style={styles.navTitle}>{this.props.title}</Text>
+          <Text numberOfLines={1} style={styles.navTitle}>{this.renderTitle()}</Text>
           <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={values.underlayColor}>
             <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
           </TouchableHighlight>
