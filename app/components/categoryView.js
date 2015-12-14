@@ -98,10 +98,6 @@ class CategoryView extends Component {
     );
   }
 
-  onEndReached = () => {
-    console.log('onEndReached');
-  }
-
   goBack = () => {
     this.props.navigator.pop();
   }
@@ -127,7 +123,6 @@ class CategoryView extends Component {
 
     let listViewProps = {
       dataSource: this.state.dataSource,
-      onEndReached: this.onEndReached,
       renderRow: this.renderRow
     };
 

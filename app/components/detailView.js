@@ -9,11 +9,14 @@ import {loadNext, loadPrev, renderSpinner} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
+import RefreshableListView from 'react-native-refreshable-listview';
 
 const RCTUIManager = require('NativeModules').UIManager;
 
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
+
+const LIST_VIEW = 'listView';
 
 @connect(state => ({
   fontSize: state.main.get('fontSize'),
@@ -48,18 +51,18 @@ class DetailView extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  getUti = row => {
+    return _.get(row, 'uti') || _.get(row, 'segname');
+  }
+
   componentDidMount() {
 
     this.loading = false;
 
     // preload
-    let {rows} = this.props;
-    let lastRow = _.last(rows);
-    let uti = lastRow.uti || lastRow.segname;
-
     this.setLoading(true);
 
-    this._rows = rows;
+    this._rows = this.props.rows;
     this.loadNext()
       .finally(() => {
         this.setLoading(false);
@@ -137,38 +140,22 @@ class DetailView extends Component {
 
   renderRow = (row, index) => {
     let {fontSize, lineHeight, toWylie} = this.props;
+    let uti = row.uti || row.segname;
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#cccccc', borderBottomWidth: 1, paddingBottom: 14}}>
-          <Text>{row.uti || row.segname}</Text>
+          <Text>{uti}</Text>
           <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
         </View>
       </View>
     );
   };
 
-  onTopReached = () => {
-    this.loadPrev();
-  };
-
   onEndReached = () => {
     this.loadNext();
   }
 
-  getListViewContentLength = () => {
-    return this.refs.listView.scrollProperties.contentLength;
-  };
-
-  getListViewOffset = () => {
-    return this.refs.listView.scrollProperties.offset;
-  };
-
   loadPrev = () => {
-
-    if (this.loading) {
-      return Promise.reject('loading');
-    }
-    this.loading = true;
 
     let firstRow = _.first(this._rows);
     let uti = firstRow.uti || firstRow.segname;
@@ -177,16 +164,11 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
 
-    return loadPrev({count: 5, uti})
+    return loadPrev({count: 1, uti})
       .then(rows => {
-        this.loadedPrev = true;
-        this.lastContentLength = this.getListViewContentLength();
         this.setState({
           dataSource: this.getDataSource(rows, false)
         });
-      })
-      .finally(() => {
-        this.loading = false;
       });
   };
 
@@ -215,40 +197,6 @@ class DetailView extends Component {
       });
   };
 
-  handleScroll = () => {
-    let listView = this.refs.listView;
-    let scrollProps = listView.scrollProperties;
-    let {totalRows} = listView.getMetrics();
-    let {offset} = scrollProps;
-
-    if (-20 === offset) {
-      this.onTopReached();
-    }
-  };
-
-  handleChangeVisibleRows = () => {
-    if (! this.overriddenScrollContentLength) {
-      let listView = this.refs.listView;
-      let setScrollContentLength = listView._setScrollContentLength;
-      this.refs.listView._setScrollContentLength = (...args) => {
-        setScrollContentLength.apply(listView, args);
-        this.handleScrollContentLengthChange();
-      };
-      this.overriddenScrollContentLength = true;
-    }
-  };
-
-  handleScrollContentLengthChange = () => {
-    if (this.loadedPrev) {
-      let contentLength = this.getListViewContentLength();
-      let delta = contentLength - this.lastContentLength;
-      let responder = this.refs.listView.getScrollResponder();
-      let offset = this.getListViewOffset();
-      responder.scrollWithoutAnimationTo(offset + delta);
-      this.loadedPrev = false;
-    }
-  };
-
   render() {
 
     if (this.state.loading) {
@@ -258,13 +206,10 @@ class DetailView extends Component {
     let listViewProps = {
       dataSource: this.state.dataSource,
       onEndReached: this.onEndReached,
-      pageSize: 5,
-      onScroll: this.handleScroll,
-      ref: 'listView',
+      pageSize: 1,
+      ref: LIST_VIEW,
       renderRow: this.renderRow,
-      scrollEventThrottle: 16,
-      removeClippedSubviews: true,
-      onChangeVisibleRows: this.handleChangeVisibleRows,
+      loadData: this.loadPrev
     };
 
     return (
@@ -278,7 +223,7 @@ class DetailView extends Component {
             <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
           </TouchableHighlight>
         </View>
-        <ListView {...listViewProps} />
+        <RefreshableListView {...listViewProps} />
         <View style={styles.boxButton}>
           <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>
             <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
