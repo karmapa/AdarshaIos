@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import kse from 'ksana-search';
+import wylie from 'tibetan/wylie';
 
 const SET_EXCERPTS = 'SET_EXCERPTS';
 const SET_KEYWORD = '';
@@ -25,7 +26,7 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-export function search(keyword, options) {
+export function search(keyword) {
 
   return (dispatch, getState) => {
 
@@ -37,6 +38,22 @@ export function search(keyword, options) {
     let state = getState();
     let db = state.main.get('db');
 
+    // escape operators
+    keyword = keyword.replace(/\\/g, '\\\\')
+      .replace(/\*/, '**');
+
+    keyword = wylie.fromWylie(keyword);
+    keyword = keyword.replace(/༌༌/g, '*');
+    keyword = removeLoadingEndingSpace(keyword);
+
+    const options = {
+      'phrase_sep': '།',
+      nohighlight: true,
+      range: {
+        maxhit: 10
+      }
+    };
+
     kse.search(db, keyword, options, (err, data) => {
       if (err) {
         dispatch(setSearchError(err));
@@ -45,6 +62,13 @@ export function search(keyword, options) {
       dispatch(setExcerpts(data.excerpt || []));
     })
   };
+
+  function removeLoadingEndingSpace(keyword) {
+    if ((! keyword) || (keyword.length < 2)) {
+      return keyword;
+    }
+    return keyword.replace(/^་/, '').replace(/་$/, '');
+  }
 }
 
 export function setExcerpts(excerpts) {
