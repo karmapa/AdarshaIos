@@ -59,7 +59,7 @@ class DetailView extends Component {
     this.preload();
   }
 
-  preload = () => {
+  preload = async () => {
 
     let promises = [];
 
@@ -70,24 +70,17 @@ class DetailView extends Component {
     if (this.props.fetchTitle) {
       promises.push(this.fetchTitle());
     }
-
-    Promise.all(promises)
-      .finally(() => {
-        this.setLoading(false);
-      });
+    await* promises;
+    this.setLoading(false);
   };
 
-  fetchTitle = () => {
-    return new Promise((resolve, reject) => {
-      let row = _.first(this.props.rows);
-      let uti = getUti(row);
-      toc({uti})
-        .then(data => {
-          this.setState({
-            title: _.get(data, 'breadcrumb[3].t')
-          });
-          resolve();
-        });
+  fetchTitle = async () => {
+    let row = _.first(this.props.rows);
+    let uti = getUti(row);
+    let data = await toc({uti});
+
+    this.setState({
+      title: _.get(data, 'breadcrumb[3].t')
     });
   };
 
@@ -177,7 +170,7 @@ class DetailView extends Component {
     this.loadNext();
   }
 
-  loadPrev = () => {
+  loadPrev = async () => {
 
     let firstRow = _.first(this._rows);
     let uti = getUti(firstRow);
@@ -185,16 +178,14 @@ class DetailView extends Component {
     if (! uti) {
       return Promise.reject('uti is missing');
     }
+    let rows = await loadPrev({count: 1, uti});
 
-    return loadPrev({count: 1, uti})
-      .then(rows => {
-        this.setState({
-          dataSource: this.getDataSource(rows, false)
-        });
-      });
+    this.setState({
+      dataSource: this.getDataSource(rows, false)
+    });
   };
 
-  loadNext = () => {
+  loadNext = async () => {
 
     if (this.loading) {
       return Promise.reject('loading');
@@ -208,15 +199,11 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
 
-    return loadNext({count: 100, uti})
-      .then(rows => {
-        this.setState({
-          dataSource: this.getDataSource(rows)
-        });
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+    let rows = await loadNext({count: 100, uti});
+    this.setState({
+      dataSource: this.getDataSource(rows)
+    });
+    this.loading = false;
   };
 
   renderTitle = () => this.props.fetchTitle ? this.state.title : this.props.title;
