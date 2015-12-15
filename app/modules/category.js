@@ -75,19 +75,16 @@ function findParent(rows, depth, index) {
 export function openToc() {
 
   return dispatch => {
-    return new Promise((resolve, reject) => {
-
-      toc()
-        .then(res => {
-          dispatch(setTocRows(res));
-          dispatch(setTocHits(res));
-          resolve(res);
-        })
-        .catch(err => {
-          dispatch(setTocError(err));
-          reject(err);
-        });
-    });
+    return toc()
+      .then(res => {
+        dispatch(setTocRows(res));
+        dispatch(setTocHits(res));
+        return res;
+      })
+      .catch(err => {
+        dispatch(setTocError(err));
+        return err;
+      });
   };
 }
 
