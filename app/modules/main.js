@@ -48,7 +48,7 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-export function openDb(dbName) {
+export function openDb() {
 
   return dispatch => {
 
