@@ -1,18 +1,7 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
-import {KsanaFileSystem as kfs} from 'NativeModules';
 
-// shouldn't bind kfs to global
-global.kfs = kfs;
-
-let ksa = require('ksana-simple-api');
-
-// MUST write require so ksana-database can get the kfs object
-let kde = require('ksana-database');
-
-if (! kfs) {
-  throw 'Ksana file system not found. Have you imported ksana-react-native in xcode ?';
-}
+const open = require('../helpers/openDb');
 
 const SET_DB = 'SET_DB';
 const SET_DB_ERROR = 'SET_DB_ERROR';
@@ -63,26 +52,22 @@ export function openDb(dbName) {
 
   return dispatch => {
 
-    return new Promise((resolve, reject) => {
+    return open()
+      .then(db => {
 
-      kde.open(dbName, function(err, db) {
-
-        if (db) {
-          db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
-            let [sutraIds, sutraVposs, heads] = fields;
-            let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
-            let sutraMap = _.object(sutraIds, rows);
-            dispatch(setSutraMap(sutraMap));
-          });
-          dispatch(setDb(db));
-          resolve(db);
-        }
-        else {
-          dispatch(setDbError(err));
-          resject(err);
-        }
+        db.get([['fields', 'sutra_id'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
+          let [sutraIds, sutraVposs, heads] = fields;
+          let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
+          let sutraMap = _.object(sutraIds, rows);
+          dispatch(setSutraMap(sutraMap));
+        });
+        dispatch(setDb(db));
+        return db;
+      })
+      .catch(err => {
+        dispatch(setDbError(err));
+        return err;
       });
-    });
   };
 }
 
