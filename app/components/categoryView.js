@@ -49,7 +49,7 @@ class CategoryView extends Component {
     }
   }
 
-  onRowClicked(row) {
+  onRowClicked = async row => {
 
     let {setLoading} = this.props;
 
@@ -64,18 +64,16 @@ class CategoryView extends Component {
 
       setLoading(true);
 
-      fetch({vpos: row.vpos})
-        .then(rows => {
-          let firstRow = _.first(rows);
-          this.props.navigator.push({
-            name: 'DetailView',
-            title: row.t,
-            rows: [firstRow]
-          });
-        })
-        .finally(() => {
-          setLoading(false);
-        })
+      let rows = await fetch({vpos: row.vpos});
+      let firstRow = _.first(rows);
+
+      this.props.navigator.push({
+        name: 'DetailView',
+        title: row.t,
+        rows: [firstRow]
+      });
+
+      setLoading(false);
     }
     else {
       this.props.navigator.push({
@@ -84,7 +82,7 @@ class CategoryView extends Component {
         tocRows: row.children
       });
     }
-  }
+  };
 
   renderRow = row => {
 
@@ -96,11 +94,11 @@ class CategoryView extends Component {
         </View>
       </TouchableHighlight>
     );
-  }
+  };
 
   goBack = () => {
     this.props.navigator.pop();
-  }
+  };
 
   renderSectionHeader = () => {
 
@@ -143,7 +141,7 @@ class CategoryView extends Component {
 
   canShowBackButton = () => {
     return this.props.navigator.getCurrentRoutes().length > 1;
-  }
+  };
 }
 
 export default CategoryView;
