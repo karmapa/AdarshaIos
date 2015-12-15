@@ -61,9 +61,8 @@ class AdvanceSearchView extends Component {
 
   alert = (message) => {
     // workaround: make sure modal view exists
-    this.setState({
-      loading: false
-    });
+    this.setLoading(false);
+
     this.setState({
       modalMessage: message,
       modalVisible: true
@@ -114,9 +113,10 @@ class AdvanceSearchView extends Component {
     return sutraIds.map(sutraId => this.props.sutraMap[sutraId]);
   }
 
-  search = () => {
+  setLoading = loading => this.setState({loading});
 
-    let self = this;
+  search = async () => {
+
     let filledInputs = this.getFilledInputs();
 
     if (0 === filledInputs.length) {
@@ -124,9 +124,7 @@ class AdvanceSearchView extends Component {
       return;
     }
 
-    self.setState({
-      loading: true
-    });
+    this.setLoading(true);
 
     let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
     let sutraRows = this.attachSutraRows(sutraIds)
@@ -136,39 +134,30 @@ class AdvanceSearchView extends Component {
     let poss = _.pluck(sutraRows, 'vpos');
 
     if (_.isEmpty(poss)) {
-      self.alert('Did not find any sutras.');
+      this.alert('Did not find any sutras.');
       return;
     }
 
-    fetch({vpos: poss})
-      .then((rows) => {
+    let rows = await fetch({vpos: poss});
 
-        if (_.isEmpty(rows)) {
-          self.alert('Did not find any sutras.');
-          return;
-        }
+    if (_.isEmpty(rows)) {
+      this.alert('Did not find any sutras.');
+      return;
+    }
 
-        // attach heads
-        rows = rows.map((row, index) => {
-          row.t = sutraRows[index].head;
-          return row;
-        });
+    // attach heads
+    rows = rows.map((row, index) => {
+      row.t = sutraRows[index].head;
+      return row;
+    });
 
-        self.props.navigator.push({
-          name: 'AdvanceSearchView',
-          title: 'Advance Search',
-          tocRows: rows
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-        self.alert('An error occurred.');
-      })
-      .finally(() => {
-        self.setState({
-          loading: false
-        });
-      });
+    this.props.navigator.push({
+      name: 'AdvanceSearchView',
+      title: 'Advance Search',
+      tocRows: rows
+    });
+
+    this.setLoading(false);
   }
 
   reset = () => {
