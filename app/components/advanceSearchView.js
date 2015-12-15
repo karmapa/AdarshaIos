@@ -57,9 +57,9 @@ class AdvanceSearchView extends Component {
 
   onInputChange = (name, value) => {
     this.props.setFieldsData({[name]: value});
-  }
+  };
 
-  alert = (message) => {
+  alert = message => {
     // workaround: make sure modal view exists
     this.setLoading(false);
 
@@ -67,13 +67,13 @@ class AdvanceSearchView extends Component {
       modalMessage: message,
       modalVisible: true
     });
-  }
+  };
 
   closeAlert = () => {
     this.setState({
       modalVisible: false
     });
-  }
+  };
 
   getFilledInputs = () => {
     let self = this;
@@ -86,7 +86,7 @@ class AdvanceSearchView extends Component {
         value: self.props.advanceSearchSettings[row.name]
       };
     });
-  }
+  };
 
   findSutraIds = (division, filledInputs) => {
     let all = (0 === division);
@@ -107,11 +107,11 @@ class AdvanceSearchView extends Component {
         return (value.length > 0) && (-1 !== value.indexOf(row.value));
       });
     }
-  }
+  };
 
-  attachSutraRows = (sutraIds) => {
+  attachSutraRows = sutraIds => {
     return sutraIds.map(sutraId => this.props.sutraMap[sutraId]);
-  }
+  };
 
   setLoading = loading => this.setState({loading});
 
@@ -158,7 +158,7 @@ class AdvanceSearchView extends Component {
     });
 
     this.setLoading(false);
-  }
+  };
 
   reset = () => {
     this.props.setFieldsData({
@@ -178,11 +178,11 @@ class AdvanceSearchView extends Component {
       translator: '',
       reviser: ''
     });
-  }
+  };
 
-  onDivisionChange = (newValue) => {
+  onDivisionChange = newValue => {
     this.props.setFieldsData({division: newValue});
-  }
+  };
 
   render() {
 
