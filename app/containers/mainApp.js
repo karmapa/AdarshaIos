@@ -29,16 +29,16 @@ class MainApp extends Component {
   }
 
   componentDidMount() {
+    this.preload();
+  }
 
+  async preload() {
     let {openDb, openToc, setLoading} = this.props;
 
     setLoading(true);
-
-    openDb(DB_NAME)
-      .then(() => openToc(DB_NAME))
-      .finally(() => {
-        setLoading(false);
-      });
+    await openDb();
+    await openToc();
+    setLoading(false);
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
