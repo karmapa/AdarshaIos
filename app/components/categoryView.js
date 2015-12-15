@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component, ListView, PropTypes, Text, View, TouchableHighlight} from 'react-native';
+import React, {Component, ListView, PropTypes, Text, View, TouchableHighlight, Image} from 'react-native';
 import _ from 'lodash';
 import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
@@ -115,7 +115,14 @@ class CategoryView extends Component {
       );
     }
     else {
-      return <Text style={styles.scriptureName}>འཇང་བཀའ་འགྱུར།</Text>;
+      return (
+        <View style={styles.scriptureContainer}>
+          <View style={styles.scriptureBody}>
+            <Image style={styles.scriptureLogo} source={require('image!Icon-Small-50')} />
+            <Text>འཇང་བཀའ་འགྱུར།</Text>
+          </View>
+        </View>
+      );
     }
   };
 

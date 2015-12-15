@@ -1,11 +1,20 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  scriptureName: {
+  scriptureContainer: {
     backgroundColor: '#e7e7e7',
     paddingBottom: 7,
     paddingTop: 7,
-    textAlign: 'center',
+  },
+  scriptureBody: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    flex: 1
+  },
+  scriptureLogo: {
+    width: 22,
+    height: 22,
+    marginRight: 7
   },
   navbar: {
     backgroundColor: '#e7e7e7',
