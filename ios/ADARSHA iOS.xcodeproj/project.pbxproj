@@ -25,7 +25,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
 		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
-		9B2936861C0D5FF300FBBE5B /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */; };
 		9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395C1C0F827C003E7A90 /* Icon-60.png */; };
 		9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395D1C0F827C003E7A90 /* Icon-72.png */; };
 		9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */; };
@@ -48,6 +47,7 @@
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
 		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
 		9BFCF4841C21C1B20036BD13 /* IconLaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4831C21C1B20036BD13 /* IconLaunchScreen.png */; };
+		9BFCF4911C21C5820036BD13 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,7 +163,6 @@
 		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
 		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
 		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
-		9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9B66395C1C0F827C003E7A90 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60.png"; path = "../assets/images/Icon-60.png"; sourceTree = "<group>"; };
 		9B66395D1C0F827C003E7A90 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../assets/images/Icon-72.png"; sourceTree = "<group>"; };
 		9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../assets/images/Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -198,9 +197,9 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
-		9BBB8E101BB0C2A700329584 /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = moedict.kdb; path = ../moedict.kdb; sourceTree = "<group>"; };
 		9BFCF4761C21B5590036BD13 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ADARSHA iOS/Images.xcassets"; sourceTree = "<group>"; };
 		9BFCF4831C21C1B20036BD13 /* IconLaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconLaunchScreen.png; path = ../assets/images/IconLaunchScreen.png; sourceTree = "<group>"; };
+		9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +307,7 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
+				9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */,
 				9B66395C1C0F827C003E7A90 /* Icon-60.png */,
 				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
@@ -318,8 +318,6 @@
 				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
 				9B6639631C0F827C003E7A90 /* iTunesArtwork.png */,
 				9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */,
-				9B2936851C0D5FF300FBBE5B /* jiangkangyur.kdb */,
-				9BBB8E101BB0C2A700329584 /* moedict.kdb */,
 				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
 				9B002A201BA81313006EAADF /* kfs_ios.m */,
 				9B002A211BA81313006EAADF /* kfs_rct.h */,
@@ -657,11 +655,11 @@
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
 				9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */,
-				9B2936861C0D5FF300FBBE5B /* jiangkangyur.kdb in Resources */,
 				9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */,
 				9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */,
 				9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
+				9BFCF4911C21C5820036BD13 /* jiangkangyur.kdb in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */,
 				9B6639681C0F827C003E7A90 /* Icon-Small-50.png in Resources */,
