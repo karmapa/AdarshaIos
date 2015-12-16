@@ -46,6 +46,8 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
+		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
+		9BFCF4841C21C1B20036BD13 /* IconLaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4831C21C1B20036BD13 /* IconLaunchScreen.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +199,8 @@
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
 		9BBB8E101BB0C2A700329584 /* moedict.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = moedict.kdb; path = ../moedict.kdb; sourceTree = "<group>"; };
+		9BFCF4761C21B5590036BD13 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ADARSHA iOS/Images.xcassets"; sourceTree = "<group>"; };
+		9BFCF4831C21C1B20036BD13 /* IconLaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconLaunchScreen.png; path = ../assets/images/IconLaunchScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +312,7 @@
 				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
 				9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */,
+				9BFCF4831C21C1B20036BD13 /* IconLaunchScreen.png */,
 				9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */,
 				9B6639611C0F827C003E7A90 /* Icon.png */,
 				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
@@ -380,6 +385,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9BFCF4761C21B5590036BD13 /* Images.xcassets */,
 				9BB108A11BA99C8800087046 /* FAKFontAwesome.h */,
 				9BB108A21BA99C8800087046 /* FAKFontAwesome.m */,
 				9BB108A31BA99C8800087046 /* FAKFoundationIcons.h */,
@@ -647,6 +653,7 @@
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
 				9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */,
 				9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */,
+				9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */,
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
 				9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */,
@@ -658,6 +665,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */,
 				9B6639681C0F827C003E7A90 /* Icon-Small-50.png in Resources */,
+				9BFCF4841C21C1B20036BD13 /* IconLaunchScreen.png in Resources */,
 				9B66396A1C0F827C003E7A90 /* Icon.png in Resources */,
 				9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
