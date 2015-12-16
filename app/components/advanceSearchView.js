@@ -88,7 +88,7 @@ class AdvanceSearchView extends Component {
     });
   };
 
-  findSutraIds = (division, filledInputs) => {
+  findSutraRows = (division, filledInputs) => {
     let all = (0 === division);
     let divisionIndices = all ? divisionNames.map((name, index) => index) : [(division - 1)];
 
@@ -98,26 +98,28 @@ class AdvanceSearchView extends Component {
       })
       .flatten()
       .filter(matchInputs)
-      .pluck('sutraid')
+      .map(row => _.pick(row, ['sutraid', 'tname']))
       .value();
 
     function matchInputs(sutra) {
-      return _.some(filledInputs, row => {
+      return _.every(filledInputs, row => {
         let value = sutra[row.name] || '';
         return (value.length > 0) && (-1 !== value.indexOf(row.value));
       });
     }
   };
 
-  attachSutraRows = sutraIds => {
-    return sutraIds.map(sutraId => this.props.sutraMap[sutraId]);
+  attachVpos = sutraRows => {
+    return sutraRows.map(sutraRow => Object.assign(sutraRow, {
+      vpos: _.get(this.props.sutraMap[sutraRow.sutraid], 'vpos')
+    }));
   };
 
   setLoading = loading => this.setState({loading});
 
   search = async () => {
 
-    let filledInputs = this.getFilledInputs();
+   let filledInputs = this.getFilledInputs();
 
     if (0 === filledInputs.length) {
       this.alert('Please fill-out at least one input field before searching.');
@@ -126,9 +128,10 @@ class AdvanceSearchView extends Component {
 
     this.setLoading(true);
 
-    let sutraIds = this.findSutraIds(this.props.advanceSearchSettings.division, filledInputs);
-    let sutraRows = this.attachSutraRows(sutraIds)
-      .filter(sutraId => undefined !== sutraId)
+    let sutraRows = this.findSutraRows(this.props.advanceSearchSettings.division, filledInputs);
+
+    sutraRows = this.attachVpos(sutraRows)
+      .filter(sutraRow => undefined !== sutraRow.vpos)
       .filter((sutraId, index) => index < 50);
 
     let poss = _.pluck(sutraRows, 'vpos');
@@ -145,11 +148,10 @@ class AdvanceSearchView extends Component {
       return;
     }
 
-    // attach heads
-    rows = rows.map((row, index) => {
-      row.t = sutraRows[index].head;
-      return row;
-    });
+    // attach tname
+    rows = rows.map((row, index) => Object.assign(row, {
+      t: sutraRows[index].tname
+    }));
 
     this.props.navigator.push({
       name: 'AdvanceSearchView',
