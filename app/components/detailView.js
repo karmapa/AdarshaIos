@@ -1,18 +1,22 @@
-import React, {ListView, Text, Component, View, PropTypes, TouchableHighlight, Image, ScrollView} from 'react-native';
+import React, {ListView, Text, Component, View, PropTypes, TextInput,
+  TouchableHighlight, TouchableOpacity, Image, ScrollView, LayoutAnimation} from 'react-native';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
 import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {loadNext, loadPrev, renderSpinner} from '../helpers';
+import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
+import {setUti} from '../modules/detailView';
 import RefreshableListView from 'react-native-refreshable-listview';
 import {toc, getUti, highlight} from '../helpers';
 
 const RCTUIManager = require('NativeModules').UIManager;
+const underlayColor = 'rgba(0, 0, 0, 0)';
+const fontColor = '#ffffff';
 
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
@@ -22,8 +26,9 @@ const LIST_VIEW = 'listView';
 @connect(state => ({
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
-  toWylie: state.main.get('toWylie')
-}), {setFontSize, setLineHeight, setWylieStatus})
+  toWylie: state.main.get('toWylie'),
+  uti: state.detailView.get('uti')
+}), {setFontSize, setLineHeight, setWylieStatus, setUti})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -48,14 +53,20 @@ class DetailView extends Component {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
     }),
-    loading: false,
-    title: ''
+    isLoading: false,
+    title: '',
+    toolbarOn: true
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  componentWillMount() {
+    LayoutAnimation.spring();
+  }
+
   componentDidMount() {
-    this.loading = false;
+    this.isLoading = false;
+    this.isScrolling = false;
     this.preload();
   }
 
@@ -84,8 +95,8 @@ class DetailView extends Component {
     });
   };
 
-  setLoading = loading => {
-    this.setState({loading});
+  setLoading = isLoading => {
+    this.setState({isLoading});
   };
 
   getDataSource = (rows, append = true) => {
@@ -199,10 +210,10 @@ class DetailView extends Component {
 
   loadNext = async () => {
 
-    if (this.loading) {
-      return Promise.reject('loading');
+    if (this.isLoading) {
+      return Promise.reject('isLoading');
     }
-    this.loading = true;
+    this.isLoading = true;
 
     let lastRow = _.last(this._rows);
     let uti = getUti(lastRow);
@@ -212,19 +223,80 @@ class DetailView extends Component {
     }
 
     let rows = await loadNext({count: 100, uti});
+
     this.setState({
       dataSource: this.getDataSource(rows)
     });
-    this.loading = false;
+    this.isLoading = false;
   };
 
   renderTitle = () => this.props.fetchTitle ? this.state.title : this.props.title;
 
+  setToolbarStatus = toolbarOn => {
+    LayoutAnimation.spring();
+    this.refs.input.blur();
+    this.setState({toolbarOn});
+  };
+
+  handleScroll = event => {
+    this.isScrolling = true;
+    this.setToolbarStatus(false);
+  };
+
+  handlePress = () => {
+    this.setToolbarStatus(! this.state.toolbarOn);
+  };
+
+  handleTouchStart = () => {
+    this.isScrolling = false;
+  };
+
+  handleTouchEnd = () => {
+    if (! this.isScrolling) {
+      this.handlePress();
+    }
+    this.isScrolling = false;
+  };
+
+  handleInputChange = text => {
+    this.props.setUti(text);
+  };
+
+  handleSubmit = async () => {
+
+    let {uti} = this.props;
+    let index = _.findIndex(this._rows, row => (row.uti === uti) || (row.segname === uti));
+
+    if (-1 !== index) {
+      this._rows.splice(0, index);
+      this.rerenderListView();
+      return Promise.resolve();
+    }
+
+    this.setLoading(true);
+
+    try {
+      let rows = await fetch({uti}) || [];
+
+      if (rows.length > 0) {
+        this._rows = rows;
+        await this.loadNext();
+      }
+    }
+    catch (err) {
+      // uti not found
+    }
+    this.setLoading(false);
+  };
+
   render() {
 
-    if (this.state.loading) {
+    if (this.state.isLoading) {
       return renderSpinner();
     }
+
+    let {toolbarOn} = this.state;
+    let {uti} = this.props;
 
     let listViewProps = {
       dataSource: this.state.dataSource,
@@ -232,35 +304,52 @@ class DetailView extends Component {
       pageSize: 1,
       ref: LIST_VIEW,
       renderRow: this.renderRow,
+      renderScrollComponent: props => {
+
+        let onScroll = props.onScroll;
+
+        props.onScroll = (...args) => {
+          onScroll.apply(null, args);
+          this.handleScroll();
+        };
+        props.onTouchStart = this.handleTouchStart;
+        props.onTouchEnd = this.handleTouchEnd;
+
+        return <ScrollView {...props} />
+      },
       loadData: this.loadPrev
     };
 
     return (
       <View style={styles.container}>
-        <View style={styles.nav}>
-          <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={values.underlayColor}>
-            <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
+        <RefreshableListView {...listViewProps} />
+        <View style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
+          <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
+            <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
           <Text numberOfLines={1} style={styles.navTitle}>{this.renderTitle()}</Text>
-          <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={values.underlayColor}>
-            <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={values.navIconColor} />
+          <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
+            <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
         </View>
-        <RefreshableListView {...listViewProps} />
-        <View style={styles.boxButton}>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseLineHeight}>
+        <View style={[{position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.5)', right: 0, paddingLeft: 7}, {top: toolbarOn ? 37 : -120}]}>
+          <TextInput ref="input" style={styles.input} placeholder={'Input PB ID'}
+            onChangeText={this.handleInputChange} value={uti} onSubmitEditing={this.handleSubmit} />
+        </View>
+        <View style={[styles.boxButton, {bottom: toolbarOn ? 0 : -50}]}>
+          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseLineHeight}>
             <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.increaseLineHeight}>
+          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseLineHeight}>
             <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.decreaseFontSize}>
+          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseFontSize}>
             <Image style={styles.buttonImage} source={require('image!icon-font-size-minus')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.increaseFontSize}>
+          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseFontSize}>
             <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button]} onPress={this.toggleWylieStatus}>
+          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.toggleWylieStatus}>
             <Image style={styles.buttonImage} source={require('image!icon-tibetan-wylie-switch')} />
           </TouchableHighlight>
         </View>
