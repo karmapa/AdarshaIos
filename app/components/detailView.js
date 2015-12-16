@@ -10,7 +10,7 @@ import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
 import RefreshableListView from 'react-native-refreshable-listview';
-import {toc, getUti} from '../helpers';
+import {toc, getUti, highlight} from '../helpers';
 
 const RCTUIManager = require('NativeModules').UIManager;
 
@@ -153,14 +153,26 @@ class DetailView extends Component {
     this.rerenderListView();
   };
 
-  renderRow = (row, index) => {
+  renderText = row => {
+
     let {fontSize, lineHeight, toWylie} = this.props;
-    let uti = getUti(row);
+
+    if (toWylie) {
+      return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(row.text)}</Text>;
+    }
+    else {
+      let children = highlight(row.text, row.realHits);
+      return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
+    }
+  };
+
+  renderRow = row => {
+
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#cccccc', borderBottomWidth: 1, paddingBottom: 14}}>
-          <Text>{uti}</Text>
-          <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{toWylie ? wylie.toWylie(row.text) : row.text}</Text>
+          <Text>{getUti(row)}</Text>
+          {this.renderText(row)}
         </View>
       </View>
     );

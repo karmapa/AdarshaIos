@@ -1,7 +1,12 @@
+import _ from 'lodash';
 import React, {Text} from 'react-native';
 import {styles} from '../styles/global.style';
 
-export default function highlight(text, hits) {
+export default function highlight(text, hits = []) {
+
+  if (_.isEmpty(hits)) {
+    return [<Text key={0}>{text}</Text>];
+  }
 
   return hits.reduce((data, hit, index, arr) => {
     let {tags, pos} = data;
