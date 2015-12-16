@@ -9,6 +9,8 @@ import {connect} from 'react-redux/native';
 
 import kse from 'ksana-search';
 
+const TRIM_POS = 20;
+
 let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 let tips = ds.cloneWithRows([
@@ -103,14 +105,15 @@ class KeyboardSearchView extends Component {
 
     let [start] = firstHit;
 
-    if (start > 20) {
-      let delta = start - 10;
-      text = text.substring(delta);
+    if (start > TRIM_POS) {
+      let delta = start - (TRIM_POS / 2);
+      text = '…' + text.substring(delta);
       hits = hits.map(hit => {
         let [start, length] = hit;
-        return [start - delta, length];
+        return [start - delta + 1, length];
       })
     }
+
     return [text, hits];
   }
 
