@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  highlight: {
+    color:"#ff7f7f"
+  },
   navIcon: {
     alignSelf: 'center',
     height: 22,

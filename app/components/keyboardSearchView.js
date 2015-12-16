@@ -6,6 +6,7 @@ import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
+import {highlight} from '../helpers';
 
 import kse from 'ksana-search';
 
@@ -92,7 +93,11 @@ class KeyboardSearchView extends Component {
   }
 
   renderText = row => {
-    return <Text style={{flex: 1}} numberOfLines={2} children={this.highlight(row.text, row.realHits)} />;
+
+    let [text, hits] = this.trimByHit(row.text, row.realHits);
+    let children = highlight(text, hits);
+
+    return <Text style={{flex: 1}} numberOfLines={2} children={children} />;
   }
 
   trimByHit = (text, hits) => {
@@ -115,25 +120,6 @@ class KeyboardSearchView extends Component {
     }
 
     return [text, hits];
-  }
-
-  highlight(text, hits) {
-
-    [text, hits] = this.trimByHit(text, hits);
-
-    return hits.reduce((data, hit, index, arr) => {
-      let {tags, pos} = data;
-      let [start, length] = hit;
-      if (start > pos) {
-        tags.push(<Text key={pos}>{text.substring(pos, start)}</Text>);
-      }
-      tags.push(<Text key={'h' + pos} style={styles.highlight}>{text.substr(start, length)}</Text>);
-      data.pos = start += length;
-      if (index === (arr.length - 1)) {
-        tags.push(<Text key={data.pos}>{text.substr(data.pos)}</Text>);
-      }
-      return data;
-    }, {tags: [], pos: 0}).tags;
   }
 
   renderRow = row => {

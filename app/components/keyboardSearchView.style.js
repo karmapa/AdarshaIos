@@ -5,9 +5,6 @@ export const styles = StyleSheet.create({
     color: '#656565',
     fontSize: 16,
   },
-  highlight: {
-    color:"#FF7F7F"
-  },
   container: {
     flex: 1,
     paddingTop: 0,
