@@ -277,6 +277,7 @@ class DetailView extends Component {
 
     try {
       let rows = await fetch({uti}) || [];
+      rows = rows.filter(row => undefined !== row.vpos);
 
       if (rows.length > 0) {
         this._rows = rows;
