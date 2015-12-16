@@ -61,6 +61,6 @@
         </view>
     </objects>
     <resources>
-        <image name="IconLaunchScreen.png" width="512" height="512"/>
+        <image name="IconLaunchScreen.png" width="1024" height="1024"/>
     </resources>
 </document>
