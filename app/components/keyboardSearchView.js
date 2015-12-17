@@ -123,8 +123,8 @@ class KeyboardSearchView extends Component {
   renderRow = row => {
 
     return (
-      <TouchableHighlight style={{paddingTop: 7, paddingBottom: 7}} onPress={this.onRowClicked.bind(this, row)} underlayColor={values.underlayColor}>
-        <View style={{flex: 1}}>
+      <TouchableHighlight onPress={this.onRowClicked.bind(this, row)} underlayColor={values.underlayColor}>
+        <View style={{flex: 1, paddingTop: 7, paddingBottom: 7}}>
           <Text style={{color: '#57867e'}}>{row.segname}</Text>
           {this.renderText(row)}
         </View>
@@ -143,7 +143,7 @@ class KeyboardSearchView extends Component {
     };
 
     let listViewProps = {
-      pageSize: 6,
+      pageSize: 12,
       dataSource: this.state.dataSource,
       renderRow: this.renderRow,
       onEndReached: this.onEndReached
