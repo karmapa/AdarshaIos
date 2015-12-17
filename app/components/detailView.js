@@ -1,5 +1,6 @@
 import React, {ListView, Text, Component, View, PropTypes, TextInput,
   TouchableHighlight, TouchableOpacity, Image, ScrollView, LayoutAnimation} from 'react-native';
+import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
@@ -7,11 +8,10 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
-import {styles} from './detailView.style';
-import {values, styles as globalStyles} from '../styles/global.style';
 import {setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} from '../modules/detailView';
-import RefreshableListView from 'react-native-refreshable-listview';
+import {styles} from './detailView.style';
 import {toc, getUti, highlight} from '../helpers';
+import {values, styles as globalStyles} from '../styles/global.style';
 
 const underlayColor = 'rgba(0, 0, 0, 0)';
 const fontColor = '#ffffff';
