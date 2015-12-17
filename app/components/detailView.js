@@ -26,9 +26,8 @@ const LIST_VIEW = 'listView';
   fontSize: state.detailView.get('fontSize'),
   lineHeight: state.detailView.get('lineHeight'),
   wylieOn: state.detailView.get('wylieOn'),
-  toolbarOn: state.detailView.get('toolbarOn'),
-  uti: state.detailView.get('uti')
-}), {setFontSize, setLineHeight, setWylieStatus, setToolbarStatus, setUti})
+  toolbarOn: state.detailView.get('toolbarOn')
+}), {setFontSize, setLineHeight, setWylieStatus, setToolbarStatus})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -234,7 +233,6 @@ class DetailView extends Component {
 
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
-    this.refs.input.blur();
     this.props.setToolbarStatus(toolbarOn);
   };
 
@@ -333,10 +331,6 @@ class DetailView extends Component {
           <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
             <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
-        </View>
-        <View style={[{position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.5)', right: 0, paddingLeft: 7}, {top: toolbarOn ? 37 : -120}]}>
-          <TextInput ref="input" style={styles.input} placeholder={'Input PB ID'}
-            onChangeText={this.handleInputChange} value={uti} onSubmitEditing={this.handleSubmit} />
         </View>
         <View style={[styles.boxButton, {bottom: toolbarOn ? 0 : -50}]}>
           <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseLineHeight}>
