@@ -137,7 +137,6 @@ class KeyboardSearchView extends Component {
   render() {
 
     let textInputProps = {
-      autoFocus: true,
       onChangeText: this.onSearchInputChange,
       placeholder: 'Search Keyword',
       ref: 'keyword',
