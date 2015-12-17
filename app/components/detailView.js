@@ -9,8 +9,7 @@ import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
-import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
-import {setToolbarStatus, setUti} from '../modules/detailView';
+import {setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} from '../modules/detailView';
 import RefreshableListView from 'react-native-refreshable-listview';
 import {toc, getUti, highlight} from '../helpers';
 
@@ -24,9 +23,9 @@ const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
 const LIST_VIEW = 'listView';
 
 @connect(state => ({
-  fontSize: state.main.get('fontSize'),
-  lineHeight: state.main.get('lineHeight'),
-  toWylie: state.main.get('toWylie'),
+  fontSize: state.detailView.get('fontSize'),
+  lineHeight: state.detailView.get('lineHeight'),
+  wylieOn: state.detailView.get('wylieOn'),
   toolbarOn: state.detailView.get('toolbarOn'),
   uti: state.detailView.get('uti')
 }), {setFontSize, setLineHeight, setWylieStatus, setToolbarStatus, setUti})
@@ -41,7 +40,7 @@ class DetailView extends Component {
     setWylieStatus: PropTypes.func.isRequired,
     fontSize: PropTypes.number.isRequired,
     lineHeight: PropTypes.number.isRequired,
-    toWylie: PropTypes.bool.isRequired,
+    wylieOn: PropTypes.bool.isRequired,
     toolbarOn: PropTypes.bool.isRequired,
     title: PropTypes.string,
     fetchTitle: PropTypes.bool
@@ -160,16 +159,16 @@ class DetailView extends Component {
   };
 
   toggleWylieStatus = () => {
-    let status = this.props.toWylie;
+    let status = this.props.wylieOn;
     this.props.setWylieStatus(! status);
     this.rerenderListView();
   };
 
   renderText = row => {
 
-    let {fontSize, lineHeight, toWylie} = this.props;
+    let {fontSize, lineHeight, wylieOn} = this.props;
 
-    if (toWylie) {
+    if (wylieOn) {
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(row.text)}</Text>;
     }
     else {
