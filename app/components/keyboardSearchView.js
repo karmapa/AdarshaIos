@@ -143,6 +143,7 @@ class KeyboardSearchView extends Component {
     };
 
     let listViewProps = {
+      pageSize: 6,
       dataSource: this.state.dataSource,
       renderRow: this.renderRow,
       onEndReached: this.onEndReached
