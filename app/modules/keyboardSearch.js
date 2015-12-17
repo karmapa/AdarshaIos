@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import kse from 'ksana-search';
+import {fetch} from '../helpers';
 import wylie from 'tibetan/wylie';
 
 const SET_EXCERPTS = 'SET_EXCERPTS';
@@ -28,10 +29,16 @@ export default function reducer(state = initialState, action) {
 
 export function search(keyword) {
 
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
 
     if (! keyword) {
       dispatch(setExcerpts([]));
+      return;
+    }
+
+    if (keyword.match(/^\d+\.\d+[abcd]$/)) {
+      let rows = await fetch({uti: keyword}) || [];
+      dispatch(setExcerpts(rows));
       return;
     }
 
