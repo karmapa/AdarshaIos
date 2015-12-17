@@ -50,7 +50,7 @@ export function search(keyword) {
       'phrase_sep': '།',
       nohighlight: true,
       range: {
-        maxhit: 10
+        maxhit: 100
       }
     };
 
