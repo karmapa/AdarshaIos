@@ -13,7 +13,6 @@ import {setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} fr
 import RefreshableListView from 'react-native-refreshable-listview';
 import {toc, getUti, highlight} from '../helpers';
 
-const RCTUIManager = require('NativeModules').UIManager;
 const underlayColor = 'rgba(0, 0, 0, 0)';
 const fontColor = '#ffffff';
 
