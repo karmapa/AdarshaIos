@@ -10,7 +10,7 @@ import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
 import {styles} from './detailView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {setFontSize, setLineHeight, setWylieStatus} from '../modules/main';
-import {setUti} from '../modules/detailView';
+import {setToolbarStatus, setUti} from '../modules/detailView';
 import RefreshableListView from 'react-native-refreshable-listview';
 import {toc, getUti, highlight} from '../helpers';
 
@@ -27,8 +27,9 @@ const LIST_VIEW = 'listView';
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
   toWylie: state.main.get('toWylie'),
+  toolbarOn: state.detailView.get('toolbarOn'),
   uti: state.detailView.get('uti')
-}), {setFontSize, setLineHeight, setWylieStatus, setUti})
+}), {setFontSize, setLineHeight, setWylieStatus, setToolbarStatus, setUti})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -41,6 +42,7 @@ class DetailView extends Component {
     fontSize: PropTypes.number.isRequired,
     lineHeight: PropTypes.number.isRequired,
     toWylie: PropTypes.bool.isRequired,
+    toolbarOn: PropTypes.bool.isRequired,
     title: PropTypes.string,
     fetchTitle: PropTypes.bool
   };
@@ -54,8 +56,7 @@ class DetailView extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2
     }),
     isLoading: false,
-    title: '',
-    toolbarOn: true
+    title: ''
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -235,16 +236,18 @@ class DetailView extends Component {
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
     this.refs.input.blur();
-    this.setState({toolbarOn});
+    this.props.setToolbarStatus(toolbarOn);
   };
 
   handleScroll = event => {
     this.isScrolling = true;
-    this.setToolbarStatus(false);
+    if (this.props.toolbarOn) {
+      this.setToolbarStatus(false);
+    }
   };
 
   handlePress = () => {
-    this.setToolbarStatus(! this.state.toolbarOn);
+    this.setToolbarStatus(! this.props.toolbarOn);
   };
 
   handleTouchStart = () => {
@@ -296,8 +299,7 @@ class DetailView extends Component {
       return renderSpinner();
     }
 
-    let {toolbarOn} = this.state;
-    let {uti} = this.props;
+    let {uti, toolbarOn} = this.props;
 
     let listViewProps = {
       dataSource: this.state.dataSource,
