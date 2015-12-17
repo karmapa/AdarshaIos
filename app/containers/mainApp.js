@@ -1,6 +1,6 @@
 import {openDb, setFontSize, setLineHeight, setLoading, setWylieStatus} from '../modules/main';
 import {openToc} from '../modules/category';
-import React, {Component, Navigator, PropTypes, View} from 'react-native';
+import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {CategoryView, DetailView, MasterView} from '../components';
@@ -76,8 +76,11 @@ class MainApp extends Component {
       };
 
       return (
-        <View style={globalStyles.container}>
-          <DetailView {...detailViewProps} />
+        <View style={[globalStyles.container, {backgroundColor: 'transparent', paddingTop: 0}]}>
+          <Image style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} source={require('image!bg-scripture')} />
+          <View style={[globalStyles.container, {backgroundColor: 'transparent', paddingTop: 20}]}>
+            <DetailView {...detailViewProps} />
+          </View>
         </View>
       );
     }

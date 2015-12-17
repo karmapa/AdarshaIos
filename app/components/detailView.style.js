@@ -4,7 +4,8 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0
+    paddingTop: 0,
+    backgroundColor: 'transparent'
   },
   nav: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -15,20 +16,6 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 0
-  },
-  input: {
-    flex: 1,
-    width: 50,
-    borderColor: '#cccccc',
-    borderRadius: 4,
-    borderWidth: 1,
-    color: '#ffffff',
-    fontSize: 18,
-    height: 40,
-    marginBottom: 7,
-    marginRight: 5,
-    marginTop: 7,
-    padding: 7
   },
   navButton: {
     width: 40

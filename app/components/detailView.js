@@ -180,7 +180,7 @@ class DetailView extends Component {
 
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
-        <View style={{borderColor: '#cccccc', borderBottomWidth: 1, paddingBottom: 14}}>
+        <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
           <Text>{getUti(row)}</Text>
           {this.renderText(row)}
         </View>

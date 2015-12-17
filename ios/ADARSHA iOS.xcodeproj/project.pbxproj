@@ -48,6 +48,7 @@
 		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
 		9BFCF4911C21C5820036BD13 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */; };
 		9BFCF4971C21C94C0036BD13 /* IconLaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4961C21C94C0036BD13 /* IconLaunchScreen.png */; };
+		9BFCF4991C22DCD50036BD13 /* bg-scripture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,7 @@
 		9BFCF4761C21B5590036BD13 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ADARSHA iOS/Images.xcassets"; sourceTree = "<group>"; };
 		9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9BFCF4961C21C94C0036BD13 /* IconLaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconLaunchScreen.png; path = ../assets/images/IconLaunchScreen.png; sourceTree = "<group>"; };
+		9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "bg-scripture.jpg"; path = "../assets/images/bg-scripture.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
 				9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */,
 				9BFCF4961C21C94C0036BD13 /* IconLaunchScreen.png */,
+				9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */,
 				9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */,
 				9B6639611C0F827C003E7A90 /* Icon.png */,
 				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
@@ -646,6 +649,7 @@
 				9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */,
 				9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */,
 				9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */,
+				9BFCF4991C22DCD50036BD13 /* bg-scripture.jpg in Resources */,
 				9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */,
 				9B66396B1C0F827C003E7A90 /* Icon@2x.png in Resources */,
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
