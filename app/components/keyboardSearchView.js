@@ -6,7 +6,7 @@ import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
-import {highlight} from '../helpers';
+import {highlight, fetch, getUti} from '../helpers';
 
 const TRIM_POS = 20;
 
@@ -45,10 +45,7 @@ class KeyboardSearchView extends Component {
   };
 
   componentDidMount() {
-    this._rows = [];
-    this.setState({
-      dataSource: this.getDataSource(this.props.excerpts)
-    });
+    this.setRows(this.props.excerpts);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,15 +53,9 @@ class KeyboardSearchView extends Component {
   }
 
   setRows = rows => {
-    this._rows = [];
     this.setState({
-      dataSource: this.getDataSource(rows)
+      dataSource: this.state.dataSource.cloneWithRows(rows)
     });
-  }
-
-  getDataSource = rows => {
-    this._rows = this._rows.concat(rows);
-    return this.state.dataSource.cloneWithRows(this._rows);
   }
 
   onSearchInputChange = keyword => {
@@ -72,7 +63,7 @@ class KeyboardSearchView extends Component {
     this.search(keyword);
   }
 
-  search(keyword) {
+  search = keyword => {
     this.props.search(keyword);
   }
 
@@ -103,7 +94,7 @@ class KeyboardSearchView extends Component {
     let firstHit = _.first(hits);
 
     if (! firstHit) {
-      return text;
+      return [text, hits];
     }
 
     let [start] = firstHit;
@@ -125,7 +116,7 @@ class KeyboardSearchView extends Component {
     return (
       <TouchableHighlight onPress={this.onRowClicked.bind(this, row)} underlayColor={values.underlayColor}>
         <View style={{flex: 1, paddingTop: 7, paddingBottom: 7}}>
-          <Text style={{color: '#57867e'}}>{row.segname}</Text>
+          <Text style={{color: '#57867e'}}>{getUti(row)}</Text>
           {this.renderText(row)}
         </View>
       </TouchableHighlight>
