@@ -31,18 +31,18 @@ const LIST_VIEW = 'listView';
 class DetailView extends Component {
 
   static PropTypes = {
+    fetchTitle: PropTypes.bool,
+    fontSize: PropTypes.number.isRequired,
+    lineHeight: PropTypes.number.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,
-    fontSize: PropTypes.number.isRequired,
-    lineHeight: PropTypes.number.isRequired,
-    wylieOn: PropTypes.bool.isRequired,
-    toolbarOn: PropTypes.bool.isRequired,
     title: PropTypes.string,
-    fetchTitle: PropTypes.bool
+    toolbarOn: PropTypes.bool.isRequired,
+    wylieOn: PropTypes.bool.isRequired
   };
 
   constructor(props) {
