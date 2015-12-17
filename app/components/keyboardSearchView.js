@@ -8,8 +8,6 @@ import {search, setKeyword} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
 import {highlight} from '../helpers';
 
-import kse from 'ksana-search';
-
 const TRIM_POS = 20;
 
 let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
