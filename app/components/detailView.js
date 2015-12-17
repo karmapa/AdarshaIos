@@ -25,8 +25,8 @@ const LIST_VIEW = 'listView';
 @connect(state => ({
   fontSize: state.detailView.get('fontSize'),
   lineHeight: state.detailView.get('lineHeight'),
-  wylieOn: state.detailView.get('wylieOn'),
-  toolbarOn: state.detailView.get('toolbarOn')
+  toolbarOn: state.detailView.get('toolbarOn'),
+  wylieOn: state.detailView.get('wylieOn')
 }), {setFontSize, setLineHeight, setWylieStatus, setToolbarStatus})
 class DetailView extends Component {
 
