@@ -6,11 +6,13 @@ import wylie from 'tibetan/wylie';
 const SET_EXCERPTS = 'SET_EXCERPTS';
 const SET_KEYWORD = '';
 const SET_SEARCH_ERROR = 'SET_SEARCH_ERROR';
+const SET_KEYBOARD_SEARCH_LOADING = 'SET_KEYBOARD_SEARCH_LOADING';
 
 const initialState = Immutable.Map({
   keyword: '',
   excerpts: [],
-  searchError: null
+  searchError: null,
+  loading: false
 });
 
 const actionsMap = {
@@ -19,7 +21,9 @@ const actionsMap = {
 
   [SET_KEYWORD]: (state, action) => state.set('keyword', action.keyword),
 
-  [SET_SEARCH_ERROR]: (state, action) => state.set('searchError', action.err)
+  [SET_SEARCH_ERROR]: (state, action) => state.set('searchError', action.err),
+
+  [SET_KEYBOARD_SEARCH_LOADING]: (state, action) => state.set('loading', action.loading)
 };
 
 export default function reducer(state = initialState, action) {
@@ -31,14 +35,18 @@ export function search(keyword) {
 
   return async (dispatch, getState) => {
 
+    dispatch(setKeyboardSearchLoading(true));
+
     if (! keyword) {
       dispatch(setExcerpts([]));
+      dispatch(setKeyboardSearchLoading(false));
       return;
     }
 
     if (keyword.match(/^\d+\.\d+[abcd]$/)) {
       let rows = await fetch({uti: keyword}) || [];
       dispatch(setExcerpts(rows));
+      dispatch(setKeyboardSearchLoading(false));
       return;
     }
 
@@ -64,9 +72,11 @@ export function search(keyword) {
     kse.search(db, keyword, options, (err, data) => {
       if (err) {
         dispatch(setSearchError(err));
+        dispatch(setKeyboardSearchLoading(false));
         return;
       }
       dispatch(setExcerpts(data.excerpt || []));
+      dispatch(setKeyboardSearchLoading(false));
     })
   };
 
@@ -96,5 +106,12 @@ export function setSearchError(err) {
   return {
     type: SET_SEARCH_ERROR,
     err
+  };
+}
+
+export function setKeyboardSearchLoading(loading) {
+  return {
+    type: SET_KEYBOARD_SEARCH_LOADING,
+    loading
   };
 }

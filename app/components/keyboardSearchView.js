@@ -6,7 +6,7 @@ import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
-import {highlight, fetch, getUti} from '../helpers';
+import {highlight, fetch, getUti, renderSpinner} from '../helpers';
 
 const TRIM_POS = 20;
 
@@ -22,7 +22,8 @@ let tips = ds.cloneWithRows([
 
 @connect(state => ({
   excerpts: state.keyboardSearch.get('excerpts'),
-  keyword: state.keyboardSearch.get('keyword')
+  keyword: state.keyboardSearch.get('keyword'),
+  loading: state.keyboardSearch.get('loading')
 }), {search, setKeyword})
 class KeyboardSearchView extends Component {
 
@@ -31,6 +32,7 @@ class KeyboardSearchView extends Component {
     keyword: PropTypes.string.isRequired,
     navigator: PropTypes.array.isRequired,
     search: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
     setKeyword: PropTypes.func.isRequired
   };
 
@@ -125,6 +127,8 @@ class KeyboardSearchView extends Component {
 
   render() {
 
+    let {loading} = this.props;
+
     let textInputProps = {
       onChangeText: this.onSearchInputChange,
       placeholder: 'Search Keyword',
@@ -143,8 +147,9 @@ class KeyboardSearchView extends Component {
     return (
       <View style={styles.container}>
         <TextInput {...textInputProps} />
-        {this.renderTips()}
-        <ListView {...listViewProps} />
+        {loading && renderSpinner()}
+        {(! loading) && this.renderTips()}
+        {(! loading) && <ListView {...listViewProps} />}
       </View>
     );
   }
