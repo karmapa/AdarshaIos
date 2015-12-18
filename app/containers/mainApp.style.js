@@ -6,15 +6,16 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   backgroundImageContainer: {
-    alignItems: 'stretch',
-    bottom: 0,
     flex: 1,
-    left: 0,
     position: 'absolute',
     top: 0,
-    right: 0
+    left: 0,
+    right: 0,
+    bottom: 0
   },
-  backgroundImage: {
-    flex: 1
+  cover: {
+    flex: 1,
+    height: null,
+    width: null
   }
 });
