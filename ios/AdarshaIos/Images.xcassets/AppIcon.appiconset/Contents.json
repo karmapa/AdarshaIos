@@ -3,79 +3,79 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "256x256.png",
+      "filename" : "ADARSHAiOS-58x58-1.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "512x512.png",
+      "filename" : "ADARSHAiOS-87x87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "256x256-1.png",
+      "filename" : "ADARSHAiOS-80x80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "512x512-1.png",
+      "filename" : "ADARSHAiOS-120x120-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "256x256-2.png",
+      "filename" : "ADARSHAiOS-120x120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "512x512-2.png",
+      "filename" : "ADARSHAiOS-180x180.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "256x256-3.png",
+      "filename" : "ADARSHAiOS-29x29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "512x512-3.png",
+      "filename" : "ADARSHAiOS-58x58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "256x256-4.png",
+      "filename" : "ADARSHAiOS-40x40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "512x512-4.png",
+      "filename" : "ADARSHAiOS-80x80.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "256x256-5.png",
+      "filename" : "ADARSHAiOS-76x76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "512x512-5.png",
+      "filename" : "ADARSHAiOS-152x152.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "512x512-6.png",
+      "filename" : "ADARSHAiOS-167x167.png",
       "scale" : "2x"
     }
   ],
