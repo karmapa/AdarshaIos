@@ -186,6 +186,10 @@ class AdvanceSearchView extends Component {
     this.props.setFieldsData({division: newValue});
   };
 
+  handleSubmit = () => {
+    this.search();
+  };
+
   render() {
 
     if (this.state.loading) {
@@ -214,7 +218,8 @@ class AdvanceSearchView extends Component {
           </PickerIOS>
 
           {fields.map(row => <TextInput key={row.name} style={styles.input}
-            placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)} value={this.props.advanceSearchSettings[row.name]} />)}
+            placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)}
+            onSubmitEditing={this.handleSubmit} value={this.props.advanceSearchSettings[row.name]} />)}
 
           <View>
             <Modal transparent={true} animated={false} visible={this.state.modalVisible}>
