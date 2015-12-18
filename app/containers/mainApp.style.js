@@ -5,9 +5,16 @@ export const styles = StyleSheet.create({
   navigatorIos: {
     flex: 1
   },
-  backgroundImage: {
+  backgroundImageContainer: {
+    alignItems: 'stretch',
+    bottom: 0,
     flex: 1,
+    left: 0,
     position: 'absolute',
-    resizeMode: 'cover'
+    top: 0,
+    right: 0
+  },
+  backgroundImage: {
+    flex: 1
   }
 });

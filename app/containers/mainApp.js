@@ -77,7 +77,9 @@ class MainApp extends Component {
 
       return (
         <View style={[globalStyles.container, {backgroundColor: 'transparent', paddingTop: 0}]}>
-          <Image style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} source={require('image!bg-scripture')} />
+          <View style={styles.backgroundImageContainer}>
+            <Image style={styles.backgroundImage} source={require('image!bg-scripture')} />
+          </View>
           <View style={[globalStyles.container, {backgroundColor: 'transparent', paddingTop: 20}]}>
             <DetailView {...detailViewProps} />
           </View>
