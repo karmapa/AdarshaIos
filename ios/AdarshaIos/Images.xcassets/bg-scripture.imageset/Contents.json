@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bg-scripture.jpg",
+      "filename" : "2048x1536 326ppi.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bg-scripture-1.jpg",
+      "filename" : "2048x1536 326ppi-1.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bg-scripture-2.jpg",
+      "filename" : "2732x2048 264ppi.jpg",
       "scale" : "3x"
     }
   ],
