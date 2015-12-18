@@ -64,7 +64,10 @@ class DetailView extends Component {
 
   componentDidMount() {
     this.isLoading = false;
+    this.isLoadingTitle = false;
+    this.lastOffsetY = 0;
     this.isScrolling = false;
+    this.setTitle(this.props.title);
     this.preload();
   }
 
@@ -84,14 +87,15 @@ class DetailView extends Component {
   };
 
   fetchTitle = async () => {
+
     let row = _.first(this.props.rows);
     let uti = getUti(row);
     let data = await toc({uti});
 
-    this.setState({
-      title: _.get(data, 'breadcrumb[3].t')
-    });
+    this.setTitle(_.get(data, 'breadcrumb[3].t'));
   };
+
+  setTitle = title => this.setState({title});
 
   setLoading = isLoading => {
     this.setState({isLoading});
@@ -199,11 +203,16 @@ class DetailView extends Component {
     if (! uti) {
       return Promise.reject('uti is missing');
     }
-    let rows = await loadPrev({count: 1, uti});
-
-    this.setState({
-      dataSource: this.getDataSource(rows, false)
-    });
+    try {
+      let rows = await loadPrev({count: 1, uti});
+      this.setState({
+        dataSource: this.getDataSource(rows, false)
+      });
+    }
+    catch (e) {
+      // uti not found
+      console.log('loadPrev err', e);
+    }
   };
 
   loadNext = async () => {
@@ -228,18 +237,34 @@ class DetailView extends Component {
     this.isLoading = false;
   };
 
-  renderTitle = () => this.props.fetchTitle ? this.state.title : this.props.title;
-
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
     this.props.setToolbarStatus(toolbarOn);
   };
+
+  updateTitle = _.debounce(async direction => {
+
+    let listView = _.get(this.refs[LIST_VIEW], 'refs.listview.refs.listview');
+    let utis = Object.keys(listView._visibleRows.s1)
+      .map(index => this._rows[index])
+      .filter(row => undefined !== row)
+      .map(row => getUti(row));
+
+    let uti = 'up' === direction ? _.first(utis) : _.last(utis);
+    let data = await toc({uti});
+    this.setTitle(_.get(data, 'breadcrumb[3].t'));
+  }, 100);
 
   handleScroll = event => {
     this.isScrolling = true;
     if (this.props.toolbarOn) {
       this.setToolbarStatus(false);
     }
+    let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
+    let direction = offsetY > this.lastOffsetY ? 'down' : 'up';
+
+    this.updateTitle(direction);
+    this.lastOffsetY = offsetY;
   };
 
   handlePress = () => {
@@ -309,7 +334,7 @@ class DetailView extends Component {
 
         props.onScroll = (...args) => {
           onScroll.apply(null, args);
-          this.handleScroll();
+          this.handleScroll(...args);
         };
         props.onTouchStart = this.handleTouchStart;
         props.onTouchEnd = this.handleTouchEnd;
@@ -326,7 +351,7 @@ class DetailView extends Component {
           <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
             <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
-          <Text numberOfLines={1} style={styles.navTitle}>{this.renderTitle()}</Text>
+          <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
           <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
             <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
