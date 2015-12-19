@@ -103,8 +103,8 @@ class KeyboardSearchView extends Component {
       let delta = start - (TRIM_POS / 2);
       text = '…' + text.substring(delta);
       hits = hits.map(hit => {
-        let [start, length] = hit;
-        return [start - delta + 1, length];
+        let [start, length, nWord] = hit;
+        return [start - delta + 1, length, nWord];
       })
     }
 

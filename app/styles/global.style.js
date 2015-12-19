@@ -11,9 +11,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  highlight: {
-    color:"#ff7f7f"
-  },
   navIcon: {
     alignSelf: 'center',
     height: 22,
@@ -29,5 +26,13 @@ export const styles = StyleSheet.create({
 export const values = {
   navIconSize: 22,
   navIconColor: '#555555',
-  underlayColor: '#ecf0f1'
+  underlayColor: '#ecf0f1',
+  highlightColors: [
+    {color: "#ff7f7f"},    // red
+    {color: "#d35400"},    // pumpkin
+    {color: "#27ae60"},    // nephritis
+    {color: "#16a085"},    // green sea
+    {color: "#2980b9"},    // belize hole
+    {color: "##8e44ad"}    // wisteria
+  ]
 };
