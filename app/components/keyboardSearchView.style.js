@@ -26,5 +26,10 @@ export const styles = StyleSheet.create({
   },
   tips: {
     marginTop: 10
+  },
+  row: {
+    flex: 1,
+    paddingBottom: 7,
+    paddingTop: 7
   }
 });
