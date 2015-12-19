@@ -217,7 +217,7 @@ class AdvanceSearchView extends Component {
             {divisionNames.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
           </PickerIOS>
 
-          {fields.map(row => <TextInput key={row.name} style={styles.input}
+          {fields.map(row => <TextInput key={row.name} style={styles.input} autoCapitalize="none"
             placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)}
             onSubmitEditing={this.handleSubmit} value={this.props.advanceSearchSettings[row.name]} />)}
 
