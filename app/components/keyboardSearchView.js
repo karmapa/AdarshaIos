@@ -1,7 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
-import React, {Component, PropTypes, ListView, View, Text, TextInput, TouchableHighlight} from 'react-native';
+import React, {Component, PropTypes, ListView, ScrollView, View, Text, TextInput, TouchableHighlight} from 'react-native';
 import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword} from '../modules/keyboardSearch';
@@ -9,16 +9,6 @@ import {connect} from 'react-redux/native';
 import {highlight, fetch, getUti, renderSpinner} from '../helpers';
 
 const TRIM_POS = 20;
-
-let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
-let tips = ds.cloneWithRows([
-  'Wildcards: ? * ? match single unknown syllable:',
-  'e.g: bde ? snying 1 syllable in between',
-  'e.g: མི་2?་པ 2 syllables in between',
-  '* match a range of unknown syllables:',
-  'e.g: mi 5* pa 1 to 5 syllables in between'
-]);
 
 @connect(state => ({
   excerpts: state.keyboardSearch.get('excerpts'),
@@ -71,7 +61,15 @@ class KeyboardSearchView extends Component {
 
   renderTips() {
     if (_.isEmpty(this.props.excerpts)) {
-      return <ListView style={{marginTop: 10}} dataSource={tips} renderRow={(row) => <Text>{row}</Text>}></ListView>;
+      return (
+        <View style={{marginTop: 10}}>
+          <Text>Wildcards: ? * ? match single unknown syllable:</Text>
+          <Text>e.g: bde ? snying 1 syllable in between</Text>
+          <Text>e.g: མི་2?་པ 2 syllables in between</Text>
+          <Text>* match a range of unknown syllables:</Text>
+          <Text>e.g: mi 5* pa 1 to 5 syllables in between</Text>
+        </View>
+      );
     }
   }
 
