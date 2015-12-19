@@ -23,5 +23,8 @@ export const styles = StyleSheet.create({
     marginBottom: 0,
     marginRight: 5,
     padding: 7
+  },
+  tips: {
+    marginTop: 10
   }
 });

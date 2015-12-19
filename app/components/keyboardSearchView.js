@@ -62,7 +62,7 @@ class KeyboardSearchView extends Component {
   renderTips() {
     if (_.isEmpty(this.props.excerpts)) {
       return (
-        <View style={{marginTop: 10}}>
+        <View style={styles.tips}>
           <Text>Wildcards: ? * ? match single unknown syllable:</Text>
           <Text>e.g: bde ? snying 1 syllable in between</Text>
           <Text>e.g: མི་2?་པ 2 syllables in between</Text>
