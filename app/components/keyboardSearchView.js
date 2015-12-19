@@ -116,7 +116,7 @@ class KeyboardSearchView extends Component {
     return (
       <TouchableHighlight onPress={this.onRowClicked.bind(this, row)} underlayColor={values.underlayColor}>
         <View style={styles.row}>
-          <Text style={{color: '#57867e'}}>{getUti(row)}</Text>
+          <Text style={styles.uti}>{getUti(row)}</Text>
           {this.renderText(row)}
         </View>
       </TouchableHighlight>

@@ -31,5 +31,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 7,
     paddingTop: 7
+  },
+  uti: {
+    color: '#57867e'
   }
 });
