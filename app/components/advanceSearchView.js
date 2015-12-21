@@ -1,10 +1,12 @@
 'use strict';
 
-import React, {Component, PropTypes, Text, TextInput, View, Modal, ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
+import React, {Component, Dimensions, PropTypes, Text, TextInput, View, Modal,
+  ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
 import _ from 'lodash';
 import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
+import {KeyboardSpacer} from '.';
 import {connect} from 'react-redux/native';
 import {fetch} from '../helpers';
 import {setFieldsData} from '../modules/advanceSearch';
@@ -47,13 +49,13 @@ class AdvanceSearchView extends Component {
 
   constructor(props) {
     super(props);
-  }
 
-  state = {
-    modalVisible: false,
-    modalMessage: '',
-    loading: false
-  };
+    this.state = {
+      modalVisible: false,
+      modalMessage: '',
+      loading: false
+    };
+  }
 
   onInputChange = (name, value) => {
     this.props.setFieldsData({[name]: value});
@@ -223,11 +225,11 @@ class AdvanceSearchView extends Component {
 
           <View>
             <Modal transparent={true} animated={false} visible={this.state.modalVisible}>
-              <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', padding: 20}}>
-                <View style={{borderRadius: 10, alignItems: 'center', backgroundColor: '#ffffff', padding: 10}}>
-                  <Text>{this.state.modalMessage}</Text>
-                  <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, {backgroundColor: '#2196f3', marginTop: 7, marginBottom: 0}]} onPress={this.closeAlert}>
-                    <Text style={{color: '#fff'}}>OK</Text>
+              <View style={styles.alertContainer}>
+                <View style={styles.alertContent}>
+                  <Text style={styles.alertText}>{this.state.modalMessage}</Text>
+                  <TouchableHighlight underlayColor={'#19bd9b'} style={styles.alertButton} onPress={this.closeAlert}>
+                    <Text style={styles.alertButtonText}>OK</Text>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -235,14 +237,12 @@ class AdvanceSearchView extends Component {
           </View>
 
           <View style={styles.buttonGroups}>
-            <TouchableHighlight underlayColor={'#16a085'} style={[styles.button, styles.buttonPrimary]} onPress={this.search}>
-              <Text style={[styles.buttonPrimaryText, styles.buttonText]}>Search</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor={'#ecf0f1'} style={[styles.button, styles.buttonDefault]} onPress={this.reset}>
+            <TouchableHighlight underlayColor={'#ecf0f1'} style={styles.resetButton} onPress={this.reset}>
               <Text style={styles.buttonText}>Reset</Text>
             </TouchableHighlight>
           </View>
         </ScrollView>
+        <KeyboardSpacer />
       </View>
     );
   }
