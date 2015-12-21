@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  pickerIos: {
+    width: 320
+  },
   viewSpinner: {
     flex: 1,
     justifyContent: 'center',
