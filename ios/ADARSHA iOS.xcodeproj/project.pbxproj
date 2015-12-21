@@ -48,7 +48,8 @@
 		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
 		9BFCF4911C21C5820036BD13 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */; };
 		9BFCF4991C22DCD50036BD13 /* bg-scripture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */; };
-		9BFD991A1C281C1000E54EAC /* icon-launch-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD99191C281C1000E54EAC /* icon-launch-screen.png */; };
+		9BFD99321C28376B00E54EAC /* icon-launch-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD99311C28376B00E54EAC /* icon-launch-screen.png */; };
+		9BFD99341C2837DF00E54EAC /* icon-launch-screen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD99331C2837DF00E54EAC /* icon-launch-screen2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,7 +202,8 @@
 		9BFCF4761C21B5590036BD13 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ADARSHA iOS/Images.xcassets"; sourceTree = "<group>"; };
 		9BFCF4901C21C5820036BD13 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "bg-scripture.jpg"; path = "../assets/images/bg-scripture.jpg"; sourceTree = "<group>"; };
-		9BFD99191C281C1000E54EAC /* icon-launch-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-launch-screen.png"; path = "../assets/images/icon-launch-screen.png"; sourceTree = "<group>"; };
+		9BFD99311C28376B00E54EAC /* icon-launch-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-launch-screen.png"; path = "../assets/images/icon-launch-screen.png"; sourceTree = "<group>"; };
+		9BFD99331C2837DF00E54EAC /* icon-launch-screen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-launch-screen2.png"; path = "../assets/images/icon-launch-screen2.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,7 +332,8 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */,
 				9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */,
-				9BFD99191C281C1000E54EAC /* icon-launch-screen.png */,
+				9BFD99311C28376B00E54EAC /* icon-launch-screen.png */,
+				9BFD99331C2837DF00E54EAC /* icon-launch-screen2.png */,
 				9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */,
 				9B7B3CF11C00F153003DC74C /* icon-line-height-minus.png */,
 				9B7B3CF21C00F153003DC74C /* icon-tibetan-wylie-switch.png */,
@@ -655,8 +658,9 @@
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
 				9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */,
 				9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */,
-				9BFD991A1C281C1000E54EAC /* icon-launch-screen.png in Resources */,
+				9BFD99341C2837DF00E54EAC /* icon-launch-screen2.png in Resources */,
 				9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */,
+				9BFD99321C28376B00E54EAC /* icon-launch-screen.png in Resources */,
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
 				9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */,
