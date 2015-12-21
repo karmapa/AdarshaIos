@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -18,38 +19,48 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconLaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="Syk-Ol-3HV">
-                    <rect key="frame" x="120" y="45" width="239" height="150"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon-launch-screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kgb-ek-lE5">
+                    <rect key="frame" x="172" y="186" width="163" height="66"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="239" id="5RI-a1-Rm0"/>
-                        <constraint firstAttribute="width" constant="285" id="F4n-xc-J2k"/>
-                        <constraint firstAttribute="height" constant="200" id="YaD-WW-jUn"/>
-                        <constraint firstAttribute="height" constant="120" id="xsJ-sc-e8x"/>
+                        <constraint firstAttribute="width" constant="120" id="1go-dW-slG"/>
+                        <constraint firstAttribute="width" constant="240" id="7Iy-bb-oTy"/>
+                        <constraint firstAttribute="width" secondItem="Kgb-ek-lE5" secondAttribute="height" multiplier="99:46" id="hRD-wa-U05"/>
+                        <constraint firstAttribute="height" constant="128" id="qHW-dE-jQn"/>
+                        <constraint firstAttribute="height" constant="120" id="sxn-Bx-Bgy"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="F4n-xc-J2k"/>
-                            <exclude reference="YaD-WW-jUn"/>
+                            <exclude reference="7Iy-bb-oTy"/>
+                            <exclude reference="hRD-wa-U05"/>
+                            <exclude reference="qHW-dE-jQn"/>
                         </mask>
                     </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Syk-Ol-3HV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-60" id="0Up-Ad-Gra"/>
+                <constraint firstItem="Kgb-ek-lE5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3Iv-eX-ubW"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AiC-Qg-kn6"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="C3j-Wt-Sbp"/>
                 <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
+                <constraint firstItem="Kgb-ek-lE5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VIl-nX-jm0"/>
+                <constraint firstItem="Kgb-ek-lE5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cie-lG-xse"/>
+                <constraint firstItem="Kgb-ek-lE5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="cpq-t6-Qp4"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
-                <constraint firstItem="Syk-Ol-3HV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iUP-iy-PlI"/>
+                <constraint firstItem="Kgb-ek-lE5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nXY-k0-iuw"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="oeO-dg-5IO"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="30" id="vML-Qr-Zen"/>
+                <constraint firstItem="Kgb-ek-lE5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-60" id="yhL-Cu-uDq"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="3Iv-eX-ubW"/>
+                    <exclude reference="cie-lG-xse"/>
+                    <exclude reference="cpq-t6-Qp4"/>
+                    <exclude reference="nXY-k0-iuw"/>
                     <exclude reference="5cJ-9S-tgC"/>
                     <exclude reference="C3j-Wt-Sbp"/>
                     <exclude reference="Koa-jz-hwk"/>
@@ -61,6 +72,6 @@
         </view>
     </objects>
     <resources>
-        <image name="IconLaunchScreen.png" width="1024" height="1024"/>
+        <image name="icon-launch-screen.png" width="320" height="320"/>
     </resources>
 </document>
