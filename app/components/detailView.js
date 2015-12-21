@@ -310,6 +310,7 @@ class DetailView extends Component {
     }
     catch (err) {
       // uti not found
+      console.log('loadNext err:', err);
     }
     this.setLoading(false);
   };
