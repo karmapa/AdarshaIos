@@ -33,14 +33,6 @@ export const styles = StyleSheet.create({
     marginRight: 5,
     padding: 7
   },
-  button: {
-    borderRadius: 4,
-    paddingTop: 7,
-    paddingLeft: 7,
-    paddingRight: 7,
-    paddingBottom: 7,
-    marginBottom: 10
-  },
   buttonPrimary: {
     backgroundColor: '#19bd9b'
   },
@@ -50,12 +42,47 @@ export const styles = StyleSheet.create({
   buttonGroups: {
     marginTop: 21
   },
-  buttonDefault: {
+  alertButton: {
+    width: 100,
+    backgroundColor: '#19bd9b',
+    borderColor: '#cccccc',
+    borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#cccccc'
+    padding: 7,
+    marginTop: 14,
+  },
+  alertButtonText: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  alertContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
+  },
+  alertContent: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 4,
+    padding: 10
+  },
+  alertText: {
+    marginTop: 7
   },
   buttonText: {
     textAlign: 'center'
+  },
+  resetButton: {
+    borderColor: '#cccccc',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginBottom: 10,
+    marginRight: 4,
+    paddingBottom: 14,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 14
   }
 });
 
