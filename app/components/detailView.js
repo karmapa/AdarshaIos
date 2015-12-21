@@ -8,7 +8,7 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
-import {setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} from '../modules/detailView';
+import {setFirstScroll, setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} from '../modules/detailView';
 import {styles} from './detailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
@@ -22,20 +22,23 @@ const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
 const LIST_VIEW = 'listView';
 
 @connect(state => ({
+  firstScroll: state.detailView.get('firstScroll'),
   fontSize: state.detailView.get('fontSize'),
   lineHeight: state.detailView.get('lineHeight'),
   toolbarOn: state.detailView.get('toolbarOn'),
   wylieOn: state.detailView.get('wylieOn')
-}), {setFontSize, setLineHeight, setWylieStatus, setToolbarStatus})
+}), {setFirstScroll, setFontSize, setLineHeight, setWylieStatus, setToolbarStatus})
 class DetailView extends Component {
 
   static PropTypes = {
     fetchTitle: PropTypes.bool,
+    firstScroll: PropTypes.bool.isRequired,
     fontSize: PropTypes.number.isRequired,
     lineHeight: PropTypes.number.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
+    setFirstScroll: PropTypes.func.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setLineHeight: PropTypes.func.isRequired,
     setWylieStatus: PropTypes.func.isRequired,
@@ -257,7 +260,7 @@ class DetailView extends Component {
 
   handleScroll = event => {
     this.isScrolling = true;
-    if (this.props.toolbarOn) {
+    if (this.props.toolbarOn && this.props.firstScroll) {
       this.setToolbarStatus(false);
     }
     let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
@@ -265,6 +268,7 @@ class DetailView extends Component {
 
     this.updateTitle(direction);
     this.lastOffsetY = offsetY;
+    this.props.setFirstScroll(true);
   };
 
   handlePress = () => {

@@ -1,11 +1,13 @@
 import Immutable from 'immutable';
 
+const SET_FIRST_SCROLL = 'SET_FIRST_SCROLL';
 const SET_FONT_SIZE = 'SET_FONT_SIZE';
 const SET_LINE_HEIGHT = 'SET_LINE_HEIGHT';
 const SET_TOOLBAR_STATUS = 'SET_TOOLBAR_STATUS';
 const SET_WYLIE_STATUS = 'SET_WYLIE_STATUS';
 
 const initialState = Immutable.Map({
+  firstScroll: false,
   fontSize: 16,
   lineHeight: 2,
   toolbarOn: true,
@@ -13,6 +15,8 @@ const initialState = Immutable.Map({
 });
 
 const actionsMap = {
+
+  [SET_FIRST_SCROLL]: (state, action) => state.set('firstScroll', action.scrolled),
 
   [SET_FONT_SIZE]: (state, action) => state.set('fontSize', action.fontSize),
 
@@ -27,6 +31,13 @@ const actionsMap = {
 export default function reducer(state = initialState, action) {
   const reduceFn = actionsMap[action.type];
   return reduceFn ? reduceFn(state, action) : state;
+}
+
+export function setFirstScroll(scrolled) {
+  return {
+    type: SET_FIRST_SCROLL,
+    scrolled
+  }
 }
 
 export function setFontSize(fontSize) {
