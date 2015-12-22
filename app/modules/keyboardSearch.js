@@ -1,15 +1,21 @@
+import _ from 'lodash';
 import Immutable from 'immutable';
-import kse from 'ksana-search';
-import {fetch} from '../helpers';
+import {fetch, filter} from '../helpers';
 import wylie from 'tibetan/wylie';
 
-const SET_EXCERPTS = 'SET_EXCERPTS';
+const SET_EXCERPT_DATA = 'SET_EXCERPT_DATA';
 const SET_KEYBOARD_SEARCH_LOADING = 'SET_KEYBOARD_SEARCH_LOADING';
 const SET_KEYWORD = '';
 const SET_SEARCH_ERROR = 'SET_SEARCH_ERROR';
+const SET_LOADING_MORE = 'SET_LOADING_MORE';
 
 const initialState = Immutable.Map({
-  excerpts: [],
+  excerptData: {
+    keyword: '',
+    rows: [],
+    utiSets: [],
+    isAppend: false
+  },
   keyword: '',
   loading: false,
   searchError: null
@@ -17,7 +23,7 @@ const initialState = Immutable.Map({
 
 const actionsMap = {
 
-  [SET_EXCERPTS]: (state, action) => state.set('excerpts', action.excerpts),
+  [SET_EXCERPT_DATA]: (state, action) => state.set('excerptData', action.data),
 
   [SET_KEYBOARD_SEARCH_LOADING]: (state, action) => state.set('loading', action.loading),
 
@@ -32,67 +38,89 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-export function search(keyword) {
+let isLoadingMore = false;
+
+export function loadMore(keyword, utiSets) {
 
   return async (dispatch, getState) => {
+
+    if (isLoadingMore) {
+      return;
+    }
+
+    isLoadingMore = true;
+
+    let state = getState();
+    let excerptData = state.keyboardSearch.get('excerptData');
+    let utis = utiSets.shift();
+
+    excerptData.utiSets = utiSets;
+    excerptData.rows = await fetch({uti: utis, q: keyword});
+    excerptData.isAppend = true;
+
+    dispatch(setExcerptData(excerptData));
+    isLoadingMore = false;
+  };
+}
+
+export function search(keyword) {
+
+  return async dispatch => {
 
     dispatch(setKeyboardSearchLoading(true));
 
     if (! keyword) {
-      dispatch(setExcerpts([]));
+      dispatch(setExcerptData({
+        keyword,
+        rows: [],
+        utiSets: [],
+        isAppend: false
+      }));
       dispatch(setKeyboardSearchLoading(false));
       return;
     }
 
     if (keyword.match(/^\d+\.\d+[abcd]$/)) {
       let rows = await fetch({uti: keyword}) || [];
-      dispatch(setExcerpts(rows));
+      dispatch(setExcerptData({
+        keyword,
+        rows,
+        utiSets: [],
+        isAppend: false
+      }));
       dispatch(setKeyboardSearchLoading(false));
       return;
     }
 
-    let state = getState();
-    let db = state.main.get('db');
-
-    // escape operators
-    keyword = keyword.replace(/\\/g, '\\\\')
-      .replace(/\*/, '**');
-
-    keyword = wylie.fromWylie(keyword);
-    keyword = keyword.replace(/༌༌/g, '*');
-    keyword = removeLoadingEndingSpace(keyword);
-
-    const options = {
+    let utiRows = await filter({
       'phrase_sep': '།',
-      nohighlight: true,
-      range: {
-        maxhit: 100
-      }
-    };
+      q: keyword
+    });
 
-    kse.search(db, keyword, options, (err, data) => {
-      if (err) {
-        dispatch(setSearchError(err));
-        dispatch(setKeyboardSearchLoading(false));
-        return;
-      }
-      dispatch(setExcerpts(data.excerpt || []));
-      dispatch(setKeyboardSearchLoading(false));
-    })
+    let utis = _.pluck(utiRows, 'uti');
+    let utiSets = _.chunk(utis, 24);
+    let currentUtis = utiSets.shift();
+
+    let rows = await fetch({
+      uti: currentUtis,
+      q: keyword
+    });
+
+    dispatch(setExcerptData({
+      keyword,
+      rows: rows || [],
+      utiSets: utiSets,
+      isAppend: false
+    }));
+
+    dispatch(setKeyboardSearchLoading(false));
   };
-
-  function removeLoadingEndingSpace(keyword) {
-    if ((! keyword) || (keyword.length < 2)) {
-      return keyword;
-    }
-    return keyword.replace(/^་/, '').replace(/་$/, '');
-  }
 }
 
-export function setExcerpts(excerpts) {
+export function setExcerptData(data) {
   return {
-    type: SET_EXCERPTS,
-    excerpts
+    type: SET_EXCERPT_DATA,
+    data
   };
 }
 
