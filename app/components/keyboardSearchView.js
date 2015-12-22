@@ -128,6 +128,7 @@ class KeyboardSearchView extends Component {
     let {loading} = this.props;
 
     let textInputProps = {
+      autoCorrect: false,
       autoCapitalize: 'none',
       onChangeText: this.onSearchInputChange,
       placeholder: 'Search Keyword',
