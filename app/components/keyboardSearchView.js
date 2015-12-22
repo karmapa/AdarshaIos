@@ -4,26 +4,33 @@ import _ from 'lodash';
 import React, {Component, PropTypes, ListView, ScrollView, View, Text, TextInput, TouchableHighlight} from 'react-native';
 import {styles} from './keyboardSearchView.style';
 import {values} from '../styles/global.style';
-import {search, setKeyword} from '../modules/keyboardSearch';
+import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
-import {highlight, fetch, getUti, renderSpinner} from '../helpers';
+import {cleanKeyword, highlight, fetch, getUti, renderSpinner} from '../helpers';
 
 const TRIM_POS = 20;
 
 @connect(state => ({
-  excerpts: state.keyboardSearch.get('excerpts'),
+  excerpts: state.keyboardSearch.get('excerptData').rows,
+  isAppend: state.keyboardSearch.get('excerptData').isAppend,
   keyword: state.keyboardSearch.get('keyword'),
-  loading: state.keyboardSearch.get('loading')
-}), {search, setKeyword})
+  lastKeyword: state.keyboardSearch.get('excerptData').keyword,
+  loading: state.keyboardSearch.get('loading'),
+  utiSets: state.keyboardSearch.get('excerptData').utiSets
+}), {search, setKeyword, loadMore})
 class KeyboardSearchView extends Component {
 
   static PropTypes = {
     excerpts: PropTypes.array.isRequired,
+    isAppend: PropTypes.bool.isRequired,
     keyword: PropTypes.string.isRequired,
+    lastKeyword: PropTypes.string.isRequired,
+    loadMore: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
     navigator: PropTypes.array.isRequired,
     search: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
-    setKeyword: PropTypes.func.isRequired
+    setKeyword: PropTypes.func.isRequired,
+    utiSets: PropTypes.func.isRequired
   };
 
   constructor(props) {
