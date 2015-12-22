@@ -48,12 +48,28 @@ class KeyboardSearchView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setRows(nextProps.excerpts);
+    let {keyword, lastKeyword, excerpts} = nextProps;
+    if (cleanKeyword(keyword) === lastKeyword) {
+      if (nextProps.isAppend) {
+        this.appendRows(excerpts);
+      }
+      else {
+        this.setRows(excerpts);
+      }
+    }
   }
 
   setRows = rows => {
+    this.rows = rows;
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(rows)
+      dataSource: this.state.dataSource.cloneWithRows(this.rows)
+    });
+  }
+
+  appendRows = rows => {
+    this.rows = this.rows.concat(rows);
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.rows)
     });
   }
 
@@ -62,9 +78,10 @@ class KeyboardSearchView extends Component {
     this.search(keyword);
   }
 
-  search = keyword => {
+  search = _.debounce(keyword => {
+    keyword = cleanKeyword(keyword);
     this.props.search(keyword);
-  }
+  }, 500);
 
   renderTips() {
     if (_.isEmpty(this.props.excerpts)) {
@@ -90,7 +107,7 @@ class KeyboardSearchView extends Component {
 
   renderText = row => {
 
-    let [text, hits] = this.trimByHit(row.text, row.realHits);
+    let [text, hits] = this.trimByHit(row.text, row.hits);
     let children = highlight(text, hits);
 
     return <Text style={{flex: 1}} numberOfLines={2} children={children} />;
@@ -130,6 +147,13 @@ class KeyboardSearchView extends Component {
     );
   }
 
+  onEndReached = () => {
+    let {keyword, lastKeyword, utiSets} = this.props;
+    if ((cleanKeyword(keyword) === lastKeyword) && (utiSets.length > 0)) {
+      this.props.loadMore(lastKeyword, utiSets);
+    }
+  }
+
   render() {
 
     let {loading} = this.props;
@@ -145,7 +169,8 @@ class KeyboardSearchView extends Component {
     };
 
     let listViewProps = {
-      pageSize: 12,
+      pageSize: 1,
+      initialListSize: 3,
       dataSource: this.state.dataSource,
       renderRow: this.renderRow,
       onEndReached: this.onEndReached
