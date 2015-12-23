@@ -94,8 +94,20 @@ export function search(keyword) {
 
     let utiRows = await filter({
       'phrase_sep': '།',
-      q: keyword
+      q: keyword,
+      field: 'head'
     });
+
+    if (_.isEmpty(utiRows)) {
+      dispatch(setExcerptData({
+        keyword,
+        rows: [],
+        utiSets: [],
+        isAppend: false
+      }));
+      dispatch(setKeyboardSearchLoading(false));
+      return;
+    }
 
     let utis = _.pluck(utiRows, 'uti');
     let utiSets = _.chunk(utis, 24);
