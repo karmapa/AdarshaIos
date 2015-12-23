@@ -18,6 +18,7 @@ const fontColor = '#ffffff';
 
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
+const ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
 
 const LIST_VIEW = 'listView';
 
@@ -172,12 +173,13 @@ class DetailView extends Component {
   renderText = row => {
 
     let {fontSize, lineHeight, wylieOn} = this.props;
+    let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
 
     if (wylieOn) {
-      return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(row.text)}</Text>;
+      return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(text)}</Text>;
     }
     else {
-      let children = highlight(row.text, row.hits);
+      let children = highlight(text, row.hits);
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
     }
   };
