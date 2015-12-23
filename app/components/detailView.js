@@ -177,7 +177,7 @@ class DetailView extends Component {
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(row.text)}</Text>;
     }
     else {
-      let children = highlight(row.text, row.realHits);
+      let children = highlight(row.text, row.hits);
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
     }
   };
