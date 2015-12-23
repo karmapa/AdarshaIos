@@ -28,7 +28,7 @@ export const values = {
   navIconColor: '#555555',
   underlayColor: '#ecf0f1',
   highlightColors: [
-    {color: "#ff7f7f"},    // red
+    {color: "#ff0000"},    // red
     {color: "#d35400"},    // pumpkin
     {color: "#27ae60"},    // nephritis
     {color: "#16a085"},    // green sea
