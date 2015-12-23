@@ -11,7 +11,6 @@ export default function cleanKeyword(keyword) {
     .replace(/\*/, '**');
 
   keyword = wylie.fromWylieWithWildcard(keyword);
-  keyword = wylie.fromWylie(keyword);
   keyword = keyword.replace(/༌༌/g, '*');
 
   return removeLoadingEndingSpace(keyword);
