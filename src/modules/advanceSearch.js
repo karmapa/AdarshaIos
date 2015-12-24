@@ -5,17 +5,9 @@ const SET_FIELDS_DATA = 'SET_FIELDS_DATA';
 const initialState = Immutable.Map({
   division: 0,
   tname: '',
-  aname: '',
-  sname: '',
-  cname: '',
-  subject: '',
   yana: '',
   charka: '',
   location: '',
-  purpose: '',
-  collect: '',
-  relation: '',
-  debate: '',
   translator: '',
   reviser: ''
 });

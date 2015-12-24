@@ -16,17 +16,9 @@ const PickerItemIOS = PickerIOS.Item;
 
 const fields = [
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},
-  {name: 'aname', placeholder: 'མདོ་མིང་གཞན།:'},
-  {name: 'sname', placeholder: 'རྒྱ་གར་མདོ་མིང་།:'},
-  {name: 'cname', placeholder: 'རྒྱ་ནག་མདོ་མིང་།:'},
-  {name: 'subject', placeholder: 'བརྗོད་བྱ།:'},
   {name: 'yana', placeholder: 'ཐེག་པ།:'},
   {name: 'charka', placeholder: 'དཀའ། འཁོར་ལོ།:'},
   {name: 'location', placeholder: 'གནས་ཕུན་སུམ་ཚོགས་པ།:'},
-  {name: 'purpose', placeholder: 'ཆོས་ཀྱི་དགོས་དོན།:'},
-  {name: 'collect', placeholder: 'བསྡུས་པའི་དོན། ལེའུ།:'},
-  {name: 'relation', placeholder: 'མཚམས་སྦྱར་བའི་གོ་རིམ།:'},
-  {name: 'debate', placeholder: 'རྒལ་ལན།:'},
   {name: 'translator', placeholder: 'ལོ་ཙཱ་བ།:'},
   {name: 'reviser', placeholder: 'ཞུ་དག་པ།:'}
 ];
@@ -168,17 +160,9 @@ class AdvanceSearchView extends Component {
     this.props.setFieldsData({
       division: 0,
       tname: '',
-      aname: '',
-      sname: '',
-      cname: '',
-      subject: '',
       yana: '',
       charka: '',
       location: '',
-      purpose: '',
-      collect: '',
-      relation: '',
-      debate: '',
       translator: '',
       reviser: ''
     });
