@@ -23,8 +23,8 @@
     "react-redux": "3.1.0",
     "react-refresh-control": "^2.0.5",
     "react-timer-mixin": "^0.13.3",
-    "redux": "^3.0.0",
     "redux-thunk": "^0.1.0",
+    "redux": "^3.0.5",
     "tibetan": "git+https://github.com/ksanaforge/tibetan.git#c0408f0",
     "zpad": "^0.5.0"
   }
