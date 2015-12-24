@@ -67,3 +67,12 @@ export function setWylieStatus(wylieStatus) {
     wylieStatus
   };
 }
+
+export function increaseFontSize() {
+  return (dispatch, getState) => {
+    let newFontSize = getState().detailView.get('fontSize') + 1;
+    if (newFontSize < 30) {
+      dispatch(setFontSize(newFontSize));
+    }
+  };
+}
