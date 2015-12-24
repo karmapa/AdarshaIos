@@ -76,3 +76,12 @@ export function increaseFontSize() {
     }
   };
 }
+
+export function decreaseFontSize() {
+  return (dispatch, getState) => {
+    let newFontSize = getState().detailView.get('fontSize') - 1;
+    if (newFontSize > 0) {
+      dispatch(setFontSize(newFontSize));
+    }
+  };
+}
