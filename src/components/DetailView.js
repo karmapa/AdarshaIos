@@ -352,33 +352,40 @@ class DetailView extends Component {
     };
 
     return (
-      <View style={styles.container}>
-        <RefreshableListView {...listViewProps} />
-        <View style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
-          <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
-            <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-          </TouchableHighlight>
-          <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
-          <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
-            <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-          </TouchableHighlight>
+      <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
+        <View style={globalStyles.backgroundImageContainer}>
+          <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />
         </View>
-        <View style={[styles.boxButton, {bottom: toolbarOn ? 0 : -50}]}>
-          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseLineHeight}>
-            <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseLineHeight}>
-            <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseFontSize}>
-            <Image style={styles.buttonImage} source={require('image!icon-font-size-minus')} />
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseFontSize}>
-            <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.toggleWylieStatus}>
-            <Image style={styles.buttonImage} source={require('image!icon-tibetan-wylie-switch')} />
-          </TouchableHighlight>
+        <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
+          <View style={styles.container}>
+            <RefreshableListView {...listViewProps} />
+            <View style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
+              <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
+                <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+              </TouchableHighlight>
+              <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
+              <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
+                <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+              </TouchableHighlight>
+            </View>
+            <View style={[styles.boxButton, {bottom: toolbarOn ? 0 : -50}]}>
+              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseLineHeight}>
+                <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
+              </TouchableHighlight>
+              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseLineHeight}>
+                <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
+              </TouchableHighlight>
+              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseFontSize}>
+                <Image style={styles.buttonImage} source={require('image!icon-font-size-minus')} />
+              </TouchableHighlight>
+              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseFontSize}>
+                <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
+              </TouchableHighlight>
+              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.toggleWylieStatus}>
+                <Image style={styles.buttonImage} source={require('image!icon-tibetan-wylie-switch')} />
+              </TouchableHighlight>
+            </View>
+          </View>
         </View>
       </View>
     );
