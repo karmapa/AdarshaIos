@@ -10,7 +10,7 @@ import {KeyboardSpacer} from '.';
 import {connect} from 'react-redux/native';
 import {fetch} from '../helpers';
 import {setFieldsData} from '../modules/advanceSearch';
-import {styles} from './advanceSearchView.style';
+import {styles} from './AdvanceSearchView.style';
 
 const PickerItemIOS = PickerIOS.Item;
 

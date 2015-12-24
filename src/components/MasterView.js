@@ -6,7 +6,7 @@ import {AdvanceSearchView, CategoryView, KeyboardSearchView} from '../components
 import {TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setSelectedTab} from '../modules/main';
-import {styles, stylesTabBar} from './masterView.style';
+import {styles, stylesTabBar} from './MasterView.style';
 
 @connect(state => ({
   selectedTab: state.main.get('selectedTab'),

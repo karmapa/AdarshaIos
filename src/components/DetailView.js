@@ -9,7 +9,7 @@ import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
 import {setFirstScroll, setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} from '../modules/detailView';
-import {styles} from './detailView.style';
+import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
 

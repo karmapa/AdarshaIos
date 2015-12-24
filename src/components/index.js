@@ -1,11 +1,11 @@
 
-import AdvanceSearchView from './advanceSearchView';
-import CategoryView from './categoryView';
-import DetailView from './detailView';
-import KeyboardSearchView from './keyboardSearchView';
-import MasterView from './masterView';
+import AdvanceSearchView from './AdvanceSearchView';
+import CategoryView from './CategoryView';
+import DetailView from './DetailView';
+import KeyboardSearchView from './KeyboardSearchView';
+import MasterView from './MasterView';
 import SearchResult from './searchResult';
-import KeyboardSpacer from './keyboardSpacer';
+import KeyboardSpacer from './KeyboardSpacer';
 
 export {
   AdvanceSearchView,

@@ -8,7 +8,7 @@ import {Icon} from 'react-native-icons';
 import {Spinner} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setLoading} from '../modules/main';
-import {styles} from './categoryView.style';
+import {styles} from './CategoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {fetch} from '../helpers';
 

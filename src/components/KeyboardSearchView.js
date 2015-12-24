@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 import React, {Component, PropTypes, ListView, ScrollView, View, Text, TextInput, TouchableHighlight} from 'react-native';
-import {styles} from './keyboardSearchView.style';
+import {styles} from './KeyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
