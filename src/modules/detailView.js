@@ -94,3 +94,12 @@ export function increaseLineHeight() {
     }
   };
 }
+
+export function decreaseLineHeight() {
+  return (dispatch, getState) => {
+    let newLineHeight = getState().detailView.get('lineHeight') - 1;
+    if (newLineHeight > 0) {
+      dispatch(setLineHeight(newLineHeight));
+    }
+  };
+}
