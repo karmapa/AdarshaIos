@@ -85,3 +85,12 @@ export function decreaseFontSize() {
     }
   };
 }
+
+export function increaseLineHeight() {
+  return (dispatch, getState) => {
+    let newLineHeight = getState().detailView.get('lineHeight') + 1;
+    if (newLineHeight < 30) {
+      dispatch(setLineHeight(newLineHeight));
+    }
+  };
+}
