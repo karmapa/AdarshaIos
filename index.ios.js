@@ -1,8 +1,4 @@
-'use strict';
-
-import React from 'react-native';
+import React, {AppRegistry} from 'react-native';
 import App from './app/containers/app';
-
-let {AppRegistry} = React;
 
 AppRegistry.registerComponent('AdarshaIos', () => App);
