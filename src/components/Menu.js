@@ -1,5 +1,5 @@
 import React, {Component, View, PropTypes, TouchableHighlight, Image, Text} from 'react-native';
-import {increaseFontSize, decreaseFontSize, increaseLineHeight, decreaseLineHeight, toggleWylieStatus} from '../modules/detailView';
+import {increaseFontSize, decreaseFontSize, increaseLineHeight, decreaseLineHeight, toggleWylieStatus} from '../modules/main';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {connect} from 'react-redux/native';
 import {styles} from './Menu.style';
@@ -7,9 +7,9 @@ import {styles} from './Menu.style';
 const underlayColor = 'rgba(0, 0, 0, 0)';
 
 @connect(state => ({
-  lineHeight: state.detailView.get('lineHeight'),
-  fontSize: state.detailView.get('fontSize'),
-  wylieOn: state.detailView.get('wylieOn')
+  lineHeight: state.main.get('lineHeight'),
+  fontSize: state.main.get('fontSize'),
+  wylieOn: state.main.get('wylieOn')
 }), {
   decreaseFontSize,
   decreaseLineHeight,
@@ -54,22 +54,22 @@ class Menu extends Component {
         <View style={styles.menu}>
 
           <View style={[styles.item, styles.row]}>
-            <TouchableHighlight underlayColor={underlayColor} style={styles.button} onPress={decreaseLineHeight}>
-              <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
-            </TouchableHighlight>
-            <Text style={styles.value}>{lineHeight}</Text>
-            <TouchableHighlight underlayColor={underlayColor} style={styles.button} onPress={increaseLineHeight}>
-              <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
-            </TouchableHighlight>
-          </View>
-
-          <View style={[styles.item, styles.row]}>
             <TouchableHighlight underlayColor={underlayColor} style={styles.button} onPress={decreaseFontSize}>
               <Image style={styles.buttonImage} source={require('image!icon-font-size-minus')} />
             </TouchableHighlight>
             <Text style={styles.value}>{fontSize}</Text>
             <TouchableHighlight underlayColor={underlayColor} style={styles.button} onPress={increaseFontSize}>
               <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
+            </TouchableHighlight>
+          </View>
+
+          <View style={[styles.item, styles.row]}>
+            <TouchableHighlight underlayColor={underlayColor} style={styles.button} onPress={decreaseLineHeight}>
+              <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
+            </TouchableHighlight>
+            <Text style={styles.value}>{lineHeight}</Text>
+            <TouchableHighlight underlayColor={underlayColor} style={styles.button} onPress={increaseLineHeight}>
+              <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
             </TouchableHighlight>
           </View>
 
