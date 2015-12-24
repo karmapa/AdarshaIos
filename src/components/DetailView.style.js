@@ -28,25 +28,5 @@ export const styles = StyleSheet.create({
   textView: {
     paddingLeft: 14,
     paddingRight: 14
-  },
-  boxButton: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingBottom: 4,
-    paddingTop: 2
-  },
-  buttonImage: {
-    height: 40,
-    width: 40
-  },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1
   }
 });
