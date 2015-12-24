@@ -8,7 +8,7 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
-import {setFirstScroll, setToolbarStatus, setUti, setFontSize, setLineHeight, setWylieStatus} from '../modules/detailView';
+import {setFirstScroll, setToolbarStatus, setUti} from '../modules/detailView';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
@@ -28,7 +28,7 @@ const LIST_VIEW = 'listView';
   lineHeight: state.detailView.get('lineHeight'),
   toolbarOn: state.detailView.get('toolbarOn'),
   wylieOn: state.detailView.get('wylieOn')
-}), {setFirstScroll, setFontSize, setLineHeight, setWylieStatus, setToolbarStatus})
+}), {setFirstScroll, setToolbarStatus})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -40,9 +40,6 @@ class DetailView extends Component {
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
     setFirstScroll: PropTypes.func.isRequired,
-    setFontSize: PropTypes.func.isRequired,
-    setLineHeight: PropTypes.func.isRequired,
-    setWylieStatus: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
     wylieOn: PropTypes.bool.isRequired
@@ -130,44 +127,6 @@ class DetailView extends Component {
 
   goHome = () => {
     this.props.navigator.popToTop();
-  };
-
-  decreaseFontSize = () => {
-    let fontSize = this.props.fontSize - 1;
-    if (fontSize >= 0) {
-      this.props.setFontSize(fontSize);
-    }
-    this.rerenderListView();
-  };
-
-  increaseFontSize = () => {
-    let fontSize = this.props.fontSize + 1;
-    if (fontSize < 30) {
-      this.props.setFontSize(fontSize);
-    }
-    this.rerenderListView();
-  };
-
-  decreaseLineHeight = () => {
-    let lineHeight = this.props.lineHeight - 0.1;
-    if (lineHeight >= 0) {
-      this.props.setLineHeight(lineHeight);
-    }
-    this.rerenderListView();
-  };
-
-  increaseLineHeight = () => {
-    let lineHeight = this.props.lineHeight + 0.1;
-    if (lineHeight < 30) {
-      this.props.setLineHeight(lineHeight);
-    }
-    this.rerenderListView();
-  };
-
-  toggleWylieStatus = () => {
-    let status = this.props.wylieOn;
-    this.props.setWylieStatus(! status);
-    this.rerenderListView();
   };
 
   renderText = row => {
@@ -366,23 +325,6 @@ class DetailView extends Component {
               <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
               <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.boxButton, {bottom: toolbarOn ? 0 : -50}]}>
-              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseLineHeight}>
-                <Image style={styles.buttonImage} source={require('image!icon-line-height-minus')} />
-              </TouchableHighlight>
-              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseLineHeight}>
-                <Image style={styles.buttonImage} source={require('image!icon-line-height-add')} />
-              </TouchableHighlight>
-              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.decreaseFontSize}>
-                <Image style={styles.buttonImage} source={require('image!icon-font-size-minus')} />
-              </TouchableHighlight>
-              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.increaseFontSize}>
-                <Image style={styles.buttonImage} source={require('image!icon-font-size-add')} />
-              </TouchableHighlight>
-              <TouchableHighlight underlayColor={underlayColor} style={[styles.button]} onPress={this.toggleWylieStatus}>
-                <Image style={styles.buttonImage} source={require('image!icon-tibetan-wylie-switch')} />
               </TouchableHighlight>
             </View>
           </View>
