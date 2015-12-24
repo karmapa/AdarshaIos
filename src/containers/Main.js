@@ -1,8 +1,9 @@
 import {openDb, setLoading} from '../modules/main';
 import {openToc} from '../modules/category';
+import SideMenu from 'react-native-side-menu';
 import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import {CategoryView, DetailView, MasterView} from '../components';
+import {CategoryView, DetailView, MasterView, Menu} from '../components';
 import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
 import {bindActionCreators} from 'redux';
@@ -55,11 +56,7 @@ class Main extends Component {
     return <Navigator {...navigatorProps} />;
   }
 
-  renderScene = (route, navigator) => {
-
-    if (this.props.loading) {
-      return renderSpinner();
-    }
+  renderContent = (route, navigator) => {
 
     if ('DetailView' === route.name) {
 
@@ -73,13 +70,20 @@ class Main extends Component {
       };
 
       return <DetailView {...detailViewProps} />;
+    }
+    return <MasterView navigator={navigator} route={route} />;
+  };
 
+  renderScene = (route, navigator) => {
+
+    if (this.props.loading) {
+      return renderSpinner();
     }
 
     return (
-      <View style={globalStyles.container}>
-        <MasterView navigator={navigator} route={route} />
-      </View>
+      <SideMenu menu={(<Menu />)} menuPosition={'right'}>
+        {this.renderContent(route, navigator)}
+      </SideMenu>
     );
   };
 }
