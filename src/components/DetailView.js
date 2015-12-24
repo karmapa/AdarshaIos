@@ -8,7 +8,7 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
-import {setFirstScroll, setToolbarStatus, setUti} from '../modules/detailView';
+import {setFirstScroll, setToolbarStatus} from '../modules/detailView';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
@@ -24,10 +24,10 @@ const LIST_VIEW = 'listView';
 
 @connect(state => ({
   firstScroll: state.detailView.get('firstScroll'),
-  fontSize: state.detailView.get('fontSize'),
-  lineHeight: state.detailView.get('lineHeight'),
+  fontSize: state.main.get('fontSize'),
+  lineHeight: state.main.get('lineHeight'),
   toolbarOn: state.detailView.get('toolbarOn'),
-  wylieOn: state.detailView.get('wylieOn')
+  wylieOn: state.main.get('wylieOn')
 }), {setFirstScroll, setToolbarStatus})
 class DetailView extends Component {
 
@@ -245,10 +245,6 @@ class DetailView extends Component {
       this.handlePress();
     }
     this.isScrolling = false;
-  };
-
-  handleInputChange = text => {
-    this.props.setUti(text);
   };
 
   handleSubmit = async () => {
