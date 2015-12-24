@@ -1,6 +1,6 @@
 'use strict';
 
-import MainApp from './containers/mainApp';
+import Main from './containers/Main';
 import React, {Component} from 'react-native';
 import reducer from './modules/reducer';
 import thunk from 'redux-thunk';
@@ -14,7 +14,7 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        {() => <MainApp />}
+        {() => <Main />}
       </Provider>
     );
   }

@@ -10,12 +10,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux/native';
 import {renderSpinner} from '../helpers';
 import {styles as globalStyles} from '../styles/global.style';
-import {styles} from './mainApp.style';
+import {styles} from './Main.style';
 
 @connect(state => ({
   loading: state.main.get('loading')
 }), {openDb, openToc, setLoading})
-class MainApp extends Component {
+class Main extends Component {
 
   static PropTypes = {
     openDb: PropTypes.func.isRequired,
@@ -95,4 +95,4 @@ class MainApp extends Component {
   };
 }
 
-export default MainApp;
+export default Main;
