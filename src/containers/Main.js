@@ -1,4 +1,4 @@
-import {openDb, setFontSize, setLineHeight, setLoading, setWylieStatus} from '../modules/main';
+import {openDb, setLoading} from '../modules/main';
 import {openToc} from '../modules/category';
 import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
 import _ from 'lodash';
@@ -57,8 +57,6 @@ class Main extends Component {
   }
 
   renderScene = (route, navigator) => {
-
-    const {setFontSize, setLineHeight, setWylieStatus} = this.props;
 
     if (this.props.loading) {
       return renderSpinner();
