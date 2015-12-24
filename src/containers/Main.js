@@ -1,7 +1,6 @@
 import {openDb, setLoading} from '../modules/main';
 import {openToc} from '../modules/category';
 import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
-import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {CategoryView, DetailView, MasterView} from '../components';
 import {DB_NAME} from '../constants/AppConstants';
