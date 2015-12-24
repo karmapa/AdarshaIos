@@ -1,4 +1,4 @@
 import React, {AppRegistry} from 'react-native';
-import App from './app/containers/app';
+import Root from './app/Root';
 
-AppRegistry.registerComponent('AdarshaIos', () => App);
+AppRegistry.registerComponent('AdarshaIos', () => Root);
