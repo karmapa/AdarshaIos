@@ -103,3 +103,10 @@ export function decreaseLineHeight() {
     }
   };
 }
+
+export function toggleWylieStatus() {
+  return (dispatch, getState) => {
+    let status = getState().detailView.get('wylieOn');
+    dispatch(setWylieStatus(! status));
+  };
+}
