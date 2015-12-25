@@ -148,7 +148,7 @@ export function decreaseFontSize() {
 
 export function increaseLineHeight() {
   return (dispatch, getState) => {
-    let newLineHeight = getState().main.get('lineHeight') + 1;
+    let newLineHeight = getState().main.get('lineHeight') + 0.1;
     if (newLineHeight < 30) {
       dispatch(setLineHeight(newLineHeight));
     }
@@ -157,7 +157,7 @@ export function increaseLineHeight() {
 
 export function decreaseLineHeight() {
   return (dispatch, getState) => {
-    let newLineHeight = getState().main.get('lineHeight') - 1;
+    let newLineHeight = getState().main.get('lineHeight') - 0.1;
     if (newLineHeight > 0) {
       dispatch(setLineHeight(newLineHeight));
     }
