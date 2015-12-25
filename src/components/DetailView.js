@@ -9,6 +9,7 @@ import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
 import {setFirstScroll, setToolbarStatus} from '../modules/detailView';
+import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
@@ -28,7 +29,7 @@ const LIST_VIEW = 'listView';
   lineHeight: state.main.get('lineHeight'),
   toolbarOn: state.detailView.get('toolbarOn'),
   wylieOn: state.main.get('wylieOn')
-}), {setFirstScroll, setToolbarStatus})
+}), {setFirstScroll, setToolbarStatus, setSideMenuStatus})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -94,6 +95,10 @@ class DetailView extends Component {
     let data = await toc({uti});
 
     this.setTitle(_.get(data, 'breadcrumb[3].t'));
+  };
+
+  openSideMenu = () => {
+    this.props.setSideMenuStatus(true);
   };
 
   setTitle = title => this.setState({title});
@@ -321,6 +326,9 @@ class DetailView extends Component {
               <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
               <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.openSideMenu} style={styles.navButton} underlayColor={underlayColor}>
+                <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
             </View>
           </View>

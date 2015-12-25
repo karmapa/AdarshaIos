@@ -9,6 +9,7 @@ const SET_FONT_SIZE = 'SET_FONT_SIZE';
 const SET_LINE_HEIGHT = 'SET_LINE_HEIGHT';
 const SET_LOADING = 'SET_LOADING';
 const SET_SELECTED_TAB = 'SET_SELECTED_TAB';
+const SET_SIDE_MENU_STATUS = 'SET_SIDE_MENU_STATUS';
 const SET_SUTRA_MAP = 'SET_SUTRA_MAP';
 const SET_TOC_ROWS = 'SET_TOC_ROWS';
 const SET_WYLIE_STATUS = 'SET_WYLIE_STATUS';
@@ -20,6 +21,7 @@ const initialState = Immutable.Map({
   lineHeight: 2,
   loading: false,
   selectedTab: 'category',
+  isSideMenuOpen: false,
   sutraMap: {},
   wylieOn: false
 });
@@ -37,6 +39,8 @@ const actionsMap = {
   [SET_LOADING]: (state, action) => state.set('loading', action.loading),
 
   [SET_SELECTED_TAB]: (state, action) => state.set('selectedTab', action.selectedTab),
+
+  [SET_SIDE_MENU_STATUS]: (state, action) => state.set('isSideMenuOpen', action.isSideMenuOpen),
 
   [SET_SUTRA_MAP]: (state, action) => state.set('sutraMap', action.sutraMap),
 
@@ -97,6 +101,13 @@ export function setSelectedTab(selectedTab) {
   return {
     type: SET_SELECTED_TAB,
     selectedTab
+  };
+}
+
+export function setSideMenuStatus(isSideMenuOpen) {
+  return {
+    type: SET_SIDE_MENU_STATUS,
+    isSideMenuOpen
   };
 }
 

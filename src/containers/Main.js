@@ -1,4 +1,4 @@
-import {openDb, setLoading} from '../modules/main';
+import {openDb, setLoading, setSideMenuStatus} from '../modules/main';
 import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
 import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
@@ -13,14 +13,16 @@ import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './Main.style';
 
 @connect(state => ({
-  loading: state.main.get('loading')
-}), {openDb, openToc, setLoading})
+  loading: state.main.get('loading'),
+  isSideMenuOpen: state.main.get('isSideMenuOpen')
+}), {openDb, openToc, setLoading, setSideMenuStatus})
 class Main extends Component {
 
   static PropTypes = {
     openDb: PropTypes.func.isRequired,
     openToc: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
+    isSideMenuOpen: PropTypes.bool.isRequired,
     setLoading: PropTypes.func.isRequired
   };
 
@@ -42,6 +44,10 @@ class Main extends Component {
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
+
+  handleSideMenuChange = isOpen => {
+    this.props.setSideMenuStatus(isOpen);
+  };
 
   render() {
 
@@ -80,8 +86,15 @@ class Main extends Component {
       return renderSpinner();
     }
 
+    let sideMenuProps = {
+      isOpen: this.props.isSideMenuOpen,
+      menu: (<Menu />),
+      menuPosition: 'right',
+      onChange: this.handleSideMenuChange
+    };
+
     return (
-      <SideMenu menu={(<Menu />)} menuPosition={'right'}>
+      <SideMenu {...sideMenuProps}>
         {this.renderContent(route, navigator)}
       </SideMenu>
     );
