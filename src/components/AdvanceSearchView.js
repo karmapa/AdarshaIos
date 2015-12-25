@@ -9,19 +9,10 @@ import {Spinner} from 'react-native-icons';
 import {KeyboardSpacer} from '.';
 import {connect} from 'react-redux/native';
 import {fetch} from '../helpers';
-import {setFieldsData} from '../modules/advanceSearch';
+import {setFieldsData, fields} from '../modules/advanceSearch';
 import {styles} from './AdvanceSearchView.style';
 
 const PickerItemIOS = PickerIOS.Item;
-
-const fields = [
-  {name: 'tname', placeholder: 'མདོ་མིང་།:'},
-  {name: 'yana', placeholder: 'ཐེག་པ།:'},
-  {name: 'charka', placeholder: 'དཀའ། འཁོར་ལོ།:'},
-  {name: 'location', placeholder: 'གནས་ཕུན་སུམ་ཚོགས་པ།:'},
-  {name: 'translator', placeholder: 'ལོ་ཙཱ་བ།:'},
-  {name: 'reviser', placeholder: 'ཞུ་དག་པ།:'}
-];
 
 const biography = require('../../biography.json');
 const divisionNames = biography.divisions.map(division => division.divisionName);
