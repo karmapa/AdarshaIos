@@ -49,19 +49,6 @@ class Main extends Component {
     this.props.setSideMenuStatus(isOpen);
   };
 
-  render() {
-
-    let navigatorProps = {
-      style: styles.navigatorIos,
-      initialRoute: {
-        index: 0
-      },
-      renderScene: this.renderScene.bind(this)
-    };
-
-    return <Navigator {...navigatorProps} />;
-  }
-
   renderContent = (route, navigator) => {
 
     if ('DetailView' === route.name) {
@@ -99,6 +86,19 @@ class Main extends Component {
       </SideMenu>
     );
   };
+
+  render() {
+
+    let navigatorProps = {
+      style: styles.navigatorIos,
+      initialRoute: {
+        index: 0
+      },
+      renderScene: this.renderScene.bind(this)
+    };
+
+    return <Navigator {...navigatorProps} />;
+  }
 }
 
 export default Main;
