@@ -3,7 +3,7 @@ import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
 import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import {CategoryView, DetailView, MasterView, Menu} from '../components';
+import {Biography, CategoryView, DetailView, MasterView, Menu} from '../components';
 import {connect} from 'react-redux/native';
 import {renderSpinner} from '../helpers';
 import {styles as globalStyles} from '../styles/global.style';
