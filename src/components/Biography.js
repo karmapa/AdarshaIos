@@ -47,6 +47,10 @@ class Biography extends Component {
     this.isScrolling = false;
   }
 
+  componentWillUnmount() {
+    this.props.setBiographyFirstScroll(false);
+  }
+
   goBack = () => {
     this.props.navigator.pop();
   };
