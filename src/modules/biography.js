@@ -70,7 +70,7 @@ export function setBiographyToolbarStatus(toolbarOn) {
   };
 }
 
-export function setFirstScroll(scrolled) {
+export function setBiographyFirstScroll(scrolled) {
   return {
     type: SET_BIOGRAPHY_FIRST_SCROLL,
     scrolled

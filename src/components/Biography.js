@@ -61,7 +61,7 @@ class Biography extends Component {
     if (this.props.toolbarOn && this.props.firstScroll) {
       this.setToolbarStatus(false);
     }
-    this.props.setFirstScroll(true);
+    this.props.setBiographyFirstScroll(true);
   };
 
   handlePress = () => {
