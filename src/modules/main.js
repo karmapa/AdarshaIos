@@ -60,7 +60,7 @@ export function openDb() {
     return open()
       .then(db => {
 
-        db.get([['fields', 'sutra'], ['fields', 'sutra_vpos'], ['fields', 'head']], (fields) => {
+        db.get([['fields', 'sutra'], ['fields', 'sutra_vpos'], ['fields', 'head']], fields => {
           let [sutraIds, sutraVposs, heads] = fields;
           let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
           let sutraMap = _.object(sutraIds, rows);
