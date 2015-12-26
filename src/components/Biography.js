@@ -26,11 +26,11 @@ class Biography extends Component {
     firstScroll: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     loadBiographyByUti: PropTypes.func.isRequired,
-    setBiographyToolbarStatus: PropTypes.func.isRequired,
-    setBiographyFirstScroll: PropTypes.func.isRequired,
-    toolbarOn: PropTypes.bool.isRequired,
     navigator: PropTypes.array.isRequired,
+    setBiographyFirstScroll: PropTypes.func.isRequired,
+    setBiographyToolbarStatus: PropTypes.func.isRequired,
     title: PropTypes.string,
+    toolbarOn: PropTypes.bool.isRequired,
     uti: PropTypes.string.isRequired
   };
 
