@@ -90,7 +90,7 @@ export const fields = [
   {key: 'chakra', name: 'དཀའ། འཁོར་ལོ།'},
   {key: 'location', name: 'གནས་ཕུན་སུམ་ཚོགས་པ།'},
   {key: 'audience', name: 'འཁོར་ཕུན་སུམ་ཚོགས་པ།'},
-  {key: 'aurthor', name: 'སྟོན་པ་ཕུན་སུམ་ཚོགས་པ།'},
+  {key: 'author', name: 'སྟོན་པ་ཕུན་སུམ་ཚོགས་པ།'},
   {key: 'requestor', name: 'ཞུ་བ་པོ་ཕུན་སུམ་ཚོགས་པ།'},
   {key: 'dharma', name: 'ཆོས་ཕུན་སུམ་ཚོགས་པ།'},
   {key: 'purpose', name: 'ཆོས་ཀྱི་དགོས་དོན།'},
