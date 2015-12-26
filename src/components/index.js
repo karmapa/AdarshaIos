@@ -1,5 +1,6 @@
 
 import AdvanceSearchView from './AdvanceSearchView';
+import Biography from './Biography';
 import CategoryView from './CategoryView';
 import DetailView from './DetailView';
 import KeyboardSearchView from './KeyboardSearchView';
@@ -9,6 +10,7 @@ import Menu from './Menu';
 
 export {
   AdvanceSearchView,
+  Biography,
   CategoryView,
   DetailView,
   KeyboardSearchView,
