@@ -1,5 +1,3 @@
-'use strict';
-
 import React, {Animated, Component, DeviceEventEmitter, PropTypes, View, Platform} from 'react-native';
 
 const KITKAT = 19;
