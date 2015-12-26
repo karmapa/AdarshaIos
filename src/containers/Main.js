@@ -32,8 +32,8 @@ class Main extends Component {
   }
 
   async preload() {
-    let {openDb, openToc, setLoading} = this.props;
 
+    let {openDb, openToc, setLoading} = this.props;
     setLoading(true);
     await openDb();
     await openToc();
