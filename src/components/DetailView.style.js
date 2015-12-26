@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
     paddingTop: 0,
     backgroundColor: 'transparent'
   },
+  titleButton: {
+    flex: 1
+  },
   nav: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     flexDirection: 'row',
