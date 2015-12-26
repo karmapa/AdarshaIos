@@ -19,7 +19,7 @@ const initialState = Immutable.Map({
   dbError: null,
   fontSize: 16,
   lineHeight: 2,
-  loading: false,
+  isLoading: false,
   selectedTab: 'category',
   isSideMenuOpen: false,
   sutraMap: {},
@@ -36,7 +36,7 @@ const actionsMap = {
 
   [SET_LINE_HEIGHT]: (state, action) => state.set('lineHeight', action.lineHeight),
 
-  [SET_LOADING]: (state, action) => state.set('loading', action.loading),
+  [SET_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
   [SET_SELECTED_TAB]: (state, action) => state.set('selectedTab', action.selectedTab),
 
@@ -90,10 +90,10 @@ export function setDbError(err) {
   };
 }
 
-export function setLoading(loading) {
+export function setLoading(isLoading) {
   return {
     type: SET_LOADING,
-    loading
+    isLoading
   };
 }
 

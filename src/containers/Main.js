@@ -10,7 +10,7 @@ import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './Main.style';
 
 @connect(state => ({
-  loading: state.main.get('loading'),
+  isLoading: state.main.get('isLoading'),
   isSideMenuOpen: state.main.get('isSideMenuOpen')
 }), {openDb, openToc, setLoading, setSideMenuStatus})
 class Main extends Component {
@@ -18,7 +18,7 @@ class Main extends Component {
   static PropTypes = {
     openDb: PropTypes.func.isRequired,
     openToc: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     isSideMenuOpen: PropTypes.bool.isRequired,
     setLoading: PropTypes.func.isRequired
   };
@@ -70,7 +70,7 @@ class Main extends Component {
 
   renderScene = (route, navigator) => {
 
-    if (this.props.loading) {
+    if (this.props.isLoading) {
       return renderSpinner();
     }
 

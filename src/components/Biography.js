@@ -23,8 +23,8 @@ class Biography extends Component {
 
   static PropTypes = {
     biography: PropTypes.object.isRequired,
-    isLoading: PropTypes.bool.isRequired,
     firstScroll: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     loadBiographyByUti: PropTypes.func.isRequired,
     setBiographyToolbarStatus: PropTypes.func.isRequired,
     setBiographyFirstScroll: PropTypes.func.isRequired,

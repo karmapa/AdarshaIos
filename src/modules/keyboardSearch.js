@@ -17,7 +17,7 @@ const initialState = Immutable.Map({
     isAppend: false
   },
   keyword: '',
-  loading: false,
+  isLoading: false,
   searchError: null
 });
 
@@ -25,7 +25,7 @@ const actionsMap = {
 
   [SET_EXCERPT_DATA]: (state, action) => state.set('excerptData', action.data),
 
-  [SET_KEYBOARD_SEARCH_LOADING]: (state, action) => state.set('loading', action.loading),
+  [SET_KEYBOARD_SEARCH_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
   [SET_KEYWORD]: (state, action) => state.set('keyword', action.keyword),
 
@@ -136,10 +136,10 @@ export function setExcerptData(data) {
   };
 }
 
-export function setKeyboardSearchLoading(loading) {
+export function setKeyboardSearchLoading(isLoading) {
   return {
     type: SET_KEYBOARD_SEARCH_LOADING,
-    loading
+    isLoading
   };
 }
 

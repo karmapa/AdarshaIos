@@ -15,7 +15,7 @@ const TRIM_POS = 20;
   isAppend: state.keyboardSearch.get('excerptData').isAppend,
   keyword: state.keyboardSearch.get('keyword'),
   lastKeyword: state.keyboardSearch.get('excerptData').keyword,
-  loading: state.keyboardSearch.get('loading'),
+  isLoading: state.keyboardSearch.get('isLoading'),
   utiSets: state.keyboardSearch.get('excerptData').utiSets
 }), {search, setKeyword, loadMore})
 class KeyboardSearchView extends Component {
@@ -26,7 +26,7 @@ class KeyboardSearchView extends Component {
     keyword: PropTypes.string.isRequired,
     lastKeyword: PropTypes.string.isRequired,
     loadMore: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     navigator: PropTypes.array.isRequired,
     search: PropTypes.func.isRequired,
     setKeyword: PropTypes.func.isRequired,
@@ -156,7 +156,7 @@ class KeyboardSearchView extends Component {
 
   render() {
 
-    let {loading} = this.props;
+    let {isLoading} = this.props;
 
     let textInputProps = {
       autoCorrect: false,
@@ -180,9 +180,9 @@ class KeyboardSearchView extends Component {
     return (
       <View style={styles.container}>
         <TextInput {...textInputProps} />
-        {loading && renderSpinner()}
-        {(! loading) && this.renderTips()}
-        {(! loading) && <ListView {...listViewProps} />}
+        {isLoading && renderSpinner()}
+        {(! isLoading) && this.renderTips()}
+        {(! isLoading) && <ListView {...listViewProps} />}
       </View>
     );
   }
