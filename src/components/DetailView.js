@@ -69,6 +69,7 @@ class DetailView extends Component {
     this.isLoadingTitle = false;
     this.lastOffsetY = 0;
     this.isScrolling = false;
+    this.direction = null;
     this.setTitle(this.props.title);
     this.preload();
   }
@@ -211,7 +212,7 @@ class DetailView extends Component {
     this.props.setToolbarStatus(toolbarOn);
   };
 
-  updateTitle = _.debounce(async direction => {
+  getVisibleUti = () => {
 
     let listView = _.get(this.refs[LIST_VIEW], 'refs.listview.refs.listview');
     let utis = Object.keys(listView._visibleRows.s1)
@@ -219,7 +220,11 @@ class DetailView extends Component {
       .filter(row => undefined !== row)
       .map(row => getUti(row));
 
-    let uti = 'up' === direction ? _.first(utis) : _.last(utis);
+    return 'up' === this.direction ? _.first(utis) : _.last(utis);
+  };
+
+  updateTitle = _.debounce(async () => {
+    let uti = this.getVisibleUti();
     let data = await toc({uti});
     this.setTitle(_.get(data, 'breadcrumb[3].t'));
   }, 100);
@@ -230,9 +235,9 @@ class DetailView extends Component {
       this.setToolbarStatus(false);
     }
     let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
-    let direction = offsetY > this.lastOffsetY ? 'down' : 'up';
+    this.direction = offsetY > this.lastOffsetY ? 'down' : 'up';
 
-    this.updateTitle(direction);
+    this.updateTitle();
     this.lastOffsetY = offsetY;
     this.props.setFirstScroll(true);
   };
