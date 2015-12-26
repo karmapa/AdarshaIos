@@ -7,6 +7,7 @@ import KeyboardSearchView from './KeyboardSearchView';
 import KeyboardSpacer from './KeyboardSpacer';
 import MasterView from './MasterView';
 import Menu from './Menu';
+import StatusBarSpacer from './StatusBarSpacer';
 
 export {
   AdvanceSearchView,
@@ -16,5 +17,6 @@ export {
   KeyboardSearchView,
   KeyboardSpacer,
   MasterView,
-  Menu
+  Menu,
+  StatusBarSpacer
 };
