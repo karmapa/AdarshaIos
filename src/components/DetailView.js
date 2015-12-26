@@ -286,6 +286,17 @@ class DetailView extends Component {
     this.setLoading(false);
   };
 
+  showBiography = () => {
+    let uti = this.getVisibleUti();
+    if (uti) {
+      this.props.navigator.push({
+        name: 'Biography',
+        title: this.state.title,
+        uti
+      });
+    }
+  };
+
   render() {
 
     if (this.state.isLoading) {
@@ -328,7 +339,9 @@ class DetailView extends Component {
               <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
-              <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
+              <TouchableHighlight style={styles.titleButton} onPress={this.showBiography} underlayColor={underlayColor}>
+                <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
+              </TouchableHighlight>
               <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
