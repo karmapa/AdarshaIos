@@ -20,6 +20,7 @@ const fontColor = '#ffffff';
 const TOP = -20;
 const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
 const ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
+const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 
 const LIST_VIEW = 'listView';
 
@@ -62,6 +63,12 @@ class DetailView extends Component {
 
   componentWillMount() {
     LayoutAnimation.spring();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (! _.isEqual(_.pick(this.props, SETTINGS_PROPS), _.pick(nextProps, SETTINGS_PROPS))) {
+      this.rerenderListView();
+    }
   }
 
   componentDidMount() {
@@ -150,6 +157,8 @@ class DetailView extends Component {
   };
 
   renderRow = row => {
+
+    console.log('renderRow');
 
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
