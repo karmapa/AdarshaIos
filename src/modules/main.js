@@ -178,35 +178,39 @@ export function increaseFontSize() {
 }
 
 export function decreaseFontSize() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     let newFontSize = getState().main.get('fontSize') - 1;
     if (newFontSize > 0) {
+      await setReaderSettings({fontSize: newFontSize});
       dispatch(setFontSize(newFontSize));
     }
   };
 }
 
 export function increaseLineHeight() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     let newLineHeight = getState().main.get('lineHeight') + 0.1;
     if (newLineHeight < 30) {
+      await setReaderSettings({lineHeight: newLineHeight});
       dispatch(setLineHeight(newLineHeight));
     }
   };
 }
 
 export function decreaseLineHeight() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     let newLineHeight = getState().main.get('lineHeight') - 0.1;
     if (newLineHeight > 0) {
+      await setReaderSettings({lineHeight: newLineHeight});
       dispatch(setLineHeight(newLineHeight));
     }
   };
 }
 
 export function toggleWylieStatus() {
-  return (dispatch, getState) => {
-    let status = getState().main.get('wylieOn');
-    dispatch(setWylieStatus(! status));
+  return async (dispatch, getState) => {
+    let newWylieStatus = ! getState().main.get('wylieOn');
+    await setReaderSettings({toggleWylieStatus: newWylieStatus});
+    dispatch(setWylieStatus(newWylieStatus));
   };
 }
