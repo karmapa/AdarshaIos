@@ -157,9 +157,6 @@ class DetailView extends Component {
   };
 
   renderRow = row => {
-
-    console.log('renderRow');
-
     return (
       <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
