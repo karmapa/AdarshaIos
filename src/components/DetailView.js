@@ -8,10 +8,10 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
-import {setFirstScroll, setToolbarStatus} from '../modules/detailView';
+import {setSearchKeyword, setFirstScroll, setToolbarStatus} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
-import {toc, getUti, highlight} from '../helpers';
+import {toc, getUti, highlight, searchHighlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
 
 const underlayColor = 'rgba(0, 0, 0, 0)';
@@ -28,9 +28,10 @@ const LIST_VIEW = 'listView';
   firstScroll: state.detailView.get('firstScroll'),
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
+  searchKeyword: state.detailView.get('searchKeyword'),
   toolbarOn: state.detailView.get('toolbarOn'),
   wylieOn: state.main.get('wylieOn')
-}), {setFirstScroll, setToolbarStatus, setSideMenuStatus})
+}), {setFirstScroll, setToolbarStatus, setSideMenuStatus, setSearchKeyword})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -41,7 +42,9 @@ class DetailView extends Component {
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
+    searchKeyword: PropTypes.string.isRequired,
     setFirstScroll: PropTypes.func.isRequired,
+    setSearchKeyword: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
     wylieOn: PropTypes.bool.isRequired
@@ -151,7 +154,15 @@ class DetailView extends Component {
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(text)}</Text>;
     }
     else {
-      let children = highlight(text, row.hits);
+      let children;
+      let {searchKeyword} = this.props;
+
+      if (searchKeyword) {
+        children = searchHighlight(text, searchKeyword);
+      }
+      else {
+        children = highlight(text, row.hits);
+      }
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
     }
   };
@@ -303,6 +314,8 @@ class DetailView extends Component {
     }
   };
 
+  onInputChange = searchKeyword => this.props.setSearchKeyword(searchKeyword);
+
   render() {
 
     if (this.state.isLoading) {
@@ -333,12 +346,24 @@ class DetailView extends Component {
       loadData: this.loadPrev
     };
 
+    let inputProps = {
+      autoCapitalize: 'none',
+      autoCorrect: false,
+      onChangeText: this.onInputChange,
+      placeholder: 'Search in sutra',
+      placeholderTextColor: 'rgba(0, 0, 0, 0.6)',
+      style: styles.input,
+      value: this.props.searchKeyword
+    };
+
     return (
       <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
         <View style={globalStyles.backgroundImageContainer}>
           <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />
         </View>
+
         <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
+
           <View style={styles.container}>
             <RefreshableListView {...listViewProps} />
             <View style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
@@ -356,7 +381,12 @@ class DetailView extends Component {
               </TouchableHighlight>
             </View>
           </View>
+
+          <View style={[styles.boxInput, {bottom: toolbarOn ? 0 : -70}]}>
+            <TextInput {...inputProps} />
+          </View>
         </View>
+
       </View>
     );
   }
