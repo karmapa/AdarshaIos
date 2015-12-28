@@ -1,23 +1,24 @@
-import {openDb, setLoading, setSideMenuStatus} from '../modules/main';
+import {openDb, setLoading, setSideMenuStatus, loadStorage} from '../modules/main';
 import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
 import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {Biography, CategoryView, DetailView, MasterView, Menu} from '../components';
 import {connect} from 'react-redux/native';
-import {renderSpinner} from '../helpers';
+import {renderSpinner, storage} from '../helpers';
 import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './Main.style';
 
 @connect(state => ({
   isLoading: state.main.get('isLoading'),
   isSideMenuOpen: state.main.get('isSideMenuOpen')
-}), {openDb, openToc, setLoading, setSideMenuStatus})
+}), {openDb, openToc, loadStorage, setLoading, setSideMenuStatus})
 class Main extends Component {
 
   static PropTypes = {
     openDb: PropTypes.func.isRequired,
     openToc: PropTypes.func.isRequired,
+    loadStorage: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isSideMenuOpen: PropTypes.bool.isRequired,
     setLoading: PropTypes.func.isRequired
@@ -33,8 +34,9 @@ class Main extends Component {
 
   async preload() {
 
-    let {openDb, openToc, setLoading} = this.props;
+    let {openDb, openToc, setLoading, loadStorage} = this.props;
     setLoading(true);
+    await loadStorage();
     await openDb();
     await openToc();
     setLoading(false);
