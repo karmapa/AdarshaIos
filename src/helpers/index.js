@@ -7,6 +7,7 @@ import highlight from './highlight';
 import loadNext from './loadNext';
 import loadPrev from './loadPrev';
 import renderSpinner from './renderSpinner';
+import storage from './storage';
 import toc from './toc';
 
 export {
@@ -19,5 +20,6 @@ export {
   loadNext,
   loadPrev,
   renderSpinner,
+  storage,
   toc
 };
