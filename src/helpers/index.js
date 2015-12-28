@@ -2,6 +2,7 @@ import cleanKeyword from './cleanKeyword';
 import fetch from './fetch';
 import filter from './filter';
 import findBiographyBySutraId from './findBiographyBySutraId';
+import getHighlightStyle from './getHighlightStyle';
 import getUti from './getUti';
 import highlight from './highlight';
 import loadNext from './loadNext';
@@ -15,6 +16,7 @@ export {
   fetch,
   filter,
   findBiographyBySutraId,
+  getHighlightStyle,
   getUti,
   highlight,
   loadNext,
