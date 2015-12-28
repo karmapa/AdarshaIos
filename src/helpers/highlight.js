@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, {Text} from 'react-native';
 import {values} from '../styles/global.style';
+import {getHighlightStyle} from '.';
 
 export default function highlight(text, hits = []) {
 
@@ -17,7 +18,7 @@ export default function highlight(text, hits = []) {
       tags.push(<Text key={pos}>{text.substring(pos, start)}</Text>);
     }
 
-    const highlightStyle = getHighlightColor(nWord, values.highlightColors);
+    const highlightStyle = getHighlightStyle(nWord);
 
     tags.push(<Text key={'h' + pos} style={highlightStyle}>{text.substr(start, length)}</Text>);
     data.pos = start += length;
@@ -28,9 +29,4 @@ export default function highlight(text, hits = []) {
 
     return data;
   }, {tags: [], pos: 0}).tags;
-}
-
-function getHighlightColor(nWord, colors) {
-  const color = colors[nWord];
-  return color ? color : _.first(colors);
 }
