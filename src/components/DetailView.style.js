@@ -30,5 +30,23 @@ export const styles = StyleSheet.create({
   textView: {
     paddingLeft: 14,
     paddingRight: 14
-  }
+  },
+  boxInput: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 10,
+    position: 'absolute',
+    left: 0,
+    right: 0
+  },
+  input: {
+    backgroundColor: '#ffffff',
+    borderColor: '#cccccc',
+    borderRadius: 4,
+    borderWidth: 1,
+    color: '#555555',
+    flex: 1,
+    fontSize: 18,
+    height: 50,
+    padding: 7
+  },
 });
