@@ -22,6 +22,14 @@ export const styles = StyleSheet.create({
   navButton: {
     width: 40
   },
+  upButton: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    position: 'absolute',
+    justifyContent: 'center',
+    right: 7,
+    width: 40,
+    height: 40
+  },
   navTitle: {
     color: '#ffffff',
     flex: 1,

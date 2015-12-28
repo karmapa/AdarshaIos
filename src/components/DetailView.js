@@ -84,12 +84,12 @@ class DetailView extends Component {
     this.preload();
   }
 
-  preload = async () => {
+  preload = async (rows = this.props.rows) => {
 
     let promises = [];
 
     this.setLoading(true);
-    this._rows = this.props.rows;
+    this._rows = rows;
     promises.push(this.loadNext());
 
     if (this.props.fetchTitle) {
@@ -316,6 +316,28 @@ class DetailView extends Component {
 
   onInputChange = searchKeyword => this.props.setSearchKeyword(searchKeyword);
 
+  goTop = async () => {
+
+    this.setLoading(true);
+
+    let rows;
+
+    try {
+      let uti = this.getVisibleUti();
+      let data = await toc({uti});
+      let vpos = _.get(data, 'breadcrumb[3].vpos');
+      rows = await fetch({vpos});
+    } catch(err) {
+      console.log('goTop err:', err);
+      this.setLoading(false);
+      return;    // don't do anything
+    }
+
+    if (rows && (rows.length > 0)) {
+      this.preload(rows);
+    }
+  };
+
   render() {
 
     if (this.state.isLoading) {
@@ -385,6 +407,10 @@ class DetailView extends Component {
           <View style={[styles.boxInput, {bottom: toolbarOn ? 0 : -70}]}>
             <TextInput {...inputProps} />
           </View>
+
+          <TouchableHighlight onPress={this.goTop} style={[styles.upButton, {bottom: toolbarOn ? 77 : -147}]} underlayColor={underlayColor}>
+            <Icon name="fontawesome|arrow-up" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+          </TouchableHighlight>
         </View>
 
       </View>
