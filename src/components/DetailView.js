@@ -13,6 +13,7 @@ import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight, searchHighlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
+import {KeyboardSpacer} from '.';
 
 const underlayColor = 'rgba(0, 0, 0, 0)';
 const fontColor = '#ffffff';
@@ -227,6 +228,10 @@ class DetailView extends Component {
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
     this.props.setToolbarStatus(toolbarOn);
+
+    if (false === toolbarOn) {
+      this.refs.searchInput.blur();
+    }
   };
 
   getVisibleUti = () => {
@@ -274,35 +279,6 @@ class DetailView extends Component {
     this.isScrolling = false;
   };
 
-  handleSubmit = async () => {
-
-    let {uti} = this.props;
-    let index = _.findIndex(this._rows, row => (row.uti === uti) || (row.segname === uti));
-
-    if (-1 !== index) {
-      this._rows.splice(0, index);
-      this.rerenderListView();
-      return Promise.resolve();
-    }
-
-    this.setLoading(true);
-
-    try {
-      let rows = await fetch({uti}) || [];
-      rows = rows.filter(row => undefined !== row.vpos);
-
-      if (rows.length > 0) {
-        this._rows = rows;
-        await this.loadNext();
-      }
-    }
-    catch (err) {
-      // uti not found
-      console.log('loadNext err:', err);
-    }
-    this.setLoading(false);
-  };
-
   showBiography = () => {
     let uti = this.getVisibleUti();
     if (uti) {
@@ -315,6 +291,8 @@ class DetailView extends Component {
   };
 
   onInputChange = searchKeyword => this.props.setSearchKeyword(searchKeyword);
+
+  handleSubmit = () => this.setToolbarStatus(false);
 
   goTop = async () => {
 
@@ -369,9 +347,11 @@ class DetailView extends Component {
     };
 
     let inputProps = {
+      ref: 'searchInput',
       autoCapitalize: 'none',
       autoCorrect: false,
       onChangeText: this.onInputChange,
+      onSubmitEditing: this.handleSubmit,
       placeholder: 'Search in sutra',
       placeholderTextColor: 'rgba(0, 0, 0, 0.6)',
       style: styles.input,
@@ -412,6 +392,8 @@ class DetailView extends Component {
             <Icon name="fontawesome|arrow-up" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
         </View>
+
+        <KeyboardSpacer />
 
       </View>
     );
