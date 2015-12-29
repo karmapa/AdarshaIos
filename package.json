@@ -9,7 +9,7 @@
   "dependencies": {
     "immutable": "^3.7.5",
     "ksana-analyzer": "git+https://github.com/ksanaforge/ksana-analyzer.git#9b14dac",
-    "ksana-database": "git+https://github.com/ksanaforge/ksana-database.git#9a797e2",
+    "ksana-database": "git+https://github.com/ksanaforge/ksana-database.git#1.5.0",
     "ksana-jsonrom": "git+https://github.com/ksanaforge/ksana-jsonrom.git#9bc61a9",
     "ksana-react-native": "git+https://github.com/kmsheng/ksana-react-native.git#fix-nonnull",
     "ksana-search": "git+https://github.com/ksanaforge/ksana-search.git#329db65",
