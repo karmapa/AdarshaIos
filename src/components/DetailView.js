@@ -11,7 +11,7 @@ import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
 import {setSearchKeyword, setFirstScroll, setToolbarStatus} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
-import {toc, getUti, highlight, searchHighlight} from '../helpers';
+import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {KeyboardSpacer} from '.';
 
