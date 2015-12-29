@@ -75,7 +75,21 @@ class DetailView extends Component {
     if (! _.isEqual(_.pick(this.props, SETTINGS_PROPS), _.pick(nextProps, SETTINGS_PROPS))) {
       this.rerenderListView();
     }
+    if (this.props.searchKeyword !== nextProps.searchKeyword) {
+      this.highlightAsync(nextProps.searchKeyword);
+    }
   }
+
+  highlightAsync = async searchKeyword => {
+    let utis = this.getVisibleUtis();
+    console.time('fetch');
+    console.log('utis', utis, 'q', searchKeyword);
+    this._rows = await fetch({uti: utis, q: searchKeyword});
+    console.timeEnd('fetch');
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this._rows)
+    });
+  };
 
   componentDidMount() {
     this.isLoading = false;
@@ -157,15 +171,7 @@ class DetailView extends Component {
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(text)}</Text>;
     }
     else {
-      let children;
-      let {searchKeyword} = this.props;
-
-      if (searchKeyword) {
-        children = searchHighlight(text, searchKeyword);
-      }
-      else {
-        children = highlight(text, row.hits);
-      }
+      let children = highlight(text, row.hits);
       return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
     }
   };
@@ -236,14 +242,18 @@ class DetailView extends Component {
     }
   };
 
-  getVisibleUti = () => {
+  getVisibleUtis = () => {
 
     let listView = _.get(this.refs[LIST_VIEW], 'refs.listview.refs.listview');
-    let utis = Object.keys(listView._visibleRows.s1)
+
+    return Object.keys(listView._visibleRows.s1)
       .map(index => this._rows[index])
       .filter(row => undefined !== row)
       .map(row => getUti(row));
+  };
 
+  getVisibleUti = () => {
+    let utis = this.getVisibleUtis();
     return 'up' === this.direction ? _.first(utis) : _.last(utis);
   };
 
