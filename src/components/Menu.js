@@ -1,5 +1,6 @@
 import React, {Component, View, PropTypes, TouchableHighlight, Image, Text} from 'react-native';
-import {increaseFontSize, decreaseFontSize, increaseLineHeight, decreaseLineHeight, toggleWylieStatus} from '../modules/main';
+import {increaseFontSize, decreaseFontSize, increaseLineHeight,
+  decreaseLineHeight, toggleWylieStatus, setBackground} from '../modules/main';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {connect} from 'react-redux/native';
 import {styles} from './Menu.style';
@@ -9,12 +10,14 @@ const underlayColor = 'rgba(0, 0, 0, 0)';
 @connect(state => ({
   lineHeight: state.main.get('lineHeight'),
   fontSize: state.main.get('fontSize'),
-  wylieOn: state.main.get('wylieOn')
+  wylieOn: state.main.get('wylieOn'),
+  backgroundIndex: state.main.get('backgroundIndex')
 }), {
   decreaseFontSize,
   decreaseLineHeight,
   increaseFontSize,
   increaseLineHeight,
+  setBackground,
   toggleWylieStatus
 })
 class Menu extends Component {
@@ -26,6 +29,8 @@ class Menu extends Component {
     increaseFontSize: PropTypes.func.isRequired,
     increaseLineHeight: PropTypes.func.isRequired,
     lineHeight: PropTypes.number.isRequired,
+    setBackground: PropTypes.func.isRequired,
+    backgroundIndex: PropTypes.number.isRequired,
     toggleWylieStatus: PropTypes.func.isRequired,
     wylieOn: PropTypes.bool.isRequired
   }
@@ -36,9 +41,21 @@ class Menu extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  setBackground = index => {
+    this.props.setBackground(index);
+  };
+
+  getSelectedStyle = backgroundIndex => {
+    if (this.props.backgroundIndex === backgroundIndex) {
+      return styles.selected;
+    }
+    return {};
+  };
+
   render() {
 
     let {
+      backgroundIndex,
       decreaseFontSize,
       decreaseLineHeight,
       fontSize,
@@ -80,6 +97,25 @@ class Menu extends Component {
               </TouchableHighlight>
             </View>
             <Text style={styles.value}>{wylieOn ? 'Wylie' : 'Tibetan'}</Text>
+          </View>
+
+          <View style={[styles.item, styles.row, styles.boxBackgrounds]}>
+
+            <TouchableHighlight underlayColor={underlayColor}
+              style={styles.backgroundButton} onPress={this.setBackground.bind(this, 0)}>
+              <View style={[styles.backgroundButtonImage, {backgroundColor: '#ffffff'}, this.getSelectedStyle(0)]} />
+            </TouchableHighlight>
+
+            <TouchableHighlight underlayColor={underlayColor}
+              style={styles.backgroundButton} onPress={this.setBackground.bind(this, 1)}>
+              <Image style={[styles.backgroundButtonImage, this.getSelectedStyle(1)]} source={require('image!bg-scripture')} />
+            </TouchableHighlight>
+
+            <TouchableHighlight underlayColor={underlayColor}
+              style={styles.backgroundButton} onPress={this.setBackground.bind(this, 2)}>
+              <Image style={[styles.backgroundButtonImage, this.getSelectedStyle(2)]} source={require('image!bg-scripture2')} />
+            </TouchableHighlight>
+
           </View>
 
         </View>
