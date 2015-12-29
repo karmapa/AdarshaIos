@@ -13,6 +13,7 @@ import {setFieldsData, fields} from '../modules/advanceSearch';
 import {styles} from './AdvanceSearchView.style';
 
 const PickerItemIOS = PickerIOS.Item;
+const mergedFields = ['tname', 'aname', 'sname', 'cname'];
 
 const biography = require('../../biography.json');
 const divisionNames = biography.divisions.map(division => division.divisionName);
@@ -88,6 +89,15 @@ class AdvanceSearchView extends Component {
 
     function matchInputs(sutra) {
       return _.every(filledInputs, row => {
+
+        // https://github.com/karmapa/AdarshaIos/issues/34
+        if ('tname' === row.name) {
+          return _.any(mergedFields, prop => {
+            let value = sutra[prop] || '';
+            return (value.length > 0) && (-1 !== value.indexOf(row.value));
+          });
+        }
+
         let value = sutra[row.name] || '';
         return (value.length > 0) && (-1 !== value.indexOf(row.value));
       });
