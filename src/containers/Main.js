@@ -37,8 +37,8 @@ class Main extends Component {
     let {openDb, openToc, setLoading, loadStorage} = this.props;
     setLoading(true);
     await loadStorage();
-    await openDb();
     await openToc();
+    await openDb();
     setLoading(false);
   }
 
