@@ -26,6 +26,7 @@ const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 const LIST_VIEW = 'listView';
 
 @connect(state => ({
+  backgroundIndex: state.main.get('backgroundIndex'),
   firstScroll: state.detailView.get('firstScroll'),
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
@@ -36,6 +37,7 @@ const LIST_VIEW = 'listView';
 class DetailView extends Component {
 
   static PropTypes = {
+    backgroundIndex: PropTypes.number.isRequired,
     fetchTitle: PropTypes.bool,
     firstScroll: PropTypes.bool.isRequired,
     fontSize: PropTypes.number.isRequired,
@@ -316,6 +318,17 @@ class DetailView extends Component {
     }
   };
 
+  renderBackgroundImage = () => {
+    switch (this.props.backgroundIndex) {
+      case 0:
+        return <View style={{backgroundColor: '#ffffff', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}></View>;
+      case 1:
+        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />
+      case 2:
+        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture2')} />
+    }
+  };
+
   render() {
 
     if (this.state.isLoading) {
@@ -361,7 +374,7 @@ class DetailView extends Component {
     return (
       <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
         <View style={globalStyles.backgroundImageContainer}>
-          <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />
+          {this.renderBackgroundImage()}
         </View>
 
         <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
