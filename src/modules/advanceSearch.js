@@ -31,7 +31,7 @@ export function setFieldsData(data) {
 export const fields = [
   {name: 'tname', placeholder: 'མདོ་མིང་།:'},
   {name: 'yana', placeholder: 'ཐེག་པ།:'},
-  {name: 'charka', placeholder: 'དཀའ། འཁོར་ལོ།:'},
+  {name: 'chakra', placeholder: 'དཀའ། འཁོར་ལོ།:'},
   {name: 'location', placeholder: 'གནས་ཕུན་སུམ་ཚོགས་པ།:'},
   {name: 'translator', placeholder: 'ལོ་ཙཱ་བ།:'},
   {name: 'reviser', placeholder: 'ཞུ་དག་པ།:'}
