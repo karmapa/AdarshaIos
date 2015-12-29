@@ -82,10 +82,7 @@ class DetailView extends Component {
 
   highlightAsync = async searchKeyword => {
     let utis = this.getVisibleUtis();
-    console.time('fetch');
-    console.log('utis', utis, 'q', searchKeyword);
     this._rows = await fetch({uti: utis, q: searchKeyword});
-    console.timeEnd('fetch');
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
