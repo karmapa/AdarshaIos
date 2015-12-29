@@ -162,7 +162,7 @@ class AdvanceSearchView extends Component {
       division: 0,
       tname: '',
       yana: '',
-      charka: '',
+      chakra: '',
       location: '',
       translator: '',
       reviser: ''

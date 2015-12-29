@@ -6,7 +6,7 @@ const initialState = Immutable.Map({
   division: 0,
   tname: '',
   yana: '',
-  charka: '',
+  chakra: '',
   location: '',
   translator: '',
   reviser: ''
