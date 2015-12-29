@@ -35,6 +35,23 @@ export const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10
   },
+  backgroundButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
+  },
+  selected: {
+    borderColor: 'rgba(0, 0, 0, 0.4)'
+  },
+  boxBackgrounds: {
+    padding: 10
+  },
+  backgroundButtonImage: {
+    height: 40,
+    width: 40,
+    borderWidth: 7,
+    borderColor: '#333333'
+  },
   buttonImage: {
     height: 40,
     width: 40
