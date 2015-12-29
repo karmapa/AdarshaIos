@@ -5,6 +5,7 @@ const storage = require('../helpers/storage');
 const open = require('../helpers/openDb');
 
 const MERGE_SETTINGS = 'MERGE_SETTINGS';
+const SET_BACKGROUND_INDEX = 'SET_BACKGROUND_INDEX';
 const SET_DB = 'SET_DB';
 const SET_DB_ERROR = 'SET_DB_ERROR';
 const SET_FONT_SIZE = 'SET_FONT_SIZE';
@@ -19,7 +20,8 @@ const SET_WYLIE_STATUS = 'SET_WYLIE_STATUS';
 const defaultReaderSettings = {
   fontSize: 16,
   lineHeight: 2,
-  wylieOn: false
+  wylieOn: false,
+  backgroundIndex: 1
 };
 
 const initialState = Immutable.Map(Object.assign({
@@ -34,6 +36,8 @@ const initialState = Immutable.Map(Object.assign({
 const actionsMap = {
 
   [MERGE_SETTINGS]: (state, action) => state.merge(action.settings),
+
+  [SET_BACKGROUND_INDEX]: (state, action) => state.set('backgroundIndex', action.backgroundIndex),
 
   [SET_DB]: (state, action) => state.set('db', action.db),
 
@@ -167,6 +171,13 @@ export function setWylieStatus(wylieStatus) {
   };
 }
 
+export function setBackgroundIndex(backgroundIndex) {
+  return {
+    type: SET_BACKGROUND_INDEX,
+    backgroundIndex
+  }
+}
+
 export function increaseFontSize() {
   return async (dispatch, getState) => {
     let newFontSize = getState().main.get('fontSize') + 1;
@@ -212,5 +223,12 @@ export function toggleWylieStatus() {
     let newWylieStatus = ! getState().main.get('wylieOn');
     await setReaderSettings({toggleWylieStatus: newWylieStatus});
     dispatch(setWylieStatus(newWylieStatus));
+  };
+}
+
+export function setBackground(backgroundIndex) {
+  return async (dispatch, getState) => {
+    await setReaderSettings({backgroundIndex});
+    dispatch(setBackgroundIndex(backgroundIndex));
   };
 }
