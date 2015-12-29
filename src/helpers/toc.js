@@ -1,6 +1,6 @@
 import {DB_NAME} from '../constants/AppConstants';
 
-let ksa = require('ksana-simple-api');
+import ksa from 'ksana-simple-api';
 
 export default function toc(options = {}) {
 
