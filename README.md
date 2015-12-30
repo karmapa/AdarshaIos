@@ -12,6 +12,7 @@ Tested on xcode Version 6.4 (6E35b)
 ```
 # Do this for the first time only
 npm run init
+cd node_modules/react-native && npm install    // if you're using npm 3+
 ```
 
 Add jiangkangur.kdb file to project in xcode
