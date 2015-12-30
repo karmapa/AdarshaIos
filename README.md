@@ -14,10 +14,11 @@ Tested on xcode Version 6.4 (6E35b)
 npm run init
 ```
 Add node_modules/kfs_* and kdb file to project
-
 ![xcode-add-files](https://raw.githubusercontent.com/kmsheng/AdarshaIos/master/docs/xcode-add-files.png)
-![xcode-add-target](https://cloud.githubusercontent.com/assets/880569/12003325/86eaacaa-ab54-11e5-8e98-00904641e117.jpg)
+
 Make sure to check Adarsha as target, this is very important.
+![xcode-add-target](https://cloud.githubusercontent.com/assets/880569/12003325/86eaacaa-ab54-11e5-8e98-00904641e117.jpg)
+
 
 Add assets/images/* to image.xcassets ( xcode )
 
