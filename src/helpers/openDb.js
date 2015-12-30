@@ -12,7 +12,7 @@ export default function openDb(dbName = DB_NAME) {
         resolve(db);
       }
       else {
-        resject(err);
+        reject(err);
       }
     });
   });
