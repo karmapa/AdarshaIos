@@ -13,16 +13,12 @@ Tested on xcode Version 6.4 (6E35b)
 # Do this for the first time only
 npm run init
 ```
-Add node_modules/kfs_* and kdb file to project
-![xcode-add-files](https://raw.githubusercontent.com/kmsheng/AdarshaIos/master/docs/xcode-add-files.png)
+Add jiangkangur.kdb file to project in xcode
+
+![xcode-add-files](http://raw.githubusercontent.com/kmsheng/AdarshaIos/master/docs/xcode-add-files.png)
 
 Make sure to check Adarsha as target, this is very important.
 ![xcode-add-target](https://cloud.githubusercontent.com/assets/880569/12003325/86eaacaa-ab54-11e5-8e98-00904641e117.jpg)
-
-
-Add assets/images/* to image.xcassets ( xcode )
-
-See [adding static resources to your ios app using images xcassets](https://facebook.github.io/react-native/docs/image.html#adding-static-resources-to-your-ios-app-using-images-xcassets)
 
 # Do this before deploying to iphone
 
