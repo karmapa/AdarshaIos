@@ -23,8 +23,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		9B002A231BA81313006EAADF /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A201BA81313006EAADF /* kfs_ios.m */; };
-		9B002A241BA81313006EAADF /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B002A221BA81313006EAADF /* kfs_rct.m */; };
 		9B4654CB1C2D8479002AF17F /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B4654CA1C2D8479002AF17F /* jiangkangyur.kdb */; };
 		9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395C1C0F827C003E7A90 /* Icon-60.png */; };
 		9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395D1C0F827C003E7A90 /* Icon-72.png */; };
@@ -46,6 +44,8 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
+		9BD6EDB61C33D4C90037E33F /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6EDB31C33D4C90037E33F /* kfs_ios.m */; };
+		9BD6EDB71C33D4C90037E33F /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6EDB51C33D4C90037E33F /* kfs_rct.m */; };
 		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
 		9BFCF4991C22DCD50036BD13 /* bg-scripture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */; };
 		9BFD99321C28376B00E54EAC /* icon-launch-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD99311C28376B00E54EAC /* icon-launch-screen.png */; };
@@ -161,10 +161,6 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		9B002A1F1BA81313006EAADF /* kfs_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_ios.h; sourceTree = "<group>"; };
-		9B002A201BA81313006EAADF /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_ios.m; sourceTree = "<group>"; };
-		9B002A211BA81313006EAADF /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfs_rct.h; sourceTree = "<group>"; };
-		9B002A221BA81313006EAADF /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kfs_rct.m; sourceTree = "<group>"; };
 		9B4654CA1C2D8479002AF17F /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9B66395C1C0F827C003E7A90 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60.png"; path = "../assets/images/Icon-60.png"; sourceTree = "<group>"; };
 		9B66395D1C0F827C003E7A90 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../assets/images/Icon-72.png"; sourceTree = "<group>"; };
@@ -200,6 +196,10 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9BD6EDB21C33D4C90037E33F /* kfs_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kfs_ios.h; path = "../node_modules/ksana-react-native/kfs_ios.h"; sourceTree = "<group>"; };
+		9BD6EDB31C33D4C90037E33F /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kfs_ios.m; path = "../node_modules/ksana-react-native/kfs_ios.m"; sourceTree = "<group>"; };
+		9BD6EDB41C33D4C90037E33F /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kfs_rct.h; path = "../node_modules/ksana-react-native/kfs_rct.h"; sourceTree = "<group>"; };
+		9BD6EDB51C33D4C90037E33F /* kfs_rct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kfs_rct.m; path = "../node_modules/ksana-react-native/kfs_rct.m"; sourceTree = "<group>"; };
 		9BFCF4761C21B5590036BD13 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "ADARSHA iOS/Images.xcassets"; sourceTree = "<group>"; };
 		9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "bg-scripture.jpg"; path = "../assets/images/bg-scripture.jpg"; sourceTree = "<group>"; };
 		9BFD99311C28376B00E54EAC /* icon-launch-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-launch-screen.png"; path = "../assets/images/icon-launch-screen.png"; sourceTree = "<group>"; };
@@ -311,6 +311,10 @@
 		13B07FAE1A68108700A75B9A /* AdarshaIos */ = {
 			isa = PBXGroup;
 			children = (
+				9BD6EDB21C33D4C90037E33F /* kfs_ios.h */,
+				9BD6EDB31C33D4C90037E33F /* kfs_ios.m */,
+				9BD6EDB41C33D4C90037E33F /* kfs_rct.h */,
+				9BD6EDB51C33D4C90037E33F /* kfs_rct.m */,
 				9B66395C1C0F827C003E7A90 /* Icon-60.png */,
 				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
@@ -322,10 +326,6 @@
 				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
 				9B6639631C0F827C003E7A90 /* iTunesArtwork.png */,
 				9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */,
-				9B002A1F1BA81313006EAADF /* kfs_ios.h */,
-				9B002A201BA81313006EAADF /* kfs_ios.m */,
-				9B002A211BA81313006EAADF /* kfs_rct.h */,
-				9B002A221BA81313006EAADF /* kfs_rct.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -693,9 +693,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B002A241BA81313006EAADF /* kfs_rct.m in Sources */,
+				9BD6EDB61C33D4C90037E33F /* kfs_ios.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				9B002A231BA81313006EAADF /* kfs_ios.m in Sources */,
+				9BD6EDB71C33D4C90037E33F /* kfs_rct.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
