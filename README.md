@@ -13,8 +13,8 @@ Tested on xcode Version 6.4 (6E35b)
 # Do this for the first time only
 npm run init
 ```
-Add jiangkangur.kdb file to project in xcode
 
+Add jiangkangur.kdb file to project in xcode
 ![xcode-add-files](http://raw.githubusercontent.com/kmsheng/AdarshaIos/master/docs/xcode-add-files.png)
 
 Make sure to check Adarsha as target, this is very important.
