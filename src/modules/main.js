@@ -1,8 +1,7 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
 
-const storage = require('../helpers/storage');
-const open = require('../helpers/openDb');
+import {openDb as open, storage} from '../helpers';
 
 const MERGE_SETTINGS = 'MERGE_SETTINGS';
 const SET_BACKGROUND_INDEX = 'SET_BACKGROUND_INDEX';

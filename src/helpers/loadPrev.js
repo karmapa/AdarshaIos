@@ -1,6 +1,5 @@
+import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
-
-let ksa = require('ksana-simple-api');
 
 export default function loadPrev(options) {
 
