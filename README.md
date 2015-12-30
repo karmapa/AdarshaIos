@@ -24,6 +24,7 @@ See [adding static resources to your ios app using images xcassets](https://face
 # Do this before deploying to iphone
 
 ```
+npm install -g react-native-cli    # if you don't have react-native command
 react-native bundle --minify
 ```
 
