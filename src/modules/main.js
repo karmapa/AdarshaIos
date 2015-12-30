@@ -40,7 +40,7 @@ const actionsMap = {
 
   [SET_DB]: (state, action) => state.set('db', action.db),
 
-  [SET_DB_ERROR]: (state, action) => state('dbError', action.err),
+  [SET_DB_ERROR]: (state, action) => state.set('dbError', action.err),
 
   [SET_FONT_SIZE]: (state, action) => state.set('fontSize', action.fontSize),
 
