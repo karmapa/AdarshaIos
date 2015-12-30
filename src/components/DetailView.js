@@ -7,7 +7,7 @@ import wylie from 'tibetan/wylie';
 import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {loadNext, loadPrev, renderSpinner, fetch} from '../helpers';
+import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
 import {setSearchKeyword, setFirstScroll, setToolbarStatus} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
@@ -82,7 +82,7 @@ class DetailView extends Component {
 
   highlightAsync = async searchKeyword => {
     let utis = this.getVisibleUtis();
-    this._rows = await fetch({uti: utis, q: searchKeyword});
+    this._rows = await fetch({uti: utis, q: cleanKeyword(searchKeyword)});
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
