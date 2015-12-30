@@ -31,14 +31,16 @@ class KeyboardSpacer extends Component {
   };
 
   _keyboardDidShow = e => {
-    Animated.spring(this.state.keyboardHeightAnim, {
-      toValue: e.endCoordinates.height
+    Animated.timing(this.state.keyboardHeightAnim, {
+      toValue: e.endCoordinates.height,
+      duration: 80
     }).start();
   };
 
   _keyboardDidHide = () => {
-    Animated.spring(this.state.keyboardHeightAnim, {
-      toValue: 0
+    Animated.timing(this.state.keyboardHeightAnim, {
+      toValue: 0,
+      duration: 80
     }).start();
   };
 
