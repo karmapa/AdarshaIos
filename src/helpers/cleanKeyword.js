@@ -6,19 +6,5 @@ export default function cleanKeyword(keyword) {
     return keyword;
   }
 
-  // escape operators
-  keyword = keyword.replace(/\\/g, '\\\\')
-    .replace(/\*/, '**');
-
-  keyword = wylie.fromWylieWithWildcard(keyword);
-  keyword = keyword.replace(/༌༌/g, '*');
-
-  return removeLoadingEndingSpace(keyword);
-}
-
-function removeLoadingEndingSpace(keyword) {
-  if ((! keyword) || (keyword.length < 2)) {
-    return keyword;
-  }
-  return keyword.replace(/^་/, '').replace(/་$/, '');
+  return wylie.fromWylieWithWildcard(keyword);
 }
