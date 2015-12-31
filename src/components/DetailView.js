@@ -81,7 +81,7 @@ class DetailView extends Component {
   }
 
   highlightAsync = async searchKeyword => {
-    let utis = this.getVisibleUtis();
+    let utis = this.getAllUtis();
     this._rows = await fetch({uti: utis, q: cleanKeyword(searchKeyword)});
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
@@ -237,6 +237,10 @@ class DetailView extends Component {
     if (false === toolbarOn) {
       this.refs.searchInput.blur();
     }
+  };
+
+  getAllUtis = () => {
+    return _.pluck(this._rows, 'uti');
   };
 
   getVisibleUtis = () => {
