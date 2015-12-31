@@ -35,11 +35,17 @@ class Main extends Component {
   async preload() {
 
     let {openDb, openToc, setLoading, loadStorage} = this.props;
-    setLoading(true);
-    await loadStorage();
-    await openToc();
-    await openDb();
-    setLoading(false);
+
+    try {
+      setLoading(true);
+      await loadStorage();
+      await openToc();
+      await openDb();
+      setLoading(false);
+    }
+    catch (e) {
+      console.error('preload err: ', e);
+    }
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
