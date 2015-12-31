@@ -3,6 +3,7 @@ import fetch from './fetch';
 import filter from './filter';
 import findBiographyBySutraId from './findBiographyBySutraId';
 import getHighlightStyle from './getHighlightStyle';
+import getOffset from './getOffset';
 import getUti from './getUti';
 import highlight from './highlight';
 import loadNext from './loadNext';
@@ -18,6 +19,7 @@ export {
   filter,
   findBiographyBySutraId,
   getHighlightStyle,
+  getOffset,
   getUti,
   highlight,
   loadNext,
