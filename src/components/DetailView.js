@@ -32,7 +32,8 @@ const LIST_VIEW = 'listView';
   lineHeight: state.main.get('lineHeight'),
   searchKeyword: state.detailView.get('searchKeyword'),
   toolbarOn: state.detailView.get('toolbarOn'),
-  wylieOn: state.main.get('wylieOn')
+  wylieOn: state.main.get('wylieOn'),
+  keyword: state.keyboardSearch.get('keyword')
 }), {setFirstScroll, setToolbarStatus, setSideMenuStatus, setSearchKeyword})
 class DetailView extends Component {
 
@@ -45,6 +46,7 @@ class DetailView extends Component {
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
+    keyword: PropTypes.string.isRequired,
     searchKeyword: PropTypes.string.isRequired,
     setFirstScroll: PropTypes.func.isRequired,
     setSearchKeyword: PropTypes.func.isRequired,
@@ -89,6 +91,11 @@ class DetailView extends Component {
   };
 
   componentDidMount() {
+
+    if (this.props.keyword) {
+      this.props.setSearchKeyword(this.props.keyword);
+    }
+
     this.isLoading = false;
     this.isLoadingTitle = false;
     this.lastOffsetY = 0;
@@ -317,7 +324,12 @@ class DetailView extends Component {
       let uti = this.getVisibleUti();
       let data = await toc({uti});
       let vpos = _.get(data, 'breadcrumb[3].vpos');
-      rows = await fetch({vpos});
+
+      rows = await fetch({
+        vpos,
+        q: cleanKeyword(this.props.searchKeyword)
+      });
+
     } catch(err) {
       console.log('goTop err:', err);
       this.setLoading(false);
