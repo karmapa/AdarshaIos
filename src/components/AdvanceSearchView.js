@@ -199,10 +199,12 @@ class AdvanceSearchView extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
 
-          <PickerIOS style={styles.pickerIos} selectedValue={this.props.advanceSearchSettings.division} onValueChange={this.onDivisionChange}>
-            <PickerItemIOS key={0} value={0} label={'All'} />
-            {divisionNames.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
-          </PickerIOS>
+          <View style={styles.pickerIosContiner}>
+            <PickerIOS style={styles.pickerIos} selectedValue={this.props.advanceSearchSettings.division} onValueChange={this.onDivisionChange}>
+              <PickerItemIOS key={0} value={0} label={'All'} />
+              {divisionNames.map((name, index) => <PickerItemIOS key={index + 1} value={index + 1} label={name} />)}
+            </PickerIOS>
+          </View>
 
           {fields.map(row => <TextInput key={row.name} autoCorrect={false} style={styles.input} autoCapitalize="none" returnKeyType="search"
             placeholder={row.placeholder} onChangeText={this.onInputChange.bind(this, row.name)}

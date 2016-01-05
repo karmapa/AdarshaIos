@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  pickerIosContiner: {
+    alignItems: 'center'
+  },
   pickerIos: {
     width: 320
   },
