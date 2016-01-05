@@ -229,7 +229,7 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
 
-    let rows = await loadNext({count: 100, uti});
+    let rows = await loadNext({count: 100, uti, q: cleanKeyword(this.props.searchKeyword)});
 
     this.setState({
       dataSource: this.getDataSource(rows)
