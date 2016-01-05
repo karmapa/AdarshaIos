@@ -108,7 +108,12 @@ class KeyboardSearchView extends Component {
   renderText = row => {
 
     let [text, hits] = this.trimByHit(row.text, row.hits);
-    let children = highlight(text, hits);
+    let children = highlight(text, hits, (key, str, style) => {
+      if (style) {
+        return <Text style={style} key={key}>{str}</Text>;
+      }
+      return <Text key={key}>{str}</Text>;
+    });
 
     return <Text style={{flex: 1}} numberOfLines={2} children={children} />;
   }

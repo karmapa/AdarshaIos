@@ -171,13 +171,18 @@ class DetailView extends Component {
     let {fontSize, lineHeight, wylieOn} = this.props;
     let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
 
-    if (wylieOn) {
-      return <Text style={{fontSize, lineHeight: lineHeight * fontSize}}>{wylie.toWylie(text)}</Text>;
-    }
-    else {
-      let children = highlight(text, row.hits);
-      return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
-    }
+    let children = highlight(text, row.hits, (key, str, style) => {
+
+      if (wylieOn) {
+        str = wylie.toWylie(str);
+      }
+      if (style) {
+        return <Text style={style} key={key}>{str}</Text>;
+      }
+      return <Text key={key}>{str}</Text>;
+    });
+
+    return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
   };
 
   renderRow = row => {
