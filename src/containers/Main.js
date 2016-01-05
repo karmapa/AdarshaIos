@@ -5,7 +5,7 @@ import React, {Component, Navigator, PropTypes, View, Image} from 'react-native'
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {Biography, CategoryView, DetailView, MasterView, Menu} from '../components';
 import {connect} from 'react-redux/native';
-import {renderSpinner, storage} from '../helpers';
+import {renderSpinner, storage, attachKeyboard} from '../helpers';
 import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './Main.style';
 
@@ -13,6 +13,7 @@ import {styles} from './Main.style';
   isLoading: state.main.get('isLoading'),
   isSideMenuOpen: state.main.get('isSideMenuOpen')
 }), {openDb, openToc, loadStorage, setLoading, setSideMenuStatus})
+@attachKeyboard
 class Main extends Component {
 
   static PropTypes = {
