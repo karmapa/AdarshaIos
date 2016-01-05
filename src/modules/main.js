@@ -15,6 +15,7 @@ const SET_SIDE_MENU_STATUS = 'SET_SIDE_MENU_STATUS';
 const SET_SUTRA_MAP = 'SET_SUTRA_MAP';
 const SET_TOC_ROWS = 'SET_TOC_ROWS';
 const SET_WYLIE_STATUS = 'SET_WYLIE_STATUS';
+const SET_KEYBOARD_HEIGHT = 'SET_KEYBOARD_HEIGHT';
 
 const defaultReaderSettings = {
   fontSize: 16,
@@ -29,7 +30,9 @@ const initialState = Immutable.Map(Object.assign({
   isLoading: false,
   selectedTab: 'category',
   isSideMenuOpen: false,
-  sutraMap: {}
+  sutraMap: {},
+  keyboardOn: false,
+  keyboardHeight: 0
 }, defaultReaderSettings));
 
 const actionsMap = {
@@ -54,7 +57,9 @@ const actionsMap = {
 
   [SET_SUTRA_MAP]: (state, action) => state.set('sutraMap', action.sutraMap),
 
-  [SET_WYLIE_STATUS]: (state, action) => state.set('wylieOn', action.wylieStatus)
+  [SET_WYLIE_STATUS]: (state, action) => state.set('wylieOn', action.wylieStatus),
+
+  [SET_KEYBOARD_HEIGHT]: (state, action) => state.set('keyboardHeight', action.keyboardHeight)
 
 };
 
@@ -175,6 +180,13 @@ export function setBackgroundIndex(backgroundIndex) {
     type: SET_BACKGROUND_INDEX,
     backgroundIndex
   }
+}
+
+export function setKeyboardHeight(keyboardHeight) {
+  return {
+    type: SET_KEYBOARD_HEIGHT,
+    keyboardHeight
+  };
 }
 
 export function increaseFontSize() {
