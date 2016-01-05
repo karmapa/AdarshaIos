@@ -25,10 +25,6 @@ class Main extends Component {
     setLoading: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.preload();
   }
