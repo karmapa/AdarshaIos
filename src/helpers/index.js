@@ -1,3 +1,4 @@
+import attachKeyboard from './attachKeyboard';
 import cleanKeyword from './cleanKeyword';
 import fetch from './fetch';
 import filter from './filter';
@@ -14,6 +15,7 @@ import storage from './storage';
 import toc from './toc';
 
 export {
+  attachKeyboard,
   cleanKeyword,
   fetch,
   filter,
