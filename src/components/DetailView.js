@@ -229,10 +229,13 @@ class DetailView extends Component {
 
   renderText = row => {
 
-    let {fontSize, lineHeight, wylieOn} = this.props;
+    const {fontSize, lineHeight, wylieOn} = this.props;
+    const visibleUti = _.get(this._visibleUtiRow, 'uti');
+    const defaultStyle = {fontSize, lineHeight: lineHeight * fontSize};
+
     let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
     let highlightIndex = 0;
-    let visibleUti = _.get(this._visibleUtiRow, 'uti');
+
 
     let children = highlight(text, row.hits, (key, str, style) => {
 
@@ -254,7 +257,7 @@ class DetailView extends Component {
       return <TibetanText key={key}>{str}</TibetanText>;
     });
 
-    return <TibetanText style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
+    return <TibetanText style={defaultStyle} children={children} />;
   };
 
   renderRow = row => {

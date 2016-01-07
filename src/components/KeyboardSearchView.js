@@ -1,12 +1,13 @@
 'use strict';
 
 import _ from 'lodash';
-import React, {Component, PropTypes, ListView, ScrollView, View, Text, TextInput, TouchableHighlight} from 'react-native';
+import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight} from 'react-native';
 import {styles} from './KeyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
 import {cleanKeyword, highlight, fetch, getUti, renderSpinner} from '../helpers';
+import {TibetanText} from '.';
 
 const TRIM_POS = 20;
 
@@ -87,11 +88,11 @@ class KeyboardSearchView extends Component {
     if (_.isEmpty(this.props.excerpts)) {
       return (
         <View style={styles.tips}>
-          <Text>Wildcards: ? * ? match single unknown syllable:</Text>
-          <Text>e.g: bde ? snying 1 syllable in between</Text>
-          <Text>e.g: མི་2?་པ 2 syllables in between</Text>
-          <Text>* match a range of unknown syllables:</Text>
-          <Text>e.g: mi 5* pa 1 to 5 syllables in between</Text>
+          <TibetanText>Wildcards: ? * ? match single unknown syllable:</TibetanText>
+          <TibetanText>e.g: bde ? snying 1 syllable in between</TibetanText>
+          <TibetanText>e.g: མི་2?་པ 2 syllables in between</TibetanText>
+          <TibetanText>* match a range of unknown syllables:</TibetanText>
+          <TibetanText>e.g: mi 5* pa 1 to 5 syllables in between</TibetanText>
         </View>
       );
     }
@@ -110,12 +111,12 @@ class KeyboardSearchView extends Component {
     let [text, hits] = this.trimByHit(row.text, row.hits);
     let children = highlight(text, hits, (key, str, style) => {
       if (style) {
-        return <Text style={style} key={key}>{str}</Text>;
+        return <TibetanText style={style} key={key}>{str}</TibetanText>;
       }
-      return <Text key={key}>{str}</Text>;
+      return <TibetanText key={key}>{str}</TibetanText>;
     });
 
-    return <Text style={{flex: 1}} numberOfLines={2} children={children} />;
+    return <TibetanText style={{flex: 1}} numberOfLines={2} children={children} />;
   }
 
   trimByHit = (text, hits) => {
@@ -145,7 +146,7 @@ class KeyboardSearchView extends Component {
     return (
       <TouchableHighlight onPress={this.onRowClicked.bind(this, row)} underlayColor={values.underlayColor}>
         <View style={styles.row}>
-          <Text style={styles.uti}>{getUti(row)}</Text>
+          <TibetanText style={styles.uti}>{getUti(row)}</TibetanText>
           {this.renderText(row)}
         </View>
       </TouchableHighlight>

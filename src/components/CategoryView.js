@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component, ListView, PropTypes, Text, View, TouchableHighlight, Image} from 'react-native';
+import React, {Component, ListView, PropTypes, View, TouchableHighlight, Image} from 'react-native';
 import _ from 'lodash';
 import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
@@ -11,6 +11,7 @@ import {setLoading} from '../modules/main';
 import {styles} from './CategoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {fetch} from '../helpers';
+import {TibetanText} from '.';
 
 @connect(() => ({}), {setLoading})
 class CategoryView extends Component {
@@ -89,7 +90,7 @@ class CategoryView extends Component {
     return (
       <TouchableHighlight key={row.index} underlayColor={values.underlayColor} onPress={this.onRowClicked.bind(this, row)}>
         <View style={[styles.rowView, {alignItems: 'center'}]}>
-          <Text style={{paddingLeft: 14, paddingTop: 10, paddingBottom: 10, flex: 1}}>{row.t}</Text>
+          <TibetanText style={{paddingLeft: 14, paddingTop: 10, paddingBottom: 10, flex: 1}}>{row.t}</TibetanText>
           <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginRight: 10}} size={16} color={'#555555'} />
         </View>
       </TouchableHighlight>
@@ -108,7 +109,7 @@ class CategoryView extends Component {
           <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={values.underlayColor}>
             <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={22} color={'#555555'} />
           </TouchableHighlight>
-          <Text style={styles.title}>{this.props.title}</Text>
+          <TibetanText style={styles.title}>{this.props.title}</TibetanText>
         </View>
       );
     }
@@ -117,7 +118,7 @@ class CategoryView extends Component {
         <View style={styles.scriptureContainer}>
           <View style={styles.scriptureBody}>
             <Image style={styles.scriptureLogo} source={require('image!Icon-Small-50')} />
-            <Text>འཇང་བཀའ་འགྱུར།</Text>
+            <TibetanText>འཇང་བཀའ་འགྱུར།</TibetanText>
           </View>
         </View>
       );

@@ -1,12 +1,12 @@
 'use strict';
 
-import React, {Component, Dimensions, PropTypes, Text, TextInput, View, Modal,
+import React, {Component, Dimensions, PropTypes, TextInput, View, Modal,
   ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
 import _ from 'lodash';
 import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
-import {KeyboardSpacer} from '.';
+import {KeyboardSpacer, TibetanText} from '.';
 import {connect} from 'react-redux/native';
 import {fetch} from '../helpers';
 import {setFieldsData, fields} from '../modules/advanceSearch';
@@ -214,9 +214,9 @@ class AdvanceSearchView extends Component {
             <Modal transparent={true} animated={false} visible={this.state.modalVisible}>
               <View style={styles.alertContainer}>
                 <View style={styles.alertContent}>
-                  <Text style={styles.alertText}>{this.state.modalMessage}</Text>
+                  <TibetanText style={styles.alertText}>{this.state.modalMessage}</TibetanText>
                   <TouchableHighlight underlayColor={'#19bd9b'} style={styles.alertButton} onPress={this.closeAlert}>
-                    <Text style={styles.alertButtonText}>OK</Text>
+                    <TibetanText style={styles.alertButtonText}>OK</TibetanText>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -225,7 +225,7 @@ class AdvanceSearchView extends Component {
 
           <View style={styles.buttonGroups}>
             <TouchableHighlight underlayColor={'#ecf0f1'} style={styles.resetButton} onPress={this.reset}>
-              <Text style={styles.buttonText}>Reset</Text>
+              <TibetanText style={styles.buttonText}>Reset</TibetanText>
             </TouchableHighlight>
           </View>
         </ScrollView>
