@@ -1,4 +1,3 @@
-
 import AdvanceSearchView from './AdvanceSearchView';
 import Biography from './Biography';
 import CategoryView from './CategoryView';
