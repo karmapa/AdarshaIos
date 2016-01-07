@@ -55,15 +55,15 @@ class MasterView extends Component {
     return (
       <View style={globalStyles.container}>
         <TabBarIOS {...stylesTabBar}>
-          <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={32}
+          <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={26}
             selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
             <CategoryView navigator={navigator} tocRows={tocRows} title={title} />
           </TabBarIOS.Item>
-          <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={32}
+          <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={26}
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
             <KeyboardSearchView navigator={navigator} />
           </TabBarIOS.Item>
-          <TabBarIOS.Item title={'Advance Search'} iconName={'ion|social-buffer'} iconSize={32}
+          <TabBarIOS.Item title={'Advance Search'} iconName={'ion|social-buffer'} iconSize={26}
             selected={'advanceSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advanceSearch')}>
             {this.renderAdvance()}
           </TabBarIOS.Item>
