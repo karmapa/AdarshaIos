@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  font: {
+  text: {
     fontFamily: 'Monlam Uni OuChan1'
   }
 });
