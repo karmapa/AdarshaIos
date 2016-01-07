@@ -537,14 +537,14 @@ class DetailView extends Component {
 
     return (
       <View style={styles.rows}>
-        <TouchableHighlight onPress={this.showSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Icon name="fontawesome|search" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        <TouchableHighlight onPress={this.goHome} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
         <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="ion|document-text" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.goHome} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        <TouchableHighlight onPress={this.showSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="fontawesome|search" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
         <TouchableHighlight onPress={this.openSideMenu} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
