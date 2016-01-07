@@ -24,10 +24,6 @@ class CategoryView extends Component {
     tocRows: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
