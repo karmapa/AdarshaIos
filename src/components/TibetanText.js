@@ -1,5 +1,9 @@
-import React, {Text, Component, PropTypes} from 'react-native';
+import _ from 'lodash';
+import React, {Text, Component} from 'react-native';
 import {styles} from './TibetanText.style';
+
+const StyleSheetRegistry = require('StyleSheetRegistry');
+const textStyle = StyleSheetRegistry.getStyleByID(styles.text);
 
 class TibetanText extends Component {
 
@@ -8,7 +12,16 @@ class TibetanText extends Component {
   }
 
   render () {
-    const props = Object.assign(this.props, {style: styles.font});
+
+    let props = _.clone(this.props);
+    let style = props.style;
+
+    if (_.isNumber(style)) {
+      style = StyleSheetRegistry.getStyleByID(style);
+    }
+
+    props.style = Object.assign({}, style, textStyle);
+
     return <Text ref={component => this._root = component} {...props} />
   }
 }
