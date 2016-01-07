@@ -1,4 +1,4 @@
-import React, {ListView, Text, Component, View, PropTypes, TextInput,
+import React, {ListView, Component, View, PropTypes, TextInput,
   TouchableHighlight, TouchableOpacity, Image, ScrollView, LayoutAnimation} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
@@ -13,7 +13,7 @@ import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
-import {KeyboardSpacer} from '.';
+import {KeyboardSpacer, TibetanText} from '.';
 import TimerMixin from 'react-timer-mixin';
 
 const underlayColor = 'rgba(0, 0, 0, 0)';
@@ -249,19 +249,19 @@ class DetailView extends Component {
           style.backgroundColor = '#e67e22';
         }
         highlightIndex++;
-        return <Text style={style} key={key}>{str}</Text>;
+        return <TibetanText style={style} key={key}>{str}</TibetanText>;
       }
-      return <Text key={key}>{str}</Text>;
+      return <TibetanText key={key}>{str}</TibetanText>;
     });
 
-    return <Text style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
+    return <TibetanText style={{fontSize, lineHeight: lineHeight * fontSize}} children={children} />;
   };
 
   renderRow = row => {
     return (
       <View ref={this.storePbRef('box-' + row.uti)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
-          <Text>{getUti(row)}</Text>
+          <TibetanText>{getUti(row)}</TibetanText>
           {this.renderText(row)}
         </View>
       </View>
@@ -600,7 +600,7 @@ class DetailView extends Component {
               <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
-              <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
+              <TibetanText numberOfLines={1} style={styles.navTitle}>{this.state.title}</TibetanText>
             </View>
           </View>
 

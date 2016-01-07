@@ -33,6 +33,7 @@
 		9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639631C0F827C003E7A90 /* iTunesArtwork.png */; };
 		9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */; };
 		9B739EF41C3E72F6005BB987 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B739EF31C3E72F6005BB987 /* jiangkangyur.kdb */; };
+		9B739EF61C3EC294005BB987 /* monlam1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B739EF51C3EC294005BB987 /* monlam1.ttf */; };
 		9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */; };
 		9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */; };
 		9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */; };
@@ -171,6 +172,7 @@
 		9B6639631C0F827C003E7A90 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = ../assets/images/iTunesArtwork.png; sourceTree = "<group>"; };
 		9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iTunesArtwork@2x.png"; path = "../assets/images/iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		9B739EF31C3E72F6005BB987 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
+		9B739EF51C3EC294005BB987 /* monlam1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam1.ttf; path = ../assets/fonts/monlam1.ttf; sourceTree = "<group>"; };
 		9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-add.png"; path = "../assets/images/icon-font-size-add.png"; sourceTree = "<group>"; };
 		9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-minus.png"; path = "../assets/images/icon-font-size-minus.png"; sourceTree = "<group>"; };
 		9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-line-height-add.png"; path = "../assets/images/icon-line-height-add.png"; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				9BB108A51BA99C8800087046 /* FAKIcon.h */,
 				9BB108A61BA99C8800087046 /* FAKIcon.m */,
 				9BB108A71BA99C8800087046 /* FAKIonIcons.h */,
+				9B739EF51C3EC294005BB987 /* monlam1.ttf */,
 				9BB108A81BA99C8800087046 /* FAKIonIcons.m */,
 				9BB108A91BA99C8800087046 /* FAKMaterial.h */,
 				9BB108AA1BA99C8800087046 /* FAKMaterial.m */,
@@ -668,6 +671,7 @@
 				9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */,
 				9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */,
 				9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */,
+				9B739EF61C3EC294005BB987 /* monlam1.ttf in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */,

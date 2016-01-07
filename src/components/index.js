@@ -8,6 +8,7 @@ import KeyboardSpacer from './KeyboardSpacer';
 import MasterView from './MasterView';
 import Menu from './Menu';
 import StatusBarSpacer from './StatusBarSpacer';
+import TibetanText from './TibetanText';
 
 export {
   AdvanceSearchView,
@@ -19,5 +20,6 @@ export {
   KeyboardSpacer,
   MasterView,
   Menu,
-  StatusBarSpacer
+  StatusBarSpacer,
+  TibetanText
 };
