@@ -22,6 +22,10 @@ export const styles = StyleSheet.create({
   navButton: {
     width: 40
   },
+  bottomButton: {
+    width: 40,
+    flex: 1
+  },
   upButton: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     position: 'absolute',
@@ -31,6 +35,7 @@ export const styles = StyleSheet.create({
     height: 40
   },
   navTitle: {
+    paddingRight: 16,
     color: '#ffffff',
     flex: 1,
     textAlign: 'center'
@@ -39,12 +44,16 @@ export const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingRight: 14
   },
-  boxInput: {
+  bottomBar: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
     position: 'absolute',
     left: 0,
     right: 0
+  },
+  rows: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   input: {
     backgroundColor: '#ffffff',
@@ -52,7 +61,7 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     color: '#555555',
-    flex: 1,
+    flex: 2,
     fontSize: 18,
     height: 50,
     padding: 7
