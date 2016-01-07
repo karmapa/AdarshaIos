@@ -1,6 +1,6 @@
 import React, {Component, ScrollView, View, Text, PropTypes} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import {AdvanceSearchView, CategoryView, KeyboardSearchView} from '../components';
+import {AdvanceSearchView, CategoryView, KeyboardSearchView, Copyright} from '../components';
 import {TabBarIOS, Spinner, Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setSelectedTab} from '../modules/main';
@@ -66,6 +66,10 @@ class MasterView extends Component {
           <TabBarIOS.Item title={'Advance Search'} iconName={'ion|social-buffer'} iconSize={32}
             selected={'advanceSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advanceSearch')}>
             {this.renderAdvance()}
+          </TabBarIOS.Item>
+          <TabBarIOS.Item title={'Copyright'} iconName={'ion|information-circled'} iconSize={24}
+            selected={'copyright' === selectedTab} onPress={this.onTabPress.bind(this, 'copyright')}>
+            <Copyright />
           </TabBarIOS.Item>
         </TabBarIOS>
       </View>
