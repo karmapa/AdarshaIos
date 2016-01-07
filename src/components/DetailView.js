@@ -14,6 +14,7 @@ import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {KeyboardSpacer} from '.';
+import TimerMixin from 'react-timer-mixin';
 
 const underlayColor = 'rgba(0, 0, 0, 0)';
 const fontColor = '#ffffff';
@@ -58,6 +59,10 @@ class DetailView extends Component {
 
   constructor(props) {
     super(props);
+    this._lastSearchKeyword = '';
+    this._visibleUtiRow = null;
+    this._rowRefs = {};
+    this._pbRefs = {};
   }
 
   state = {
@@ -65,7 +70,8 @@ class DetailView extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2
     }),
     isLoading: false,
-    title: ''
+    title: '',
+    highlightIndex: 0
   }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -73,6 +79,31 @@ class DetailView extends Component {
   componentWillMount() {
     LayoutAnimation.spring();
   }
+
+  componentDidUpdate() {
+    /*TimerMixin.requestAnimationFrame(() => {
+      this.getFocusElementOffset();
+    });*/
+  }
+
+  getFocusElementOffset = () => {
+    let uti = _.get(this._visibleUtiRow, 'uti')
+    let ref = this.getHighlightRef(uti, this.state.highlightIndex);
+    let element = this._rowRefs[ref];
+    let pbRef = this.getPbRef(uti);
+    let container = this._pbRefs[pbRef];
+
+    if (container && element) {
+        element.measureLayout(React.findNodeHandle(container), (x, y, width, height) => {
+          console.log('here', x, y, width, height);
+        });
+    }
+  };
+
+  clearCache = () => {
+    this._rowRefs = {};
+    this._pbRefs = {};
+  };
 
   componentWillReceiveProps(nextProps) {
     if (! _.isEqual(_.pick(this.props, SETTINGS_PROPS), _.pick(nextProps, SETTINGS_PROPS))) {
@@ -84,8 +115,17 @@ class DetailView extends Component {
   }
 
   highlightAsync = async searchKeyword => {
-    let utis = this.getAllUtis();
-    this._rows = await fetch({uti: utis, q: cleanKeyword(searchKeyword)});
+
+    let utis = this.getVisibleUtis();
+    this._rows = await fetch({uti: utis, q: cleanKeyword(searchKeyword)}) || [];
+    let uti = this.getVisibleUti() || _.get(_.first(this._rows), 'uti');
+
+    if (uti) {
+      this._visibleUtiRow = _.find(this._rows, {uti});
+      this.setState({
+        highlightIndex: 0
+      });
+    }
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
@@ -112,6 +152,7 @@ class DetailView extends Component {
 
     this.setLoading(true);
     this._rows = rows;
+
     promises.push(this.loadNext());
 
     if (this.props.fetchTitle) {
@@ -160,6 +201,7 @@ class DetailView extends Component {
   };
 
   goBack = () => {
+    this.closeSearchInput();
     this.props.navigator.pop();
   };
 
@@ -167,10 +209,30 @@ class DetailView extends Component {
     this.props.navigator.popToTop();
   };
 
+  getHighlightRef = (uti, highlightIndex) => {
+    return uti + ':' + highlightIndex;
+  }
+
+  storeTextRef = ref => {
+    return data => this._rowRefs[ref] = data;
+  }
+
+  storePbRef = ref => {
+    return data => this._pbRefs[ref] = data;
+  }
+
+  getPbRef = uti => 'box-' + uti;
+
+  handleTextLayout = event => {
+    console.log('handleTextLayout', event.nativeEvent.layout);
+  };
+
   renderText = row => {
 
     let {fontSize, lineHeight, wylieOn} = this.props;
     let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
+    let highlightIndex = 0;
+    let visibleUti = _.get(this._visibleUtiRow, 'uti');
 
     let children = highlight(text, row.hits, (key, str, style) => {
 
@@ -178,6 +240,15 @@ class DetailView extends Component {
         str = wylie.toWylie(str);
       }
       if (style) {
+
+        // default
+        style = {backgroundColor: '#f1c40f'};
+
+        if ((row.uti === visibleUti) && (highlightIndex === this.state.highlightIndex)) {
+          // target
+          style.backgroundColor = '#e67e22';
+        }
+        highlightIndex++;
         return <Text style={style} key={key}>{str}</Text>;
       }
       return <Text key={key}>{str}</Text>;
@@ -188,7 +259,7 @@ class DetailView extends Component {
 
   renderRow = row => {
     return (
-      <View style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
+      <View ref={this.storePbRef('box-' + row.uti)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
           <Text>{getUti(row)}</Text>
           {this.renderText(row)}
@@ -247,8 +318,9 @@ class DetailView extends Component {
     LayoutAnimation.spring();
     this.props.setToolbarStatus(toolbarOn);
 
-    if (false === toolbarOn) {
+    if ((false === toolbarOn) && this.refs.searchInput) {
       this.refs.searchInput.blur();
+      this.props.setSearchBarStatus(false);
     }
   };
 
@@ -260,7 +332,7 @@ class DetailView extends Component {
 
     let listView = _.get(this.refs[LIST_VIEW], 'refs.listview.refs.listview');
 
-    return Object.keys(listView._visibleRows.s1)
+    return Object.keys(_.get(listView, '_visibleRows.s1', {}))
       .map(index => this._rows[index])
       .filter(row => undefined !== row)
       .map(row => getUti(row));
@@ -268,6 +340,10 @@ class DetailView extends Component {
 
   getVisibleUti = () => {
     let utis = this.getVisibleUtis();
+
+    if (_.isNull(this.direction)) {
+      return _.first(utis);
+    }
     return 'up' === this.direction ? _.first(utis) : _.last(utis);
   };
 
@@ -279,19 +355,30 @@ class DetailView extends Component {
 
   handleScroll = event => {
     this.isScrolling = true;
-    if (this.props.toolbarOn && this.props.firstScroll) {
+
+    if (this.props.toolbarOn && this.props.hasScrolled && (! this.props.searchBarOn)) {
       this.setToolbarStatus(false);
     }
+
+    if (this.props.searchBarOn && this.refs.searchInput) {
+      this.refs.searchInput.blur();
+    }
+
     let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
     this.direction = offsetY > this.lastOffsetY ? 'down' : 'up';
 
     this.updateTitle();
     this.lastOffsetY = offsetY;
-    this.props.setFirstScroll(true);
+    this.props.setHasScrolled(true);
   };
 
   handlePress = () => {
-    this.setToolbarStatus(! this.props.toolbarOn);
+    if (this.props.searchBarOn && this.refs.searchInput) {
+      this.refs.searchInput.blur();
+    }
+    else {
+      this.setToolbarStatus(! this.props.toolbarOn);
+    }
   };
 
   handleTouchStart = () => {
@@ -331,6 +418,11 @@ class DetailView extends Component {
       let data = await toc({uti});
       let vpos = _.get(data, 'breadcrumb[3].vpos');
 
+      if (_.isUndefined(vpos)) {
+        this.setLoading(false);
+        return;
+      }
+
       rows = await fetch({
         vpos,
         q: cleanKeyword(this.props.searchKeyword)
@@ -347,6 +439,16 @@ class DetailView extends Component {
     }
   };
 
+  showSearchInput = () => {
+    if (this._lastSearchKeyword) {
+      this.props.setSearchKeyword(this._lastSearchKeyword);
+    }
+    if (this.props.searchKeyword) {
+      this.highlightAsync(this.props.searchKeyword);
+    }
+    this.props.setSearchBarStatus(true);
+  };
+
   renderBackgroundImage = () => {
     switch (this.props.backgroundIndex) {
       case 0:
@@ -356,6 +458,101 @@ class DetailView extends Component {
       case 2:
         return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture2')} />
     }
+  };
+
+  closeSearchInput = () => {
+    this.clearCache();
+    this._lastSearchKeyword = this.props.searchKeyword;
+    this.props.setSearchKeyword('');
+    this.props.setSearchBarStatus(false);
+  }
+
+  goPreviousKeyword = () => {
+
+    if (0 === this.state.highlightIndex) {
+      console.log('prev limit');
+      return;
+    }
+
+    if (this.state.highlightIndex > 0) {
+      this.setState({
+        highlightIndex: this.state.highlightIndex - 1
+      });
+    }
+  };
+
+  goNextKeyword = () => {
+
+    let lastIndex = _.get(this._visibleUtiRow, 'hits', []).length - 1;
+
+    if (lastIndex === this.state.highlightIndex) {
+      console.log('next limit');
+      return;
+    }
+
+    if (this.state.highlightIndex < lastIndex) {
+      this.setState({
+        highlightIndex: this.state.highlightIndex + 1
+      });
+    }
+  };
+
+  renderBottomBarContent = () => {
+
+    if (this.props.searchBarOn) {
+
+      let inputProps = {
+        ref: 'searchInput',
+        autoCapitalize: 'none',
+        autoFocus: true,
+        autoCorrect: false,
+        onChangeText: this.onInputChange,
+        onSubmitEditing: this.handleSubmit,
+        placeholder: 'Search in sutra',
+        placeholderTextColor: 'rgba(0, 0, 0, 0.6)',
+        style: styles.input,
+        value: this.props.searchKeyword
+      };
+
+      return (
+        <View style={styles.rows}>
+          <TextInput {...inputProps} />
+          <View style={[styles.rows, {flex: 2}]}>
+            <TouchableHighlight onPress={this.goPreviousKeyword} style={styles.bottomButton} underlayColor={underlayColor}>
+              <Icon name="ion|arrow-up-b" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={this.goNextKeyword} style={styles.bottomButton} underlayColor={underlayColor}>
+              <Icon name="ion|arrow-down-b" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={this.closeSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
+              <Icon name="ion|close-round" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+            </TouchableHighlight>
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.rows}>
+        <TouchableHighlight onPress={this.showSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="fontawesome|search" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="ion|document-text" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.goHome} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.openSideMenu} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        </TouchableHighlight>
+      </View>
+    );
+  };
+
+  getUpButtonBottom = () => {
+    // height with search input and without search input are different
+    return this.props.searchBarOn ? 77 : 50;
   };
 
   render() {
@@ -382,31 +579,20 @@ class DetailView extends Component {
         };
         props.onTouchStart = this.handleTouchStart;
         props.onTouchEnd = this.handleTouchEnd;
+        props.ref = scrollView => this._scrollView = scrollView;
 
         return <ScrollView {...props} />
       },
       loadData: this.loadPrev
     };
 
-    let inputProps = {
-      ref: 'searchInput',
-      autoCapitalize: 'none',
-      autoCorrect: false,
-      onChangeText: this.onInputChange,
-      onSubmitEditing: this.handleSubmit,
-      placeholder: 'Search in sutra',
-      placeholderTextColor: 'rgba(0, 0, 0, 0.6)',
-      style: styles.input,
-      value: this.props.searchKeyword
-    };
-
     return (
-      <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
+      <View ref="father" style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
         <View style={globalStyles.backgroundImageContainer}>
           {this.renderBackgroundImage()}
         </View>
 
-        <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
+        <View ref="child" style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
 
           <View style={styles.container}>
             <RefreshableListView {...listViewProps} />
@@ -414,23 +600,15 @@ class DetailView extends Component {
               <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
-              <TouchableHighlight style={styles.titleButton} onPress={this.showBiography} underlayColor={underlayColor}>
-                <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={this.goHome} style={styles.navButton} underlayColor={underlayColor}>
-                <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-              </TouchableHighlight>
-              <TouchableHighlight onPress={this.openSideMenu} style={styles.navButton} underlayColor={underlayColor}>
-                <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-              </TouchableHighlight>
+              <Text numberOfLines={1} style={styles.navTitle}>{this.state.title}</Text>
             </View>
           </View>
 
-          <View style={[styles.boxInput, {bottom: toolbarOn ? 0 : -70}]}>
-            <TextInput {...inputProps} />
+          <View style={[styles.bottomBar, {bottom: toolbarOn ? 0 : -70}]}>
+            {this.renderBottomBarContent()}
           </View>
 
-          <TouchableHighlight onPress={this.goTop} style={[styles.upButton, {bottom: toolbarOn ? 77 : -147}]} underlayColor={underlayColor}>
+          <TouchableHighlight onPress={this.goTop} style={[styles.upButton, {bottom: toolbarOn ? this.getUpButtonBottom() : -147}]} underlayColor={underlayColor}>
             <Icon name="fontawesome|arrow-up" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
           </TouchableHighlight>
         </View>
