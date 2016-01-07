@@ -6,7 +6,7 @@ import {getHighlightStyle} from '.';
 export default function highlight(text, hits = [], fn = () => {}) {
 
   if (_.isEmpty(hits)) {
-    return [<Text key={0}>{text}</Text>];
+    return [fn(0, text)];
   }
 
   return hits.reduce((data, hit, index, arr) => {
