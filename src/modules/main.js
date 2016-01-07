@@ -211,7 +211,7 @@ export function decreaseFontSize() {
 
 export function increaseLineHeight() {
   return async (dispatch, getState) => {
-    let newLineHeight = getState().main.get('lineHeight') + 0.1;
+    let newLineHeight = parseFloat((getState().main.get('lineHeight') + 0.1).toFixed(1));
     if (newLineHeight < 30) {
       await setReaderSettings({lineHeight: newLineHeight});
       dispatch(setLineHeight(newLineHeight));
@@ -221,7 +221,7 @@ export function increaseLineHeight() {
 
 export function decreaseLineHeight() {
   return async (dispatch, getState) => {
-    let newLineHeight = getState().main.get('lineHeight') - 0.1;
+    let newLineHeight = parseFloat((getState().main.get('lineHeight') - 0.1).toFixed(1));
     if (newLineHeight > 0) {
       await setReaderSettings({lineHeight: newLineHeight});
       dispatch(setLineHeight(newLineHeight));
