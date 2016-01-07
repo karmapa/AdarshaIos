@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 14
   },
   navTitle: {
+    paddingRight: 16,
     color: '#ffffff',
     flex: 1,
     textAlign: 'center'
