@@ -3,13 +3,13 @@ import _ from 'lodash';
 import {fetch, findBiographyBySutraId} from '../helpers';
 
 const SET_BIOGRAPHY = 'SET_BIOGRAPHY';
-const SET_BIOGRAPHY_FIRST_SCROLL = 'SET_BIOGRAPHY_FIRST_SCROLL';
+const SET_BIOGRAPHY_HAS_SCROLLED = 'SET_BIOGRAPHY_HAS_SCROLLED';
 const SET_BIOGRAPHY_LOADING = 'SET_BIOGRAPHY_LOADING';
 const SET_BIOGRAPHY_TOOLBAR_STATUS = 'SET_BIOGRAPHY_TOOLBAR_STATUS';
 
 const initialState = Immutable.Map({
   biography: null,
-  firstScroll: false,
+  hasScrolled: false,
   isLoading: false,
   toolbarOn: true
 });
@@ -18,7 +18,7 @@ const actionsMap = {
 
   [SET_BIOGRAPHY]: (state, action) => state.set('biography', action.biography),
 
-  [SET_BIOGRAPHY_FIRST_SCROLL]: (state, action) => state.set('firstScroll', action.scrolled),
+  [SET_BIOGRAPHY_HAS_SCROLLED]: (state, action) => state.set('hasScrolled', action.hasScrolled),
 
   [SET_BIOGRAPHY_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
@@ -70,10 +70,10 @@ export function setBiographyToolbarStatus(toolbarOn) {
   };
 }
 
-export function setBiographyFirstScroll(scrolled) {
+export function setBiographyHasScrolled(hasScrolled) {
   return {
-    type: SET_BIOGRAPHY_FIRST_SCROLL,
-    scrolled
+    type: SET_BIOGRAPHY_HAS_SCROLLED,
+    hasScrolled
   }
 }
 

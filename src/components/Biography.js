@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {fetch} from '../helpers';
-import {setBiographyFirstScroll, loadBiographyByUti, fields, setBiographyToolbarStatus} from '../modules/biography';
+import {setBiographyHasScrolled, loadBiographyByUti, fields, setBiographyToolbarStatus} from '../modules/biography';
 import {renderSpinner} from '../helpers';
 import {styles} from './Biography.style';
 import {values, styles as globalStyles} from '../styles/global.style';
@@ -14,20 +14,20 @@ const underlayColor = 'rgba(0, 0, 0, 0)';
 
 @connect(state => ({
   biography: state.biography.get('biography'),
-  firstScroll: state.biography.get('firstScroll'),
+  hasScrolled: state.biography.get('hasScrolled'),
   isLoading: state.biography.get('isLoading'),
   toolbarOn: state.biography.get('toolbarOn')
 
-}), {loadBiographyByUti, setBiographyToolbarStatus, setBiographyFirstScroll})
+}), {loadBiographyByUti, setBiographyToolbarStatus, setBiographyHasScrolled})
 class Biography extends Component {
 
   static PropTypes = {
     biography: PropTypes.object.isRequired,
-    firstScroll: PropTypes.bool.isRequired,
+    hasScrolled: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     loadBiographyByUti: PropTypes.func.isRequired,
     navigator: PropTypes.array.isRequired,
-    setBiographyFirstScroll: PropTypes.func.isRequired,
+    setBiographyHasScrolled: PropTypes.func.isRequired,
     setBiographyToolbarStatus: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
@@ -48,7 +48,7 @@ class Biography extends Component {
   }
 
   componentWillUnmount() {
-    this.props.setBiographyFirstScroll(false);
+    this.props.setBiographyHasScrolled(false);
   }
 
   goBack = () => {
@@ -62,10 +62,10 @@ class Biography extends Component {
 
   handleScroll = event => {
     this.isScrolling = true;
-    if (this.props.toolbarOn && this.props.firstScroll) {
+    if (this.props.toolbarOn && this.props.hasScrolled) {
       this.setToolbarStatus(false);
     }
-    this.props.setBiographyFirstScroll(true);
+    this.props.setBiographyHasScrolled(true);
   };
 
   handlePress = () => {

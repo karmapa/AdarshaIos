@@ -8,7 +8,7 @@ import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
-import {setSearchKeyword, setFirstScroll, setToolbarStatus} from '../modules/detailView';
+import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
@@ -27,20 +27,21 @@ const LIST_VIEW = 'listView';
 
 @connect(state => ({
   backgroundIndex: state.main.get('backgroundIndex'),
-  firstScroll: state.detailView.get('firstScroll'),
+  hasScrolled: state.detailView.get('hasScrolled'),
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
   searchKeyword: state.detailView.get('searchKeyword'),
   toolbarOn: state.detailView.get('toolbarOn'),
   wylieOn: state.main.get('wylieOn'),
-  keyword: state.keyboardSearch.get('keyword')
-}), {setFirstScroll, setToolbarStatus, setSideMenuStatus, setSearchKeyword})
+  keyword: state.keyboardSearch.get('keyword'),
+  searchBarOn: state.detailView.get('searchBarOn')
+}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword, setSearchBarStatus})
 class DetailView extends Component {
 
   static PropTypes = {
     backgroundIndex: PropTypes.number.isRequired,
     fetchTitle: PropTypes.bool,
-    firstScroll: PropTypes.bool.isRequired,
+    hasScrolled: PropTypes.bool.isRequired,
     fontSize: PropTypes.number.isRequired,
     lineHeight: PropTypes.number.isRequired,
     navigator: PropTypes.array.isRequired,
@@ -48,7 +49,7 @@ class DetailView extends Component {
     rows: PropTypes.array.isRequired,
     keyword: PropTypes.string.isRequired,
     searchKeyword: PropTypes.string.isRequired,
-    setFirstScroll: PropTypes.func.isRequired,
+    setHasScrolled: PropTypes.func.isRequired,
     setSearchKeyword: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
