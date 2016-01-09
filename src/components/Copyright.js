@@ -14,7 +14,7 @@ class Biography extends Component {
           or other electronic or mechanical methods, without the prior written permission of the publisher,
          except in the case of brief quotations embodied in critical reviews and certain other noncommercial
          uses permitted by copyright law. For permission requests, write to the publisher,
-         addressed “Attention: Permissions Coordinator,” at the address belowཨཱཪྱ. </TibetanText>
+         addressed “Attention: Permissions Coordinator,” at the address belowཨཱཪྱ á、è、î、õ 和 ü.aeiou </TibetanText>
       </View>
     );
   }
