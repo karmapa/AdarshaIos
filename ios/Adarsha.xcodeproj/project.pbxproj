@@ -45,6 +45,18 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
+		9BBB88FB1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB88FA1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf */; };
+		9BBB89101C3F67520034FC80 /* monlam_sans_serifbold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89071C3F67510034FC80 /* monlam_sans_serifbold.ttf */; };
+		9BBB89111C3F67520034FC80 /* monlam_uni_dutsa1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89081C3F67510034FC80 /* monlam_uni_dutsa1.ttf */; };
+		9BBB89121C3F67520034FC80 /* monlam_uni_dutsa2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89091C3F67510034FC80 /* monlam_uni_dutsa2.ttf */; };
+		9BBB89131C3F67520034FC80 /* monlam_uni_ouchan3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890A1C3F67510034FC80 /* monlam_uni_ouchan3.ttf */; };
+		9BBB89141C3F67520034FC80 /* monlam_uni_ouchan4.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890B1C3F67510034FC80 /* monlam_uni_ouchan4.ttf */; };
+		9BBB89151C3F67520034FC80 /* monlam_uni_ouchan5.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890C1C3F67510034FC80 /* monlam_uni_ouchan5.ttf */; };
+		9BBB89161C3F67520034FC80 /* monlam_uni_paytsik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890D1C3F67510034FC80 /* monlam_uni_paytsik.ttf */; };
+		9BBB89171C3F67520034FC80 /* monlam_uni_tikrang.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890E1C3F67510034FC80 /* monlam_uni_tikrang.ttf */; };
+		9BBB89181C3F67520034FC80 /* monlam_uni_tiktong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890F1C3F67510034FC80 /* monlam_uni_tiktong.ttf */; };
+		9BBB891A1C3F697A0034FC80 /* Kokonor.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89191C3F69790034FC80 /* Kokonor.ttf */; };
+		9BBB891C1C3F6E2F0034FC80 /* Kailasa.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB891B1C3F6E2F0034FC80 /* Kailasa.ttc */; };
 		9BD6EDB61C33D4C90037E33F /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6EDB31C33D4C90037E33F /* kfs_ios.m */; };
 		9BD6EDB71C33D4C90037E33F /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6EDB51C33D4C90037E33F /* kfs_rct.m */; };
 		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
@@ -198,6 +210,18 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9BBB88FA1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_ouchan2.ttf; path = ../assets/fonts/monlam_uni_ouchan2.ttf; sourceTree = "<group>"; };
+		9BBB89071C3F67510034FC80 /* monlam_sans_serifbold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_sans_serifbold.ttf; path = ../assets/fonts/monlam_sans_serifbold.ttf; sourceTree = "<group>"; };
+		9BBB89081C3F67510034FC80 /* monlam_uni_dutsa1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_dutsa1.ttf; path = ../assets/fonts/monlam_uni_dutsa1.ttf; sourceTree = "<group>"; };
+		9BBB89091C3F67510034FC80 /* monlam_uni_dutsa2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_dutsa2.ttf; path = ../assets/fonts/monlam_uni_dutsa2.ttf; sourceTree = "<group>"; };
+		9BBB890A1C3F67510034FC80 /* monlam_uni_ouchan3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_ouchan3.ttf; path = ../assets/fonts/monlam_uni_ouchan3.ttf; sourceTree = "<group>"; };
+		9BBB890B1C3F67510034FC80 /* monlam_uni_ouchan4.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_ouchan4.ttf; path = ../assets/fonts/monlam_uni_ouchan4.ttf; sourceTree = "<group>"; };
+		9BBB890C1C3F67510034FC80 /* monlam_uni_ouchan5.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_ouchan5.ttf; path = ../assets/fonts/monlam_uni_ouchan5.ttf; sourceTree = "<group>"; };
+		9BBB890D1C3F67510034FC80 /* monlam_uni_paytsik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_paytsik.ttf; path = ../assets/fonts/monlam_uni_paytsik.ttf; sourceTree = "<group>"; };
+		9BBB890E1C3F67510034FC80 /* monlam_uni_tikrang.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_tikrang.ttf; path = ../assets/fonts/monlam_uni_tikrang.ttf; sourceTree = "<group>"; };
+		9BBB890F1C3F67510034FC80 /* monlam_uni_tiktong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_tiktong.ttf; path = ../assets/fonts/monlam_uni_tiktong.ttf; sourceTree = "<group>"; };
+		9BBB89191C3F69790034FC80 /* Kokonor.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kokonor.ttf; path = ../assets/fonts/Kokonor.ttf; sourceTree = "<group>"; };
+		9BBB891B1C3F6E2F0034FC80 /* Kailasa.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kailasa.ttc; path = ../assets/fonts/Kailasa.ttc; sourceTree = "<group>"; };
 		9BD6EDB21C33D4C90037E33F /* kfs_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kfs_ios.h; path = "../node_modules/ksana-react-native/kfs_ios.h"; sourceTree = "<group>"; };
 		9BD6EDB31C33D4C90037E33F /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kfs_ios.m; path = "../node_modules/ksana-react-native/kfs_ios.m"; sourceTree = "<group>"; };
 		9BD6EDB41C33D4C90037E33F /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kfs_rct.h; path = "../node_modules/ksana-react-native/kfs_rct.h"; sourceTree = "<group>"; };
@@ -402,11 +426,23 @@
 				9B739EF51C3EC294005BB987 /* monlam1.ttf */,
 				9BB108A81BA99C8800087046 /* FAKIonIcons.m */,
 				9BB108A91BA99C8800087046 /* FAKMaterial.h */,
+				9BBB88FA1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf */,
 				9BB108AA1BA99C8800087046 /* FAKMaterial.m */,
 				9BB108AB1BA99C8800087046 /* FAKZocial.h */,
 				9BB108AC1BA99C8800087046 /* FAKZocial.m */,
 				9BB108AD1BA99C8800087046 /* FontAwesome.otf */,
 				9BB108AE1BA99C8800087046 /* FontAwesomeKit.h */,
+				9BBB89071C3F67510034FC80 /* monlam_sans_serifbold.ttf */,
+				9BBB89191C3F69790034FC80 /* Kokonor.ttf */,
+				9BBB89081C3F67510034FC80 /* monlam_uni_dutsa1.ttf */,
+				9BBB89091C3F67510034FC80 /* monlam_uni_dutsa2.ttf */,
+				9BBB891B1C3F6E2F0034FC80 /* Kailasa.ttc */,
+				9BBB890A1C3F67510034FC80 /* monlam_uni_ouchan3.ttf */,
+				9BBB890B1C3F67510034FC80 /* monlam_uni_ouchan4.ttf */,
+				9BBB890C1C3F67510034FC80 /* monlam_uni_ouchan5.ttf */,
+				9BBB890D1C3F67510034FC80 /* monlam_uni_paytsik.ttf */,
+				9BBB890E1C3F67510034FC80 /* monlam_uni_tikrang.ttf */,
+				9BBB890F1C3F67510034FC80 /* monlam_uni_tiktong.ttf */,
 				9BB108AF1BA99C8800087046 /* foundation-icons.ttf */,
 				9BB108B01BA99C8800087046 /* ionicons.ttf */,
 				9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */,
@@ -653,20 +689,30 @@
 			files = (
 				9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */,
 				9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */,
+				9BBB89181C3F67520034FC80 /* monlam_uni_tiktong.ttf in Resources */,
+				9BBB89131C3F67520034FC80 /* monlam_uni_ouchan3.ttf in Resources */,
 				9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */,
 				9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */,
 				9BFCF4991C22DCD50036BD13 /* bg-scripture.jpg in Resources */,
 				9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */,
 				9B66396B1C0F827C003E7A90 /* Icon@2x.png in Resources */,
+				9BBB89141C3F67520034FC80 /* monlam_uni_ouchan4.ttf in Resources */,
+				9BBB89171C3F67520034FC80 /* monlam_uni_tikrang.ttf in Resources */,
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
 				9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */,
 				9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */,
 				9B739EF41C3E72F6005BB987 /* jiangkangyur.kdb in Resources */,
 				9BFD99341C2837DF00E54EAC /* icon-launch-screen2.png in Resources */,
 				9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */,
+				9BBB89111C3F67520034FC80 /* monlam_uni_dutsa1.ttf in Resources */,
 				9BFD99321C28376B00E54EAC /* icon-launch-screen.png in Resources */,
+				9BBB89161C3F67520034FC80 /* monlam_uni_paytsik.ttf in Resources */,
+				9BBB89151C3F67520034FC80 /* monlam_uni_ouchan5.ttf in Resources */,
+				9BBB88FB1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf in Resources */,
 				9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */,
 				9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */,
+				9BBB891A1C3F697A0034FC80 /* Kokonor.ttf in Resources */,
+				9BBB89121C3F67520034FC80 /* monlam_uni_dutsa2.ttf in Resources */,
 				9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */,
 				9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */,
 				9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */,
@@ -675,9 +721,11 @@
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */,
+				9BBB891C1C3F6E2F0034FC80 /* Kailasa.ttc in Resources */,
 				9B6639681C0F827C003E7A90 /* Icon-Small-50.png in Resources */,
 				9B66396A1C0F827C003E7A90 /* Icon.png in Resources */,
 				9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */,
+				9BBB89101C3F67520034FC80 /* monlam_sans_serifbold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
