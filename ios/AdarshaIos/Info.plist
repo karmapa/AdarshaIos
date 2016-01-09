@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>monlam1.ttf</string>
-	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFiles</key>
@@ -41,6 +37,22 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>monlam1.ttf</string>
+		<string>monlam_uni_ouchan2.ttf</string>
+		<string>monlam_sans_serifbold.ttf</string>
+		<string>monlam_uni_dutsa1.ttf</string>
+		<string>monlam_uni_dutsa2.ttf</string>
+		<string>monlam_uni_ouchan3.ttf</string>
+		<string>monlam_uni_ouchan4.ttf</string>
+		<string>monlam_uni_ouchan5.ttf</string>
+		<string>monlam_uni_paytsik.ttf</string>
+		<string>monlam_uni_tikrang.ttf</string>
+		<string>monlam_uni_tiktong.ttf</string>
+		<string>Kokonor.ttf</string>
+		<string>Kailasa.ttc</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
