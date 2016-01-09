@@ -1,7 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
-import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight} from 'react-native';
+import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight, Dimensions} from 'react-native';
 import {styles} from './KeyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
@@ -17,6 +17,7 @@ const TRIM_POS = 20;
   keyword: state.keyboardSearch.get('keyword'),
   lastKeyword: state.keyboardSearch.get('excerptData').keyword,
   isLoading: state.keyboardSearch.get('isLoading'),
+  isLoadingMore: state.keyboardSearch.get('isLoadingMore'),
   utiSets: state.keyboardSearch.get('excerptData').utiSets
 }), {search, setKeyword, loadMore})
 class KeyboardSearchView extends Component {
@@ -28,6 +29,7 @@ class KeyboardSearchView extends Component {
     lastKeyword: PropTypes.string.isRequired,
     loadMore: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    isLoadingMore: PropTypes.bool.isRequired,
     navigator: PropTypes.array.isRequired,
     search: PropTypes.func.isRequired,
     setKeyword: PropTypes.func.isRequired,
@@ -49,8 +51,15 @@ class KeyboardSearchView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let {keyword, lastKeyword, excerpts} = nextProps;
+
+    let {keyword, lastKeyword, excerpts, isLoading, isLoadingMore} = nextProps;
+
+    if (isLoading || isLoadingMore) {
+      return;
+    }
+
     if (cleanKeyword(keyword) === lastKeyword) {
+
       if (nextProps.isAppend) {
         this.appendRows(excerpts);
       }
@@ -141,6 +150,12 @@ class KeyboardSearchView extends Component {
     return [text, hits];
   }
 
+  renderFooter = () => {
+    if (this.props.isLoadingMore) {
+      return renderSpinner();
+    }
+  };
+
   renderRow = row => {
 
     return (
@@ -175,11 +190,12 @@ class KeyboardSearchView extends Component {
     };
 
     let listViewProps = {
-      pageSize: 1,
-      initialListSize: 3,
-      scrollRenderAheadDistance: 1000,
+      pageSize: 7,
+      initialListSize: 7,
+      onRenderAheadDistance: Dimensions.get('window').height * 3,
       dataSource: this.state.dataSource,
       renderRow: this.renderRow,
+      renderFooter: this.renderFooter,
       onEndReached: this.onEndReached
     };
 

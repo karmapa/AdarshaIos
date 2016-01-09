@@ -5,9 +5,11 @@ import wylie from 'tibetan/wylie';
 
 const SET_EXCERPT_DATA = 'SET_EXCERPT_DATA';
 const SET_KEYBOARD_SEARCH_LOADING = 'SET_KEYBOARD_SEARCH_LOADING';
+const SET_KEYBOARD_SEARCH_LOADING_MORE = 'SET_KEYBOARD_SEARCH_LOADING_MORE';
 const SET_KEYWORD = '';
 const SET_SEARCH_ERROR = 'SET_SEARCH_ERROR';
-const SET_LOADING_MORE = 'SET_LOADING_MORE';
+
+const CHUNK_SIZE = 14;
 
 const initialState = Immutable.Map({
   excerptData: {
@@ -27,6 +29,8 @@ const actionsMap = {
 
   [SET_KEYBOARD_SEARCH_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
+  [SET_KEYBOARD_SEARCH_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
+
   [SET_KEYWORD]: (state, action) => state.set('keyword', action.keyword),
 
   [SET_SEARCH_ERROR]: (state, action) => state.set('searchError', action.err)
@@ -38,28 +42,31 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-let isLoadingMore = false;
-
 export function loadMore(keyword, utiSets) {
 
   return async (dispatch, getState) => {
+
+    const state = getState().keyboardSearch;
+    const isLoadingMore = state.get('isLoadingMore');
 
     if (isLoadingMore) {
       return;
     }
 
-    isLoadingMore = true;
+    dispatch(setKeyboardSearchLoadingMore(true));
 
-    let state = getState();
-    let excerptData = state.keyboardSearch.get('excerptData');
     let utis = utiSets.shift();
 
-    excerptData.utiSets = utiSets;
-    excerptData.rows = await fetch({uti: utis, q: keyword});
-    excerptData.isAppend = true;
+    const rows = await fetch({uti: utis, q: keyword});
 
-    dispatch(setExcerptData(excerptData));
-    isLoadingMore = false;
+    dispatch(setExcerptData({
+      rows,
+      isAppend: true,
+      keyword: state.get('excerptData').keyword,
+      utiSets
+    }));
+
+    dispatch(setKeyboardSearchLoadingMore(false));
   };
 }
 
@@ -98,6 +105,8 @@ export function search(keyword) {
       field: 'head'
     });
 
+    console.log('utiRows.length', utiRows.length);
+
     if (_.isEmpty(utiRows)) {
       dispatch(setExcerptData({
         keyword,
@@ -110,7 +119,7 @@ export function search(keyword) {
     }
 
     let utis = _.pluck(utiRows, 'uti');
-    let utiSets = _.chunk(utis, 24);
+    let utiSets = _.chunk(utis, CHUNK_SIZE);
     let currentUtis = utiSets.shift();
 
     let rows = await fetch({
@@ -140,6 +149,13 @@ export function setKeyboardSearchLoading(isLoading) {
   return {
     type: SET_KEYBOARD_SEARCH_LOADING,
     isLoading
+  };
+}
+
+export function setKeyboardSearchLoadingMore(isLoadingMore) {
+  return {
+    type: SET_KEYBOARD_SEARCH_LOADING_MORE,
+    isLoadingMore
   };
 }
 
