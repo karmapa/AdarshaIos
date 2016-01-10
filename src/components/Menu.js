@@ -33,7 +33,7 @@ class Menu extends Component {
     backgroundIndex: PropTypes.number.isRequired,
     toggleWylieStatus: PropTypes.func.isRequired,
     wylieOn: PropTypes.bool.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);

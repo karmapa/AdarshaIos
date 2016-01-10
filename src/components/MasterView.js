@@ -40,7 +40,7 @@ class MasterView extends Component {
     return (
       <AdvanceSearchView navigator={navigator} />
     );
-  }
+  };
 
   render() {
 
@@ -75,6 +75,6 @@ class MasterView extends Component {
       </View>
     );
   }
-}
+};
 
 export default MasterView;

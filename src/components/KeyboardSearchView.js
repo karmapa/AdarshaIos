@@ -74,19 +74,19 @@ class KeyboardSearchView extends Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.rows)
     });
-  }
+  };
 
   appendRows = rows => {
     this.rows = this.rows.concat(rows);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.rows)
     });
-  }
+  };
 
   onSearchInputChange = keyword => {
     this.props.setKeyword(keyword);
     this.search(keyword);
-  }
+  };
 
   search = _.debounce(keyword => {
     keyword = cleanKeyword(keyword);
@@ -113,7 +113,7 @@ class KeyboardSearchView extends Component {
       fetchTitle: true,
       rows: [row]
     });
-  }
+  };
 
   renderText = row => {
 
@@ -126,7 +126,7 @@ class KeyboardSearchView extends Component {
     });
 
     return <TibetanText style={{flex: 1}} numberOfLines={2} children={children} />;
-  }
+  };
 
   trimByHit = (text, hits) => {
 
@@ -148,7 +148,7 @@ class KeyboardSearchView extends Component {
     }
 
     return [text, hits];
-  }
+  };
 
   renderFooter = () => {
     if (this.props.isLoadingMore) {
@@ -166,14 +166,14 @@ class KeyboardSearchView extends Component {
         </View>
       </TouchableHighlight>
     );
-  }
+  };
 
   onEndReached = () => {
     let {keyword, lastKeyword, utiSets} = this.props;
     if ((cleanKeyword(keyword) === lastKeyword) && (utiSets.length > 0)) {
       this.props.loadMore(lastKeyword, utiSets);
     }
-  }
+  };
 
   render() {
 
@@ -208,6 +208,6 @@ class KeyboardSearchView extends Component {
       </View>
     );
   }
-}
+};
 
 export default KeyboardSearchView;

@@ -72,7 +72,7 @@ class DetailView extends Component {
     isLoading: false,
     title: '',
     highlightIndex: 0
-  }
+  };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
@@ -211,15 +211,15 @@ class DetailView extends Component {
 
   getHighlightRef = (uti, highlightIndex) => {
     return uti + ':' + highlightIndex;
-  }
+  };
 
   storeTextRef = ref => {
     return data => this._rowRefs[ref] = data;
-  }
+  };
 
   storePbRef = ref => {
     return data => this._pbRefs[ref] = data;
-  }
+  };
 
   getPbRef = uti => 'box-' + uti;
 
@@ -273,7 +273,7 @@ class DetailView extends Component {
 
   onEndReached = () => {
     this.loadNext();
-  }
+  };
 
   loadPrev = async () => {
 
@@ -468,7 +468,7 @@ class DetailView extends Component {
     this._lastSearchKeyword = this.props.searchKeyword;
     this.props.setSearchKeyword('');
     this.props.setSearchBarStatus(false);
-  }
+  };
 
   goPreviousKeyword = () => {
 
@@ -621,6 +621,6 @@ class DetailView extends Component {
       </View>
     );
   }
-}
+};
 
 export default DetailView;
