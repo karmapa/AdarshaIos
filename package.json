@@ -9,6 +9,9 @@
     "postinstall": "scripts/postinstall.sh"
   },
   "dependencies": {
+    "buffer": "^4.1.0",
+    "fs": "0.0.2",
+    "hoist-non-react-statics": "^1.0.3",
     "immutable": "^3.7.5",
     "ksana-analyzer": "git+https://github.com/ksanaforge/ksana-analyzer.git#9b14dac",
     "ksana-database": "git+https://github.com/ksanaforge/ksana-database.git#1.5.0",
