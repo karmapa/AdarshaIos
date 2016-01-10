@@ -158,8 +158,10 @@ class DetailView extends Component {
     if (this.props.fetchTitle) {
       promises.push(this.fetchTitle());
     }
-    await* promises;
-    this.setLoading(false);
+    return Promise.all(promises)
+      .then(() => {
+        this.setLoading(false);
+      });
   };
 
   fetchTitle = async () => {
