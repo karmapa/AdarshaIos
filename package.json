@@ -13,7 +13,7 @@
     "fs": "0.0.2",
     "hoist-non-react-statics": "^1.0.3",
     "immutable": "^3.7.5",
-    "ksana-analyzer": "git+https://github.com/ksanaforge/ksana-analyzer.git#9b14dac",
+    "ksana-analyzer": "git+https://github.com/ksanaforge/ksana-analyzer.git#1.5.0",
     "ksana-database": "git+https://github.com/ksanaforge/ksana-database.git#1.5.0",
     "ksana-jsonrom": "git+https://github.com/kmsheng/ksana-jsonrom.git#require-native-kfs",
     "ksana-react-native": "git+https://github.com/kmsheng/ksana-react-native.git#fix-nonnull",
