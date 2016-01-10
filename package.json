@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh",
     "init": "scripts/init.sh",
+    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all",
     "postinstall": "scripts/postinstall.sh"
   },
   "dependencies": {
