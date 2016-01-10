@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh",
-    "init": "./scripts/init.sh"
+    "init": "scripts/init.sh",
+    "postinstall": "scripts/postinstall.sh"
   },
   "dependencies": {
     "immutable": "^3.7.5",
