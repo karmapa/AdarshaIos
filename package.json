@@ -22,7 +22,7 @@
     "ksana-simple-api": "git+https://github.com/ksanaforge/ksana-simple-api.git#1.5.0",
     "lodash": "^3.10.1",
     "path": "^0.12.7",
-    "react-native": "0.18.0-rc",
+    "react-native": "git+https://github.com/kmsheng/react-native.git#v0.18.0-listview-fix",
     "react-native-icons": "0.7.0",
     "react-native-invertible-scroll-view": "^0.1.2",
     "react-native-refreshable-listview": "^1.3.0",
