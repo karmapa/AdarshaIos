@@ -25,7 +25,7 @@ Make sure to check Adarsha as target, this is very important.
 
 ```
 npm install -g react-native-cli    # if you don't have react-native command
-react-native bundle --minify
+npm run build
 ```
 
 # Terminology
