@@ -65,7 +65,7 @@ class Main extends Component {
         navigator,
         route,
         rows: route.rows,
-        title: route.title
+        fetchTitle: true
       };
 
       return <DetailView {...detailViewProps} />;
