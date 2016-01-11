@@ -19,7 +19,7 @@ export default function attachKeyboard(Component) {
       this._unRegisterEvents();
     }
 
-    _registerEvents() {
+    _registerEvents = () => {
       this._keyboardDidShowSubscription = DeviceEventEmitter.addListener('keyboardDidShow', e => this._keyboardDidShow(e));
       this._keyboardDidHideSubscription = DeviceEventEmitter.addListener('keyboardDidHide', e => this._keyboardDidHide(e));
     };
@@ -29,9 +29,7 @@ export default function attachKeyboard(Component) {
       this._keyboardDidHideSubscription.remove();
     };
 
-    _keyboardDidShow = e => {
-      this.props.setKeyboardHeight(e.endCoordinates.height);
-    };
+    _keyboardDidShow = e => this.props.setKeyboardHeight(e.endCoordinates.height);
 
     _keyboardDidHide = () => {
       this.props.setKeyboardHeight(0);
