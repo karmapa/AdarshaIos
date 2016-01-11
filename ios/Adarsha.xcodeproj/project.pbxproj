@@ -39,6 +39,7 @@
 		9B7B3CF61C00F153003DC74C /* icon-line-height-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF01C00F153003DC74C /* icon-line-height-add.png */; };
 		9B7B3CF71C00F153003DC74C /* icon-line-height-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF11C00F153003DC74C /* icon-line-height-minus.png */; };
 		9B7B3CF81C00F153003DC74C /* icon-tibetan-wylie-switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CF21C00F153003DC74C /* icon-tibetan-wylie-switch.png */; };
+		9B948E081C439E4600FF6269 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B948E071C439E4600FF6269 /* HexColors.m */; };
 		9BB108A01BA99C4900087046 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB1089F1BA99C0C00087046 /* libReactNativeIcons.a */; };
 		9BB108BF1BA99C8800087046 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AD1BA99C8800087046 /* FontAwesome.otf */; };
 		9BB108C11BA99C8800087046 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108AF1BA99C8800087046 /* foundation-icons.ttf */; };
@@ -191,6 +192,8 @@
 		9B7B3CF11C00F153003DC74C /* icon-line-height-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-line-height-minus.png"; path = "../assets/images/icon-line-height-minus.png"; sourceTree = "<group>"; };
 		9B7B3CF21C00F153003DC74C /* icon-tibetan-wylie-switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-tibetan-wylie-switch.png"; path = "../assets/images/icon-tibetan-wylie-switch.png"; sourceTree = "<group>"; };
 		9B88B5F51BA9986A006B3635 /* FontAwesomeKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FontAwesomeKit; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit"; sourceTree = "<group>"; };
+		9B948E061C439E4600FF6269 /* HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = HexColors/Classes/HexColors.h; sourceTree = "<group>"; };
+		9B948E071C439E4600FF6269 /* HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = HexColors/Classes/HexColors.m; sourceTree = "<group>"; };
 		9BB1089A1BA99C0C00087046 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		9BB108A11BA99C8800087046 /* FAKFontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FAKFontAwesome.h; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FAKFontAwesome.h"; sourceTree = "<group>"; };
 		9BB108A21BA99C8800087046 /* FAKFontAwesome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FAKFontAwesome.m; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FAKFontAwesome.m"; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 				9BD6EDB31C33D4C90037E33F /* kfs_ios.m */,
 				9BD6EDB41C33D4C90037E33F /* kfs_rct.h */,
 				9BD6EDB51C33D4C90037E33F /* kfs_rct.m */,
+				9B948E061C439E4600FF6269 /* HexColors.h */,
+				9B948E071C439E4600FF6269 /* HexColors.m */,
 				9B66395C1C0F827C003E7A90 /* Icon-60.png */,
 				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
@@ -749,6 +754,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				9BD6EDB71C33D4C90037E33F /* kfs_rct.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				9B948E081C439E4600FF6269 /* HexColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
