@@ -22,7 +22,7 @@ class TibetanText extends Component {
 
     props.style = Object.assign({}, style, textStyle);
 
-    return <Text ref={component => this._root = component} {...props} />
+    return <Text ref={component => this._root = component} {...props} />;
   }
 }
 

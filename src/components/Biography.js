@@ -3,7 +3,6 @@ import React, {Component, PropTypes, Text, View, ScrollView,
 import _ from 'lodash';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {fetch} from '../helpers';
 import {setBiographyHasScrolled, loadBiographyByUti, fields, setBiographyToolbarStatus} from '../modules/biography';
 import {renderSpinner} from '../helpers';
 import {styles} from './Biography.style';

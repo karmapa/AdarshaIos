@@ -13,7 +13,6 @@ const SET_LOADING = 'SET_LOADING';
 const SET_SELECTED_TAB = 'SET_SELECTED_TAB';
 const SET_SIDE_MENU_STATUS = 'SET_SIDE_MENU_STATUS';
 const SET_SUTRA_MAP = 'SET_SUTRA_MAP';
-const SET_TOC_ROWS = 'SET_TOC_ROWS';
 const SET_WYLIE_STATUS = 'SET_WYLIE_STATUS';
 const SET_KEYBOARD_HEIGHT = 'SET_KEYBOARD_HEIGHT';
 
@@ -109,7 +108,7 @@ export function mergeSettings(settings) {
   return {
     type: MERGE_SETTINGS,
     settings
-  }
+  };
 }
 
 export function setDb(db) {
@@ -158,14 +157,14 @@ export function setFontSize(fontSize) {
   return {
     type: SET_FONT_SIZE,
     fontSize
-  }
+  };
 }
 
 export function setLineHeight(lineHeight) {
   return {
     type: SET_LINE_HEIGHT,
     lineHeight
-  }
+  };
 }
 
 export function setWylieStatus(wylieStatus) {
@@ -179,7 +178,7 @@ export function setBackgroundIndex(backgroundIndex) {
   return {
     type: SET_BACKGROUND_INDEX,
     backgroundIndex
-  }
+  };
 }
 
 export function setKeyboardHeight(keyboardHeight) {

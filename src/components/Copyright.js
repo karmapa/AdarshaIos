@@ -1,4 +1,4 @@
-import React, {Component, PropTypes, View} from 'react-native';
+import React, {Component, View} from 'react-native';
 import {TibetanText} from '.';
 import {styles} from './Copyright.style';
 

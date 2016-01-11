@@ -5,7 +5,6 @@ const SET_TOOLBAR_STATUS = 'SET_TOOLBAR_STATUS';
 const SET_SEARCH_KEYWORD = 'SET_SEARCH_KEYWORD';
 const SET_SEARCHBAR_STATUS = 'SET_SEARCHBAR_STATUS';
 const SET_MATCH_INDEX = 'SET_MATCH_INDEX';
-const SET_VISIBLE_UTI = 'SET_VISIBLE_UTI';
 const SET_UTIS = 'SET_UTIS';
 const SET_DETAIL_VIEW_LOADING_MORE = 'SET_DETAIL_VIEW_LOADING_MORE';
 
@@ -45,7 +44,7 @@ export function setHasScrolled(hasScrolled) {
   return {
     type: SET_HAS_SCROLLED,
     hasScrolled
-  }
+  };
 }
 
 export function setToolbarStatus(toolbarOn) {

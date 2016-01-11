@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import Immutable from 'immutable';
 import {fetch, filter} from '../helpers';
-import wylie from 'tibetan/wylie';
 
 const SET_EXCERPT_DATA = 'SET_EXCERPT_DATA';
 const SET_KEYBOARD_SEARCH_LOADING = 'SET_KEYBOARD_SEARCH_LOADING';

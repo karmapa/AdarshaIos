@@ -1,4 +1,4 @@
-import React, {Animated, Component, DeviceEventEmitter, PropTypes, View, Platform} from 'react-native';
+import React, {Animated, Component, PropTypes, View, Platform} from 'react-native';
 import {connect} from 'react-redux/native';
 
 const KITKAT = 19;

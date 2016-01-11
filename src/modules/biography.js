@@ -40,7 +40,7 @@ export function loadBiographyByUti(uti) {
     return fetch({uti, fields: 'sutra'})
       .then(rows => {
         let sutraId = _.first(_.first(rows).values);
-        return findBiographyBySutraId(sutraId)
+        return findBiographyBySutraId(sutraId);
       })
       .then(biography => {
         dispatch(setBiography(biography));
@@ -74,7 +74,7 @@ export function setBiographyHasScrolled(hasScrolled) {
   return {
     type: SET_BIOGRAPHY_HAS_SCROLLED,
     hasScrolled
-  }
+  };
 }
 
 export const fields = [

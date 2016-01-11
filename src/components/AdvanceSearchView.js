@@ -1,10 +1,6 @@
-'use strict';
-
-import React, {Component, Dimensions, PropTypes, TextInput, View, Modal,
+import React, {Component, PropTypes, TextInput, View, Modal,
   ScrollView, TouchableHighlight, PickerIOS} from 'react-native';
 import _ from 'lodash';
-import ksa from 'ksana-simple-api';
-import {DB_NAME} from '../constants/AppConstants';
 import {Spinner} from 'react-native-icons';
 import {KeyboardSpacer, TibetanText} from '.';
 import {connect} from 'react-redux/native';

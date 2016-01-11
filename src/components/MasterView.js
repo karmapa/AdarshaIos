@@ -1,10 +1,9 @@
-import React, {Component, ScrollView, View, Text, PropTypes, TabBarIOS} from 'react-native';
+import React, {Component, View, PropTypes, TabBarIOS} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {AdvanceSearchView, CategoryView, KeyboardSearchView, Copyright} from '../components';
-import {Spinner, Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setSelectedTab} from '../modules/main';
-import {styles, stylesTabBar} from './MasterView.style';
+import {stylesTabBar} from './MasterView.style';
 import {styles as globalStyles} from '../styles/global.style';
 
 @connect(state => ({
@@ -75,6 +74,6 @@ class MasterView extends Component {
       </View>
     );
   }
-};
+}
 
 export default MasterView;

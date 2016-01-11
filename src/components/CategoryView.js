@@ -1,11 +1,6 @@
-'use strict';
-
 import React, {Component, ListView, PropTypes, View, TouchableHighlight, Image} from 'react-native';
 import _ from 'lodash';
-import ksa from 'ksana-simple-api';
-import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
-import {Spinner} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setLoading} from '../modules/main';
 import {styles} from './CategoryView.style';

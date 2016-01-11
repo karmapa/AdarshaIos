@@ -1,12 +1,10 @@
-'use strict';
-
 import _ from 'lodash';
-import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight, Dimensions} from 'react-native';
+import React, {Component, PropTypes, ListView, View, TextInput, TouchableHighlight, Dimensions} from 'react-native';
 import {styles} from './KeyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
 import {connect} from 'react-redux/native';
-import {cleanKeyword, highlight, fetch, getUti, renderSpinner} from '../helpers';
+import {cleanKeyword, highlight, getUti, renderSpinner} from '../helpers';
 import {TibetanText} from '.';
 
 const TRIM_POS = 20;
@@ -144,7 +142,7 @@ class KeyboardSearchView extends Component {
       hits = hits.map(hit => {
         let [start, length, nWord] = hit;
         return [start - delta + 1, length, nWord];
-      })
+      });
     }
 
     return [text, hits];
@@ -208,6 +206,6 @@ class KeyboardSearchView extends Component {
       </View>
     );
   }
-};
+}
 
 export default KeyboardSearchView;

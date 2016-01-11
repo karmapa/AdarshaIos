@@ -1,12 +1,11 @@
 import {openDb, setLoading, setSideMenuStatus, loadStorage} from '../modules/main';
 import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
-import React, {Component, Navigator, PropTypes, View, Image} from 'react-native';
+import React, {Component, Navigator, PropTypes} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import {Biography, CategoryView, DetailView, MasterView, Menu} from '../components';
+import {Biography, DetailView, MasterView, Menu} from '../components';
 import {connect} from 'react-redux/native';
-import {renderSpinner, storage, attachKeyboard} from '../helpers';
-import {styles as globalStyles} from '../styles/global.style';
+import {renderSpinner, attachKeyboard} from '../helpers';
 import {styles} from './Main.style';
 
 @connect(state => ({
@@ -54,13 +53,12 @@ class Main extends Component {
   renderContent = (route, navigator) => {
 
     if ('Biography' === route.name) {
-      return <Biography uti={route.uti} navigator={navigator} title={route.title} />
+      return <Biography uti={route.uti} navigator={navigator} title={route.title} />;
     }
 
     if ('DetailView' === route.name) {
 
       let detailViewProps = {
-        fetchTitle: route.fetchTitle,
         message: route.message,
         navigator,
         route,

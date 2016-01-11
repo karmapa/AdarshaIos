@@ -55,7 +55,6 @@ class Menu extends Component {
   render() {
 
     let {
-      backgroundIndex,
       decreaseFontSize,
       decreaseLineHeight,
       fontSize,
