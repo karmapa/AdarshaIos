@@ -39,6 +39,7 @@
   // TabBarIOS.Item active / inactive color
   // http://stackoverflow.com/questions/26551458/change-tintcolor-of-unselected-uitabbarcontroller-item-title-and-background-imag
   // http://jslim.net/blog/2014/05/05/ios-customize-uitabbar-appearance/
+  // https://devforums.apple.com/message/851126#851126
 
   [UITabBarItem.appearance setTitleTextAttributes:
                 @{NSForegroundColorAttributeName : [UIColor hx_colorWithHexString:@"FFFFFF" alpha: 0.7]}
