@@ -1,14 +1,14 @@
-import React, {ListView, Component, View, PropTypes, TextInput,
-  TouchableHighlight, TouchableOpacity, Image, ScrollView, LayoutAnimation} from 'react-native';
+import React, {ListView, Component, View, PropTypes, TextInput, Dimensions,
+  TouchableHighlight, Image, ScrollView, LayoutAnimation} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
-import {DB_NAME} from '../constants/AppConstants';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
-import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus} from '../modules/detailView';
+import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus,
+  setMatchIndex, setUtis, setLoadingMore} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
@@ -19,8 +19,6 @@ import TimerMixin from 'react-timer-mixin';
 const underlayColor = 'rgba(0, 0, 0, 0)';
 const fontColor = '#ffffff';
 
-const TOP = -20;
-const DEFAULT_TOP_REACHED_THRESHOLD = 1000;
 const ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
 const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 
@@ -32,19 +30,29 @@ const LIST_VIEW = 'listView';
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
   searchKeyword: state.detailView.get('searchKeyword'),
+  isLoadingMore: state.detailView.get('isLoadingMore'),
+  matchIndex: state.detailView.get('matchIndex'),
+  currentUti: state.detailView.get('currentUti'),
   toolbarOn: state.detailView.get('toolbarOn'),
   wylieOn: state.main.get('wylieOn'),
   keyword: state.keyboardSearch.get('keyword'),
+  utis: state.detailView.get('utis'),
   searchBarOn: state.detailView.get('searchBarOn')
-}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword, setSearchBarStatus})
+}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword,
+  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore})
 class DetailView extends Component {
 
   static PropTypes = {
     backgroundIndex: PropTypes.number.isRequired,
     fetchTitle: PropTypes.bool,
+    isLoadingMore: PropTypes.bool.isRequired,
+    setLoadingMore: PropTypes.func.isRequired,
     hasScrolled: PropTypes.bool.isRequired,
     fontSize: PropTypes.number.isRequired,
     lineHeight: PropTypes.number.isRequired,
+    matchIndex: PropTypes.number.isRequired,
+    setMatchIndex: PropTypes.func.isRequired,
+    setUtis: PropTypes.func.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
@@ -54,15 +62,18 @@ class DetailView extends Component {
     setSearchKeyword: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
+    utis: PropTypes.array.isRequired,
     wylieOn: PropTypes.bool.isRequired
   };
 
   constructor(props) {
     super(props);
+
     this._lastSearchKeyword = '';
     this._visibleUtiRow = null;
     this._rowRefs = {};
     this._pbRefs = {};
+    this._rowsLayout = {};
   }
 
   state = {
@@ -70,8 +81,7 @@ class DetailView extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2
     }),
     isLoading: false,
-    title: '',
-    highlightIndex: 0
+    title: ''
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -87,15 +97,15 @@ class DetailView extends Component {
   }
 
   getFocusElementOffset = () => {
-    let uti = _.get(this._visibleUtiRow, 'uti')
-    let ref = this.getHighlightRef(uti, this.state.highlightIndex);
+    let uti = _.get(this._visibleUtiRow, 'uti');
+    let ref = this.getHighlightRef(uti, this.props.matchIndex);
     let element = this._rowRefs[ref];
     let pbRef = this.getPbRef(uti);
     let container = this._pbRefs[pbRef];
 
     if (container && element) {
         element.measureLayout(React.findNodeHandle(container), (x, y, width, height) => {
-          console.log('here', x, y, width, height);
+          //console.log('here', x, y, width, height);
         });
     }
   };
@@ -105,27 +115,28 @@ class DetailView extends Component {
     this._pbRefs = {};
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
     if (! _.isEqual(_.pick(this.props, SETTINGS_PROPS), _.pick(nextProps, SETTINGS_PROPS))) {
       this.rerenderListView();
     }
-    if (this.props.searchKeyword !== nextProps.searchKeyword) {
+    else if (this.props.matchIndex !== nextProps.matchIndex) {
+      this.rerenderListView();
+    }
+    else if (this.props.searchKeyword !== nextProps.searchKeyword) {
       this.highlightAsync(nextProps.searchKeyword);
     }
   }
 
+  getVisibleRow = () => {
+    let uti = this.getVisibleUti() || _.get(_.first(this._rows), 'uti');
+    return _.find(this._rows, {uti});
+  };
+
   highlightAsync = async searchKeyword => {
 
-    let utis = this.getVisibleUtis();
-    this._rows = await fetch({uti: utis, q: cleanKeyword(searchKeyword)}) || [];
-    let uti = this.getVisibleUti() || _.get(_.first(this._rows), 'uti');
+    this._rows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
+    setMatchIndex(0);
 
-    if (uti) {
-      this._visibleUtiRow = _.find(this._rows, {uti});
-      this.setState({
-        highlightIndex: 0
-      });
-    }
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
@@ -143,7 +154,9 @@ class DetailView extends Component {
     this.isScrolling = false;
     this.direction = null;
     this.setTitle(this.props.title);
-    this.preload();
+    TimerMixin.setTimeout(() => {
+      this.preload();
+    });
   }
 
   preload = async (rows = this.props.rows) => {
@@ -211,8 +224,8 @@ class DetailView extends Component {
     this.props.navigator.popToTop();
   };
 
-  getHighlightRef = (uti, highlightIndex) => {
-    return uti + ':' + highlightIndex;
+  getHighlightRef = (uti, matchIndex) => {
+    return uti + ':' + matchIndex;
   };
 
   storeTextRef = ref => {
@@ -231,13 +244,12 @@ class DetailView extends Component {
 
   renderText = row => {
 
-    const {fontSize, lineHeight, wylieOn} = this.props;
-    const visibleUti = _.get(this._visibleUtiRow, 'uti');
+    const {fontSize, lineHeight, wylieOn, matchIndex, searchBarOn} = this.props;
+    const visibleUti = this.getVisibleUti();
     const defaultStyle = {fontSize, lineHeight: lineHeight * fontSize};
 
     let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
     let highlightIndex = 0;
-
 
     let children = highlight(text, row.hits, (key, str, style) => {
 
@@ -249,7 +261,7 @@ class DetailView extends Component {
         // default
         style = {backgroundColor: '#f1c40f'};
 
-        if ((row.uti === visibleUti) && (highlightIndex === this.state.highlightIndex)) {
+        if ((row.uti === visibleUti) && (highlightIndex === matchIndex) && searchBarOn) {
           // target
           style.backgroundColor = '#e67e22';
         }
@@ -262,9 +274,13 @@ class DetailView extends Component {
     return <TibetanText style={defaultStyle} children={children} />;
   };
 
+  handleRowLayout(row, event) {
+    this._rowsLayout[row.uti] = event.nativeEvent.layout;
+  }
+
   renderRow = row => {
     return (
-      <View ref={this.storePbRef('box-' + row.uti)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
+      <View onLayout={this.handleRowLayout.bind(this, row)} ref={this.storePbRef('box-' + row.uti)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
           <TibetanText>{getUti(row)}</TibetanText>
           {this.renderText(row)}
@@ -299,10 +315,13 @@ class DetailView extends Component {
 
   loadNext = async () => {
 
-    if (this.isLoading) {
+    let {isLoadingMore, setLoadingMore} = this.props;
+
+    if (isLoadingMore) {
       return Promise.reject('isLoading');
     }
-    this.isLoading = true;
+
+    setLoadingMore(true);
 
     let lastRow = _.last(this._rows);
     let uti = getUti(lastRow);
@@ -311,12 +330,12 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
 
-    let rows = await loadNext({count: 100, uti, q: cleanKeyword(this.props.searchKeyword)});
+    let rows = await loadNext({count: 5, uti, q: cleanKeyword(this.props.searchKeyword)});
 
     this.setState({
       dataSource: this.getDataSource(rows)
     });
-    this.isLoading = false;
+    setLoadingMore(false);
   };
 
   setToolbarStatus = toolbarOn => {
@@ -333,23 +352,25 @@ class DetailView extends Component {
     return _.pluck(this._rows, 'uti');
   };
 
-  getVisibleUtis = () => {
-
-    let listView = _.get(this.refs[LIST_VIEW], 'refs.listview.refs.listview');
-
-    return Object.keys(_.get(listView, '_visibleRows.s1', {}))
-      .map(index => this._rows[index])
-      .filter(row => undefined !== row)
-      .map(row => getUti(row));
-  };
-
   getVisibleUti = () => {
-    let utis = this.getVisibleUtis();
 
-    if (_.isNull(this.direction)) {
-      return _.first(utis);
-    }
-    return 'up' === this.direction ? _.first(utis) : _.last(utis);
+    let {utis} = this.props;
+    let middle = this.lastOffsetY + (Dimensions.get('window').height / 2);
+
+    let layoutRow = _.chain(utis)
+      .map(uti => {
+        const layout = this._rowsLayout[uti];
+        return layout ? {uti, layout} : null;
+      })
+      .filter(_.isObject)
+      .filter(row => {
+        let {layout} = row;
+        return (layout.y < middle) && (middle < (layout.y + layout.height));
+      })
+      .first()
+      .value();
+
+    return layoutRow ? layoutRow.uti : _.first(utis);
   };
 
   updateTitle = _.debounce(async () => {
@@ -440,7 +461,9 @@ class DetailView extends Component {
     }
 
     if (rows && (rows.length > 0)) {
-      this.preload(rows);
+      TimerMixin.setTimeout(() => {
+        this.preload(rows);
+      }, 0);
     }
   };
 
@@ -457,11 +480,11 @@ class DetailView extends Component {
   renderBackgroundImage = () => {
     switch (this.props.backgroundIndex) {
       case 0:
-        return <View style={{backgroundColor: '#ffffff', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}></View>;
+        return <View style={{backgroundColor: '#ffffff', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}} />;
       case 1:
-        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />
+        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />;
       case 2:
-        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture2')} />
+        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture2')} />;
     }
   };
 
@@ -474,31 +497,31 @@ class DetailView extends Component {
 
   goPreviousKeyword = () => {
 
-    if (0 === this.state.highlightIndex) {
+    let {matchIndex, setMatchIndex} = this.props;
+
+    if (0 === matchIndex) {
       console.log('prev limit');
       return;
     }
 
-    if (this.state.highlightIndex > 0) {
-      this.setState({
-        highlightIndex: this.state.highlightIndex - 1
-      });
+    if (matchIndex > 0) {
+      setMatchIndex(matchIndex - 1);
     }
   };
 
   goNextKeyword = () => {
 
-    let lastIndex = _.get(this._visibleUtiRow, 'hits', []).length - 1;
+    let {matchIndex, setMatchIndex} = this.props;
+    let visibleRow = this.getVisibleRow();
+    let lastIndex = _.get(visibleRow, 'hits', []).length - 1;
 
-    if (lastIndex === this.state.highlightIndex) {
+    if (lastIndex === matchIndex) {
       console.log('next limit');
       return;
     }
 
-    if (this.state.highlightIndex < lastIndex) {
-      this.setState({
-        highlightIndex: this.state.highlightIndex + 1
-      });
+    if (matchIndex < lastIndex) {
+      setMatchIndex(matchIndex + 1);
     }
   };
 
@@ -560,13 +583,29 @@ class DetailView extends Component {
     return this.props.searchBarOn ? 77 : 50;
   };
 
+  handleChangeVisibleRows = (visibleRows) => {
+
+    let utis = Object.keys(_.get(visibleRows, 's1', {}))
+      .map(index => this._rows[index])
+      .filter(row => undefined !== row)
+      .map(row => getUti(row));
+
+    this.props.setUtis(utis);
+  };
+
+  renderFooter = () => {
+    if (this.props.isLoadingMore) {
+      return renderSpinner();
+    }
+  };
+
   render() {
 
     if (this.state.isLoading) {
       return renderSpinner();
     }
 
-    let {uti, toolbarOn} = this.props;
+    let {toolbarOn} = this.props;
 
     let listViewProps = {
       dataSource: this.state.dataSource,
@@ -574,6 +613,10 @@ class DetailView extends Component {
       pageSize: 1,
       ref: LIST_VIEW,
       renderRow: this.renderRow,
+      renderAheadDistance: 2000,
+      onEndReachedThreshold: 3000,
+      onChangeVisibleRows: this.handleChangeVisibleRows,
+      renderFooter: this.renderFooter,
       renderScrollComponent: props => {
 
         let onScroll = props.onScroll;
@@ -586,7 +629,7 @@ class DetailView extends Component {
         props.onTouchEnd = this.handleTouchEnd;
         props.ref = scrollView => this._scrollView = scrollView;
 
-        return <ScrollView {...props} />
+        return <ScrollView {...props} />;
       },
       loadData: this.loadPrev
     };
@@ -623,6 +666,6 @@ class DetailView extends Component {
       </View>
     );
   }
-};
+}
 
 export default DetailView;
