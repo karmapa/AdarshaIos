@@ -8,8 +8,9 @@
  */
 
 #import "AppDelegate.h"
-
 #import "RCTRootView.h"
+
+#import "HexColors.h"
 
 @implementation AppDelegate
 
@@ -33,6 +34,20 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  // https://github.com/facebook/react-native/issues/3083
+  // TabBarIOS.Item active / inactive color
+  // http://stackoverflow.com/questions/26551458/change-tintcolor-of-unselected-uitabbarcontroller-item-title-and-background-imag
+  // http://jslim.net/blog/2014/05/05/ios-customize-uitabbar-appearance/
+
+  [UITabBarItem.appearance setTitleTextAttributes:
+                @{NSForegroundColorAttributeName : [UIColor hx_colorWithHexString:@"FFFFFF" alpha: 0.7]}
+                                         forState:UIControlStateNormal];
+
+  [UITabBarItem.appearance setTitleTextAttributes:
+                @{NSForegroundColorAttributeName : [UIColor hx_colorWithHexString:@"FFFFFF"]}
+                                         forState:UIControlStateSelected];
+
   return YES;
 }
 
