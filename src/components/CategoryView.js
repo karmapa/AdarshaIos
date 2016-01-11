@@ -53,7 +53,6 @@ class CategoryView extends Component {
     if ('AdvanceSearchView' === this.props.from) {
       this.props.navigator.push({
         name: 'DetailView',
-        title: row.t,
         rows: [row]
       });
     }
@@ -66,7 +65,6 @@ class CategoryView extends Component {
 
       this.props.navigator.push({
         name: 'DetailView',
-        title: row.t,
         rows: [firstRow]
       });
 
