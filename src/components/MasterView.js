@@ -1,7 +1,7 @@
-import React, {Component, ScrollView, View, Text, PropTypes} from 'react-native';
+import React, {Component, ScrollView, View, Text, PropTypes, TabBarIOS} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {AdvanceSearchView, CategoryView, KeyboardSearchView, Copyright} from '../components';
-import {TabBarIOS, Spinner, Icon} from 'react-native-icons';
+import {Spinner, Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setSelectedTab} from '../modules/main';
 import {styles, stylesTabBar} from './MasterView.style';
@@ -55,19 +55,19 @@ class MasterView extends Component {
     return (
       <View style={globalStyles.container}>
         <TabBarIOS {...stylesTabBar}>
-          <TabBarIOS.Item title={'Category'} iconName={'ion|ios-book-outline'} iconSize={26}
+          <TabBarIOS.Item title={'Category'} icon={require('image!ion-ios-book-outline')} accessibilityLabel="Category"
             selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
             <CategoryView navigator={navigator} tocRows={tocRows} title={title} />
           </TabBarIOS.Item>
-          <TabBarIOS.Item title={'Keyboard Search'} iconName={'ion|ios-search'} iconSize={26}
+          <TabBarIOS.Item title={'Keyboard Search'} icon={require('image!ion-ios-search')} accessibilityLabel="Keyboard Search"
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
             <KeyboardSearchView navigator={navigator} />
           </TabBarIOS.Item>
-          <TabBarIOS.Item title={'Advance Search'} iconName={'ion|social-buffer'} iconSize={26}
+          <TabBarIOS.Item title={'Advance Search'} icon={require('image!ion-social-buffer')} accessibilityLabel="Advance Search"
             selected={'advanceSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'advanceSearch')}>
             {this.renderAdvance()}
           </TabBarIOS.Item>
-          <TabBarIOS.Item title={'Copyright'} iconName={'ion|information-circled'} iconSize={24}
+          <TabBarIOS.Item title={'Copyright'} icon={require('image!ion-information-circled')} accessibilityLabel="Copyright"
             selected={'copyright' === selectedTab} onPress={this.onTabPress.bind(this, 'copyright')}>
             <Copyright />
           </TabBarIOS.Item>
