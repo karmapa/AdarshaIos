@@ -105,8 +105,6 @@ export function search(keyword) {
       field: 'head'
     });
 
-    console.log('utiRows.length', utiRows.length);
-
     if (_.isEmpty(utiRows)) {
       dispatch(setExcerptData({
         keyword,
