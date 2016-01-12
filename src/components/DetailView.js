@@ -585,6 +585,7 @@ class DetailView extends Component {
           onScroll.apply(null, args);
           this.handleScroll(...args);
         };
+        props.scrollEventThrottle = 10;
         props.onTouchStart = this.handleTouchStart;
         props.onTouchEnd = this.handleTouchEnd;
         props.ref = scrollView => this._scrollView = scrollView;
