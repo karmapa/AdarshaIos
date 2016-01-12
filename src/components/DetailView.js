@@ -13,7 +13,7 @@ import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
 import {values, styles as globalStyles} from '../styles/global.style';
-import {KeyboardSpacer, TibetanText} from '.';
+import {Background, KeyboardSpacer, TibetanText} from '.';
 import TimerMixin from 'react-timer-mixin';
 
 const underlayColor = 'rgba(0, 0, 0, 0)';
