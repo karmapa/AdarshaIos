@@ -36,6 +36,7 @@ const LIST_VIEW = 'listView';
   matchIndex: state.detailView.get('matchIndex'),
   searchBarOn: state.detailView.get('searchBarOn'),
   searchKeyword: state.detailView.get('searchKeyword'),
+  title: state.detailView.get('title'),
   toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
   wylieOn: state.main.get('wylieOn')
