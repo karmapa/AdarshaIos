@@ -397,7 +397,11 @@ class DetailView extends Component {
 
   goTop = async () => {
 
-    let {setLoading, searchKeyword} = this.props;
+    let {isLoading, setLoading, searchKeyword} = this.props;
+
+    if (isLoading) {
+      return;
+    }
 
     setLoading(true);
 
