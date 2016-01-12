@@ -73,7 +73,7 @@ class DetailView extends Component {
     super(props);
 
     this._lastSearchKeyword = '';
-    this._rowsLayout = {};
+    this._layoutRows = {};
   }
 
   state = {
@@ -234,7 +234,7 @@ class DetailView extends Component {
   };
 
   handleRowLayout(row, event) {
-    this._rowsLayout[row.uti] = event.nativeEvent.layout;
+    this._layoutRows[row.uti] = event.nativeEvent.layout;
   }
 
   renderRow = row => {
@@ -318,7 +318,7 @@ class DetailView extends Component {
 
     let layoutRow = _.chain(utis)
       .map(uti => {
-        const layout = this._rowsLayout[uti];
+        const layout = this._layoutRows[uti];
         return layout ? {uti, layout} : null;
       })
       .filter(_.isObject)
