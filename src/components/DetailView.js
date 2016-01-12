@@ -94,6 +94,7 @@ class DetailView extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
+
     if (! _.isEqual(_.pick(this.props, SETTINGS_PROPS), _.pick(nextProps, SETTINGS_PROPS))) {
       this.rerenderListView();
     }
