@@ -123,7 +123,9 @@ class DetailView extends Component {
 
   highlightAsync = async searchKeyword => {
 
-    this._rows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
+    let newRows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
+    this._rows = this.updateHitsByRows(this._rows, newRows);
+
     setMatchIndex(0);
 
     this.setState({
