@@ -465,9 +465,18 @@ class DetailView extends Component {
     this.props.setSearchBarStatus(false);
   };
 
+  getUtisWithHits = utis => {
+    return utis.filter(uti => {
+      let row = _.find(this._rows, {uti});
+      return _.get(row, 'hits', []).length > 0;
+    });
+  };
+
   getPreviousUti = () => {
+
     let {visibleUti, utis} = this.props;
-    let utisWithHits = utis.filter(uti => _.get(_.find(this._rows, {uti}), 'hits', []).length > 0);
+    let utisWithHits = this.getUtisWithHits(utis);
+
     let index = utisWithHits.indexOf(visibleUti);
     let notFound = -1 === index;
     let noNext = 0 === index;
@@ -479,8 +488,10 @@ class DetailView extends Component {
   };
 
   getNextUti = () => {
+
     let {visibleUti, utis} = this.props;
-    let utisWithHits = utis.filter(uti => _.get(_.find(this._rows, {uti}), 'hits', []).length > 0);
+    let utisWithHits = this.getUtisWithHits(utis);
+
     let index = utisWithHits.indexOf(visibleUti);
     let notFound = -1 === index;
     let noNext = index === (utisWithHits.length - 1);
