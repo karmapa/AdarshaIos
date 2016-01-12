@@ -2,9 +2,9 @@ import Immutable from 'immutable';
 import _ from 'lodash';
 import {toc} from '../helpers';
 
-const SET_TOC_ERROR = 'SET_TOC_ERROR';
-const SET_TOC_HITS = 'SET_TOC_HITS';
-const SET_TOC_ROWS = 'SET_TOC_ROWS';
+const SET_TOC_ERROR = 'CATEGORY::SET_TOC_ERROR';
+const SET_TOC_HITS = 'CATEGORY::SET_TOC_HITS';
+const SET_TOC_ROWS = 'CATEGORY::SET_TOC_ROWS';
 
 const initialState = Immutable.Map({
   tocRows: []

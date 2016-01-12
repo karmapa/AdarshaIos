@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-const SET_FIELDS_DATA = 'SET_FIELDS_DATA';
+const SET_FIELDS_DATA = 'ADVANCE_SEARCH::SET_FIELDS_DATA';
 
 const initialState = Immutable.Map({
   division: 0,
