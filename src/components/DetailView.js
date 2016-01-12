@@ -237,10 +237,11 @@ class DetailView extends Component {
     this._layoutRows[row.uti] = event.nativeEvent.layout;
   };
 
+  getRowKey = row => 'row-' + row.uti;
 
   renderRow = row => {
     return (
-      <View onLayout={this.handleRowLayout.bind(this, row)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
+      <View key={this.getRowKey(row)} onLayout={this.handleRowLayout.bind(this, row)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
           <TibetanText>{getUti(row)}</TibetanText>
           {this.renderText(row)}
