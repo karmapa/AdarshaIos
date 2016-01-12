@@ -343,7 +343,7 @@ class DetailView extends Component {
   updateTitle = _.debounce(async () => {
     let uti = this.getVisibleUti();
     let data = await toc({uti});
-    this.setTitle(_.get(data, 'breadcrumb[3].t'));
+    this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
   }, 100);
 
   handleScroll = event => {
