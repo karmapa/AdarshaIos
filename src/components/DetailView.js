@@ -561,12 +561,12 @@ class DetailView extends Component {
     }
   };
 
-  render() {
+  renderContent = () => {
 
     let {toolbarOn, isLoading} = this.props;
 
     if (isLoading) {
-      return renderSpinner();
+      return renderSpinner({transparent: true});
     }
 
     let listViewProps = {
@@ -597,11 +597,7 @@ class DetailView extends Component {
     };
 
     return (
-      <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
-        <View style={globalStyles.backgroundImageContainer}>
-          {this.renderBackgroundImage()}
-        </View>
-
+      <View style={{flex: 1}}>
         <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
 
           <View style={styles.container}>
@@ -624,7 +620,18 @@ class DetailView extends Component {
         </View>
 
         <KeyboardSpacer />
+      </View>
+    );
+  };
 
+  render() {
+
+    return (
+      <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
+        <View style={globalStyles.backgroundImageContainer}>
+          {this.renderBackgroundImage()}
+        </View>
+        {this.renderContent()}
       </View>
     );
   }
