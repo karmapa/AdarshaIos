@@ -26,19 +26,19 @@ const LIST_VIEW = 'listView';
 
 @connect(state => ({
   backgroundIndex: state.main.get('backgroundIndex'),
-  hasScrolled: state.detailView.get('hasScrolled'),
+  currentUti: state.detailView.get('currentUti'),
   fontSize: state.main.get('fontSize'),
-  lineHeight: state.main.get('lineHeight'),
-  searchKeyword: state.detailView.get('searchKeyword'),
+  hasScrolled: state.detailView.get('hasScrolled'),
   isLoading: state.detailView.get('isLoading'),
   isLoadingMore: state.detailView.get('isLoadingMore'),
-  matchIndex: state.detailView.get('matchIndex'),
-  currentUti: state.detailView.get('currentUti'),
-  toolbarOn: state.detailView.get('toolbarOn'),
-  wylieOn: state.main.get('wylieOn'),
   keyword: state.keyboardSearch.get('keyword'),
+  lineHeight: state.main.get('lineHeight'),
+  matchIndex: state.detailView.get('matchIndex'),
+  searchBarOn: state.detailView.get('searchBarOn'),
+  searchKeyword: state.detailView.get('searchKeyword'),
+  toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
-  searchBarOn: state.detailView.get('searchBarOn')
+  wylieOn: state.main.get('wylieOn')
 }), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword,
   setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle})
 class DetailView extends Component {
