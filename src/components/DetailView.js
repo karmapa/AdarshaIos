@@ -7,7 +7,7 @@ import wylie from 'tibetan/wylie';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
-import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus,
+import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
   setMatchIndex, setUtis, setLoadingMore} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
@@ -30,6 +30,7 @@ const LIST_VIEW = 'listView';
   fontSize: state.main.get('fontSize'),
   lineHeight: state.main.get('lineHeight'),
   searchKeyword: state.detailView.get('searchKeyword'),
+  isLoading: state.detailView.get('isLoading'),
   isLoadingMore: state.detailView.get('isLoadingMore'),
   matchIndex: state.detailView.get('matchIndex'),
   currentUti: state.detailView.get('currentUti'),
@@ -39,27 +40,29 @@ const LIST_VIEW = 'listView';
   utis: state.detailView.get('utis'),
   searchBarOn: state.detailView.get('searchBarOn')
 }), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword,
-  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore})
+  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading})
 class DetailView extends Component {
 
   static PropTypes = {
     backgroundIndex: PropTypes.number.isRequired,
     fetchTitle: PropTypes.bool,
-    isLoadingMore: PropTypes.bool.isRequired,
-    setLoadingMore: PropTypes.func.isRequired,
-    hasScrolled: PropTypes.bool.isRequired,
     fontSize: PropTypes.number.isRequired,
+    hasScrolled: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isLoadingMore: PropTypes.bool.isRequired,
+    keyword: PropTypes.string.isRequired,
     lineHeight: PropTypes.number.isRequired,
     matchIndex: PropTypes.number.isRequired,
-    setMatchIndex: PropTypes.func.isRequired,
-    setUtis: PropTypes.func.isRequired,
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
-    keyword: PropTypes.string.isRequired,
     searchKeyword: PropTypes.string.isRequired,
     setHasScrolled: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired,
+    setLoadingMore: PropTypes.func.isRequired,
+    setMatchIndex: PropTypes.func.isRequired,
     setSearchKeyword: PropTypes.func.isRequired,
+    setUtis: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
     utis: PropTypes.array.isRequired,
@@ -71,8 +74,6 @@ class DetailView extends Component {
 
     this._lastSearchKeyword = '';
     this._visibleUtiRow = null;
-    this._rowRefs = {};
-    this._pbRefs = {};
     this._rowsLayout = {};
   }
 
@@ -80,7 +81,6 @@ class DetailView extends Component {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
     }),
-    isLoading: false,
     title: ''
   };
 
@@ -89,31 +89,6 @@ class DetailView extends Component {
   componentWillMount() {
     LayoutAnimation.spring();
   }
-
-  componentDidUpdate() {
-    /*TimerMixin.requestAnimationFrame(() => {
-      this.getFocusElementOffset();
-    });*/
-  }
-
-  getFocusElementOffset = () => {
-    let uti = _.get(this._visibleUtiRow, 'uti');
-    let ref = this.getHighlightRef(uti, this.props.matchIndex);
-    let element = this._rowRefs[ref];
-    let pbRef = this.getPbRef(uti);
-    let container = this._pbRefs[pbRef];
-
-    if (container && element) {
-        element.measureLayout(React.findNodeHandle(container), (x, y, width, height) => {
-          //console.log('here', x, y, width, height);
-        });
-    }
-  };
-
-  clearCache = () => {
-    this._rowRefs = {};
-    this._pbRefs = {};
-  };
 
   componentWillReceiveProps(nextProps, nextState) {
     if (! _.isEqual(_.pick(this.props, SETTINGS_PROPS), _.pick(nextProps, SETTINGS_PROPS))) {
@@ -161,9 +136,12 @@ class DetailView extends Component {
 
   preload = async (rows = this.props.rows) => {
 
+    let {setLoading, isLoading} = this.props;
     let promises = [];
 
-    this.setLoading(true);
+    if (! isLoading) {
+      setLoading(true);
+    }
     this._rows = rows;
 
     promises.push(this.loadNext());
@@ -173,7 +151,7 @@ class DetailView extends Component {
     }
     return Promise.all(promises)
       .then(() => {
-        this.setLoading(false);
+        setLoading(false);
       });
   };
 
@@ -191,10 +169,6 @@ class DetailView extends Component {
   };
 
   setTitle = title => this.setState({title});
-
-  setLoading = isLoading => {
-    this.setState({isLoading});
-  };
 
   getDataSource = (rows, append = true) => {
     if (append) {
@@ -223,20 +197,6 @@ class DetailView extends Component {
   goHome = () => {
     this.props.navigator.popToTop();
   };
-
-  getHighlightRef = (uti, matchIndex) => {
-    return uti + ':' + matchIndex;
-  };
-
-  storeTextRef = ref => {
-    return data => this._rowRefs[ref] = data;
-  };
-
-  storePbRef = ref => {
-    return data => this._pbRefs[ref] = data;
-  };
-
-  getPbRef = uti => 'box-' + uti;
 
   handleTextLayout = event => {
     console.log('handleTextLayout', event.nativeEvent.layout);
@@ -280,7 +240,7 @@ class DetailView extends Component {
 
   renderRow = row => {
     return (
-      <View onLayout={this.handleRowLayout.bind(this, row)} ref={this.storePbRef('box-' + row.uti)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
+      <View onLayout={this.handleRowLayout.bind(this, row)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
           <TibetanText>{getUti(row)}</TibetanText>
           {this.renderText(row)}
@@ -435,7 +395,9 @@ class DetailView extends Component {
 
   goTop = async () => {
 
-    this.setLoading(true);
+    let {setLoading, searchKeyword} = this.props;
+
+    setLoading(true);
 
     let rows;
 
@@ -445,18 +407,18 @@ class DetailView extends Component {
       let vpos = _.get(data, 'breadcrumb[3].vpos');
 
       if (_.isUndefined(vpos)) {
-        this.setLoading(false);
+        setLoading(false);
         return;
       }
 
       rows = await fetch({
         vpos,
-        q: cleanKeyword(this.props.searchKeyword)
+        q: cleanKeyword(searchKeyword)
       });
 
     } catch(err) {
       console.log('goTop err:', err);
-      this.setLoading(false);
+      setLoading(false);
       return;    // don't do anything
     }
 
@@ -489,7 +451,6 @@ class DetailView extends Component {
   };
 
   closeSearchInput = () => {
-    this.clearCache();
     this._lastSearchKeyword = this.props.searchKeyword;
     this.props.setSearchKeyword('');
     this.props.setSearchBarStatus(false);
@@ -601,11 +562,11 @@ class DetailView extends Component {
 
   render() {
 
-    if (this.state.isLoading) {
+    let {toolbarOn, isLoading} = this.props;
+
+    if (isLoading) {
       return renderSpinner();
     }
-
-    let {toolbarOn} = this.props;
 
     let listViewProps = {
       dataSource: this.state.dataSource,
@@ -635,12 +596,12 @@ class DetailView extends Component {
     };
 
     return (
-      <View ref="father" style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
+      <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
         <View style={globalStyles.backgroundImageContainer}>
           {this.renderBackgroundImage()}
         </View>
 
-        <View ref="child" style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
+        <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
 
           <View style={styles.container}>
             <RefreshableListView {...listViewProps} />
