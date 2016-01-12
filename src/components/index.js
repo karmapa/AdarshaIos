@@ -1,4 +1,5 @@
 import AdvanceSearchView from './AdvanceSearchView';
+import Background from './Background';
 import Biography from './Biography';
 import CategoryView from './CategoryView';
 import Copyright from './Copyright';
@@ -12,6 +13,7 @@ import TibetanText from './TibetanText';
 
 export {
   AdvanceSearchView,
+  Background,
   Biography,
   CategoryView,
   Copyright,
