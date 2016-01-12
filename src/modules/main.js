@@ -17,21 +17,21 @@ const SET_SUTRA_MAP = 'MAIN::SET_SUTRA_MAP';
 const SET_WYLIE_STATUS = 'MAIN::SET_WYLIE_STATUS';
 
 const defaultReaderSettings = {
+  backgroundIndex: 1,
   fontSize: 16,
   lineHeight: 2,
-  wylieOn: false,
-  backgroundIndex: 1
+  wylieOn: false
 };
 
 const initialState = Immutable.Map(Object.assign({
   db: null,
   dbError: null,
   isLoading: false,
-  selectedTab: 'category',
   isSideMenuOpen: false,
-  sutraMap: {},
+  keyboardHeight: 0,
   keyboardOn: false,
-  keyboardHeight: 0
+  selectedTab: 'category',
+  sutraMap: {}
 }, defaultReaderSettings));
 
 const actionsMap = {
