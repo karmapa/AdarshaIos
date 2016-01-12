@@ -441,6 +441,7 @@ class DetailView extends Component {
   };
 
   showSearchInput = () => {
+
     if (this._lastSearchKeyword) {
       this.props.setSearchKeyword(this._lastSearchKeyword);
     }
