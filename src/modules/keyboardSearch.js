@@ -3,8 +3,8 @@ import Immutable from 'immutable';
 import {fetch, filter} from '../helpers';
 
 const SET_EXCERPT_DATA = 'KEYBOARD_SEARCH::SET_EXCERPT_DATA';
-const SET_KEYBOARD_SEARCH_LOADING = 'KEYBOARD_SEARCH::SET_KEYBOARD_SEARCH_LOADING';
-const SET_KEYBOARD_SEARCH_LOADING_MORE = 'KEYBOARD_SEARCH::SET_KEYBOARD_SEARCH_LOADING_MORE';
+const SET_LOADING = 'KEYBOARD_SEARCH::SET_LOADING';
+const SET_LOADING_MORE = 'KEYBOARD_SEARCH::SET_LOADING_MORE';
 const SET_KEYWORD = 'KEYBOARD_SEARCH::SET_KEYWORD';
 const SET_SEARCH_ERROR = 'KEYBOARD_SEARCH::SET_SEARCH_ERROR';
 
@@ -26,9 +26,9 @@ const actionsMap = {
 
   [SET_EXCERPT_DATA]: (state, action) => state.set('excerptData', action.data),
 
-  [SET_KEYBOARD_SEARCH_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
+  [SET_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
-  [SET_KEYBOARD_SEARCH_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
+  [SET_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
 
   [SET_KEYWORD]: (state, action) => state.set('keyword', action.keyword),
 
@@ -52,7 +52,7 @@ export function loadMore(keyword, utiSets) {
       return;
     }
 
-    dispatch(setKeyboardSearchLoadingMore(true));
+    dispatch(setLoadingMore(true));
 
     let utis = utiSets.shift();
 
@@ -65,7 +65,7 @@ export function loadMore(keyword, utiSets) {
       utiSets
     }));
 
-    dispatch(setKeyboardSearchLoadingMore(false));
+    dispatch(setLoadingMore(false));
   };
 }
 
@@ -73,7 +73,7 @@ export function search(keyword) {
 
   return async dispatch => {
 
-    dispatch(setKeyboardSearchLoading(true));
+    dispatch(setLoading(true));
 
     if (! keyword) {
       dispatch(setExcerptData({
@@ -82,7 +82,7 @@ export function search(keyword) {
         utiSets: [],
         isAppend: false
       }));
-      dispatch(setKeyboardSearchLoading(false));
+      dispatch(setLoading(false));
       return;
     }
 
@@ -94,7 +94,7 @@ export function search(keyword) {
         utiSets: [],
         isAppend: false
       }));
-      dispatch(setKeyboardSearchLoading(false));
+      dispatch(setLoading(false));
       return;
     }
 
@@ -111,7 +111,7 @@ export function search(keyword) {
         utiSets: [],
         isAppend: false
       }));
-      dispatch(setKeyboardSearchLoading(false));
+      dispatch(setLoading(false));
       return;
     }
 
@@ -131,7 +131,7 @@ export function search(keyword) {
       isAppend: false
     }));
 
-    dispatch(setKeyboardSearchLoading(false));
+    dispatch(setLoading(false));
   };
 }
 
@@ -142,16 +142,16 @@ export function setExcerptData(data) {
   };
 }
 
-export function setKeyboardSearchLoading(isLoading) {
+export function setLoading(isLoading) {
   return {
-    type: SET_KEYBOARD_SEARCH_LOADING,
+    type: SET_LOADING,
     isLoading
   };
 }
 
-export function setKeyboardSearchLoadingMore(isLoadingMore) {
+export function setLoadingMore(isLoadingMore) {
   return {
-    type: SET_KEYBOARD_SEARCH_LOADING_MORE,
+    type: SET_LOADING_MORE,
     isLoadingMore
   };
 }
