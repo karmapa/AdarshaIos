@@ -73,7 +73,6 @@ class DetailView extends Component {
     super(props);
 
     this._lastSearchKeyword = '';
-    this._visibleUtiRow = null;
     this._rowsLayout = {};
   }
 
