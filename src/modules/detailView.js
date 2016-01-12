@@ -1,22 +1,24 @@
 import Immutable from 'immutable';
 
-const SET_HAS_SCROLLED = 'SET_HAS_SCROLLED';
-const SET_TOOLBAR_STATUS = 'SET_TOOLBAR_STATUS';
-const SET_SEARCH_KEYWORD = 'SET_SEARCH_KEYWORD';
-const SET_SEARCHBAR_STATUS = 'SET_SEARCHBAR_STATUS';
-const SET_MATCH_INDEX = 'SET_MATCH_INDEX';
-const SET_UTIS = 'SET_UTIS';
-const SET_DETAIL_VIEW_LOADING = 'SET_DETAIL_VIEW_LOADING';
-const SET_DETAIL_VIEW_LOADING_MORE = 'SET_DETAIL_VIEW_LOADING_MORE';
+const SET_HAS_SCROLLED = 'DETAIL_VIEW::SET_HAS_SCROLLED';
+const SET_TOOLBAR_STATUS = 'DETAIL_VIEW::SET_TOOLBAR_STATUS';
+const SET_SEARCH_KEYWORD = 'DETAIL_VIEW::SET_SEARCH_KEYWORD';
+const SET_SEARCHBAR_STATUS = 'DETAIL_VIEW::SET_SEARCHBAR_STATUS';
+const SET_MATCH_INDEX = 'DETAIL_VIEW::SET_MATCH_INDEX';
+const SET_UTIS = 'DETAIL_VIEW::SET_UTIS';
+const SET_DETAIL_VIEW_LOADING = 'DETAIL_VIEW::SET_DETAIL_VIEW_LOADING';
+const SET_DETAIL_VIEW_LOADING_MORE = 'DETAIL_VIEW::SET_DETAIL_VIEW_LOADING_MORE';
+const SET_TITLE = 'DETAIL_VIEW::SET_TITLE';
 
 const initialState = Immutable.Map({
   hasScrolled: false,
-  toolbarOn: true,
-  searchBarOn: false,
-  searchKeyword: '',
-  matchIndex: 0,
   isLoading: false,
   isLoadingMore: false,
+  matchIndex: 0,
+  searchBarOn: false,
+  searchKeyword: '',
+  title: '',
+  toolbarOn: true,
   utis: []
 });
 
@@ -36,7 +38,9 @@ const actionsMap = {
 
   [SET_DETAIL_VIEW_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
-  [SET_DETAIL_VIEW_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore)
+  [SET_DETAIL_VIEW_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
+
+  [SET_TITLE]: (state, action) => state.set('title', action.title)
 };
 
 export default function reducer(state = initialState, action) {
@@ -97,5 +101,12 @@ export function setLoading(isLoading) {
   return {
     type: SET_DETAIL_VIEW_LOADING,
     isLoading
+  };
+}
+
+export function setTitle(title) {
+  return {
+    type: SET_TITLE,
+    title
   };
 }

@@ -8,7 +8,7 @@ import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
 import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
-  setMatchIndex, setUtis, setLoadingMore} from '../modules/detailView';
+  setTitle, setMatchIndex, setUtis, setLoadingMore} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
@@ -40,12 +40,11 @@ const LIST_VIEW = 'listView';
   utis: state.detailView.get('utis'),
   searchBarOn: state.detailView.get('searchBarOn')
 }), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword,
-  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading})
+  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle})
 class DetailView extends Component {
 
   static PropTypes = {
     backgroundIndex: PropTypes.number.isRequired,
-    fetchTitle: PropTypes.bool,
     fontSize: PropTypes.number.isRequired,
     hasScrolled: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -60,6 +59,7 @@ class DetailView extends Component {
     setHasScrolled: PropTypes.func.isRequired,
     setLoading: PropTypes.func.isRequired,
     setLoadingMore: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired,
     setMatchIndex: PropTypes.func.isRequired,
     setSearchKeyword: PropTypes.func.isRequired,
     setUtis: PropTypes.func.isRequired,
@@ -78,9 +78,17 @@ class DetailView extends Component {
 
   state = {
     dataSource: new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2
-    }),
-    title: ''
+      rowHasChanged: (row1, row2) => {
+        if (this.isVisibleRow(row2)) {
+          return true;
+        }
+        return false;
+      }
+    })
+  };
+
+  isVisibleRow = row => {
+    return this.props.utis.includes(row.uti);
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -127,7 +135,7 @@ class DetailView extends Component {
     this.lastOffsetY = 0;
     this.isScrolling = false;
     this.direction = null;
-    this.setTitle(this.props.title);
+
     TimerMixin.setTimeout(() => {
       this.preload();
     });
@@ -144,10 +152,8 @@ class DetailView extends Component {
     this._rows = rows;
 
     promises.push(this.loadNext());
+    promises.push(this.fetchTitle());
 
-    if (this.props.fetchTitle) {
-      promises.push(this.fetchTitle());
-    }
     return Promise.all(promises)
       .then(() => {
         setLoading(false);
@@ -160,14 +166,12 @@ class DetailView extends Component {
     let uti = getUti(row);
     let data = await toc({uti});
 
-    this.setTitle(_.get(data, 'breadcrumb[3].t'));
+    this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
   };
 
   openSideMenu = () => {
     this.props.setSideMenuStatus(true);
   };
-
-  setTitle = title => this.setState({title});
 
   getDataSource = (rows, append = true) => {
     if (append) {
@@ -180,9 +184,6 @@ class DetailView extends Component {
   };
 
   rerenderListView = () => {
-    // workaround of forcing a ListView to update
-    // https://github.com/facebook/react-native/issues/1133
-    this._rows = JSON.parse(JSON.stringify(this._rows));
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
@@ -384,7 +385,7 @@ class DetailView extends Component {
     if (uti) {
       this.props.navigator.push({
         name: 'Biography',
-        title: this.state.title,
+        title: this.props.title,
         uti
       });
     }
@@ -557,13 +558,13 @@ class DetailView extends Component {
 
   renderFooter = () => {
     if (this.props.isLoadingMore) {
-      return renderSpinner();
+      return renderSpinner({transparent: true});
     }
   };
 
   renderContent = () => {
 
-    let {toolbarOn, isLoading} = this.props;
+    let {toolbarOn, isLoading, title} = this.props;
 
     if (isLoading) {
       return renderSpinner({transparent: true});
@@ -576,7 +577,7 @@ class DetailView extends Component {
       ref: LIST_VIEW,
       renderRow: this.renderRow,
       renderAheadDistance: 2000,
-      onEndReachedThreshold: 3000,
+      onEndReachedThreshold: 0,
       onChangeVisibleRows: this.handleChangeVisibleRows,
       renderFooter: this.renderFooter,
       renderScrollComponent: props => {
@@ -606,7 +607,7 @@ class DetailView extends Component {
               <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
-              <TibetanText numberOfLines={1} style={styles.navTitle}>{this.state.title}</TibetanText>
+              <TibetanText numberOfLines={1} style={styles.navTitle}>{title}</TibetanText>
             </View>
           </View>
 

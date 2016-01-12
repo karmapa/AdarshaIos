@@ -108,7 +108,6 @@ class KeyboardSearchView extends Component {
   onRowClicked = row => {
     this.props.navigator.push({
       name: 'DetailView',
-      fetchTitle: true,
       rows: [row]
     });
   };
