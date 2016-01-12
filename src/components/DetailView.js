@@ -111,6 +111,16 @@ class DetailView extends Component {
     return _.find(this._rows, {uti});
   };
 
+  updateHitsByRows = (rows = [], newRows = []) => {
+    newRows.forEach(newRow => {
+      let row = _.find(rows, {uti: newRow.uti});
+      if (row) {
+        row.hits = newRow.hits;
+      }
+    });
+    return rows;
+  };
+
   highlightAsync = async searchKeyword => {
 
     this._rows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
