@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import React, {Text} from 'react-native';
-import {values} from '../styles/global.style';
 import {getHighlightStyle} from '.';
 
 export default function highlight(text, hits = [], fn = () => {}) {
