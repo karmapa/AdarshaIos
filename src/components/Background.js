@@ -1,4 +1,4 @@
-import React, {Component, PropTypes, View} from 'react-native';
+import React, {Component, PropTypes, View, Image} from 'react-native';
 import {connect} from 'react-redux/native';
 import {styles as globalStyles} from '../styles/global.style';
 import {styles} from './Background.style';
