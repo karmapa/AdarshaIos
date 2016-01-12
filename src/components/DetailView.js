@@ -1,5 +1,5 @@
 import React, {ListView, Component, View, PropTypes, TextInput, Dimensions,
-  TouchableHighlight, Image, ScrollView, LayoutAnimation} from 'react-native';
+  TouchableHighlight, ScrollView, LayoutAnimation} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -385,6 +385,8 @@ class DetailView extends Component {
     this.isScrolling = false;
   };
 
+  hasBiography = () => !! this.props.title;
+
   showBiography = () => {
     let {visibleUti} = this.props;
     if (visibleUti) {
@@ -486,6 +488,16 @@ class DetailView extends Component {
     }
   };
 
+  renderBiographyButton = () => {
+    if (this.hasBiography()) {
+      return (
+        <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Icon name="ion|document-text" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+        </TouchableHighlight>
+      );
+    }
+  };
+
   renderBottomBarContent = () => {
 
     if (this.props.searchBarOn) {
@@ -526,9 +538,7 @@ class DetailView extends Component {
         <TouchableHighlight onPress={this.goHome} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Icon name="ion|document-text" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-        </TouchableHighlight>
+        {this.renderBiographyButton()}
         <TouchableHighlight onPress={this.showSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="fontawesome|search" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
