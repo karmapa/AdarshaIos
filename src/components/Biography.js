@@ -3,7 +3,7 @@ import React, {Component, PropTypes, Text, View, ScrollView,
 import _ from 'lodash';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {setBiographyHasScrolled, loadBiographyByUti, fields, setBiographyToolbarStatus} from '../modules/biography';
+import {setHasScrolled, loadBiographyByUti, fields, setToolbarStatus} from '../modules/biography';
 import {renderSpinner} from '../helpers';
 import {styles} from './Biography.style';
 import {values, styles as globalStyles} from '../styles/global.style';
@@ -17,7 +17,7 @@ const underlayColor = 'rgba(0, 0, 0, 0)';
   isLoading: state.biography.get('isLoading'),
   toolbarOn: state.biography.get('toolbarOn')
 
-}), {loadBiographyByUti, setBiographyToolbarStatus, setBiographyHasScrolled})
+}), {loadBiographyByUti, setToolbarStatus, setHasScrolled})
 class Biography extends Component {
 
   static PropTypes = {
@@ -26,8 +26,8 @@ class Biography extends Component {
     isLoading: PropTypes.bool.isRequired,
     loadBiographyByUti: PropTypes.func.isRequired,
     navigator: PropTypes.array.isRequired,
-    setBiographyHasScrolled: PropTypes.func.isRequired,
-    setBiographyToolbarStatus: PropTypes.func.isRequired,
+    setHasScrolled: PropTypes.func.isRequired,
+    setToolbarStatus: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
     uti: PropTypes.string.isRequired
@@ -47,7 +47,7 @@ class Biography extends Component {
   }
 
   componentWillUnmount() {
-    this.props.setBiographyHasScrolled(false);
+    this.props.setHasScrolled(false);
   }
 
   goBack = () => {
@@ -56,7 +56,7 @@ class Biography extends Component {
 
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
-    this.props.setBiographyToolbarStatus(toolbarOn);
+    this.props.setToolbarStatus(toolbarOn);
   };
 
   handleScroll = event => {
@@ -64,7 +64,7 @@ class Biography extends Component {
     if (this.props.toolbarOn && this.props.hasScrolled) {
       this.setToolbarStatus(false);
     }
-    this.props.setBiographyHasScrolled(true);
+    this.props.setHasScrolled(true);
   };
 
   handlePress = () => {

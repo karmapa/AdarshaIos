@@ -3,9 +3,9 @@ import _ from 'lodash';
 import {fetch, findBiographyBySutraId} from '../helpers';
 
 const SET_BIOGRAPHY = 'BIOGRAPHY::SET_BIOGRAPHY';
-const SET_BIOGRAPHY_HAS_SCROLLED = 'BIOGRAPHY::SET_BIOGRAPHY_HAS_SCROLLED';
-const SET_BIOGRAPHY_LOADING = 'BIOGRAPHY::SET_BIOGRAPHY_LOADING';
-const SET_BIOGRAPHY_TOOLBAR_STATUS = 'BIOGRAPHY::SET_BIOGRAPHY_TOOLBAR_STATUS';
+const SET_HAS_SCROLLED = 'BIOGRAPHY::SET_HAS_SCROLLED';
+const SET_LOADING = 'BIOGRAPHY::SET_LOADING';
+const SET_TOOLBAR_STATUS = 'BIOGRAPHY::SET_TOOLBAR_STATUS';
 
 const initialState = Immutable.Map({
   biography: null,
@@ -18,11 +18,11 @@ const actionsMap = {
 
   [SET_BIOGRAPHY]: (state, action) => state.set('biography', action.biography),
 
-  [SET_BIOGRAPHY_HAS_SCROLLED]: (state, action) => state.set('hasScrolled', action.hasScrolled),
+  [SET_HAS_SCROLLED]: (state, action) => state.set('hasScrolled', action.hasScrolled),
 
-  [SET_BIOGRAPHY_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
+  [SET_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
-  [SET_BIOGRAPHY_TOOLBAR_STATUS]: (state, action) => state.set('toolbarOn', action.toolbarOn)
+  [SET_TOOLBAR_STATUS]: (state, action) => state.set('toolbarOn', action.toolbarOn)
 
 };
 
@@ -35,7 +35,7 @@ export function loadBiographyByUti(uti) {
 
   return dispatch => {
 
-    dispatch(setBiographyLoading(true));
+    dispatch(setLoading(true));
 
     return fetch({uti, fields: 'sutra'})
       .then(rows => {
@@ -45,7 +45,7 @@ export function loadBiographyByUti(uti) {
       .then(biography => {
         dispatch(setBiography(biography));
       })
-      .finally(() => dispatch(setBiographyLoading(false)));
+      .finally(() => dispatch(setLoading(false)));
   };
 }
 
@@ -56,23 +56,23 @@ export function setBiography(biography) {
   };
 }
 
-export function setBiographyLoading(isLoading) {
+export function setLoading(isLoading) {
   return {
-    type: SET_BIOGRAPHY_LOADING,
+    type: SET_LOADING,
     isLoading
   };
 }
 
-export function setBiographyToolbarStatus(toolbarOn) {
+export function setToolbarStatus(toolbarOn) {
   return {
-    type: SET_BIOGRAPHY_TOOLBAR_STATUS,
+    type: SET_TOOLBAR_STATUS,
     toolbarOn
   };
 }
 
-export function setBiographyHasScrolled(hasScrolled) {
+export function setHasScrolled(hasScrolled) {
   return {
-    type: SET_BIOGRAPHY_HAS_SCROLLED,
+    type: SET_HAS_SCROLLED,
     hasScrolled
   };
 }
