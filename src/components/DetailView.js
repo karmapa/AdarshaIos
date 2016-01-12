@@ -207,10 +207,6 @@ class DetailView extends Component {
     this.props.navigator.popToTop();
   };
 
-  handleTextLayout = event => {
-    console.log('handleTextLayout', event.nativeEvent.layout);
-  };
-
   renderText = row => {
 
     const {fontSize, lineHeight, wylieOn, matchIndex, searchBarOn} = this.props;
