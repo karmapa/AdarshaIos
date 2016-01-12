@@ -9,6 +9,7 @@ const SET_UTIS = 'DETAIL_VIEW::SET_UTIS';
 const SET_LOADING = 'DETAIL_VIEW::SET_LOADING';
 const SET_LOADING_MORE = 'DETAIL_VIEW::SET_LOADING_MORE';
 const SET_TITLE = 'DETAIL_VIEW::SET_TITLE';
+const SET_VISIBLE_UTI = 'DETAIL_VIEW::SET_VISIBLE_UTI';
 
 const initialState = Immutable.Map({
   hasScrolled: false,
@@ -19,7 +20,8 @@ const initialState = Immutable.Map({
   searchKeyword: '',
   title: '',
   toolbarOn: true,
-  utis: []
+  utis: [],
+  visibleUti: null
 });
 
 const actionsMap = {
@@ -40,7 +42,9 @@ const actionsMap = {
 
   [SET_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
 
-  [SET_TITLE]: (state, action) => state.set('title', action.title)
+  [SET_TITLE]: (state, action) => state.set('title', action.title),
+
+  [SET_VISIBLE_UTI]: (state, action) => state.set('visibleUti', action.visibleUti)
 };
 
 export default function reducer(state = initialState, action) {
@@ -108,5 +112,12 @@ export function setTitle(title) {
   return {
     type: SET_TITLE,
     title
+  };
+}
+
+export function setVisibleUti(visibleUti) {
+  return {
+    type: SET_VISIBLE_UTI,
+    visibleUti
   };
 }

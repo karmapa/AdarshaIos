@@ -8,7 +8,7 @@ import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
 import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
-  setTitle, setMatchIndex, setUtis, setLoadingMore} from '../modules/detailView';
+  setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
@@ -25,7 +25,7 @@ const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 const LIST_VIEW = 'listView';
 
 @connect(state => ({
-  currentUti: state.detailView.get('currentUti'),
+  visibleUti: state.detailView.get('visibleUti'),
   fontSize: state.main.get('fontSize'),
   hasScrolled: state.detailView.get('hasScrolled'),
   isLoading: state.detailView.get('isLoading'),
@@ -39,7 +39,7 @@ const LIST_VIEW = 'listView';
   toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
   wylieOn: state.main.get('wylieOn')
-}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword,
+}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword, setVisibleUti,
   setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle})
 class DetailView extends Component {
 
@@ -61,9 +61,11 @@ class DetailView extends Component {
     setTitle: PropTypes.func.isRequired,
     setMatchIndex: PropTypes.func.isRequired,
     setSearchKeyword: PropTypes.func.isRequired,
+    setVisibleUti: PropTypes.func.isRequired,
     setUtis: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
+    visibleUti: PropTypes.string.isRequired,
     utis: PropTypes.array.isRequired,
     wylieOn: PropTypes.bool.isRequired
   };
@@ -105,7 +107,7 @@ class DetailView extends Component {
   }
 
   getVisibleRow = () => {
-    let uti = this.getVisibleUti() || _.get(_.first(this._rows), 'uti');
+    let uti = this.props.visibleUti || _.get(_.first(this._rows), 'uti');
     return _.find(this._rows, {uti});
   };
 
@@ -207,8 +209,7 @@ class DetailView extends Component {
 
   renderText = row => {
 
-    const {fontSize, lineHeight, wylieOn, matchIndex, searchBarOn} = this.props;
-    const visibleUti = this.getVisibleUti();
+    const {fontSize, lineHeight, wylieOn, matchIndex, searchBarOn, visibleUti} = this.props;
     const defaultStyle = {fontSize, lineHeight: lineHeight * fontSize};
 
     let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
@@ -317,7 +318,7 @@ class DetailView extends Component {
     return _.pluck(this._rows, 'uti');
   };
 
-  getVisibleUti = () => {
+  setVisibleUti = () => {
 
     let {utis} = this.props;
     let middle = this.lastOffsetY + (Dimensions.get('window').height / 2);
@@ -335,12 +336,12 @@ class DetailView extends Component {
       .first()
       .value();
 
-    return layoutRow ? layoutRow.uti : _.first(utis);
+    let visibleUti = layoutRow ? layoutRow.uti : _.first(utis);
+    this.props.setVisibleUti(visibleUti);
   };
 
   updateTitle = _.debounce(async () => {
-    let uti = this.getVisibleUti();
-    let data = await toc({uti});
+    let data = await toc({uti: this.props.visibleUti});
     this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
   }, 100);
 
@@ -361,6 +362,7 @@ class DetailView extends Component {
     this.updateTitle();
     this.lastOffsetY = offsetY;
     this.props.setHasScrolled(true);
+    this.setVisibleUti();
   };
 
   handlePress = () => {
@@ -384,12 +386,12 @@ class DetailView extends Component {
   };
 
   showBiography = () => {
-    let uti = this.getVisibleUti();
-    if (uti) {
+    let {visibleUti} = this.props;
+    if (visibleUti) {
       this.props.navigator.push({
         name: 'Biography',
         title: this.props.title,
-        uti
+        uti: visibleUti
       });
     }
   };
@@ -411,8 +413,7 @@ class DetailView extends Component {
     let rows;
 
     try {
-      let uti = this.getVisibleUti();
-      let data = await toc({uti});
+      let data = await toc({uti: this.props.visibleUti});
       let vpos = _.get(data, 'breadcrumb[3].vpos');
 
       if (_.isUndefined(vpos)) {
