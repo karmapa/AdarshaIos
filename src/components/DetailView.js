@@ -22,6 +22,9 @@ const fontColor = '#ffffff';
 const ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
 const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 
+const COLOR_YELLOW = '#f1c40f';
+const COLOR_ORANGE = '#e67e22';
+
 const LIST_VIEW = 'listView';
 
 @connect(state => ({
@@ -74,7 +77,7 @@ class DetailView extends Component {
     super(props);
 
     this._lastSearchKeyword = '';
-    this._layoutRows = {};
+    this._layoutData = {};
   }
 
   state = {
@@ -146,7 +149,10 @@ class DetailView extends Component {
     this.direction = null;
 
     TimerMixin.setTimeout(() => {
-      this.preload();
+      this.preload()
+        .then(() => {
+          this.setVisibleUti();
+        });
     });
   }
 
@@ -223,11 +229,11 @@ class DetailView extends Component {
       if (style) {
 
         // default
-        style = {backgroundColor: '#f1c40f'};
+        style = {backgroundColor: COLOR_YELLOW};
 
         if ((row.uti === visibleUti) && (highlightIndex === matchIndex) && searchBarOn) {
           // target
-          style.backgroundColor = '#e67e22';
+          style.backgroundColor = COLOR_ORANGE;
         }
         highlightIndex++;
         return <TibetanText style={style} key={key}>{str}</TibetanText>;
@@ -239,7 +245,7 @@ class DetailView extends Component {
   };
 
   handleRowLayout = (row, event) => {
-    this._layoutRows[row.uti] = event.nativeEvent.layout;
+    this._layoutData[row.uti] = event.nativeEvent.layout;
   };
 
   getRowKey = row => 'row-' + row.uti;
@@ -325,7 +331,7 @@ class DetailView extends Component {
 
     let layoutRow = _.chain(utis)
       .map(uti => {
-        const layout = this._layoutRows[uti];
+        const layout = this._layoutData[uti];
         return layout ? {uti, layout} : null;
       })
       .filter(_.isObject)
@@ -336,7 +342,8 @@ class DetailView extends Component {
       .first()
       .value();
 
-    let visibleUti = layoutRow ? layoutRow.uti : _.first(utis);
+    let visibleUti = layoutRow ? layoutRow.uti : _.get(this._rows, '[0].uti');
+
     this.props.setVisibleUti(visibleUti);
   };
 
@@ -458,12 +465,44 @@ class DetailView extends Component {
     this.props.setSearchBarStatus(false);
   };
 
+  getPreviousUti = () => {
+    let {visibleUti, utis} = this.props;
+    let utisWithHits = utis.filter(uti => _.get(_.find(this._rows, {uti}), 'hits', []).length > 0);
+    let index = utisWithHits.indexOf(visibleUti);
+    let notFound = -1 === index;
+    let noNext = 0 === index;
+
+    if (notFound || noNext) {
+      return null;
+    }
+    return utisWithHits[index - 1];
+  };
+
+  getNextUti = () => {
+    let {visibleUti, utis} = this.props;
+    let utisWithHits = utis.filter(uti => _.get(_.find(this._rows, {uti}), 'hits', []).length > 0);
+    let index = utisWithHits.indexOf(visibleUti);
+    let notFound = -1 === index;
+    let noNext = index === (utisWithHits.length - 1);
+
+    if (notFound || noNext) {
+      return null;
+    }
+    return utisWithHits[index + 1];
+  };
+
   goPreviousKeyword = () => {
 
     let {matchIndex, setMatchIndex} = this.props;
 
     if (0 === matchIndex) {
-      console.log('prev limit');
+      let previousUti = this.getPreviousUti();
+      let previousRow = _.find(this._rows, {uti: previousUti});
+      let layoutRow = this._layoutData[previousUti];
+      if (layoutRow && previousRow) {
+        setMatchIndex(previousRow.hits.length - 1);
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(layoutRow.y);
+      }
       return;
     }
 
@@ -479,7 +518,13 @@ class DetailView extends Component {
     let lastIndex = _.get(visibleRow, 'hits', []).length - 1;
 
     if (lastIndex === matchIndex) {
-      console.log('next limit');
+      let nextUti = this.getNextUti();
+      let layoutRow = this._layoutData[nextUti];
+
+      if (layoutRow) {
+        setMatchIndex(0);
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(layoutRow.y);
+      }
       return;
     }
 
