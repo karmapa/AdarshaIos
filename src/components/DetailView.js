@@ -25,7 +25,6 @@ const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 const LIST_VIEW = 'listView';
 
 @connect(state => ({
-  backgroundIndex: state.main.get('backgroundIndex'),
   currentUti: state.detailView.get('currentUti'),
   fontSize: state.main.get('fontSize'),
   hasScrolled: state.detailView.get('hasScrolled'),
@@ -45,7 +44,6 @@ const LIST_VIEW = 'listView';
 class DetailView extends Component {
 
   static PropTypes = {
-    backgroundIndex: PropTypes.number.isRequired,
     fontSize: PropTypes.number.isRequired,
     hasScrolled: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -451,17 +449,6 @@ class DetailView extends Component {
     this.props.setSearchBarStatus(true);
   };
 
-  renderBackgroundImage = () => {
-    switch (this.props.backgroundIndex) {
-      case 0:
-        return <View style={{backgroundColor: '#ffffff', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}} />;
-      case 1:
-        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture')} />;
-      case 2:
-        return <Image style={globalStyles.cover} resizeMode="cover" source={require('image!bg-scripture2')} />;
-    }
-  };
-
   closeSearchInput = () => {
     this._lastSearchKeyword = this.props.searchKeyword;
     this.props.setSearchKeyword('');
@@ -639,9 +626,7 @@ class DetailView extends Component {
 
     return (
       <View style={[globalStyles.transparentContainer, {paddingTop: 0}]}>
-        <View style={globalStyles.backgroundImageContainer}>
-          {this.renderBackgroundImage()}
-        </View>
+        <Background />
         {this.renderContent()}
       </View>
     );
