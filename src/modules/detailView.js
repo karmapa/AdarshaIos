@@ -6,8 +6,8 @@ const SET_SEARCH_KEYWORD = 'DETAIL_VIEW::SET_SEARCH_KEYWORD';
 const SET_SEARCHBAR_STATUS = 'DETAIL_VIEW::SET_SEARCHBAR_STATUS';
 const SET_MATCH_INDEX = 'DETAIL_VIEW::SET_MATCH_INDEX';
 const SET_UTIS = 'DETAIL_VIEW::SET_UTIS';
-const SET_DETAIL_VIEW_LOADING = 'DETAIL_VIEW::SET_DETAIL_VIEW_LOADING';
-const SET_DETAIL_VIEW_LOADING_MORE = 'DETAIL_VIEW::SET_DETAIL_VIEW_LOADING_MORE';
+const SET_LOADING = 'DETAIL_VIEW::SET_LOADING';
+const SET_LOADING_MORE = 'DETAIL_VIEW::SET_LOADING_MORE';
 const SET_TITLE = 'DETAIL_VIEW::SET_TITLE';
 
 const initialState = Immutable.Map({
@@ -36,9 +36,9 @@ const actionsMap = {
 
   [SET_UTIS]: (state, action) => state.set('utis', action.utis),
 
-  [SET_DETAIL_VIEW_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
+  [SET_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
-  [SET_DETAIL_VIEW_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
+  [SET_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore),
 
   [SET_TITLE]: (state, action) => state.set('title', action.title)
 };
@@ -92,14 +92,14 @@ export function setUtis(utis) {
 
 export function setLoadingMore(isLoadingMore) {
   return {
-    type: SET_DETAIL_VIEW_LOADING_MORE,
+    type: SET_LOADING_MORE,
     isLoadingMore
   };
 }
 
 export function setLoading(isLoading) {
   return {
-    type: SET_DETAIL_VIEW_LOADING,
+    type: SET_LOADING,
     isLoading
   };
 }
