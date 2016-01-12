@@ -233,9 +233,10 @@ class DetailView extends Component {
     return <TibetanText style={defaultStyle} children={children} />;
   };
 
-  handleRowLayout(row, event) {
+  handleRowLayout = (row, event) => {
     this._layoutRows[row.uti] = event.nativeEvent.layout;
-  }
+  };
+
 
   renderRow = row => {
     return (
