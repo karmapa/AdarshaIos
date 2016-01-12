@@ -6,6 +6,7 @@ const SET_SEARCH_KEYWORD = 'SET_SEARCH_KEYWORD';
 const SET_SEARCHBAR_STATUS = 'SET_SEARCHBAR_STATUS';
 const SET_MATCH_INDEX = 'SET_MATCH_INDEX';
 const SET_UTIS = 'SET_UTIS';
+const SET_DETAIL_VIEW_LOADING = 'SET_DETAIL_VIEW_LOADING';
 const SET_DETAIL_VIEW_LOADING_MORE = 'SET_DETAIL_VIEW_LOADING_MORE';
 
 const initialState = Immutable.Map({
@@ -14,6 +15,7 @@ const initialState = Immutable.Map({
   searchBarOn: false,
   searchKeyword: '',
   matchIndex: 0,
+  isLoading: false,
   isLoadingMore: false,
   utis: []
 });
@@ -31,6 +33,8 @@ const actionsMap = {
   [SET_MATCH_INDEX]: (state, action) => state.set('matchIndex', action.matchIndex),
 
   [SET_UTIS]: (state, action) => state.set('utis', action.utis),
+
+  [SET_DETAIL_VIEW_LOADING]: (state, action) => state.set('isLoading', action.isLoading),
 
   [SET_DETAIL_VIEW_LOADING_MORE]: (state, action) => state.set('isLoadingMore', action.isLoadingMore)
 };
@@ -86,5 +90,12 @@ export function setLoadingMore(isLoadingMore) {
   return {
     type: SET_DETAIL_VIEW_LOADING_MORE,
     isLoadingMore
+  };
+}
+
+export function setLoading(isLoading) {
+  return {
+    type: SET_DETAIL_VIEW_LOADING,
+    isLoading
   };
 }
