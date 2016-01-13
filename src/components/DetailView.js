@@ -24,6 +24,7 @@ const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 
 const COLOR_YELLOW = '#f1c40f';
 const COLOR_ORANGE = '#e67e22';
+const TOP_BAR_HEIGHT = 32;
 
 const LIST_VIEW = 'listView';
 
