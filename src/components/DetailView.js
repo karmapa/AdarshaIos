@@ -339,6 +339,8 @@ class DetailView extends Component {
 
   getOffsetBottom = () => this.lastOffsetY + Dimensions.get('window').height;
 
+  getWindowHeight = () => Dimensions.get('window').height;
+
   setVisibleUti = () => {
 
     let {utis} = this.props;
