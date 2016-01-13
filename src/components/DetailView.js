@@ -146,9 +146,7 @@ class DetailView extends Component {
 
   componentDidMount() {
 
-    let {keyword, setSearchKeyword, setMatchIndex} = this.props;
-
-    setMatchIndex(0);
+    let {keyword, setSearchKeyword} = this.props;
 
     if (keyword) {
       setSearchKeyword(keyword);
@@ -161,30 +159,33 @@ class DetailView extends Component {
     this.direction = null;
 
     TimerMixin.setTimeout(() => {
-      this.preload()
-        .then(() => {
-          this.setVisibleUti();
-        });
+      this.preload();
     });
   }
 
   preload = async (rows = this.props.rows) => {
 
-    let {setLoading, isLoading} = this.props;
-    let promises = [];
+    let {setLoading, isLoading, setMatchIndex, setVisibleUti} = this.props;
 
     if (! isLoading) {
       setLoading(true);
     }
     this._rows = rows || [];
 
-    promises.push(this.loadNext());
-    promises.push(this.fetchTitle());
+    let newRows = await this.fetchNextRows();
+    let dataSource = this.getDataSource(newRows, false);
 
-    return Promise.all(promises)
-      .then(() => {
-        setLoading(false);
-      });
+    let assignedUti = _.get(_.first(this._rows), 'uti');
+    if (assignedUti) {
+      setVisibleUti(assignedUti);
+    }
+
+    this.setState({dataSource});
+
+    await this.fetchTitle();
+
+    setMatchIndex(0);
+    setLoading(false);
   };
 
   fetchTitle = async () => {
@@ -305,6 +306,17 @@ class DetailView extends Component {
     }
   };
 
+  fetchNextRows = () => {
+
+    let lastRow = _.last(this._rows);
+    let uti = getUti(lastRow);
+
+    if (! uti) {
+      return Promise.reject('uti is missing');
+    }
+    return loadNext({count: 5, uti, q: cleanKeyword(this.props.searchKeyword)});
+  };
+
   loadNext = async () => {
 
     let {isLoadingMore, setLoadingMore} = this.props;
@@ -315,14 +327,7 @@ class DetailView extends Component {
 
     setLoadingMore(true);
 
-    let lastRow = _.last(this._rows);
-    let uti = getUti(lastRow);
-
-    if (! uti) {
-      return Promise.reject('uti is missing');
-    }
-
-    let rows = await loadNext({count: 5, uti, q: cleanKeyword(this.props.searchKeyword)});
+    let rows = await this.fetchNextRows();
 
     this.setState({
       dataSource: this.getDataSource(rows)
@@ -350,9 +355,13 @@ class DetailView extends Component {
 
   getWindowHeight = () => Dimensions.get('window').height;
 
-  setVisibleUti = () => {
+  setVisibleUti = assignedUti => {
 
-    let {utis} = this.props;
+    let {utis, setVisibleUti} = this.props;
+
+    if (assignedUti) {
+      setVisibleUti(assignedUti);
+    }
     let offsetMiddle = this.getOffsetMiddle();
 
     let layoutRow = _.chain(utis)
@@ -370,7 +379,7 @@ class DetailView extends Component {
 
     let visibleUti = layoutRow ? layoutRow.uti : _.get(this._rows, '[0].uti');
 
-    this.props.setVisibleUti(visibleUti);
+    setVisibleUti(visibleUti);
   };
 
   updateTitle = _.debounce(async () => {
