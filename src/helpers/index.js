@@ -13,6 +13,7 @@ import openDb from './openDb';
 import renderSpinner from './renderSpinner';
 import storage from './storage';
 import toc from './toc';
+import utiToSutraId from './utiToSutraId';
 
 export {
   attachKeyboard,
@@ -29,5 +30,6 @@ export {
   openDb,
   renderSpinner,
   storage,
-  toc
+  toc,
+  utiToSutraId
 };
