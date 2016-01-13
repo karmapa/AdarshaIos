@@ -354,7 +354,7 @@ class DetailView extends Component {
       .filter(_.isObject)
       .filter(row => {
         let {layout} = row;
-        return (layout.y < middle) && (middle < (layout.y + layout.height));
+        return (layout.y < offsetMiddle) && (offsetMiddle < (layout.y + layout.height));
       })
       .first()
       .value();
