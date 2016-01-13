@@ -484,8 +484,8 @@ class DetailView extends Component {
 
   getUtisWithHits = utis => {
     return utis.filter(uti => {
-      let row = _.find(this._rows, {uti});
-      return _.get(row, 'hits', []).length > 0;
+      let row = _.find(this._rows, {uti}) || {};
+      return (row.hits || []).length > 0;
     });
   };
 
@@ -499,7 +499,7 @@ class DetailView extends Component {
     let noNext = 0 === index;
 
     if (notFound || noNext) {
-      return null;
+      return [];
     }
     return utisWithHits[index - 1];
   };
