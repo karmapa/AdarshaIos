@@ -87,7 +87,7 @@ export const fields = [
   {key: 'homeage', name: 'བསྒྱུར་ཕྱག'},
   {key: 'subject', name: 'བརྗོད་བྱ།'},
   {key: 'yana', name: 'ཐེག་པ།'},
-  {key: 'chakra', name: 'དཀའ། འཁོར་ལོ།'},
+  {key: 'chakra', name: 'འཁོར་ལོ།'},
   {key: 'location', name: 'གནས་ཕུན་སུམ་ཚོགས་པ།'},
   {key: 'audience', name: 'འཁོར་ཕུན་སུམ་ཚོགས་པ།'},
   {key: 'author', name: 'སྟོན་པ་ཕུན་སུམ་ཚོགས་པ།'},
