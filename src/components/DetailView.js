@@ -24,10 +24,9 @@ const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 
 const COLOR_YELLOW = '#f1c40f';
 const COLOR_ORANGE = '#e67e22';
-const TOP_BAR_HEIGHT = 32;
-const BOTTOM_BAR_HEIGHT = 100;
 
 const LIST_VIEW = 'listView';
+const DELTA_MOVEMENT = 80;
 
 @connect(state => ({
   visibleUti: state.detailView.get('visibleUti'),
@@ -78,6 +77,8 @@ class DetailView extends Component {
   constructor(props) {
     super(props);
 
+    this._topBarHeight = 0;
+    this._bottomBarHeight = 0;
     this._lastSearchKeyword = '';
     this._layoutData = {};
   }
@@ -175,7 +176,7 @@ class DetailView extends Component {
     if (! isLoading) {
       setLoading(true);
     }
-    this._rows = rows;
+    this._rows = rows || [];
 
     promises.push(this.loadNext());
     promises.push(this.fetchTitle());
@@ -257,6 +258,14 @@ class DetailView extends Component {
 
   handleRowLayout = (row, event) => {
     this._layoutData[row.uti] = event.nativeEvent.layout;
+  };
+
+  setTopBarHeight = event => {
+    this._topBarHeight = event.nativeEvent.layout.height;
+  };
+
+  setBottomBarHeight = event => {
+    this._bottomBarHeight = event.nativeEvent.layout.height;
   };
 
   getRowKey = row => 'row-' + row.uti;
@@ -546,7 +555,7 @@ class DetailView extends Component {
 
       // calculate next keyword's offsetY
       let offsetY = this.getOffsetYByMatchIndex(matchIndex - 1);
-      let topOffsetY = this.lastOffsetY + TOP_BAR_HEIGHT;
+      let topOffsetY = this.lastOffsetY + this._topBarHeight;
 
       if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
         let distance = topOffsetY - offsetY;
@@ -577,8 +586,8 @@ class DetailView extends Component {
 
       if (! _.isNull(offsetY)) {
         setMatchIndex(0);
-        let newOffsetY = offsetY - TOP_BAR_HEIGHT;
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY);
+        let newOffsetY = offsetY - this._topBarHeight;
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY + DELTA_MOVEMENT);
       }
       return;
     }
@@ -589,11 +598,11 @@ class DetailView extends Component {
 
       // calculate next keyword's offsetY
       let offsetY = this.getOffsetYByMatchIndex(matchIndex + 1);
-      let bottomOffset = this.getOffsetBottom() - BOTTOM_BAR_HEIGHT;
+      let bottomOffset = this.getOffsetBottom() - this._bottomBarHeight;
 
       if ((! _.isNull(offsetY)) && (offsetY > bottomOffset)) {
         let distance = offsetY - bottomOffset;
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(this.lastOffsetY + distance);
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(this.lastOffsetY + distance + DELTA_MOVEMENT);
 
       }
     }
@@ -743,7 +752,7 @@ class DetailView extends Component {
 
           <View style={styles.container}>
             <RefreshableListView {...listViewProps} />
-            <View style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
+            <View onLayout={this.setTopBarHeight}  style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
               <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
@@ -751,7 +760,7 @@ class DetailView extends Component {
             </View>
           </View>
 
-          <View style={[styles.bottomBar, {bottom: toolbarOn ? 0 : -70}]}>
+          <View onLayout={this.setBottomBarHeight} style={[styles.bottomBar, {bottom: toolbarOn ? 0 : -70}]}>
             {this.renderBottomBarContent()}
           </View>
 
