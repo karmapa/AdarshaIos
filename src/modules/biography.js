@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
-import {fetch, findBiographyBySutraId} from '../helpers';
+import {utiToSutraId, findBiographyBySutraId} from '../helpers';
 
 const SET_BIOGRAPHY = 'BIOGRAPHY::SET_BIOGRAPHY';
 const SET_HAS_SCROLLED = 'BIOGRAPHY::SET_HAS_SCROLLED';
@@ -37,11 +37,8 @@ export function loadBiographyByUti(uti) {
 
     dispatch(setLoading(true));
 
-    return fetch({uti, fields: 'sutra'})
-      .then(rows => {
-        let sutraId = _.first(_.first(rows).values);
-        return findBiographyBySutraId(sutraId);
-      })
+    return utiToSutraId(uti)
+      .then(sutraId => findBiographyBySutraId(sutraId))
       .then(biography => {
         dispatch(setBiography(biography));
       })
