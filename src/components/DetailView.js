@@ -145,8 +145,12 @@ class DetailView extends Component {
 
   componentDidMount() {
 
-    if (this.props.keyword) {
-      this.props.setSearchKeyword(this.props.keyword);
+    let {keyword, setSearchKeyword, setMatchIndex} = this.props;
+
+    setMatchIndex(0);
+
+    if (keyword) {
+      setSearchKeyword(keyword);
     }
 
     this.isLoading = false;
