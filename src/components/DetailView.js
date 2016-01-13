@@ -335,10 +335,12 @@ class DetailView extends Component {
     return _.pluck(this._rows, 'uti');
   };
 
+  getOffsetMiddle = () => this.lastOffsetY + (Dimensions.get('window').height / 2);
+
   setVisibleUti = () => {
 
     let {utis} = this.props;
-    let middle = this.lastOffsetY + (Dimensions.get('window').height / 2);
+    let offsetMiddle = this.getOffsetMiddle();
 
     let layoutRow = _.chain(utis)
       .map(uti => {
