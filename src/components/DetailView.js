@@ -527,15 +527,35 @@ class DetailView extends Component {
       let previousUti = this.getPreviousUti();
       let previousRow = _.find(this._rows, {uti: previousUti});
       let layoutRow = this._layoutData[previousUti];
+
       if (layoutRow && previousRow) {
-        setMatchIndex(previousRow.hits.length - 1);
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(layoutRow.y);
+
+        let previousHits = previousRow.hits || [];
+        let offsetY = this.getOffsetYByMatchIndex(previousHits.length - 1, previousUti);
+
+        if (! _.isNull(offsetY)) {
+          setMatchIndex(previousHits.length - 1);
+          this.refs[LIST_VIEW].getScrollResponder().scrollTo(this.lastOffsetY - offsetY);
+        }
       }
       return;
     }
 
     if (matchIndex > 0) {
       setMatchIndex(matchIndex - 1);
+
+      // calculate next keyword's offsetY
+      let offsetY = this.getOffsetYByMatchIndex(matchIndex - 1);
+      let topOffsetY = this.lastOffsetY + TOP_BAR_HEIGHT;
+
+      if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
+        let distance = topOffsetY - offsetY;
+        let newOffsetY = offsetY - distance;
+        if (newOffsetY < 0) {
+          newOffsetY = 0;
+        }
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY);
+      }
     }
   };
 
@@ -543,22 +563,60 @@ class DetailView extends Component {
 
     let {matchIndex, setMatchIndex} = this.props;
     let visibleRow = this.getVisibleRow();
-    let lastIndex = _.get(visibleRow, 'hits', []).length - 1;
+
+    if (_.isEmpty(visibleRow)) {
+      return;
+    }
+
+    let lastIndex = (visibleRow.hits || []).length - 1;
 
     if (lastIndex === matchIndex) {
       let nextUti = this.getNextUti();
       let layoutRow = this._layoutData[nextUti];
+      let offsetY = this.getOffsetYByMatchIndex(0, nextUti);
 
-      if (layoutRow) {
+      if (! _.isNull(offsetY)) {
         setMatchIndex(0);
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(layoutRow.y);
+        let newOffsetY = offsetY - TOP_BAR_HEIGHT;
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY);
       }
       return;
     }
 
     if (matchIndex < lastIndex) {
+
       setMatchIndex(matchIndex + 1);
+
+      // calculate next keyword's offsetY
+      let offsetY = this.getOffsetYByMatchIndex(matchIndex + 1);
+      let bottomOffset = this.getOffsetBottom() - BOTTOM_BAR_HEIGHT;
+
+      if ((! _.isNull(offsetY)) && (offsetY > bottomOffset)) {
+        let distance = offsetY - bottomOffset;
+        this.refs[LIST_VIEW].getScrollResponder().scrollTo(this.lastOffsetY + distance);
+
+      }
     }
+  };
+
+  getOffsetYByMatchIndex = (matchIndex, visibleUti = this.props.visibleUti) => {
+
+    let row = _.find(this._rows, {uti: visibleUti});
+    let layoutRow = this._layoutData[visibleUti];
+
+    if (_.isEmpty(row) || _.isEmpty(layoutRow)) {
+      return null;
+    }
+
+    let hits = row.hits || [];
+    let hit = hits[matchIndex];
+
+    if (_.isUndefined(hit)) {
+      return null;
+    }
+    let [start] = hit;
+
+    return parseInt((layoutRow.height * (start / row.text.length)) + layoutRow.y, 10);
   };
 
   renderBiographyButton = () => {
