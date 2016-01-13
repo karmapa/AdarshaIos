@@ -641,7 +641,7 @@ class DetailView extends Component {
       ref: LIST_VIEW,
       renderRow: this.renderRow,
       renderAheadDistance: 2000,
-      onEndReachedThreshold: 0,
+      onEndReachedThreshold: 300,
       onChangeVisibleRows: this.handleChangeVisibleRows,
       renderFooter: this.renderFooter,
       renderScrollComponent: props => {
