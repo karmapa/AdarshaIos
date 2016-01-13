@@ -84,7 +84,12 @@ class DetailView extends Component {
 
   state = {
     dataSource: new ListView.DataSource({
-      rowHasChanged: (row1, row2) => this.isVisibleRow(row2)
+      rowHasChanged: (row1, row2) => {
+        if (this.isVisibleRow(row2)) {
+          return true;
+        }
+        return row1 !== row2;
+      }
     })
   };
 
