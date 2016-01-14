@@ -74,7 +74,6 @@ class Main extends Component {
     if ('DetailView' === route.name) {
 
       let detailViewProps = {
-        message: route.message,
         navigator,
         route,
         rows: route.rows
