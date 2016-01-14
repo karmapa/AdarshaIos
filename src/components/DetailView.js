@@ -1,5 +1,5 @@
 import React, {ListView, Component, View, PropTypes, TextInput, Dimensions,
-  TouchableHighlight, ScrollView, LayoutAnimation} from 'react-native';
+  TouchableHighlight, ScrollView, LayoutAnimation, Image} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -643,7 +643,7 @@ class DetailView extends Component {
     if (this.hasBiography()) {
       return (
         <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Icon name="ion|document-text" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+          <Image style={{width: 16, height: 16}} source={require('image!icon-biography')} />
         </TouchableHighlight>
       );
     }
@@ -691,7 +691,7 @@ class DetailView extends Component {
         </TouchableHighlight>
         {this.renderBiographyButton()}
         <TouchableHighlight onPress={this.showSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Icon name="fontawesome|search" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
+          <Image style={{width: 22, height: 22}} source={require('image!icon-sutra-search')} />
         </TouchableHighlight>
         <TouchableHighlight onPress={this.openSideMenu} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />

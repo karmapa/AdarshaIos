@@ -20,6 +20,8 @@ export const styles = StyleSheet.create({
     width: 40
   },
   bottomButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 40,
     flex: 1
   },
