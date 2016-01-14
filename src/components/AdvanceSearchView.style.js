@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   container: {
+    paddingTop: 20,
     flex: 1,
     backgroundColor: '#ffffff',
   },

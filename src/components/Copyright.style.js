@@ -2,7 +2,10 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 14
+    paddingTop: 34,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingBottom: 14
   },
   title: {
     fontSize: 24,

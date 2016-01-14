@@ -759,7 +759,7 @@ class DetailView extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <View style={[globalStyles.transparentContainer, {paddingTop: 20}]}>
+        <View style={[globalStyles.transparentContainer]}>
 
           <View style={styles.container}>
             <RefreshableListView {...listViewProps} />

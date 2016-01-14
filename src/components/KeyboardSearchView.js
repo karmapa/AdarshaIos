@@ -34,10 +34,6 @@ class KeyboardSearchView extends Component {
     utiSets: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2

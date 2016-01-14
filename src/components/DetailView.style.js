@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     left: 0,
     paddingBottom: 7,
-    paddingTop: 7,
+    paddingTop: 27,
     position: 'absolute',
     right: 0,
     top: 0

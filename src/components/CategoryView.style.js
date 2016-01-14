@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   scriptureContainer: {
     backgroundColor: '#e7e7e7',
     paddingBottom: 7,
-    paddingTop: 7,
+    paddingTop: 27
   },
   scriptureBody: {
     alignSelf: 'center',
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   navbar: {
     backgroundColor: '#e7e7e7',
-    paddingTop: 7,
+    paddingTop: 27,
     paddingBottom: 7,
     flexDirection: 'row'
   },

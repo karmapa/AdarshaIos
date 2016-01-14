@@ -20,8 +20,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#ffffff',
-    flex: 1,
-    paddingTop: 20
+    flex: 1
   },
   viewSpinner: {
     flex: 1,
