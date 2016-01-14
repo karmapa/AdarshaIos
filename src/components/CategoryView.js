@@ -79,8 +79,8 @@ class CategoryView extends Component {
     return (
       <TouchableHighlight key={row.index} underlayColor={values.underlayColor} onPress={this.onRowClicked.bind(this, row)}>
         <View style={[styles.rowView, {alignItems: 'center'}]}>
-          <TibetanText style={{paddingLeft: 14, paddingTop: 10, paddingBottom: 10, flex: 1}}>{row.t}</TibetanText>
-          <Icon name="ion|chevron-right" style={{width: 16, height: 16, marginRight: 10}} size={16} color={'#555555'} />
+          <TibetanText style={styles.rowText}>{row.t}</TibetanText>
+          <Icon name="ion|chevron-right" style={styles.rowIcon} size={16} color={'#555555'} />
         </View>
       </TouchableHighlight>
     );

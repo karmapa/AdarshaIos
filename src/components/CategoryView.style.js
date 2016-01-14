@@ -49,8 +49,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   rowText: {
-    height: 32,
-    paddingLeft: 14
+    paddingLeft: 14,
+    paddingTop: 10,
+    paddingBottom: 10,
+    flex: 1
+  },
+  rowIcon: {
+    width: 16,
+    height: 16,
+    marginRight: 10
   },
   backButton: {
     width: 40
