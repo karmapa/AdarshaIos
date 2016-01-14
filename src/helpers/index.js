@@ -5,6 +5,7 @@ import filter from './filter';
 import findBiographyBySutraId from './findBiographyBySutraId';
 import getHighlightStyle from './getHighlightStyle';
 import getOffset from './getOffset';
+import getOrientation from './getOrientation';
 import getUti from './getUti';
 import highlight from './highlight';
 import loadNext from './loadNext';
@@ -24,6 +25,7 @@ export {
   findBiographyBySutraId,
   getHighlightStyle,
   getOffset,
+  getOrientation,
   getUti,
   highlight,
   loadNext,

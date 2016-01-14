@@ -2,14 +2,9 @@
 import {StyleSheet} from 'react-native';
 import Dimensions from 'Dimensions';
 
-const window = Dimensions.get('window');
-
 export const styles = StyleSheet.create({
   container: {
-    height: window.height,
-    width: window.width,
-    backgroundColor: '#333333',
-    paddingLeft: window.width * 0.33
+    backgroundColor: '#333333'
   },
   row: {
     flexDirection: 'row',

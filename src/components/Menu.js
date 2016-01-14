@@ -1,17 +1,21 @@
-import React, {Component, View, PropTypes, TouchableHighlight, Image, Text} from 'react-native';
+import React, {Component, View, PropTypes, TouchableHighlight,
+ Orientation, Image, Text, Dimensions} from 'react-native';
 import {increaseFontSize, decreaseFontSize, increaseLineHeight,
   decreaseLineHeight, toggleWylieStatus, setBackground} from '../modules/main';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {connect} from 'react-redux/native';
 import {styles} from './Menu.style';
+import {MENU_WIDTH} from '../constants/AppConstants';
 
+const window = Dimensions.get('window');
 const underlayColor = 'rgba(0, 0, 0, 0)';
 
 @connect(state => ({
   lineHeight: state.main.get('lineHeight'),
   fontSize: state.main.get('fontSize'),
   wylieOn: state.main.get('wylieOn'),
-  backgroundIndex: state.main.get('backgroundIndex')
+  backgroundIndex: state.main.get('backgroundIndex'),
+  orientation: state.main.get('orientation')
 }), {
   decreaseFontSize,
   decreaseLineHeight,
@@ -31,13 +35,10 @@ class Menu extends Component {
     lineHeight: PropTypes.number.isRequired,
     setBackground: PropTypes.func.isRequired,
     backgroundIndex: PropTypes.number.isRequired,
+    orientation: PropTypes.string.isRequired,
     toggleWylieStatus: PropTypes.func.isRequired,
     wylieOn: PropTypes.bool.isRequired
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
@@ -62,11 +63,25 @@ class Menu extends Component {
       increaseLineHeight,
       lineHeight,
       toggleWylieStatus,
-      wylieOn
+      wylieOn,
+      orientation
     } = this.props;
 
+    let windowWidth = window.width;
+    let windowHeight = window.height;
+
+    if ('LANDSCAPE' === orientation) {
+      [windowWidth, windowHeight] = [windowHeight, windowWidth];
+    }
+
+    const containerStyle = {
+      height: windowHeight,
+      width: windowWidth,
+      paddingLeft: windowWidth - MENU_WIDTH
+    };
+
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         <View style={styles.menu}>
 
           <View style={[styles.item, styles.row]}>

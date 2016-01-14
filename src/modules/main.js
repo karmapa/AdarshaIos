@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
 
-import {openDb as open, storage} from '../helpers';
+import {openDb as open, storage, getOrientation} from '../helpers';
 
 const MERGE_SETTINGS = 'MAIN::MERGE_SETTINGS';
 const SET_BACKGROUND_INDEX = 'MAIN::SET_BACKGROUND_INDEX';
@@ -15,6 +15,7 @@ const SET_SELECTED_TAB = 'MAIN::SET_SELECTED_TAB';
 const SET_SIDE_MENU_STATUS = 'MAIN::SET_SIDE_MENU_STATUS';
 const SET_SUTRA_MAP = 'MAIN::SET_SUTRA_MAP';
 const SET_WYLIE_STATUS = 'MAIN::SET_WYLIE_STATUS';
+const SET_ORIENTATION = 'MAIN::SET_ORIENTATION';
 
 const defaultReaderSettings = {
   backgroundIndex: 1,
@@ -31,7 +32,8 @@ const initialState = Immutable.Map(Object.assign({
   keyboardHeight: 0,
   keyboardOn: false,
   selectedTab: 'category',
-  sutraMap: {}
+  sutraMap: {},
+  orientation: 'PROTRAIT',    // PROTRAIT or LANDSCAPE
 }, defaultReaderSettings));
 
 const actionsMap = {
@@ -58,7 +60,9 @@ const actionsMap = {
 
   [SET_WYLIE_STATUS]: (state, action) => state.set('wylieOn', action.wylieStatus),
 
-  [SET_KEYBOARD_HEIGHT]: (state, action) => state.set('keyboardHeight', action.keyboardHeight)
+  [SET_KEYBOARD_HEIGHT]: (state, action) => state.set('keyboardHeight', action.keyboardHeight),
+
+  [SET_ORIENTATION]: (state, action) => state.set('orientation', action.orientation)
 
 };
 
@@ -185,6 +189,20 @@ export function setKeyboardHeight(keyboardHeight) {
   return {
     type: SET_KEYBOARD_HEIGHT,
     keyboardHeight
+  };
+}
+
+export function setOrientation(orientation) {
+  return {
+    type: SET_ORIENTATION,
+    orientation
+  };
+}
+
+export function setDeviceOrientation() {
+  return async (dispatch) => {
+    let orientation = await getOrientation();
+    dispatch(setOrientation(orientation));
   };
 }
 
