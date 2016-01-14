@@ -10,6 +10,7 @@ import highlight from './highlight';
 import loadNext from './loadNext';
 import loadPrev from './loadPrev';
 import openDb from './openDb';
+import removeLatin from './removeLatin';
 import renderSpinner from './renderSpinner';
 import storage from './storage';
 import toc from './toc';
@@ -28,6 +29,7 @@ export {
   loadNext,
   loadPrev,
   openDb,
+  removeLatin,
   renderSpinner,
   storage,
   toc,

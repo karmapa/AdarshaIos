@@ -5,7 +5,7 @@ import {connect} from 'react-redux/native';
 import {setLoading} from '../modules/main';
 import {styles} from './CategoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
-import {fetch} from '../helpers';
+import {fetch, removeLatin} from '../helpers';
 import {TibetanText} from '.';
 
 @connect(() => ({}), {setLoading})
@@ -79,7 +79,7 @@ class CategoryView extends Component {
     return (
       <TouchableHighlight key={row.index} underlayColor={values.underlayColor} onPress={this.onRowClicked.bind(this, row)}>
         <View style={[styles.rowView, {alignItems: 'center'}]}>
-          <TibetanText style={styles.rowText}>{row.t}</TibetanText>
+          <TibetanText style={styles.rowText}>{removeLatin(row.t)}</TibetanText>
           <Icon name="ion|chevron-right" style={styles.rowIcon} size={16} color={'#555555'} />
         </View>
       </TouchableHighlight>
@@ -98,7 +98,7 @@ class CategoryView extends Component {
           <TouchableHighlight onPress={this.goBack} style={styles.backButton} underlayColor={values.underlayColor}>
             <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={22} color={'#555555'} />
           </TouchableHighlight>
-          <TibetanText style={styles.title}>{this.props.title}</TibetanText>
+          <TibetanText style={styles.title}>{removeLatin(this.props.title)}</TibetanText>
         </View>
       );
     }
