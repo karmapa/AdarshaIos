@@ -32,7 +32,7 @@
     "react-timer-mixin": "^0.13.3",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.2",
-    "tibetan": "git+https://github.com/ksanaforge/tibetan.git#c0408f0",
+    "tibetan": "git+https://github.com/kmsheng/tibetan.git#feature-distinguish-qyang-q.yang",
     "zpad": "^0.5.0"
   },
   "devDependencies": {
