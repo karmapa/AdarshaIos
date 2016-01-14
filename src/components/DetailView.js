@@ -158,7 +158,9 @@ class DetailView extends Component {
     this.isScrolling = false;
     this.direction = null;
 
-    this.preload();
+    TimerMixin.setTimeout(() => {
+      this.preload();
+    });
   }
 
   preload = async (rows = this.props.rows) => {
