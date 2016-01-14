@@ -46,6 +46,7 @@
 		9BB108C21BA99C8800087046 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B01BA99C8800087046 /* ionicons.ttf */; };
 		9BB108C31BA99C8800087046 /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */; };
 		9BB108C41BA99C8800087046 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */; };
+		9BB606671C4785BA00417075 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB606661C4785BA00417075 /* Orientation.m */; };
 		9BBB88FB1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB88FA1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf */; };
 		9BBB89101C3F67520034FC80 /* monlam_sans_serifbold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89071C3F67510034FC80 /* monlam_sans_serifbold.ttf */; };
 		9BBB89111C3F67520034FC80 /* monlam_uni_dutsa1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89081C3F67510034FC80 /* monlam_uni_dutsa1.ttf */; };
@@ -213,6 +214,8 @@
 		9BB108B01BA99C8800087046 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		9BB108B11BA99C8800087046 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		9BB108B21BA99C8800087046 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		9BB606651C4785BA00417075 /* Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Orientation.h; sourceTree = "<group>"; };
+		9BB606661C4785BA00417075 /* Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Orientation.m; sourceTree = "<group>"; };
 		9BBB88FA1C3F65D20034FC80 /* monlam_uni_ouchan2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_ouchan2.ttf; path = ../assets/fonts/monlam_uni_ouchan2.ttf; sourceTree = "<group>"; };
 		9BBB89071C3F67510034FC80 /* monlam_sans_serifbold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_sans_serifbold.ttf; path = ../assets/fonts/monlam_sans_serifbold.ttf; sourceTree = "<group>"; };
 		9BBB89081C3F67510034FC80 /* monlam_uni_dutsa1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_dutsa1.ttf; path = ../assets/fonts/monlam_uni_dutsa1.ttf; sourceTree = "<group>"; };
@@ -420,6 +423,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9BB606641C4785BA00417075 /* RCTOrientation */,
 				9BFCF4761C21B5590036BD13 /* Images.xcassets */,
 				9BB108A11BA99C8800087046 /* FAKFontAwesome.h */,
 				9BB108A21BA99C8800087046 /* FAKFontAwesome.m */,
@@ -477,6 +481,16 @@
 				9BB1089F1BA99C0C00087046 /* libReactNativeIcons.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9BB606641C4785BA00417075 /* RCTOrientation */ = {
+			isa = PBXGroup;
+			children = (
+				9BB606651C4785BA00417075 /* Orientation.h */,
+				9BB606661C4785BA00417075 /* Orientation.m */,
+			);
+			name = RCTOrientation;
+			path = "../node_modules/react-native-orientation/RCTOrientation";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -752,6 +766,7 @@
 			files = (
 				9BD6EDB61C33D4C90037E33F /* kfs_ios.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				9BB606671C4785BA00417075 /* Orientation.m in Sources */,
 				9BD6EDB71C33D4C90037E33F /* kfs_rct.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				9B948E081C439E4600FF6269 /* HexColors.m in Sources */,
