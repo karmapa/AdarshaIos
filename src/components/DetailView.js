@@ -192,9 +192,11 @@ class DetailView extends Component {
 
     let row = _.first(this.props.rows);
     let uti = getUti(row);
-    let data = await toc({uti});
 
-    this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
+    if (uti) {
+      let data = await toc({uti});
+      this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
+    }
   };
 
   openSideMenu = () => {
