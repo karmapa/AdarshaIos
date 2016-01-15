@@ -159,12 +159,18 @@ class DetailView extends Component {
     this.direction = null;
 
     TimerMixin.setTimeout(() => {
-      this.preload();
+      this.preload({append: true});
     });
   }
 
-  preload = async (rows = this.props.rows) => {
+  preload = async (options = {}) => {
 
+    options = Object.assign({
+      rows: this.props.rows,
+      append: false
+    }, options);
+
+    let {rows, append} = options;
     let {setLoading, isLoading, setMatchIndex, setVisibleUti} = this.props;
 
     if (! isLoading) {
@@ -173,7 +179,7 @@ class DetailView extends Component {
     this._rows = rows || [];
 
     let newRows = await this.fetchNextRows();
-    let dataSource = this.getDataSource(newRows, false);
+    let dataSource = this.getDataSource(newRows, append);
 
     let assignedUti = _.get(_.first(this._rows), 'uti');
     if (assignedUti) {
@@ -480,7 +486,7 @@ class DetailView extends Component {
 
     if (rows && (rows.length > 0)) {
       TimerMixin.setTimeout(() => {
-        this.preload(rows);
+        this.preload({rows, append: false});
       }, 0);
     }
   };
