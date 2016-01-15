@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 
+const DETAIL_VIEW_BACKGROUND_COLOR = 'rgba(27, 130, 134, 0.9)';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -7,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   nav: {
-    backgroundColor: 'rgba(27, 140, 144, 0.5)',
+    backgroundColor: DETAIL_VIEW_BACKGROUND_COLOR,
     flexDirection: 'row',
     left: 0,
     paddingBottom: 7,
@@ -26,7 +28,7 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   upButton: {
-    backgroundColor: 'rgba(27, 140, 144, 0.5)',
+    backgroundColor: DETAIL_VIEW_BACKGROUND_COLOR,
     position: 'absolute',
     justifyContent: 'center',
     right: 7,
@@ -44,7 +46,7 @@ export const styles = StyleSheet.create({
     paddingRight: 14
   },
   bottomBar: {
-    backgroundColor: 'rgba(27, 140, 144, 0.5)',
+    backgroundColor: DETAIL_VIEW_BACKGROUND_COLOR,
     padding: 10,
     position: 'absolute',
     left: 0,
