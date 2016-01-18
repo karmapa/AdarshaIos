@@ -196,12 +196,12 @@ class DetailView extends Component {
 
   fetchTitle = async () => {
 
-    let row = _.first(this.props.rows);
-    let uti = getUti(row);
+    let vposEnd = _.get(_.first(this.props.rows), 'vpos_end');
 
-    if (uti) {
-      let data = await toc({uti});
-      this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
+    if (vposEnd) {
+      let data = await toc({vpos: vposEnd});
+      let title = _.get(data, 'breadcrumb[3].t');
+      this.props.setTitle(title);
     }
   };
 
@@ -391,8 +391,14 @@ class DetailView extends Component {
   };
 
   updateTitle = _.debounce(async () => {
-    let data = await toc({uti: this.props.visibleUti});
-    this.props.setTitle(_.get(data, 'breadcrumb[3].t'));
+
+    let vposEnd = _.get(this.getVisibleRow(), 'vpos_end');
+
+    if (vposEnd) {
+      let data = await toc({vpos: vposEnd});
+      let title = _.get(data, 'breadcrumb[3].t');
+      this.props.setTitle(title);
+    }
   }, 100);
 
   handleScroll = event => {
