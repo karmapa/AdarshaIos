@@ -19,6 +19,7 @@ import renderSpinner from './renderSpinner';
 import storage from './storage';
 import toc from './toc';
 import utiToSutraId from './utiToSutraId';
+import utiGreaterThan from './utiGreaterThan';
 
 export {
   attachKeyboard,
@@ -41,5 +42,6 @@ export {
   renderSpinner,
   storage,
   toc,
+  utiGreaterThan,
   utiToSutraId
 };
