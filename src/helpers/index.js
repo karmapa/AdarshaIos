@@ -20,6 +20,7 @@ import storage from './storage';
 import toc from './toc';
 import utiToSutraId from './utiToSutraId';
 import utiGreaterThan from './utiGreaterThan';
+import searchInSutra from './searchInSutra';
 
 export {
   attachKeyboard,
@@ -41,6 +42,7 @@ export {
   removeLatin,
   renderSpinner,
   storage,
+  searchInSutra,
   toc,
   utiGreaterThan,
   utiToSutraId
