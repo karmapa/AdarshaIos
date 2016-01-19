@@ -6,7 +6,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
+import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword, searchInSutra} from '../helpers';
 import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
   setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
@@ -81,6 +81,12 @@ class DetailView extends Component {
     this._bottomBarHeight = 0;
     this._lastSearchKeyword = '';
     this._layoutData = {};
+
+    this.isLoading = false;
+    this.isLoadingTitle = false;
+    this.lastOffsetY = 0;
+    this.isScrolling = false;
+    this.direction = null;
   }
 
   state = {
@@ -94,15 +100,27 @@ class DetailView extends Component {
     })
   };
 
-  isVisibleRow = row => {
-    return this.props.utis.includes(row.uti);
-  };
-
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
   componentWillMount() {
     LayoutAnimation.spring();
   }
+
+  componentDidMount() {
+
+    let {keyword, setSearchKeyword} = this.props;
+
+    if (keyword) {
+      setSearchKeyword(keyword);
+    }
+
+    this.preload({append: true})
+      .catch(err => console.log('preload err: ', err));
+  }
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
+  isVisibleRow = row => {
+    return this.props.utis.includes(row.uti);
+  };
 
   componentWillReceiveProps(nextProps, nextState) {
 
@@ -144,25 +162,6 @@ class DetailView extends Component {
     });
   };
 
-  componentDidMount() {
-
-    let {keyword, setSearchKeyword} = this.props;
-
-    if (keyword) {
-      setSearchKeyword(keyword);
-    }
-
-    this.isLoading = false;
-    this.isLoadingTitle = false;
-    this.lastOffsetY = 0;
-    this.isScrolling = false;
-    this.direction = null;
-
-    TimerMixin.setTimeout(() => {
-      this.preload({append: true});
-    });
-  }
-
   preload = async (options = {}) => {
 
     options = Object.assign({
@@ -185,9 +184,7 @@ class DetailView extends Component {
     if (assignedUti) {
       setVisibleUti(assignedUti);
     }
-
     this.setState({dataSource});
-
     await this.fetchTitle();
 
     setMatchIndex(0);
@@ -491,11 +488,16 @@ class DetailView extends Component {
     }
 
     if (rows && (rows.length > 0)) {
-      TimerMixin.setTimeout(() => {
+      this._goTopTimer = TimerMixin.setTimeout(() => {
         this.preload({rows, append: false});
       }, 0);
     }
   };
+
+  componentWillUnmount() {
+    clearTimeout(this._initTimer);
+    clearTimeout(this._goTopTimer);
+  }
 
   showSearchInput = () => {
 
@@ -593,7 +595,7 @@ class DetailView extends Component {
 
   goNextKeyword = () => {
 
-    let {matchIndex, setMatchIndex} = this.props;
+    let {matchIndex, setMatchIndex, searchKeyword, visibleUti, setLoading} = this.props;
     let visibleRow = this.getVisibleRow();
 
     if (_.isEmpty(visibleRow)) {
@@ -604,14 +606,35 @@ class DetailView extends Component {
 
     if (lastIndex === matchIndex) {
       let nextUti = this.getNextUti();
-      let layoutRow = this._layoutData[nextUti];
-      let offsetY = this.getOffsetYByMatchIndex(0, nextUti);
 
-      if (! _.isNull(offsetY)) {
-        setMatchIndex(0);
-        let newOffsetY = offsetY - this._topBarHeight;
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY + DELTA_MOVEMENT);
+      if (nextUti) {
+        let layoutRow = this._layoutData[nextUti];
+        let offsetY = this.getOffsetYByMatchIndex(0, nextUti);
+
+        if (! _.isNull(offsetY)) {
+          setMatchIndex(0);
+          let newOffsetY = offsetY - this._topBarHeight;
+          this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY + DELTA_MOVEMENT);
+        }
       }
+      else {
+
+        /*
+        setLoading(true);
+
+        // search in sutra
+        searchInSutra(cleanKeyword(searchKeyword), visibleUti)
+          .then(rows => {
+            let row = _.first(rows);
+            if (row) {
+              this.preload({rows: [row], append: false})
+                .catch(err => console.log('searchInSutra preload err:', err));
+            }
+          })
+          .catch(err => console.log('searchInSutra err: ', err));
+        */
+      }
+
       return;
     }
 
