@@ -6,6 +6,7 @@ import findBiographyBySutraId from './findBiographyBySutraId';
 import getFieldRange from './getFieldRange';
 import getHighlightStyle from './getHighlightStyle';
 import getOffset from './getOffset';
+import isValidUti from './isValidUti';
 import getOrientation from './getOrientation';
 import getUti from './getUti';
 import highlight from './highlight';
@@ -23,6 +24,7 @@ export {
   cleanKeyword,
   fetch,
   filter,
+  isValidUti,
   findBiographyBySutraId,
   getFieldRange,
   getHighlightStyle,
