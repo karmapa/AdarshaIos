@@ -3,6 +3,7 @@ import cleanKeyword from './cleanKeyword';
 import fetch from './fetch';
 import filter from './filter';
 import findBiographyBySutraId from './findBiographyBySutraId';
+import getFieldRange from './getFieldRange';
 import getHighlightStyle from './getHighlightStyle';
 import getOffset from './getOffset';
 import getOrientation from './getOrientation';
@@ -23,6 +24,7 @@ export {
   fetch,
   filter,
   findBiographyBySutraId,
+  getFieldRange,
   getHighlightStyle,
   getOffset,
   getOrientation,
