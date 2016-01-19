@@ -33,10 +33,6 @@ class Biography extends Component {
     uti: PropTypes.string.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     this.props.loadBiographyByUti(this.props.uti);
     LayoutAnimation.spring();
