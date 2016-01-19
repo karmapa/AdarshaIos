@@ -9,6 +9,7 @@ import getOffset from './getOffset';
 import isValidUti from './isValidUti';
 import getOrientation from './getOrientation';
 import getUti from './getUti';
+import getUtiParts from './getUtiParts';
 import highlight from './highlight';
 import loadNext from './loadNext';
 import loadPrev from './loadPrev';
@@ -31,6 +32,7 @@ export {
   getOffset,
   getOrientation,
   getUti,
+  getUtiParts,
   highlight,
   loadNext,
   loadPrev,
