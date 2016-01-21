@@ -8,7 +8,8 @@ import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword, searchInSutra} from '../helpers';
 import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
-  setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti} from '../modules/detailView';
+  setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti,
+  setDataSource, setElements} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
@@ -42,12 +43,14 @@ const DELTA_MOVEMENT = 80;
   title: state.detailView.get('title'),
   toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
-  wylieOn: state.main.get('wylieOn')
+  wylieOn: state.main.get('wylieOn'),
+  dataSource: state.detailView.get('dataSource'),
 }), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword, setVisibleUti,
-  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle})
+  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle, setDataSource})
 class DetailView extends Component {
 
   static PropTypes = {
+    dataSource: PropTypes.object.isRequired,
     fontSize: PropTypes.number.isRequired,
     hasScrolled: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -60,6 +63,7 @@ class DetailView extends Component {
     rows: PropTypes.array.isRequired,
     searchKeyword: PropTypes.string.isRequired,
     setHasScrolled: PropTypes.func.isRequired,
+    setDataSource: PropTypes.func.isRequired,
     setLoading: PropTypes.func.isRequired,
     setLoadingMore: PropTypes.func.isRequired,
     setTitle: PropTypes.func.isRequired,
@@ -82,46 +86,45 @@ class DetailView extends Component {
     this._lastSearchKeyword = '';
     this._layoutData = {};
     this._busy = false;
+    this._searchedInSutra = false;
 
     this.isLoading = false;
     this.isLoadingTitle = false;
     this.lastOffsetY = 0;
     this.isScrolling = false;
-    this.direction = null;
-  }
-
-  state = {
-    dataSource: new ListView.DataSource({
-      rowHasChanged: (row1, row2) => {
-        if (this.isVisibleRow(row2)) {
-          return true;
-        }
-        return row1 !== row2;
-      }
-    })
-  };
-
-  componentWillMount() {
-    LayoutAnimation.spring();
   }
 
   componentDidMount() {
 
-    let {keyword, setSearchKeyword} = this.props;
+    LayoutAnimation.spring();
 
-    if (keyword) {
-      setSearchKeyword(keyword);
-    }
-
+    this.initKeyword();
+    this.initDataSource();
     this.preload({append: true})
       .catch(err => console.log('preload err: ', err));
   }
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
-  isVisibleRow = row => {
-    return this.props.utis.includes(row.uti);
+  initDataSource = () => {
+    let {dataSource, setDataSource} = this.props;
+    dataSource._rowHasChanged = this._rowHasChanged;
+    setDataSource(dataSource);
   };
+
+  initKeyword = () => {
+    let {keyword, setSearchKeyword} = this.props;
+    if (keyword) {
+      setSearchKeyword(keyword);
+    }
+  };
+
+  _rowHasChanged = (row1, row2) => {
+    if (this.isVisibleRow(row2)) {
+      return true;
+    }
+    return row1 !== row2;
+  };
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   componentWillReceiveProps(nextProps, nextState) {
 
@@ -135,6 +138,35 @@ class DetailView extends Component {
       this.highlightAsync(nextProps.searchKeyword);
     }
   }
+
+  componentDidUpdate(prevProps, prevState) {
+
+    let {visibleUti, searchBarOn, isLoading} = this.props;
+
+    if (isLoading) {
+      return;
+    }
+
+    // searching in sutra triggered by goPreviousKeyword or goNextKeyword
+    if ((prevProps.visibleUti !== visibleUti) && searchBarOn && this._searchedInSutra) {
+      this._searchedInSutra = false;
+      let offsetY = this.getOffsetYByMatchIndex(this.props.matchIndex, this.props.visibleUti);
+      this.scrollTo(this.lastOffsetY - offsetY);
+    }
+  }
+
+  scrollTo = offsetY => {
+
+    let scrollComponent = this.refs[LIST_VIEW].getScrollResponder();
+
+    if (scrollComponent) {
+      scrollComponent.scrollTo(offsetY);
+    }
+  };
+
+  isVisibleRow = row => {
+    return this.props.utis.includes(row.uti);
+  };
 
   getVisibleRow = () => {
     let uti = this.props.visibleUti || _.get(_.first(this._rows), 'uti');
@@ -159,14 +191,13 @@ class DetailView extends Component {
 
     this._busy = true;
 
+    let {setDataSource, dataSource} = this.props;
     let newRows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
     this._rows = this.updateHitsByRows(this._rows, newRows);
 
     setMatchIndex(0);
 
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this._rows)
-    });
+    setDataSource(dataSource.cloneWithRows(this._rows));
     this._busy = false;
   }, 500);
 
@@ -192,7 +223,7 @@ class DetailView extends Component {
     if (assignedUti) {
       setVisibleUti(assignedUti);
     }
-    this.setState({dataSource});
+    this.props.setDataSource(dataSource);
     await this.fetchTitle();
 
     setMatchIndex(0);
@@ -221,13 +252,11 @@ class DetailView extends Component {
     else {
       this._rows = rows.concat(this._rows);
     }
-    return this.state.dataSource.cloneWithRows(this._rows);
+    return this.props.dataSource.cloneWithRows(this._rows);
   };
 
   rerenderListView = () => {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this._rows)
-    });
+    this.props.setDataSource(this.props.dataSource.cloneWithRows(this._rows));
   };
 
   goBack = () => {
@@ -309,9 +338,7 @@ class DetailView extends Component {
     }
     try {
       let rows = await loadPrev({count: 1, uti, q: cleanKeyword(this.props.searchKeyword)});
-      this.setState({
-        dataSource: this.getDataSource(rows, false)
-      });
+      this.props.setDataSource(this.getDataSource(rows, false));
     }
     catch (e) {
       // uti not found
@@ -332,7 +359,7 @@ class DetailView extends Component {
 
   loadNext = async () => {
 
-    let {isLoadingMore, setLoadingMore} = this.props;
+    let {isLoadingMore, setLoadingMore, setDataSource} = this.props;
 
     if (isLoadingMore) {
       return Promise.reject('isLoading');
@@ -342,9 +369,7 @@ class DetailView extends Component {
 
     let rows = await this.fetchNextRows();
 
-    this.setState({
-      dataSource: this.getDataSource(rows)
-    });
+    setDataSource(this.getDataSource(rows));
     setLoadingMore(false);
   };
 
@@ -418,7 +443,6 @@ class DetailView extends Component {
     }
 
     let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
-    this.direction = offsetY > this.lastOffsetY ? 'down' : 'up';
 
     this.updateTitle();
     this.lastOffsetY = offsetY;
@@ -563,22 +587,50 @@ class DetailView extends Component {
 
   goPreviousKeyword = () => {
 
-    let {matchIndex, setMatchIndex} = this.props;
+    let {matchIndex, setMatchIndex, searchKeyword, visibleUti} = this.props;
 
     if (0 === matchIndex) {
+
       let previousUti = this.getPreviousUti();
-      let previousRow = _.find(this._rows, {uti: previousUti});
-      let layoutRow = this._layoutData[previousUti];
+      let previousRow = null;
 
-      if (layoutRow && previousRow) {
+      if (previousUti) {
+        previousRow = _.find(this._rows, {uti: previousUti});
+      }
 
+      if (previousRow) {
+        let layoutRow = this._layoutData[previousUti];
         let previousHits = previousRow.hits || [];
         let offsetY = this.getOffsetYByMatchIndex(previousHits.length - 1, previousUti);
 
         if (! _.isNull(offsetY)) {
           setMatchIndex(previousHits.length - 1);
-          this.refs[LIST_VIEW].getScrollResponder().scrollTo(this.lastOffsetY - offsetY);
+          this.scrollTo(this.lastOffsetY - offsetY);
         }
+      }
+      else {
+        setLoading(true);
+
+        searchInSutra({
+          query: cleanKeyword(searchKeyword),
+          uti: visibleUti,
+          direction: 'top'
+        })
+        .then(rows => {
+          let row = _.first(rows);
+          if (row) {
+            this._searchedInSutra = true;
+            this.preload({rows: [row], append: true})
+              .catch(err => console.log('searchInSutra preload err:', err));
+          }
+          else {
+            setLoading(false);
+          }
+        })
+        .catch(err => {
+          console.log('searchInSutra err: ', err)
+          setLoading(false);
+        });
       }
       return;
     }
@@ -596,7 +648,7 @@ class DetailView extends Component {
         if (newOffsetY < 0) {
           newOffsetY = 0;
         }
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY);
+        this.scrollTo(newOffsetY);
       }
     }
   };
@@ -622,25 +674,33 @@ class DetailView extends Component {
         if (! _.isNull(offsetY)) {
           setMatchIndex(0);
           let newOffsetY = offsetY - this._topBarHeight;
-          this.refs[LIST_VIEW].getScrollResponder().scrollTo(newOffsetY + DELTA_MOVEMENT);
+          this.scrollTo(newOffsetY + DELTA_MOVEMENT);
         }
       }
       else {
 
-        /*
         setLoading(true);
 
-        // search in sutra
-        searchInSutra(cleanKeyword(searchKeyword), visibleUti)
-          .then(rows => {
-            let row = _.first(rows);
-            if (row) {
-              this.preload({rows: [row], append: false})
-                .catch(err => console.log('searchInSutra preload err:', err));
-            }
-          })
-          .catch(err => console.log('searchInSutra err: ', err));
-        */
+        searchInSutra({
+          query: cleanKeyword(searchKeyword),
+          uti: visibleUti,
+          direction: 'bottom'
+        })
+        .then(rows => {
+          let row = _.first(rows);
+          if (row) {
+            this._searchedInSutra = true;
+            this.preload({rows: [row], append: true})
+              .catch(err => console.log('searchInSutra preload err:', err));
+          }
+          else {
+            setLoading(false);
+          }
+        })
+        .catch(err => {
+          console.log('searchInSutra err: ', err)
+          setLoading(false);
+        });
       }
 
       return;
@@ -656,8 +716,7 @@ class DetailView extends Component {
 
       if ((! _.isNull(offsetY)) && (offsetY > bottomOffset)) {
         let distance = offsetY - bottomOffset;
-        this.refs[LIST_VIEW].getScrollResponder().scrollTo(this.lastOffsetY + distance + DELTA_MOVEMENT);
-
+        this.scrollTo(this.lastOffsetY + distance + DELTA_MOVEMENT);
       }
     }
   };
@@ -773,7 +832,7 @@ class DetailView extends Component {
     }
 
     let listViewProps = {
-      dataSource: this.state.dataSource,
+      dataSource: this.props.dataSource,
       onEndReached: this.onEndReached,
       pageSize: 1,
       ref: LIST_VIEW,
