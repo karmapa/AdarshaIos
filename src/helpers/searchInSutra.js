@@ -1,8 +1,18 @@
 import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
-import {utiToSutraId, getFieldRange, filter, utiGreaterThan, isValidUti} from '.';
+import {utiToSutraId, getFieldRange, filter, utiGreaterThan, utiLessThan, isValidUti, fetch} from '.';
+import _ from 'lodash';
 
-export default function searchInSutra(query, uti) {
+export default function searchInSutra(options = {}) {
+
+  options = Object.assign({
+    query: '',
+    uti: '',
+    direction: 'bottom',
+  }, options);
+
+  const {query, uti, direction} = options;
+  const compare = ('bottom' === direction) ? utiGreaterThan : utiLessThan;
 
   return utiToSutraId(uti)
     .then(sutraId => {
@@ -22,8 +32,17 @@ export default function searchInSutra(query, uti) {
     })
     .then(rows => {
       return rows.filter(row => {
-        return isValidUti(row.uti) && utiGreaterThan(row.uti, uti);
+        return isValidUti(row.uti) && compare(row.uti, uti);
+      })
+      .map(row => {
+        return row.uti;
       });
+    })
+    .then(utis => {
+      if (_.isEmpty(utis)) {
+        return [];
+      }
+      return fetch({q: query, uti: utis});
     });
 
 }
