@@ -81,6 +81,7 @@ class DetailView extends Component {
     this._bottomBarHeight = 0;
     this._lastSearchKeyword = '';
     this._layoutData = {};
+    this._busy = false;
 
     this.isLoading = false;
     this.isLoadingTitle = false;
@@ -150,7 +151,13 @@ class DetailView extends Component {
     return rows;
   };
 
-  highlightAsync = async searchKeyword => {
+  highlightAsync = _.debounce(async searchKeyword => {
+
+    if (this._busy) {
+      return;
+    }
+
+    this._busy = true;
 
     let newRows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
     this._rows = this.updateHitsByRows(this._rows, newRows);
@@ -160,7 +167,8 @@ class DetailView extends Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._rows)
     });
-  };
+    this._busy = false;
+  }, 500);
 
   preload = async (options = {}) => {
 
