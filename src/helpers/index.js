@@ -21,7 +21,6 @@ import toc from './toc';
 import utiToSutraId from './utiToSutraId';
 import utiGreaterThan from './utiGreaterThan';
 import searchInSutra from './searchInSutra';
-import tryOpen from './tryOpen';
 
 export {
   attachKeyboard,
@@ -45,7 +44,6 @@ export {
   storage,
   searchInSutra,
   toc,
-  tryOpen,
   utiGreaterThan,
   utiToSutraId
 };
