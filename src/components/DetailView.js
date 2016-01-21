@@ -148,10 +148,21 @@ class DetailView extends Component {
     }
 
     // searching in sutra triggered by goPreviousKeyword or goNextKeyword
-    if ((prevProps.visibleUti !== visibleUti) && searchBarOn && this._searchedInSutra) {
-      this._searchedInSutra = false;
-      let offsetY = this.getOffsetYByMatchIndex(this.props.matchIndex, this.props.visibleUti);
-      this.scrollTo(this.lastOffsetY - offsetY);
+    if (this._searchedInSutra) {
+      setTimeout(() => {
+        this._searchedInSutra = false;
+        let offsetY = this.getOffsetYByMatchIndex();
+        let topOffsetY = this.lastOffsetY + this._topBarHeight;
+
+        if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
+          let distance = topOffsetY - offsetY;
+          let newOffsetY = offsetY - distance;
+          if (newOffsetY < 0) {
+            newOffsetY = 0;
+          }
+          this.scrollTo(newOffsetY);
+        }
+      }, 300);
     }
   }
 
@@ -209,7 +220,7 @@ class DetailView extends Component {
     }, options);
 
     let {rows, append} = options;
-    let {setLoading, isLoading, setMatchIndex, setVisibleUti} = this.props;
+    let {setLoading, isLoading, setVisibleUti} = this.props;
 
     if (! isLoading) {
       setLoading(true);
@@ -226,7 +237,6 @@ class DetailView extends Component {
     this.props.setDataSource(dataSource);
     await this.fetchTitle();
 
-    setMatchIndex(0);
     setLoading(false);
   };
 
@@ -521,7 +531,10 @@ class DetailView extends Component {
 
     if (rows && (rows.length > 0)) {
       this._goTopTimer = TimerMixin.setTimeout(() => {
-        this.preload({rows, append: false});
+        this.preload({rows, append: false})
+          .then(() => {
+            this.props.setMatchIndex(0);
+          });
       }, 0);
     }
   };
@@ -691,6 +704,9 @@ class DetailView extends Component {
           if (row) {
             this._searchedInSutra = true;
             this.preload({rows: [row], append: true})
+              .then(() => {
+                this.props.setMatchIndex(0);
+              })
               .catch(err => console.log('searchInSutra preload err:', err));
           }
           else {
@@ -721,12 +737,13 @@ class DetailView extends Component {
     }
   };
 
-  getOffsetYByMatchIndex = (matchIndex, visibleUti = this.props.visibleUti) => {
+  getOffsetYByMatchIndex = (matchIndex = this.props.matchIndex, visibleUti = this.props.visibleUti) => {
 
     let row = _.find(this._rows, {uti: visibleUti});
     let layoutRow = this._layoutData[visibleUti];
 
     if (_.isEmpty(row) || _.isEmpty(layoutRow)) {
+      console.log('omg');
       return null;
     }
 
