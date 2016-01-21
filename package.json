@@ -15,7 +15,7 @@
     "hoist-non-react-statics": "^1.0.3",
     "immutable": "^3.7.5",
     "ksana-analyzer": "git+https://github.com/ksanaforge/ksana-analyzer.git#1.5.0",
-    "ksana-database": "git+https://github.com/ksanaforge/ksana-database.git#1.5.6",
+    "ksana-database": "git+https://github.com/ksanaforge/ksana-database.git#1.5.8",
     "ksana-jsonrom": "git+https://github.com/ksanaforge/ksana-jsonrom.git#1.5.5",
     "ksana-react-native": "git+https://github.com/kmsheng/ksana-react-native.git#fix-nonnull",
     "ksana-search": "git+https://github.com/ksanaforge/ksana-search.git#1.5.5",
