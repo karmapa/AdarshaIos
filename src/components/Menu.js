@@ -1,5 +1,5 @@
 import React, {Component, View, PropTypes, TouchableHighlight,
- Orientation, Image, Text, Dimensions} from 'react-native';
+  Image, Text, Dimensions} from 'react-native';
 import {increaseFontSize, decreaseFontSize, increaseLineHeight,
   decreaseLineHeight, toggleWylieStatus, setBackground} from '../modules/main';
 import shouldPureComponentUpdate from 'react-pure-render/function';
