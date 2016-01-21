@@ -20,6 +20,7 @@ import storage from './storage';
 import toc from './toc';
 import utiToSutraId from './utiToSutraId';
 import utiGreaterThan from './utiGreaterThan';
+import utiLessThan from './utiLessThan';
 import searchInSutra from './searchInSutra';
 
 export {
@@ -45,5 +46,6 @@ export {
   searchInSutra,
   toc,
   utiGreaterThan,
+  utiLessThan,
   utiToSutraId
 };
