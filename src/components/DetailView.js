@@ -6,7 +6,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword, searchInSutra, tryOpen} from '../helpers';
+import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword, searchInSutra} from '../helpers';
 import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
   setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
