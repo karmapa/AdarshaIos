@@ -121,7 +121,7 @@ class Biography extends Component {
           <ScrollView {...scrollViewProps}>
             {this.renderField()}
           </ScrollView>
-          <View style={[styles.nav, {top: this.props.toolbarOn ? 20 : -60}]}>
+          <View style={[styles.nav, {top: this.props.toolbarOn ? 0 : -60}]}>
             <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
               <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
             </TouchableHighlight>

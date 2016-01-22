@@ -5,7 +5,7 @@ const DETAIL_VIEW_BACKGROUND_COLOR = 'rgba(27, 130, 134, 0.9)';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0,
+    paddingTop: 20,
     backgroundColor: 'transparent'
   },
   nav: {
