@@ -139,17 +139,9 @@ class DetailView extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  scrollOnLayout = uti => {
 
-    let {visibleUti, searchBarOn, isLoading} = this.props;
-
-    if (isLoading) {
-      return;
-    }
-
-    // searching in sutra triggered by goPreviousKeyword or goNextKeyword
-    if (this._searchedInSutra) {
-      setTimeout(() => {
+    if (this._searchedInSutra && (this.props.visibleUti === uti)) {
         this._searchedInSutra = false;
         let offsetY = this.getOffsetYByMatchIndex();
         let topOffsetY = this.lastOffsetY + this._topBarHeight;
@@ -162,9 +154,8 @@ class DetailView extends Component {
           }
           this.scrollTo(newOffsetY);
         }
-      }, 300);
     }
-  }
+  };
 
   scrollTo = offsetY => {
 
@@ -311,6 +302,7 @@ class DetailView extends Component {
 
   handleRowLayout = (row, event) => {
     this._layoutData[row.uti] = event.nativeEvent.layout;
+    this.scrollOnLayout(row.uti);
   };
 
   setTopBarHeight = event => {
