@@ -1,6 +1,6 @@
 import ksa from 'ksana-simple-api';
 import {DB_NAME} from '../constants/AppConstants';
-import {utiToSutraId, getFieldRange, filter, utiGreaterThan, utiLessThan, isValidUti, fetch} from '.';
+import {utiToSutraId, getFieldRange, filter, fetch} from '.';
 import _ from 'lodash';
 
 export default function searchInSutra(options = {}) {
@@ -12,7 +12,6 @@ export default function searchInSutra(options = {}) {
   }, options);
 
   const {query, uti, direction} = options;
-  const compare = ('bottom' === direction) ? utiGreaterThan : utiLessThan;
 
   return utiToSutraId(uti)
     .then(sutraId => {
@@ -31,12 +30,13 @@ export default function searchInSutra(options = {}) {
       });
     })
     .then(rows => {
-      return rows.filter(row => {
-        return isValidUti(row.uti) && compare(row.uti, uti);
-      })
-      .map(row => {
-        return row.uti;
-      });
+      let utis = _.pluck(rows, 'uti');
+      let needle = utis.indexOf(uti);
+
+      if ('bottom' === direction) {
+        return utis.filter((u, index) => index > needle);
+      }
+      return utis.filter((u, index) => index < needle);
     })
     .then(utis => {
       if (_.isEmpty(utis)) {
