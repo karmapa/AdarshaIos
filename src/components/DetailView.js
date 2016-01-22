@@ -659,13 +659,11 @@ class DetailView extends Component {
 
   handleNextButtonClick = () => {
     this.blurSearchInput();
-    this.props.setSearchBarStatus(false);
     this.goNextKeyword();
   };
 
   handlePreviousButtonClick = () => {
     this.blurSearchInput();
-    this.props.setSearchBarStatus(false);
     this.goPreviousKeyword();
   };
 
