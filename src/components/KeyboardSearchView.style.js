@@ -24,9 +24,6 @@ export const styles = StyleSheet.create({
     marginRight: 5,
     padding: 7
   },
-  tips: {
-    marginTop: 10
-  },
   row: {
     flex: 1,
     paddingBottom: 7,

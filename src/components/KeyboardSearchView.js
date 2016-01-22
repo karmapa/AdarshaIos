@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component, PropTypes, ListView, View, TextInput, TouchableHighlight, Dimensions} from 'react-native';
+import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight, Dimensions} from 'react-native';
 import {styles} from './KeyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
@@ -8,6 +8,7 @@ import {cleanKeyword, highlight, getUti, renderSpinner} from '../helpers';
 import {TibetanText} from '.';
 
 const TRIM_POS = 20;
+const TOP_AND_BOTTOM_SPACE = 150;
 
 @connect(state => ({
   excerpts: state.keyboardSearch.get('excerptData').rows,
@@ -87,15 +88,36 @@ class KeyboardSearchView extends Component {
     this.props.search(keyword);
   }, 500);
 
+  getScrollViewHeight = () => {
+    return Dimensions.get('window').height - TOP_AND_BOTTOM_SPACE;
+  };
+
   renderTips() {
     if (_.isEmpty(this.props.excerpts)) {
       return (
-        <View style={styles.tips}>
-          <TibetanText>Wildcards: ? * ? match single unknown syllable:</TibetanText>
-          <TibetanText>e.g: bde ? snying 1 syllable in between</TibetanText>
-          <TibetanText>e.g: མི་2?་པ 2 syllables in between</TibetanText>
-          <TibetanText>* match a range of unknown syllables:</TibetanText>
-          <TibetanText>e.g: mi 5* pa 1 to 5 syllables in between</TibetanText>
+        <View style={{height: this.getScrollViewHeight()}}>
+          <ScrollView automaticallyAdjustContentInsets={false}>
+            <View style={{paddingTop: 14}}>
+              <TibetanText>Wildcards Search Rule:</TibetanText>
+              <TibetanText>. (dot) and * (star) these two wildcards match single unknow syllable.</TibetanText>
+              <TibetanText>example:</TibetanText>
+              <TibetanText>search: rdzogs.sangs/ རྫོགས.སངས (1 syllable in between)</TibetanText>
+              <TibetanText>result:</TibetanText>
+              <TibetanText>-->rdzogs pa’i sangs…../རྫོགས་པའི་སངས་་་་་་</TibetanText>
+              <TibetanText>-->rdgogs par sangs…../རྫོགས་པར་སངས་་་་་</TibetanText>
+              <TibetanText>example:</TibetanText>
+              <TibetanText>search: rdzogs*sangs/ རྫོགས*སངས (1 or non syllable in between)</TibetanText>
+              <TibetanText>result:</TibetanText>
+              <TibetanText>-->rdzogs pa’i sangs…../རྫོགས་པའི་སངས་་་་་་</TibetanText>
+              <TibetanText>-->rdgogs sangs…../རྫོགས་སངས་་་་་</TibetanText>
+              <TibetanText>example:</TibetanText>
+              <TibetanText>search: de*3pa/དེ*3པ(1 or 2 or 3 or non syllable in between)</TibetanText>
+              <TibetanText>result:</TibetanText>
+              <TibetanText>-->de dag gis smras pa…./དེ་དག་གིས་སྨྲས་པ་་་་་་</TibetanText>
+              <TibetanText>-->de la smras pa.../དེ་ལ་སྨྲས་པ་་་་་</TibetanText>
+              <TibetanText>-->de gang yin pa…./དེ་གང་ཡིན་པ་་་་་་</TibetanText>
+            </View>
+          </ScrollView>
         </View>
       );
     }
