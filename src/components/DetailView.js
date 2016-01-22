@@ -99,9 +99,16 @@ class DetailView extends Component {
 
     this.initKeyword();
     this.initDataSource();
-    this.preload({append: true})
-      .catch(err => console.log('preload err: ', err));
+    this.preloadDetailView();
   }
+
+  preloadDetailView = () => {
+    this.props.setLoading(true);
+    TimerMixin.setTimeout(() => {
+      this.preload({append: true})
+        .catch(err => console.log('preload err: ', err));
+    }, 500);
+  };
 
   initDataSource = () => {
     let {dataSource, setDataSource} = this.props;
