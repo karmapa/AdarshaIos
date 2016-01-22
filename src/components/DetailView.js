@@ -1,4 +1,4 @@
-import React, {ListView, Component, View, PropTypes, TextInput, Dimensions,
+import React, {Component, View, PropTypes, TextInput, Dimensions,
   TouchableHighlight, ScrollView, LayoutAnimation, Image} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
@@ -9,7 +9,7 @@ import {connect} from 'react-redux/native';
 import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword, searchInSutra} from '../helpers';
 import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
   setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti,
-  setDataSource, setElements} from '../modules/detailView';
+  setDataSource} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
 import {styles} from './DetailView.style';
 import {toc, getUti, highlight} from '../helpers';
@@ -522,7 +522,7 @@ class DetailView extends Component {
     }
 
     if (rows && (rows.length > 0)) {
-      this._goTopTimer = TimerMixin.setTimeout(() => {
+      TimerMixin.setTimeout(() => {
         this.preload({rows, append: false})
           .then(() => {
             this.props.setMatchIndex(0);
@@ -530,11 +530,6 @@ class DetailView extends Component {
       }, 0);
     }
   };
-
-  componentWillUnmount() {
-    clearTimeout(this._initTimer);
-    clearTimeout(this._goTopTimer);
-  }
 
   showSearchInput = () => {
 
@@ -604,7 +599,6 @@ class DetailView extends Component {
       }
 
       if (previousRow) {
-        let layoutRow = this._layoutData[previousUti];
         let previousHits = previousRow.hits || [];
         let offsetY = this.getOffsetYByMatchIndex(previousHits.length - 1, previousUti);
 
@@ -633,7 +627,7 @@ class DetailView extends Component {
           }
         })
         .catch(err => {
-          console.log('searchInSutra err: ', err)
+          console.log('searchInSutra err: ', err);
           setLoading(false);
         });
       }
@@ -673,7 +667,6 @@ class DetailView extends Component {
       let nextUti = this.getNextUti();
 
       if (nextUti) {
-        let layoutRow = this._layoutData[nextUti];
         let offsetY = this.getOffsetYByMatchIndex(0, nextUti);
 
         if (! _.isNull(offsetY)) {
@@ -706,7 +699,7 @@ class DetailView extends Component {
           }
         })
         .catch(err => {
-          console.log('searchInSutra err: ', err)
+          console.log('searchInSutra err: ', err);
           setLoading(false);
         });
       }
