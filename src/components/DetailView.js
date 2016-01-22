@@ -87,6 +87,7 @@ class DetailView extends Component {
     this._layoutData = {};
     this._busy = false;
     this._searchedInSutra = false;
+    this._searchedDirection = 'bottom';
 
     this.lastOffsetY = 0;
     this.isScrolling = false;
@@ -140,18 +141,29 @@ class DetailView extends Component {
   scrollOnLayout = uti => {
 
     if (this._searchedInSutra && (this.props.visibleUti === uti)) {
-        this._searchedInSutra = false;
-        let offsetY = this.getOffsetYByMatchIndex();
-        let topOffsetY = this.lastOffsetY + this._topBarHeight;
 
-        if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
-          let distance = topOffsetY - offsetY;
-          let newOffsetY = offsetY - distance;
-          if (newOffsetY < 0) {
-            newOffsetY = 0;
-          }
-          this.scrollTo(newOffsetY);
+      if ('bottom' === this._searchedDirection) {
+        this.props.setMatchIndex(0);
+      }
+      else {
+        let hits = _.get(_.find(this._rows, {uti}), 'hits');
+        if (hits) {
+          this.props.setMatchIndex(hits.length - 1);
         }
+      }
+
+      this._searchedInSutra = false;
+      let offsetY = this.getOffsetYByMatchIndex();
+      let topOffsetY = this.lastOffsetY + this._topBarHeight;
+
+      if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
+        let distance = topOffsetY - offsetY;
+        let newOffsetY = offsetY - distance;
+        if (newOffsetY < 0) {
+          newOffsetY = 0;
+        }
+        this.scrollTo(newOffsetY);
+      }
     }
   };
 
@@ -621,9 +633,10 @@ class DetailView extends Component {
           direction: 'top'
         })
         .then(rows => {
-          let row = _.first(rows);
+          let row = _.last(rows);
           if (row) {
             this._searchedInSutra = true;
+            this._searchedDirection = 'top';
             this.preload({rows: [row], append: true})
               .catch(err => console.log('searchInSutra preload err:', err));
           }
@@ -655,16 +668,6 @@ class DetailView extends Component {
         this.scrollTo(newOffsetY);
       }
     }
-  };
-
-  handleNextButtonClick = () => {
-    this.blurSearchInput();
-    this.goNextKeyword();
-  };
-
-  handlePreviousButtonClick = () => {
-    this.blurSearchInput();
-    this.goPreviousKeyword();
   };
 
   goNextKeyword = () => {
@@ -703,10 +706,8 @@ class DetailView extends Component {
           let row = _.first(rows);
           if (row) {
             this._searchedInSutra = true;
+            this._searchedDirection = 'bottom';
             this.preload({rows: [row], append: true})
-              .then(() => {
-                this.props.setMatchIndex(0);
-              })
               .catch(err => console.log('searchInSutra preload err:', err));
           }
           else {
@@ -737,13 +738,22 @@ class DetailView extends Component {
     }
   };
 
+  handleNextButtonClick = () => {
+    this.blurSearchInput();
+    this.goNextKeyword();
+  };
+
+  handlePreviousButtonClick = () => {
+    this.blurSearchInput();
+    this.goPreviousKeyword();
+  };
+
   getOffsetYByMatchIndex = (matchIndex = this.props.matchIndex, visibleUti = this.props.visibleUti) => {
 
     let row = _.find(this._rows, {uti: visibleUti});
     let layoutRow = this._layoutData[visibleUti];
 
     if (_.isEmpty(row) || _.isEmpty(layoutRow)) {
-      console.log('omg');
       return null;
     }
 
