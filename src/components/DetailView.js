@@ -775,7 +775,7 @@ class DetailView extends Component {
       let inputProps = {
         ref: 'searchInput',
         autoCapitalize: 'none',
-        autoFocus: true,
+        autoFocus: false,
         autoCorrect: false,
         onChangeText: this.onInputChange,
         onSubmitEditing: this.handleSubmit,
