@@ -7,7 +7,7 @@
     "init": "scripts/init.sh",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all",
     "postinstall": "scripts/postinstall.sh",
-    "build": "node node_modules/react-native/local-cli/cli.js bundle --minify --entry-file=./index.ios.js --bundle-output=./ios/main.jsbundle --platform=ios"
+    "build": "node node_modules/react-native/local-cli/cli.js bundle --minify --entry-file=./index.ios.js --bundle-output=./ios/main.jsbundle --platform=ios --dev=false"
   },
   "dependencies": {
     "buffer": "^4.1.0",
