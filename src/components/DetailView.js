@@ -30,7 +30,7 @@ const LIST_VIEW = 'listView';
 const DELTA_MOVEMENT = 80;
 
 @connect(state => ({
-  visibleUti: state.detailView.get('visibleUti'),
+  dataSource: state.detailView.get('dataSource'),
   fontSize: state.main.get('fontSize'),
   hasScrolled: state.detailView.get('hasScrolled'),
   isLoading: state.detailView.get('isLoading'),
@@ -43,8 +43,8 @@ const DELTA_MOVEMENT = 80;
   title: state.detailView.get('title'),
   toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
-  wylieOn: state.main.get('wylieOn'),
-  dataSource: state.detailView.get('dataSource'),
+  visibleUti: state.detailView.get('visibleUti'),
+  wylieOn: state.main.get('wylieOn')
 }), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword, setVisibleUti,
   setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle, setDataSource})
 class DetailView extends Component {
@@ -62,19 +62,19 @@ class DetailView extends Component {
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
     searchKeyword: PropTypes.string.isRequired,
-    setHasScrolled: PropTypes.func.isRequired,
     setDataSource: PropTypes.func.isRequired,
+    setHasScrolled: PropTypes.func.isRequired,
     setLoading: PropTypes.func.isRequired,
     setLoadingMore: PropTypes.func.isRequired,
-    setTitle: PropTypes.func.isRequired,
     setMatchIndex: PropTypes.func.isRequired,
     setSearchKeyword: PropTypes.func.isRequired,
-    setVisibleUti: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired,
     setUtis: PropTypes.func.isRequired,
+    setVisibleUti: PropTypes.func.isRequired,
     title: PropTypes.string,
     toolbarOn: PropTypes.bool.isRequired,
-    visibleUti: PropTypes.string.isRequired,
     utis: PropTypes.array.isRequired,
+    visibleUti: PropTypes.string.isRequired,
     wylieOn: PropTypes.bool.isRequired
   };
 
