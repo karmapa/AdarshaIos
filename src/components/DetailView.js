@@ -140,7 +140,7 @@ class DetailView extends Component {
     else if (this.props.matchIndex !== nextProps.matchIndex) {
       this.rerenderListView();
     }
-    else if (this.props.searchKeyword !== nextProps.searchKeyword) {
+    else if ((this.props.searchKeyword !== nextProps.searchKeyword) && this.props.searchBarOn) {
       this.highlightAsync(nextProps.searchKeyword);
     }
   }
@@ -204,20 +204,13 @@ class DetailView extends Component {
 
   highlightAsync = _.debounce(async searchKeyword => {
 
-    if (this._busy) {
-      return;
-    }
-
-    this._busy = true;
-
     let {setDataSource, dataSource} = this.props;
     let newRows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
+
     this._rows = this.updateHitsByRows(this._rows, newRows);
 
     setMatchIndex(0);
-
     setDataSource(dataSource.cloneWithRows(this._rows));
-    this._busy = false;
   }, 500);
 
   preload = async (options = {}) => {
