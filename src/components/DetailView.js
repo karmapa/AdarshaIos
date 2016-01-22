@@ -88,8 +88,6 @@ class DetailView extends Component {
     this._busy = false;
     this._searchedInSutra = false;
 
-    this.isLoading = false;
-    this.isLoadingTitle = false;
     this.lastOffsetY = 0;
     this.isScrolling = false;
   }
