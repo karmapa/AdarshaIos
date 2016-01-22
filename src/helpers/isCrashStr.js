@@ -3,5 +3,6 @@ export default function isCrashStr(str) {
   // string that are able to crash ksana iOS native module
   // 1.1a
   // 1-1
-  return new RegExp(/^(\d+\.\d+[abcd])|(\d+\-\d+)$/).test(str);
+  // 1
+  return new RegExp(/^(\d+\.\d+[abcd])|(\d+\-\d+)|(\d+)$/).test(str);
 }
