@@ -23,6 +23,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		9B12ACD31C51FD54003D2FE7 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B12ACD21C51FD54003D2FE7 /* jiangkangyur.kdb */; };
 		9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395C1C0F827C003E7A90 /* Icon-60.png */; };
 		9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395D1C0F827C003E7A90 /* Icon-72.png */; };
 		9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */; };
@@ -32,7 +33,6 @@
 		9B66396B1C0F827C003E7A90 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639621C0F827C003E7A90 /* Icon@2x.png */; };
 		9B66396C1C0F827C003E7A90 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639631C0F827C003E7A90 /* iTunesArtwork.png */; };
 		9B66396D1C0F827C003E7A90 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */; };
-		9B739EF41C3E72F6005BB987 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B739EF31C3E72F6005BB987 /* jiangkangyur.kdb */; };
 		9B739EF61C3EC294005BB987 /* monlam1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B739EF51C3EC294005BB987 /* monlam1.ttf */; };
 		9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */; };
 		9B7B3CF51C00F153003DC74C /* icon-font-size-minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */; };
@@ -176,6 +176,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9B12ACD21C51FD54003D2FE7 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9B66395C1C0F827C003E7A90 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60.png"; path = "../assets/images/Icon-60.png"; sourceTree = "<group>"; };
 		9B66395D1C0F827C003E7A90 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../assets/images/Icon-72.png"; sourceTree = "<group>"; };
 		9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../assets/images/Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -185,7 +186,6 @@
 		9B6639621C0F827C003E7A90 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../assets/images/Icon@2x.png"; sourceTree = "<group>"; };
 		9B6639631C0F827C003E7A90 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = ../assets/images/iTunesArtwork.png; sourceTree = "<group>"; };
 		9B6639641C0F827C003E7A90 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iTunesArtwork@2x.png"; path = "../assets/images/iTunesArtwork@2x.png"; sourceTree = "<group>"; };
-		9B739EF31C3E72F6005BB987 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9B739EF51C3EC294005BB987 /* monlam1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam1.ttf; path = ../assets/fonts/monlam1.ttf; sourceTree = "<group>"; };
 		9B7B3CEE1C00F153003DC74C /* icon-font-size-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-add.png"; path = "../assets/images/icon-font-size-add.png"; sourceTree = "<group>"; };
 		9B7B3CEF1C00F153003DC74C /* icon-font-size-minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-font-size-minus.png"; path = "../assets/images/icon-font-size-minus.png"; sourceTree = "<group>"; };
@@ -353,8 +353,8 @@
 				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
 				9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */,
-				9B739EF31C3E72F6005BB987 /* jiangkangyur.kdb */,
 				9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */,
+				9B12ACD21C51FD54003D2FE7 /* jiangkangyur.kdb */,
 				9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */,
 				9B6639611C0F827C003E7A90 /* Icon.png */,
 				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
@@ -720,10 +720,10 @@
 				9B7B3CF41C00F153003DC74C /* icon-font-size-add.png in Resources */,
 				9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */,
 				9B6639691C0F827C003E7A90 /* Icon-Small-50@2x.png in Resources */,
-				9B739EF41C3E72F6005BB987 /* jiangkangyur.kdb in Resources */,
 				9BFD99341C2837DF00E54EAC /* icon-launch-screen2.png in Resources */,
 				9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */,
 				9BBB89111C3F67520034FC80 /* monlam_uni_dutsa1.ttf in Resources */,
+				9B12ACD31C51FD54003D2FE7 /* jiangkangyur.kdb in Resources */,
 				9BFD99321C28376B00E54EAC /* icon-launch-screen.png in Resources */,
 				9BBB89161C3F67520034FC80 /* monlam_uni_paytsik.ttf in Resources */,
 				9BBB89151C3F67520034FC80 /* monlam_uni_ouchan5.ttf in Resources */,
