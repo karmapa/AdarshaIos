@@ -9,7 +9,6 @@ import getOffset from './getOffset';
 import isValidUti from './isValidUti';
 import getOrientation from './getOrientation';
 import getUti from './getUti';
-import getUtiParts from './getUtiParts';
 import highlight from './highlight';
 import loadNext from './loadNext';
 import loadPrev from './loadPrev';
@@ -19,8 +18,6 @@ import renderSpinner from './renderSpinner';
 import storage from './storage';
 import toc from './toc';
 import utiToSutraId from './utiToSutraId';
-import utiGreaterThan from './utiGreaterThan';
-import utiLessThan from './utiLessThan';
 import searchInSutra from './searchInSutra';
 
 export {
@@ -35,7 +32,6 @@ export {
   getOffset,
   getOrientation,
   getUti,
-  getUtiParts,
   highlight,
   loadNext,
   loadPrev,
@@ -45,7 +41,5 @@ export {
   storage,
   searchInSutra,
   toc,
-  utiGreaterThan,
-  utiLessThan,
   utiToSutraId
 };
