@@ -1,5 +1,7 @@
 import _ from 'lodash';
+import {isUti} from '.';
 
 export default function getUti(row) {
-  return _.get(row, 'uti') || _.get(row, 'segname');
+  let uti = _.get(row, 'uti') || _.get(row, 'segname');
+  return isUti(uti) ? uti : '';
 }
