@@ -373,12 +373,19 @@ class DetailView extends Component {
     setLoadingMore(false);
   };
 
+  blurSearchInput = () => {
+    let searchInput = this.refs.searchInput;
+    if (searchInput) {
+      searchInput.blur();
+    }
+  };
+
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
     this.props.setToolbarStatus(toolbarOn);
 
     if ((false === toolbarOn) && this.refs.searchInput) {
-      this.refs.searchInput.blur();
+      this.blurSearchInput();
       this.props.setSearchBarStatus(false);
     }
   };
@@ -439,7 +446,7 @@ class DetailView extends Component {
     }
 
     if (this.props.searchBarOn && this.refs.searchInput) {
-      this.refs.searchInput.blur();
+      this.blurSearchInput();
     }
 
     let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
@@ -452,7 +459,7 @@ class DetailView extends Component {
 
   handlePress = () => {
     if (this.props.searchBarOn && this.refs.searchInput) {
-      this.refs.searchInput.blur();
+      this.blurSearchInput();
     }
     else {
       this.setToolbarStatus(! this.props.toolbarOn);
@@ -650,6 +657,16 @@ class DetailView extends Component {
     }
   };
 
+  handleNextButtonClick = () => {
+    this.blurSearchInput();
+    this.goNextKeyword();
+  };
+
+  handlePreviousButtonClick = () => {
+    this.blurSearchInput();
+    this.goPreviousKeyword();
+  };
+
   goNextKeyword = () => {
 
     let {matchIndex, setMatchIndex, searchKeyword, visibleUti, setLoading} = this.props;
@@ -772,10 +789,10 @@ class DetailView extends Component {
         <View style={styles.rows}>
           <TextInput {...inputProps} />
           <View style={[styles.rows, {flex: 2}]}>
-            <TouchableHighlight onPress={this.goPreviousKeyword} style={styles.bottomButton} underlayColor={underlayColor}>
+            <TouchableHighlight onPress={this.handlePreviousButtonClick} style={styles.bottomButton} underlayColor={underlayColor}>
               <Icon name="ion|arrow-up-b" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
             </TouchableHighlight>
-            <TouchableHighlight onPress={this.goNextKeyword} style={styles.bottomButton} underlayColor={underlayColor}>
+            <TouchableHighlight onPress={this.handleNextButtonClick} style={styles.bottomButton} underlayColor={underlayColor}>
               <Icon name="ion|arrow-down-b" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
             </TouchableHighlight>
             <TouchableHighlight onPress={this.closeSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
