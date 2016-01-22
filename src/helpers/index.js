@@ -19,6 +19,7 @@ import storage from './storage';
 import toc from './toc';
 import utiToSutraId from './utiToSutraId';
 import searchInSutra from './searchInSutra';
+import isCrashStr from './isCrashStr';
 
 export {
   attachKeyboard,
@@ -41,5 +42,6 @@ export {
   storage,
   searchInSutra,
   toc,
-  utiToSutraId
+  utiToSutraId,
+  isCrashStr
 };
