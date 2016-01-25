@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
-import {utiToSutraId, findBiographyBySutraId} from '../helpers';
+import {vposToSutraId, findBiographyBySutraId} from '../helpers';
 
 const SET_BIOGRAPHY = 'BIOGRAPHY::SET_BIOGRAPHY';
 const SET_HAS_SCROLLED = 'BIOGRAPHY::SET_HAS_SCROLLED';
@@ -31,13 +31,13 @@ export default function reducer(state = initialState, action) {
   return reduceFn ? reduceFn(state, action) : state;
 }
 
-export function loadBiographyByUti(uti) {
+export function loadBiographyByVpos(vpos) {
 
   return dispatch => {
 
     dispatch(setLoading(true));
 
-    return utiToSutraId(uti)
+    return vposToSutraId(vpos)
       .then(sutraId => findBiographyBySutraId(sutraId))
       .then(biography => {
         dispatch(setBiography(biography));

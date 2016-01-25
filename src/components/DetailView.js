@@ -492,12 +492,13 @@ class DetailView extends Component {
   hasBiography = () => !! this.props.title;
 
   showBiography = () => {
-    let {visibleUti} = this.props;
-    if (visibleUti) {
+    let visibleRow = this.getVisibleRow();
+
+    if (visibleRow) {
       this.props.navigator.push({
         name: 'Biography',
         title: this.props.title,
-        uti: visibleUti
+        vpos: _.get(visibleRow, 'vpos_end')
       });
     }
   };

@@ -18,6 +18,7 @@ import renderSpinner from './renderSpinner';
 import storage from './storage';
 import toc from './toc';
 import utiToSutraId from './utiToSutraId';
+import vposToSutraId from './vposToSutraId';
 import searchInSutra from './searchInSutra';
 import isCrashStr from './isCrashStr';
 import isUti from './isUti';
@@ -44,6 +45,7 @@ export {
   searchInSutra,
   toc,
   utiToSutraId,
+  vposToSutraId,
   isCrashStr,
   isUti
 };

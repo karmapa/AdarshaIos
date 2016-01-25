@@ -68,7 +68,7 @@ class Main extends Component {
   renderContent = (route, navigator) => {
 
     if ('Biography' === route.name) {
-      return <Biography uti={route.uti} navigator={navigator} title={route.title} />;
+      return <Biography vpos={route.vpos} navigator={navigator} title={route.title} />;
     }
 
     if ('DetailView' === route.name) {
