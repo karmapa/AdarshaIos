@@ -3,13 +3,12 @@ import _ from 'lodash';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
 import {setLoading} from '../modules/main';
-import {setKeyword} from '../modules/keyboardSearch';
 import {styles} from './CategoryView.style';
 import {values, styles as globalStyles} from '../styles/global.style';
 import {fetch, removeLatin} from '../helpers';
 import {TibetanText} from '.';
 
-@connect(() => ({}), {setLoading, setKeyword})
+@connect(() => ({}), {setLoading})
 class CategoryView extends Component {
 
   static PropTypes = {
@@ -17,8 +16,7 @@ class CategoryView extends Component {
     navigator: PropTypes.array.isRequired,
     setLoading: PropTypes.func.isRequired,
     title: PropTypes.string,
-    tocRows: PropTypes.object.isRequired,
-    setKeyword: PropTypes.func.isRequired
+    tocRows: PropTypes.object.isRequired
   };
 
   state = {
@@ -54,8 +52,6 @@ class CategoryView extends Component {
       });
     }
     else if (_.isEmpty(row.children)) {
-
-      this.props.setKeyword('');
 
       setLoading(true);
 

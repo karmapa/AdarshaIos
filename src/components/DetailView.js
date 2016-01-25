@@ -33,7 +33,6 @@ const LIST_VIEW = 'listView';
   hasScrolled: state.detailView.get('hasScrolled'),
   isLoading: state.detailView.get('isLoading'),
   isLoadingMore: state.detailView.get('isLoadingMore'),
-  keyword: state.keyboardSearch.get('keyword'),
   lineHeight: state.main.get('lineHeight'),
   matchIndex: state.detailView.get('matchIndex'),
   title: state.detailView.get('title'),

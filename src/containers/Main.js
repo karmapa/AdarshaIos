@@ -74,6 +74,7 @@ class Main extends Component {
       let detailViewProps = {
         navigator,
         route,
+        keyword: route.keyword,
         rows: route.rows
       };
 

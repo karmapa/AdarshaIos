@@ -7,6 +7,7 @@ const SET_MATCH_INDEX = 'DETAIL_VIEW::SET_MATCH_INDEX';
 const SET_SEARCHBAR_STATUS = 'DETAIL_VIEW::SET_SEARCHBAR_STATUS';
 import React, {ListView} from 'react-native';
 
+const SET_KEYWORD = 'DETAIL_VIEW::SET_KEYWORD';
 const SET_SEARCH_KEYWORD = 'DETAIL_VIEW::SET_SEARCH_KEYWORD';
 const SET_TITLE = 'DETAIL_VIEW::SET_TITLE';
 const SET_TOOLBAR_STATUS = 'DETAIL_VIEW::SET_TOOLBAR_STATUS';
@@ -34,6 +35,8 @@ const initialState = Immutable.Map({
 });
 
 const actionsMap = {
+
+  [SET_KEYWORD]: (state, action) => state.set('keyword', action.keyword),
 
   [SET_SEARCH_KEYWORD]: (state, action) => state.set('searchKeyword', action.searchKeyword),
 
@@ -88,6 +91,13 @@ export function setSearchKeyword(searchKeyword) {
   return {
     type: SET_SEARCH_KEYWORD,
     searchKeyword
+  };
+}
+
+export function setKeyword(keyword) {
+  return {
+    type: SET_KEYWORD,
+    keyword
   };
 }
 
