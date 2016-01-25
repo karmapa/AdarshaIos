@@ -15,7 +15,7 @@ export default function renderSpinner(options = {}) {
 
   if (options.transparent) {
     viewStyle.push({backgroundColor: 'transparent'});
-  };
+  }
 
   return (
     <View style={viewStyle}>

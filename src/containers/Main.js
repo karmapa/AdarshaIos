@@ -2,7 +2,7 @@ import {openDb, setLoading, setSideMenuStatus, loadStorage,
   setOrientation, setDeviceOrientation} from '../modules/main';
 import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
-import React, {Component, Navigator, PropTypes, Dimensions} from 'react-native';
+import React, {Component, Navigator, PropTypes} from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import {Biography, DetailView, MasterView, Menu} from '../components';
 import {connect} from 'react-redux/native';
@@ -10,8 +10,6 @@ import {renderSpinner, attachKeyboard} from '../helpers';
 import {styles} from './Main.style';
 import Orientation from 'react-native-orientation';
 import {MENU_WIDTH} from '../constants/AppConstants';
-
-const window = Dimensions.get('window');
 
 @connect(state => ({
   isLoading: state.main.get('isLoading'),

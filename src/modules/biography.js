@@ -1,5 +1,4 @@
 import Immutable from 'immutable';
-import _ from 'lodash';
 import {vposToSutraId, findBiographyBySutraId} from '../helpers';
 
 const SET_BIOGRAPHY = 'BIOGRAPHY::SET_BIOGRAPHY';

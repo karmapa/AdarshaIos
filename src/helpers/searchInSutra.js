@@ -1,5 +1,3 @@
-import ksa from 'ksana-simple-api';
-import {DB_NAME} from '../constants/AppConstants';
 import {utiToSutraId, getFieldRange, filter, fetch} from '.';
 import _ from 'lodash';
 
