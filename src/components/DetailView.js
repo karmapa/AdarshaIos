@@ -1,4 +1,4 @@
-import React, {Component, View, PropTypes, TextInput, Dimensions,
+import React, {Component, View, PropTypes, Dimensions,
   TouchableHighlight, ScrollView, LayoutAnimation, Image} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
@@ -6,8 +6,8 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import wylie from 'tibetan/wylie';
 import {Icon} from 'react-native-icons';
 import {connect} from 'react-redux/native';
-import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword, searchInSutra} from '../helpers';
-import {setSearchKeyword, setHasScrolled, setToolbarStatus, setSearchBarStatus, setLoading,
+import {loadNext, loadPrev, renderSpinner, fetch, cleanKeyword} from '../helpers';
+import {setHasScrolled, setToolbarStatus, setLoading,
   setTitle, setMatchIndex, setUtis, setLoadingMore, setVisibleUti,
   setDataSource} from '../modules/detailView';
 import {setSideMenuStatus} from '../modules/main';
@@ -24,10 +24,8 @@ const ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
 const SETTINGS_PROPS = ['fontSize', 'lineHeight', 'wylieOn'];
 
 const COLOR_YELLOW = '#f1c40f';
-const COLOR_ORANGE = '#e67e22';
 
 const LIST_VIEW = 'listView';
-const DELTA_MOVEMENT = 80;
 
 @connect(state => ({
   dataSource: state.detailView.get('dataSource'),
@@ -38,15 +36,13 @@ const DELTA_MOVEMENT = 80;
   keyword: state.keyboardSearch.get('keyword'),
   lineHeight: state.main.get('lineHeight'),
   matchIndex: state.detailView.get('matchIndex'),
-  searchBarOn: state.detailView.get('searchBarOn'),
-  searchKeyword: state.detailView.get('searchKeyword'),
   title: state.detailView.get('title'),
   toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
   visibleUti: state.detailView.get('visibleUti'),
   wylieOn: state.main.get('wylieOn')
-}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setSearchKeyword, setVisibleUti,
-  setSearchBarStatus, setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle, setDataSource})
+}), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setVisibleUti,
+  setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle, setDataSource})
 class DetailView extends Component {
 
   static PropTypes = {
@@ -61,13 +57,11 @@ class DetailView extends Component {
     navigator: PropTypes.array.isRequired,
     route: PropTypes.object.isRequired,
     rows: PropTypes.array.isRequired,
-    searchKeyword: PropTypes.string.isRequired,
     setDataSource: PropTypes.func.isRequired,
     setHasScrolled: PropTypes.func.isRequired,
     setLoading: PropTypes.func.isRequired,
     setLoadingMore: PropTypes.func.isRequired,
     setMatchIndex: PropTypes.func.isRequired,
-    setSearchKeyword: PropTypes.func.isRequired,
     setTitle: PropTypes.func.isRequired,
     setUtis: PropTypes.func.isRequired,
     setVisibleUti: PropTypes.func.isRequired,
@@ -86,8 +80,6 @@ class DetailView extends Component {
     this._lastSearchKeyword = '';
     this._layoutData = {};
     this._busy = false;
-    this._searchedInSutra = false;
-    this._searchedDirection = 'bottom';
 
     this.lastOffsetY = 0;
     this.isScrolling = false;
@@ -97,7 +89,6 @@ class DetailView extends Component {
 
     LayoutAnimation.spring();
 
-    this.initKeyword();
     this.initDataSource();
     this.preloadDetailView();
   }
@@ -114,13 +105,6 @@ class DetailView extends Component {
     let {dataSource, setDataSource} = this.props;
     dataSource._rowHasChanged = this._rowHasChanged;
     setDataSource(dataSource);
-  };
-
-  initKeyword = () => {
-    let {keyword, setSearchKeyword} = this.props;
-    if (keyword) {
-      setSearchKeyword(keyword);
-    }
   };
 
   _rowHasChanged = (row1, row2) => {
@@ -140,39 +124,7 @@ class DetailView extends Component {
     else if (this.props.matchIndex !== nextProps.matchIndex) {
       this.rerenderListView();
     }
-    else if ((this.props.searchKeyword !== nextProps.searchKeyword) && this.props.searchBarOn) {
-      this.highlightAsync(nextProps.searchKeyword);
-    }
   }
-
-  scrollOnLayout = uti => {
-
-    if (this._searchedInSutra && (this.props.visibleUti === uti)) {
-
-      if ('bottom' === this._searchedDirection) {
-        this.props.setMatchIndex(0);
-      }
-      else {
-        let hits = _.get(_.find(this._rows, {uti}), 'hits');
-        if (hits) {
-          this.props.setMatchIndex(hits.length - 1);
-        }
-      }
-
-      this._searchedInSutra = false;
-      let offsetY = this.getOffsetYByMatchIndex();
-      let topOffsetY = this.lastOffsetY + this._topBarHeight;
-
-      if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
-        let distance = topOffsetY - offsetY;
-        let newOffsetY = offsetY - distance;
-        if (newOffsetY < 0) {
-          newOffsetY = 0;
-        }
-        this.scrollTo(newOffsetY);
-      }
-    }
-  };
 
   scrollTo = offsetY => {
 
@@ -191,27 +143,6 @@ class DetailView extends Component {
     let uti = this.props.visibleUti || _.get(_.first(this._rows), 'uti');
     return _.find(this._rows, {uti});
   };
-
-  updateHitsByRows = (rows = [], newRows = []) => {
-    newRows.forEach(newRow => {
-      let row = _.find(rows, {uti: newRow.uti});
-      if (row) {
-        row.hits = newRow.hits;
-      }
-    });
-    return rows;
-  };
-
-  highlightAsync = _.debounce(async searchKeyword => {
-
-    let {setDataSource, dataSource} = this.props;
-    let newRows = await fetch({uti: this.props.utis, q: cleanKeyword(searchKeyword)}) || [];
-
-    this._rows = this.updateHitsByRows(this._rows, newRows);
-
-    setMatchIndex(0);
-    setDataSource(dataSource.cloneWithRows(this._rows));
-  }, 500);
 
   preload = async (options = {}) => {
 
@@ -271,7 +202,6 @@ class DetailView extends Component {
   };
 
   goBack = () => {
-    this.closeSearchInput();
     this.props.navigator.pop();
   };
 
@@ -281,7 +211,7 @@ class DetailView extends Component {
 
   renderText = row => {
 
-    const {fontSize, lineHeight, wylieOn, matchIndex, searchBarOn, visibleUti} = this.props;
+    const {fontSize, lineHeight, wylieOn, matchIndex, visibleUti} = this.props;
     const defaultStyle = {fontSize, lineHeight: lineHeight * fontSize};
 
     let text = row.text.replace(/\n/g, ZERO_WIDTH_SPACE);
@@ -297,9 +227,9 @@ class DetailView extends Component {
         // default
         style = {backgroundColor: COLOR_YELLOW};
 
-        if ((row.uti === visibleUti) && (highlightIndex === matchIndex) && searchBarOn) {
+        if ((row.uti === visibleUti) && (highlightIndex === matchIndex)) {
           // target
-          style.backgroundColor = COLOR_ORANGE;
+          // style.backgroundColor = COLOR_ORANGE;
         }
         highlightIndex++;
         return <TibetanText style={style} key={key}>{str}</TibetanText>;
@@ -312,7 +242,6 @@ class DetailView extends Component {
 
   handleRowLayout = (row, event) => {
     this._layoutData[row.uti] = event.nativeEvent.layout;
-    this.scrollOnLayout(row.uti);
   };
 
   setTopBarHeight = event => {
@@ -349,7 +278,7 @@ class DetailView extends Component {
       return Promise.reject('uti is missing');
     }
     try {
-      let rows = await loadPrev({count: 1, uti, q: cleanKeyword(this.props.searchKeyword)});
+      let rows = await loadPrev({count: 1, uti, q: cleanKeyword(this.props.keyword)});
       this.props.setDataSource(this.getDataSource(rows, false));
     }
     catch (e) {
@@ -366,7 +295,7 @@ class DetailView extends Component {
     if (! uti) {
       return Promise.reject('uti is missing');
     }
-    return loadNext({count: 5, uti, q: cleanKeyword(this.props.searchKeyword)});
+    return loadNext({count: 5, uti, q: cleanKeyword(this.props.keyword)});
   };
 
   loadNext = async () => {
@@ -385,21 +314,9 @@ class DetailView extends Component {
     setLoadingMore(false);
   };
 
-  blurSearchInput = () => {
-    let searchInput = this.refs.searchInput;
-    if (searchInput) {
-      searchInput.blur();
-    }
-  };
-
   setToolbarStatus = toolbarOn => {
     LayoutAnimation.spring();
     this.props.setToolbarStatus(toolbarOn);
-
-    if ((false === toolbarOn) && this.refs.searchInput) {
-      this.blurSearchInput();
-      this.props.setSearchBarStatus(false);
-    }
   };
 
   getAllUtis = () => {
@@ -453,12 +370,8 @@ class DetailView extends Component {
   handleScroll = event => {
     this.isScrolling = true;
 
-    if (this.props.toolbarOn && this.props.hasScrolled && (! this.props.searchBarOn)) {
+    if (this.props.toolbarOn && this.props.hasScrolled) {
       this.setToolbarStatus(false);
-    }
-
-    if (this.props.searchBarOn && this.refs.searchInput) {
-      this.blurSearchInput();
     }
 
     let offsetY = _.get(event, 'nativeEvent.contentOffset.y');
@@ -470,12 +383,7 @@ class DetailView extends Component {
   };
 
   handlePress = () => {
-    if (this.props.searchBarOn && this.refs.searchInput) {
-      this.blurSearchInput();
-    }
-    else {
-      this.setToolbarStatus(! this.props.toolbarOn);
-    }
+    this.setToolbarStatus(! this.props.toolbarOn);
   };
 
   handleTouchStart = () => {
@@ -503,13 +411,11 @@ class DetailView extends Component {
     }
   };
 
-  onInputChange = searchKeyword => this.props.setSearchKeyword(searchKeyword);
-
   handleSubmit = () => this.setToolbarStatus(false);
 
   goTop = async () => {
 
-    let {isLoading, setLoading, searchKeyword} = this.props;
+    let {isLoading, setLoading, keyword} = this.props;
 
     if (isLoading) {
       return;
@@ -530,7 +436,7 @@ class DetailView extends Component {
 
       rows = await fetch({
         vpos,
-        q: cleanKeyword(searchKeyword)
+        q: cleanKeyword(keyword)
       });
 
     } catch(err) {
@@ -547,23 +453,6 @@ class DetailView extends Component {
           });
       }, 0);
     }
-  };
-
-  showSearchInput = () => {
-
-    if (this._lastSearchKeyword) {
-      this.props.setSearchKeyword(this._lastSearchKeyword);
-    }
-    if (this.props.searchKeyword) {
-      this.highlightAsync(this.props.searchKeyword);
-    }
-    this.props.setSearchBarStatus(true);
-  };
-
-  closeSearchInput = () => {
-    this._lastSearchKeyword = this.props.searchKeyword;
-    this.props.setSearchKeyword('');
-    this.props.setSearchBarStatus(false);
   };
 
   getUtisWithHits = utis => {
@@ -603,152 +492,6 @@ class DetailView extends Component {
     return utisWithHits[index + 1];
   };
 
-  goPreviousKeyword = () => {
-
-    let {matchIndex, setMatchIndex, searchKeyword, visibleUti} = this.props;
-
-    if (0 === matchIndex) {
-
-      let previousUti = this.getPreviousUti();
-      let previousRow = null;
-
-      if (previousUti) {
-        previousRow = _.find(this._rows, {uti: previousUti});
-      }
-
-      if (previousRow) {
-        let previousHits = previousRow.hits || [];
-        let offsetY = this.getOffsetYByMatchIndex(previousHits.length - 1, previousUti);
-
-        if (! _.isNull(offsetY)) {
-          setMatchIndex(previousHits.length - 1);
-          this.scrollTo(this.lastOffsetY - offsetY);
-        }
-      }
-      else {
-        setLoading(true);
-
-        searchInSutra({
-          query: cleanKeyword(searchKeyword),
-          uti: visibleUti,
-          direction: 'top'
-        })
-        .then(rows => {
-          let row = _.last(rows);
-          if (row) {
-            this._searchedInSutra = true;
-            this._searchedDirection = 'top';
-            this.preload({rows: [row], append: true})
-              .catch(err => console.log('searchInSutra preload err:', err));
-          }
-          else {
-            setLoading(false);
-          }
-        })
-        .catch(err => {
-          console.log('searchInSutra err: ', err);
-          setLoading(false);
-        });
-      }
-      return;
-    }
-
-    if (matchIndex > 0) {
-      setMatchIndex(matchIndex - 1);
-
-      // calculate next keyword's offsetY
-      let offsetY = this.getOffsetYByMatchIndex(matchIndex - 1);
-      let topOffsetY = this.lastOffsetY + this._topBarHeight;
-
-      if ((! _.isNull(offsetY)) && (offsetY < topOffsetY)) {
-        let distance = topOffsetY - offsetY;
-        let newOffsetY = offsetY - distance;
-        if (newOffsetY < 0) {
-          newOffsetY = 0;
-        }
-        this.scrollTo(newOffsetY);
-      }
-    }
-  };
-
-  goNextKeyword = () => {
-
-    let {matchIndex, setMatchIndex, searchKeyword, visibleUti, setLoading} = this.props;
-    let visibleRow = this.getVisibleRow();
-
-    if (_.isEmpty(visibleRow)) {
-      return;
-    }
-
-    let lastIndex = (visibleRow.hits || []).length - 1;
-
-    if (lastIndex === matchIndex) {
-      let nextUti = this.getNextUti();
-
-      if (nextUti) {
-        let offsetY = this.getOffsetYByMatchIndex(0, nextUti);
-
-        if (! _.isNull(offsetY)) {
-          setMatchIndex(0);
-          let newOffsetY = offsetY - this._topBarHeight;
-          this.scrollTo(newOffsetY + DELTA_MOVEMENT);
-        }
-      }
-      else {
-
-        setLoading(true);
-
-        searchInSutra({
-          query: cleanKeyword(searchKeyword),
-          uti: visibleUti,
-          direction: 'bottom'
-        })
-        .then(rows => {
-          let row = _.first(rows);
-          if (row) {
-            this._searchedInSutra = true;
-            this._searchedDirection = 'bottom';
-            this.preload({rows: [row], append: true})
-              .catch(err => console.log('searchInSutra preload err:', err));
-          }
-          else {
-            setLoading(false);
-          }
-        })
-        .catch(err => {
-          console.log('searchInSutra err: ', err);
-          setLoading(false);
-        });
-      }
-
-      return;
-    }
-
-    if (matchIndex < lastIndex) {
-
-      setMatchIndex(matchIndex + 1);
-
-      // calculate next keyword's offsetY
-      let offsetY = this.getOffsetYByMatchIndex(matchIndex + 1);
-      let bottomOffset = this.getOffsetBottom() - this._bottomBarHeight;
-
-      if ((! _.isNull(offsetY)) && (offsetY > bottomOffset)) {
-        let distance = offsetY - bottomOffset;
-        this.scrollTo(this.lastOffsetY + distance + DELTA_MOVEMENT);
-      }
-    }
-  };
-
-  handleNextButtonClick = () => {
-    this.blurSearchInput();
-    this.goNextKeyword();
-  };
-
-  handlePreviousButtonClick = () => {
-    this.blurSearchInput();
-    this.goPreviousKeyword();
-  };
-
   getOffsetYByMatchIndex = (matchIndex = this.props.matchIndex, visibleUti = this.props.visibleUti) => {
 
     let row = _.find(this._rows, {uti: visibleUti});
@@ -781,48 +524,12 @@ class DetailView extends Component {
 
   renderBottomBarContent = () => {
 
-    if (this.props.searchBarOn) {
-
-      let inputProps = {
-        ref: 'searchInput',
-        autoCapitalize: 'none',
-        autoFocus: false,
-        autoCorrect: false,
-        onChangeText: this.onInputChange,
-        onSubmitEditing: this.handleSubmit,
-        placeholder: 'Search in sutra',
-        placeholderTextColor: 'rgba(0, 0, 0, 0.6)',
-        style: styles.input,
-        value: this.props.searchKeyword
-      };
-
-      return (
-        <View style={styles.rows}>
-          <TextInput {...inputProps} />
-          <View style={[styles.rows, {flex: 2}]}>
-            <TouchableHighlight onPress={this.handlePreviousButtonClick} style={styles.bottomButton} underlayColor={underlayColor}>
-              <Icon name="ion|arrow-up-b" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-            </TouchableHighlight>
-            <TouchableHighlight onPress={this.handleNextButtonClick} style={styles.bottomButton} underlayColor={underlayColor}>
-              <Icon name="ion|arrow-down-b" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-            </TouchableHighlight>
-            <TouchableHighlight onPress={this.closeSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
-              <Icon name="ion|close-round" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
-            </TouchableHighlight>
-          </View>
-        </View>
-      );
-    }
-
     return (
       <View style={styles.rows}>
         <TouchableHighlight onPress={this.goHome} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
         {this.renderBiographyButton()}
-        <TouchableHighlight onPress={this.showSearchInput} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Image style={{width: 22, height: 22}} source={require('image!icon-sutra-search')} />
-        </TouchableHighlight>
         <TouchableHighlight onPress={this.openSideMenu} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
@@ -831,8 +538,7 @@ class DetailView extends Component {
   };
 
   getUpButtonBottom = () => {
-    // height with search input and without search input are different
-    return this.props.searchBarOn ? 77 : 50;
+    return 50;
   };
 
   handleChangeVisibleRows = (visibleRows) => {
