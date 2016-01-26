@@ -1,6 +1,13 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  heading: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  danger: {
+    color: '#ff0000'
+  },
   text: {
     color: '#656565',
     fontSize: 16,

@@ -98,24 +98,43 @@ class KeyboardSearchView extends Component {
         <View style={{height: this.getScrollViewHeight()}}>
           <ScrollView automaticallyAdjustContentInsets={false}>
             <View style={{paddingTop: 14}}>
-              <TibetanText>Wildcards Search Rule:</TibetanText>
-              <TibetanText>. (dot) and * (star) these two wildcards match single unknow syllable.</TibetanText>
-              <TibetanText>example:</TibetanText>
-              <TibetanText>search: rdzogs.sangs/ རྫོགས.སངས (1 syllable in between)</TibetanText>
-              <TibetanText>result:</TibetanText>
-              <TibetanText>-->rdzogs pa’i sangs…../རྫོགས་པའི་སངས་་་་་་</TibetanText>
-              <TibetanText>-->rdgogs par sangs…../རྫོགས་པར་སངས་་་་་</TibetanText>
-              <TibetanText>example:</TibetanText>
-              <TibetanText>search: rdzogs*sangs/ རྫོགས*སངས (1 or non syllable in between)</TibetanText>
-              <TibetanText>result:</TibetanText>
-              <TibetanText>-->rdzogs pa’i sangs…../རྫོགས་པའི་སངས་་་་་་</TibetanText>
-              <TibetanText>-->rdgogs sangs…../རྫོགས་སངས་་་་་</TibetanText>
-              <TibetanText>example:</TibetanText>
-              <TibetanText>search: de*3pa/དེ*3པ(1 or 2 or 3 or non syllable in between)</TibetanText>
-              <TibetanText>result:</TibetanText>
-              <TibetanText>-->de dag gis smras pa…./དེ་དག་གིས་སྨྲས་པ་་་་་་</TibetanText>
-              <TibetanText>-->de la smras pa.../དེ་ལ་སྨྲས་པ་་་་་</TibetanText>
-              <TibetanText>-->de gang yin pa…./དེ་གང་ཡིན་པ་་་་་་</TibetanText>
+              <TibetanText style={styles.heading}>Searching with Wildcards</TibetanText>
+              <TibetanText>You can use wildcard characters to search ADARSHA when you know the beginning and ending of a phrase but not the syllables in between. There are two wildcards: the period (.) and the asterisk (*).</TibetanText>
+              <TibetanText>Use the period when you know the exact number of syllables you want to search for. Type “.” (period) to search for one syllable in between, “.2” (period-2) to search for two syllables in  between, “.3” (period-3) to search for three syllables in between, and so forth.</TibetanText>
+              <TibetanText>For example, searching for རྫོགས.སངས (rdzogs.sangs) will return phrases such as:</TibetanText>
+              <TibetanText>རྫོགས་པའི་སངས་,</TibetanText>
+              <TibetanText>རྫོགས་པར་སངས་, and so forth.</TibetanText>
+              <TibetanText>
+                <TibetanText>If you want to search for two syllables in between, type .2 (period-2). For example, རྫོགས</TibetanText>
+                <TibetanText style={styles.danger}>.2</TibetanText>
+                <TibetanText>སངས (rdzogs</TibetanText>
+                <TibetanText style={styles.danger}>.2</TibetanText>
+                <TibetanText>sangs) will return:</TibetanText>
+              </TibetanText>
+              <TibetanText>རྫོགས་པར། །རྫོགས་སངས,</TibetanText>
+              <TibetanText>རྫོགས། །ངས་ནི་སངས, and so forth.</TibetanText>
+              <TibetanText>Use the * (asterisk) when you do not know the exact number of syllables in between. Type * (asterisk) when there might be up to one syllable in between — that is, no syllable or one syllable. Type *2 to search for up to two syllables in between, *3 to search for up to three syllables in between, and so forth.</TibetanText>
+              <TibetanText>For example, searching for རྫོགས*སངས (rdzogs*sangs) will return results with either no syllable  in between or one syllable in between, such as:</TibetanText>
+              <TibetanText>རྫོགས་སངས་,</TibetanText>
+              <TibetanText>རྫོགས་པའི་སངས་,</TibetanText>
+              <TibetanText>རྫོགས་པར་སངས་, and so forth.</TibetanText>
+              <TibetanText>
+                <TibetanText>Searching for ཡང*2སངས་ (yang</TibetanText>
+                <TibetanText style={styles.danger}>*2</TibetanText>
+                <TibetanText>sangs) will return:</TibetanText>
+              </TibetanText>
+              <TibetanText>ཡང་སངས་,</TibetanText>
+              <TibetanText>ཡང་དག་སངས་,</TibetanText>
+              <TibetanText>ཡང་རང་སངས་,</TibetanText>
+              <TibetanText>ཡང་འདིས་རང་སངས་, and so forth.</TibetanText>
+              <TibetanText>
+                <TibetanText>Searching for ཡང</TibetanText>
+                <TibetanText style={styles.danger}>*3</TibetanText>
+                <TibetanText>སངས་ will return all those same results plus:</TibetanText>
+              </TibetanText>
+              <TibetanText>ཡང་དག་རྫོགས་པའི་སངས་,</TibetanText>
+              <TibetanText>ཡང་བལང་བར་བྱའོ། །སངས་,</TibetanText>
+              <TibetanText>ཡང་དེ་དག་ནི་སངས་, and so forth.</TibetanText>
             </View>
           </ScrollView>
         </View>
