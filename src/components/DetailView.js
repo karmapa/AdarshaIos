@@ -385,8 +385,6 @@ class DetailView extends Component {
     this.isScrolling = false;
   };
 
-  hasBiography = () => !! this.props.title;
-
   showBiography = () => {
     let visibleRow = this.getVisibleRow();
 
@@ -500,16 +498,6 @@ class DetailView extends Component {
     return parseInt((layoutRow.height * (start / row.text.length)) + layoutRow.y, 10);
   };
 
-  renderBiographyButton = () => {
-    if (this.hasBiography()) {
-      return (
-        <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
-          <Image style={{width: 16, height: 16}} source={require('image!icon-biography')} />
-        </TouchableHighlight>
-      );
-    }
-  };
-
   renderBottomBarContent = () => {
 
     return (
@@ -517,7 +505,9 @@ class DetailView extends Component {
         <TouchableHighlight onPress={this.goHome} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="ion|home" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
-        {this.renderBiographyButton()}
+        <TouchableHighlight onPress={this.showBiography} style={styles.bottomButton} underlayColor={underlayColor}>
+          <Image style={{width: 16, height: 16}} source={require('image!icon-biography')} />
+        </TouchableHighlight>
         <TouchableHighlight onPress={this.openSideMenu} style={styles.bottomButton} underlayColor={underlayColor}>
           <Icon name="fontawesome|gear" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
         </TouchableHighlight>
