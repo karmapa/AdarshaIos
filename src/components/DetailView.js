@@ -74,11 +74,7 @@ class DetailView extends Component {
   constructor(props) {
     super(props);
 
-    this._topBarHeight = 0;
-    this._bottomBarHeight = 0;
-    this._lastSearchKeyword = '';
     this._layoutData = {};
-    this._busy = false;
 
     this.lastOffsetY = 0;
     this.isScrolling = false;
@@ -241,14 +237,6 @@ class DetailView extends Component {
 
   handleRowLayout = (row, event) => {
     this._layoutData[row.uti] = event.nativeEvent.layout;
-  };
-
-  setTopBarHeight = event => {
-    this._topBarHeight = event.nativeEvent.layout.height;
-  };
-
-  setBottomBarHeight = event => {
-    this._bottomBarHeight = event.nativeEvent.layout.height;
   };
 
   getRowKey = row => 'row-' + row.uti;
@@ -599,7 +587,7 @@ class DetailView extends Component {
 
           <View style={styles.container}>
             <RefreshableListView {...listViewProps} />
-            <View onLayout={this.setTopBarHeight}  style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
+            <View style={[styles.nav, {top: toolbarOn ? 0 : -60}]}>
               <TouchableHighlight onPress={this.goBack} style={styles.navButton} underlayColor={underlayColor}>
                 <Icon name="ion|chevron-left" style={globalStyles.navIcon} size={values.navIconSize} color={fontColor} />
               </TouchableHighlight>
@@ -607,7 +595,7 @@ class DetailView extends Component {
             </View>
           </View>
 
-          <View onLayout={this.setBottomBarHeight} style={[styles.bottomBar, {bottom: toolbarOn ? 0 : -70}]}>
+          <View style={[styles.bottomBar, {bottom: toolbarOn ? 0 : -70}]}>
             {this.renderBottomBarContent()}
           </View>
 
