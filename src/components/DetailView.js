@@ -274,8 +274,9 @@ class DetailView extends Component {
     let uti = getUti(firstRow);
 
     if (! uti) {
-      return Promise.reject('uti is missing');
+      return;
     }
+
     try {
       let rows = await loadPrev({count: 1, uti, q: cleanKeyword(this.props.keyword)});
       this.props.setDataSource(this.getDataSource(rows, false));
@@ -292,7 +293,7 @@ class DetailView extends Component {
     let uti = getUti(lastRow);
 
     if (! uti) {
-      return Promise.reject('uti is missing');
+      return;
     }
     return loadNext({count: 5, uti, q: cleanKeyword(this.props.keyword)});
   };
@@ -302,7 +303,7 @@ class DetailView extends Component {
     let {isLoadingMore, setLoadingMore, setDataSource} = this.props;
 
     if (isLoadingMore) {
-      return Promise.reject('isLoading');
+      return;
     }
 
     setLoadingMore(true);
