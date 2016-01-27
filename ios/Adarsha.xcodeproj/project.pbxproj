@@ -23,7 +23,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		9B12ACD31C51FD54003D2FE7 /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9B12ACD21C51FD54003D2FE7 /* jiangkangyur.kdb */; };
 		9B6639651C0F827C003E7A90 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395C1C0F827C003E7A90 /* Icon-60.png */; };
 		9B6639661C0F827C003E7A90 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395D1C0F827C003E7A90 /* Icon-72.png */; };
 		9B6639671C0F827C003E7A90 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */; };
@@ -59,6 +58,7 @@
 		9BBB89181C3F67520034FC80 /* monlam_uni_tiktong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB890F1C3F67510034FC80 /* monlam_uni_tiktong.ttf */; };
 		9BBB891A1C3F697A0034FC80 /* Kokonor.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB89191C3F69790034FC80 /* Kokonor.ttf */; };
 		9BBB891C1C3F6E2F0034FC80 /* Kailasa.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB891B1C3F6E2F0034FC80 /* Kailasa.ttc */; };
+		9BC068FA1C58A1FB008210BD /* jiangkangyur.kdb in Resources */ = {isa = PBXBuildFile; fileRef = 9BC068F91C58A1FB008210BD /* jiangkangyur.kdb */; };
 		9BD6EDB61C33D4C90037E33F /* kfs_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6EDB31C33D4C90037E33F /* kfs_ios.m */; };
 		9BD6EDB71C33D4C90037E33F /* kfs_rct.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD6EDB51C33D4C90037E33F /* kfs_rct.m */; };
 		9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFCF4761C21B5590036BD13 /* Images.xcassets */; };
@@ -176,7 +176,6 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		9B12ACD21C51FD54003D2FE7 /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9B66395C1C0F827C003E7A90 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60.png"; path = "../assets/images/Icon-60.png"; sourceTree = "<group>"; };
 		9B66395D1C0F827C003E7A90 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../assets/images/Icon-72.png"; sourceTree = "<group>"; };
 		9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../assets/images/Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -228,6 +227,7 @@
 		9BBB890F1C3F67510034FC80 /* monlam_uni_tiktong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = monlam_uni_tiktong.ttf; path = ../assets/fonts/monlam_uni_tiktong.ttf; sourceTree = "<group>"; };
 		9BBB89191C3F69790034FC80 /* Kokonor.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kokonor.ttf; path = ../assets/fonts/Kokonor.ttf; sourceTree = "<group>"; };
 		9BBB891B1C3F6E2F0034FC80 /* Kailasa.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kailasa.ttc; path = ../assets/fonts/Kailasa.ttc; sourceTree = "<group>"; };
+		9BC068F91C58A1FB008210BD /* jiangkangyur.kdb */ = {isa = PBXFileReference; lastKnownFileType = file; name = jiangkangyur.kdb; path = ../jiangkangyur.kdb; sourceTree = "<group>"; };
 		9BD6EDB21C33D4C90037E33F /* kfs_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kfs_ios.h; path = "../node_modules/ksana-react-native/kfs_ios.h"; sourceTree = "<group>"; };
 		9BD6EDB31C33D4C90037E33F /* kfs_ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kfs_ios.m; path = "../node_modules/ksana-react-native/kfs_ios.m"; sourceTree = "<group>"; };
 		9BD6EDB41C33D4C90037E33F /* kfs_rct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kfs_rct.h; path = "../node_modules/ksana-react-native/kfs_rct.h"; sourceTree = "<group>"; };
@@ -350,11 +350,11 @@
 				9B948E061C439E4600FF6269 /* HexColors.h */,
 				9B948E071C439E4600FF6269 /* HexColors.m */,
 				9B66395C1C0F827C003E7A90 /* Icon-60.png */,
+				9BC068F91C58A1FB008210BD /* jiangkangyur.kdb */,
 				9B66395D1C0F827C003E7A90 /* Icon-72.png */,
 				9B66395E1C0F827C003E7A90 /* Icon-72@2x.png */,
 				9B66395F1C0F827C003E7A90 /* Icon-Small-50.png */,
 				9BFCF4981C22DCD50036BD13 /* bg-scripture.jpg */,
-				9B12ACD21C51FD54003D2FE7 /* jiangkangyur.kdb */,
 				9B6639601C0F827C003E7A90 /* Icon-Small-50@2x.png */,
 				9B6639611C0F827C003E7A90 /* Icon.png */,
 				9B6639621C0F827C003E7A90 /* Icon@2x.png */,
@@ -723,7 +723,7 @@
 				9BFD99341C2837DF00E54EAC /* icon-launch-screen2.png in Resources */,
 				9BFCF4771C21B5590036BD13 /* Images.xcassets in Resources */,
 				9BBB89111C3F67520034FC80 /* monlam_uni_dutsa1.ttf in Resources */,
-				9B12ACD31C51FD54003D2FE7 /* jiangkangyur.kdb in Resources */,
+				9BC068FA1C58A1FB008210BD /* jiangkangyur.kdb in Resources */,
 				9BFD99321C28376B00E54EAC /* icon-launch-screen.png in Resources */,
 				9BBB89161C3F67520034FC80 /* monlam_uni_paytsik.ttf in Resources */,
 				9BBB89151C3F67520034FC80 /* monlam_uni_ouchan5.ttf in Resources */,
