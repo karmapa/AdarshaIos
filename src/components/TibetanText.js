@@ -20,7 +20,12 @@ class TibetanText extends Component {
       style = StyleSheetRegistry.getStyleByID(style);
     }
 
-    props.style = Object.assign({}, style, textStyle);
+    if (_.isArray(style)) {
+      props.style = style.concat(textStyle);
+    }
+    else {
+      props.style = Object.assign({}, style, textStyle);
+    }
 
     return <Text ref={component => this._root = component} {...props} />;
   }
