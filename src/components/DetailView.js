@@ -241,11 +241,13 @@ class DetailView extends Component {
 
   getRowKey = row => 'row-' + row.uti;
 
+  replaceNonJiangkangyurUti = uti => uti.replace(/_@\d+/g, '');
+
   renderRow = row => {
     return (
       <View key={this.getRowKey(row)} onLayout={this.handleRowLayout.bind(this, row)} style={{paddingLeft: 14, paddingRight: 14, marginBottom: 20}}>
         <View style={{borderColor: '#000000', borderBottomWidth: 1, paddingBottom: 14}}>
-          <TibetanText>{getUti(row)}</TibetanText>
+          <TibetanText>{this.replaceNonJiangkangyurUti(getUti(row))}</TibetanText>
           {this.renderText(row)}
         </View>
       </View>
