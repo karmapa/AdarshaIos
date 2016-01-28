@@ -1,5 +1,5 @@
-import React, {Component, View, PropTypes, Dimensions,
-  TouchableHighlight, ScrollView, LayoutAnimation, Image} from 'react-native';
+import React, {Component, View, PropTypes, TouchableHighlight,
+  ScrollView, LayoutAnimation, Image} from 'react-native';
 import RefreshableListView from 'react-native-refreshable-listview';
 import _ from 'lodash';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -39,7 +39,10 @@ const LIST_VIEW = 'listView';
   toolbarOn: state.detailView.get('toolbarOn'),
   utis: state.detailView.get('utis'),
   visibleUti: state.detailView.get('visibleUti'),
-  wylieOn: state.main.get('wylieOn')
+  wylieOn: state.main.get('wylieOn'),
+  orientation: state.main.get('orientation'),
+  deviceWidth: state.main.get('deviceWidth'),
+  deviceHeight: state.main.get('deviceHeight')
 }), {setHasScrolled, setToolbarStatus, setSideMenuStatus, setVisibleUti,
   setMatchIndex, setUtis, setLoadingMore, setLoading, setTitle, setDataSource})
 class DetailView extends Component {
@@ -68,7 +71,10 @@ class DetailView extends Component {
     toolbarOn: PropTypes.bool.isRequired,
     utis: PropTypes.array.isRequired,
     visibleUti: PropTypes.string.isRequired,
-    wylieOn: PropTypes.bool.isRequired
+    wylieOn: PropTypes.bool.isRequired,
+    orientation: PropTypes.string.isRequired,
+    deviceWidth: PropTypes.number.isRequired,
+    deviceHeight: PropTypes.number.isRequired
   };
 
   constructor(props) {
@@ -313,11 +319,14 @@ class DetailView extends Component {
     return _.pluck(this._rows, 'uti');
   };
 
-  getOffsetMiddle = () => this.lastOffsetY + (Dimensions.get('window').height / 2);
+  getWindowHeight = () => {
+    let {orientation, deviceWidth, deviceHeight} = this.props;
+    return ('LANDSCAPE' === orientation) ? deviceHeight : deviceWidth;
+  };
 
-  getOffsetBottom = () => this.lastOffsetY + Dimensions.get('window').height;
+  getOffsetMiddle = () => this.lastOffsetY + (this.getWindowHeight() / 2);
 
-  getWindowHeight = () => Dimensions.get('window').height;
+  getOffsetBottom = () => this.lastOffsetY + this.getWindowHeight();
 
   setVisibleUti = assignedUti => {
 

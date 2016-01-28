@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight, Dimensions} from 'react-native';
+import React, {Component, PropTypes, ListView, ScrollView, View, TextInput, TouchableHighlight} from 'react-native';
 import {styles} from './KeyboardSearchView.style';
 import {values} from '../styles/global.style';
 import {search, setKeyword, loadMore} from '../modules/keyboardSearch';
@@ -17,7 +17,10 @@ const TOP_AND_BOTTOM_SPACE = 150;
   lastKeyword: state.keyboardSearch.get('excerptData').keyword,
   isLoading: state.keyboardSearch.get('isLoading'),
   isLoadingMore: state.keyboardSearch.get('isLoadingMore'),
-  utiSets: state.keyboardSearch.get('excerptData').utiSets
+  utiSets: state.keyboardSearch.get('excerptData').utiSets,
+  orientation: state.main.get('orientation'),
+  deviceWidth: state.main.get('deviceWidth'),
+  deviceHeight: state.main.get('deviceHeight')
 }), {search, setKeyword, loadMore})
 class KeyboardSearchView extends Component {
 
@@ -32,6 +35,9 @@ class KeyboardSearchView extends Component {
     navigator: PropTypes.array.isRequired,
     search: PropTypes.func.isRequired,
     setKeyword: PropTypes.func.isRequired,
+    orientation: PropTypes.string.isRequired,
+    deviceWidth: PropTypes.number.isRequired,
+    deviceHeight: PropTypes.number.isRequired,
     utiSets: PropTypes.func.isRequired
   };
 
@@ -89,7 +95,13 @@ class KeyboardSearchView extends Component {
   }, 500);
 
   getScrollViewHeight = () => {
-    return Dimensions.get('window').height - TOP_AND_BOTTOM_SPACE;
+
+    const {orientation, deviceWidth, deviceHeight} = this.props;
+
+    if ('LANDSCAPE' === orientation) {
+      return deviceWidth - TOP_AND_BOTTOM_SPACE;
+    }
+    return deviceHeight - TOP_AND_BOTTOM_SPACE;
   };
 
   renderTips() {
@@ -215,7 +227,7 @@ class KeyboardSearchView extends Component {
 
   render() {
 
-    let {isLoading} = this.props;
+    let {isLoading, orientation, deviceWidth, deviceHeight} = this.props;
 
     let textInputProps = {
       autoCorrect: false,
@@ -227,10 +239,12 @@ class KeyboardSearchView extends Component {
       value: this.props.keyword
     };
 
+    let windowHeight = ('LANDSCAPE' === orientation) ? deviceWidth : deviceHeight;
+
     let listViewProps = {
       pageSize: 7,
       initialListSize: 7,
-      onRenderAheadDistance: Dimensions.get('window').height * 3,
+      onRenderAheadDistance: windowHeight * 3,
       dataSource: this.state.dataSource,
       renderRow: this.renderRow,
       renderFooter: this.renderFooter,
