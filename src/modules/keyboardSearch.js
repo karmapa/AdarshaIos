@@ -87,7 +87,10 @@ export function search(keyword) {
     }
 
     if (isPbId(keyword)) {
+
       let rows = await fetch({uti: keyword}) || [];
+      rows = rows.filter(row => !! row.text);
+
       dispatch(setExcerptData({
         keyword,
         rows,

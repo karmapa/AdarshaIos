@@ -154,6 +154,9 @@ class KeyboardSearchView extends Component {
 
     let [text, hits] = this.trimByHit(row.text, row.hits);
     let children = highlight(text, hits, (key, str, style) => {
+      if (str) {
+        str = str.trim();
+      }
       if (style) {
         return <TibetanText style={style} key={key}>{str}</TibetanText>;
       }
