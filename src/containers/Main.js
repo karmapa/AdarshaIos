@@ -1,4 +1,4 @@
-import {openDb, setLoading, setSideMenuStatus, loadStorage,
+import {openDb, setLoading, setSideMenuStatus, loadStorage, setDeviceSize,
   setOrientation, setDeviceOrientation} from '../modules/main';
 import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
@@ -14,7 +14,8 @@ import {MENU_WIDTH} from '../constants/AppConstants';
 @connect(state => ({
   isLoading: state.main.get('isLoading'),
   isSideMenuOpen: state.main.get('isSideMenuOpen')
-}), {openDb, openToc, loadStorage, setLoading, setSideMenuStatus, setDeviceOrientation, setOrientation})
+}), {openDb, openToc, loadStorage, setLoading, setSideMenuStatus,
+  setDeviceOrientation, setOrientation, setDeviceSize})
 @attachKeyboard
 class Main extends Component {
 
@@ -26,11 +27,13 @@ class Main extends Component {
     setOrientation: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isSideMenuOpen: PropTypes.bool.isRequired,
-    setLoading: PropTypes.func.isRequired
+    setLoading: PropTypes.func.isRequired,
+    setDeviceSize: PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.setDeviceOrientation();
+    this.props.setDeviceSize();
     Orientation.addOrientationListener(this._orientationDidChange);
     this.preload();
   }

@@ -8,6 +8,7 @@ import getHighlightStyle from './getHighlightStyle';
 import getOffset from './getOffset';
 import getOrientation from './getOrientation';
 import getUti from './getUti';
+import getDeviceSize from './getDeviceSize';
 import highlight from './highlight';
 import loadNext from './loadNext';
 import loadPrev from './loadPrev';
@@ -28,6 +29,7 @@ export {
   fetch,
   filter,
   findBiographyBySutraId,
+  getDeviceSize,
   getFieldRange,
   getHighlightStyle,
   getOffset,

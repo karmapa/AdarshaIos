@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import _ from 'lodash';
 
-import {openDb as open, storage, getOrientation} from '../helpers';
+import {openDb as open, storage, getOrientation, getDeviceSize} from '../helpers';
 
 const MERGE_SETTINGS = 'MAIN::MERGE_SETTINGS';
 const SET_BACKGROUND_INDEX = 'MAIN::SET_BACKGROUND_INDEX';
@@ -16,6 +16,8 @@ const SET_SIDE_MENU_STATUS = 'MAIN::SET_SIDE_MENU_STATUS';
 const SET_SUTRA_MAP = 'MAIN::SET_SUTRA_MAP';
 const SET_WYLIE_STATUS = 'MAIN::SET_WYLIE_STATUS';
 const SET_ORIENTATION = 'MAIN::SET_ORIENTATION';
+const SET_DEVICE_WIDTH = 'MAIN::SET_DEVICE_WIDTH';
+const SET_DEVICE_HEIGHT = 'MAIN::SET_DEVICE_HEIGHT';
 
 const defaultReaderSettings = {
   backgroundIndex: 1,
@@ -34,6 +36,8 @@ const initialState = Immutable.Map(Object.assign({
   selectedTab: 'category',
   sutraMap: {},
   orientation: 'PROTRAIT',    // PROTRAIT or LANDSCAPE
+  deviceWidth: 0,
+  deviceHeight: 0
 }, defaultReaderSettings));
 
 const actionsMap = {
@@ -62,8 +66,11 @@ const actionsMap = {
 
   [SET_KEYBOARD_HEIGHT]: (state, action) => state.set('keyboardHeight', action.keyboardHeight),
 
-  [SET_ORIENTATION]: (state, action) => state.set('orientation', action.orientation)
+  [SET_ORIENTATION]: (state, action) => state.set('orientation', action.orientation),
 
+  [SET_DEVICE_WIDTH]: (state, action) => state.set('deviceWidth', action.width),
+
+  [SET_DEVICE_HEIGHT]: (state, action) => state.set('deviceHeight', action.height)
 };
 
 export default function reducer(state = initialState, action) {
@@ -199,10 +206,34 @@ export function setOrientation(orientation) {
   };
 }
 
+export function setDeviceWidth(width) {
+  return {
+    type: SET_DEVICE_WIDTH,
+    width
+  };
+}
+
+export function setDeviceHeight(height) {
+  return {
+    type: SET_DEVICE_HEIGHT,
+    height
+  };
+}
+
 export function setDeviceOrientation() {
   return async (dispatch) => {
     let orientation = await getOrientation();
     dispatch(setOrientation(orientation));
+  };
+}
+
+export function setDeviceSize() {
+
+  let {width, height} = getDeviceSize();
+
+  return async dispatch => {
+    dispatch(setDeviceWidth(width));
+    dispatch(setDeviceHeight(height));
   };
 }
 

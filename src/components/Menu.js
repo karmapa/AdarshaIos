@@ -1,5 +1,5 @@
 import React, {Component, View, PropTypes, TouchableHighlight,
-  Image, Text, Dimensions} from 'react-native';
+  Image, Text} from 'react-native';
 import {increaseFontSize, decreaseFontSize, increaseLineHeight,
   decreaseLineHeight, toggleWylieStatus, setBackground} from '../modules/main';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -7,7 +7,6 @@ import {connect} from 'react-redux/native';
 import {styles} from './Menu.style';
 import {MENU_WIDTH} from '../constants/AppConstants';
 
-const window = Dimensions.get('window');
 const underlayColor = 'rgba(0, 0, 0, 0)';
 
 @connect(state => ({
@@ -15,7 +14,9 @@ const underlayColor = 'rgba(0, 0, 0, 0)';
   fontSize: state.main.get('fontSize'),
   wylieOn: state.main.get('wylieOn'),
   backgroundIndex: state.main.get('backgroundIndex'),
-  orientation: state.main.get('orientation')
+  orientation: state.main.get('orientation'),
+  deviceWidth: state.main.get('deviceWidth'),
+  deviceHeight: state.main.get('deviceHeight')
 }), {
   decreaseFontSize,
   decreaseLineHeight,
@@ -37,6 +38,8 @@ class Menu extends Component {
     backgroundIndex: PropTypes.number.isRequired,
     orientation: PropTypes.string.isRequired,
     toggleWylieStatus: PropTypes.func.isRequired,
+    deviceWidth: PropTypes.number.isRequired,
+    deviceHeight: PropTypes.number.isRequired,
     wylieOn: PropTypes.bool.isRequired
   };
 
@@ -64,20 +67,19 @@ class Menu extends Component {
       lineHeight,
       toggleWylieStatus,
       wylieOn,
-      orientation
+      orientation,
+      deviceWidth,
+      deviceHeight
     } = this.props;
 
-    let windowWidth = window.width;
-    let windowHeight = window.height;
-
     if ('LANDSCAPE' === orientation) {
-      [windowWidth, windowHeight] = [windowHeight, windowWidth];
+      [deviceWidth, deviceHeight] = [deviceHeight, deviceWidth];
     }
 
     const containerStyle = {
-      height: windowHeight,
-      width: windowWidth,
-      paddingLeft: windowWidth - MENU_WIDTH
+      height: deviceHeight,
+      width: deviceWidth,
+      paddingLeft: deviceWidth - MENU_WIDTH
     };
 
     return (
