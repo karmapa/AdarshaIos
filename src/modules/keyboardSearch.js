@@ -103,8 +103,7 @@ export function search(keyword) {
 
     let utiRows = await filter({
       'phrase_sep': '།',
-      q: keyword,
-      field: 'head'
+      q: keyword
     });
 
     if (_.isEmpty(utiRows)) {
