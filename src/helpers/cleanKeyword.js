@@ -1,8 +1,9 @@
 import wylie from 'tibetan/wylie';
+import {isPbId} from '.';
 
 export default function cleanKeyword(keyword = '') {
 
-  if (keyword.match(/^\d+\.\d+[abcd]$/)) {
+  if (isPbId(keyword)) {
     return keyword;
   }
 
