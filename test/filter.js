@@ -9,8 +9,7 @@ describe('ksa.filter', function() {
     ksa.filter({
       db: 'jiangkangyur',
      'phrase_sep': '།',
-      q: wylie.fromWylieWithWildcard('ga dag'),
-      field: 'head'
+      q: wylie.fromWylieWithWildcard('ga dag')
     }, cb);
 
     function cb(err, rows) {
