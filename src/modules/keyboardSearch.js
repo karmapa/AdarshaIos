@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import Immutable from 'immutable';
-import {fetch, filter} from '../helpers';
+import {fetch, filter, isPbId} from '../helpers';
 
 const SET_EXCERPT_DATA = 'KEYBOARD_SEARCH::SET_EXCERPT_DATA';
 const SET_LOADING = 'KEYBOARD_SEARCH::SET_LOADING';
@@ -86,7 +86,7 @@ export function search(keyword) {
       return;
     }
 
-    if (keyword.match(/^\d+\.\d+[abcd]$/)) {
+    if (isPbId(keyword)) {
       let rows = await fetch({uti: keyword}) || [];
       dispatch(setExcerptData({
         keyword,
