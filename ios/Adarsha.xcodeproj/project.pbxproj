@@ -545,7 +545,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = S85G2288V4;
+						DevelopmentTeam = DAM5GZD8EV;
 					};
 				};
 			};
@@ -848,7 +848,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = org.karmapa.AdarshaIos;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.dharma-treasure.adarsha";
 				PRODUCT_NAME = Adarsha;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -869,7 +869,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = org.karmapa.AdarshaIos;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.dharma-treasure.adarsha";
 				PRODUCT_NAME = Adarsha;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
