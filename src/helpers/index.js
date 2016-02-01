@@ -1,6 +1,7 @@
 import attachKeyboard from './attachKeyboard';
 import cleanKeyword from './cleanKeyword';
 import fetch from './fetch';
+import fetchBySutraId from './fetchBySutraId';
 import filter from './filter';
 import findBiographyBySutraId from './findBiographyBySutraId';
 import getFieldRange from './getFieldRange';
@@ -22,11 +23,13 @@ import vposToSutraId from './vposToSutraId';
 import searchInSutra from './searchInSutra';
 import isCrashStr from './isCrashStr';
 import isPbId from './isPbId';
+import vposToUti from './vposToUti';
 
 export {
   attachKeyboard,
   cleanKeyword,
   fetch,
+  fetchBySutraId,
   filter,
   findBiographyBySutraId,
   getDeviceSize,
@@ -47,5 +50,6 @@ export {
   utiToSutraId,
   vposToSutraId,
   isCrashStr,
+  vposToUti,
   isPbId
 };
