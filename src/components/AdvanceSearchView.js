@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {Spinner} from 'react-native-icons';
 import {KeyboardSpacer, TibetanText} from '.';
 import {connect} from 'react-redux/native';
-import {fetch} from '../helpers';
+import {fetch, fetchBySutraId} from '../helpers';
 import {setFieldsData, fields} from '../modules/advanceSearch';
 import {styles} from './AdvanceSearchView.style';
 
@@ -121,18 +121,7 @@ class AdvanceSearchView extends Component {
 
     let sutraRows = this.findSutraRows(this.props.advanceSearchSettings.division, filledInputs);
 
-    sutraRows = this.attachVpos(sutraRows)
-      .filter(sutraRow => undefined !== sutraRow.vpos)
-      .filter((sutraId, index) => index < 50);
-
-    let poss = _.pluck(sutraRows, 'vpos');
-
-    if (_.isEmpty(poss)) {
-      this.alert('Did not find any sutras.');
-      return;
-    }
-
-    let rows = await fetch({vpos: poss});
+    let rows = await fetchBySutraId(_.pluck(sutraRows, 'sutraid'));
 
     if (_.isEmpty(rows)) {
       this.alert('Did not find any sutras.');
