@@ -21,7 +21,6 @@ export default function fetchBySutraId(sutraIds) {
   })
   .then(utis => {
     if (_.isEmpty(utis)) {
-      console.log('here');
       return [];
     }
     return fetch({uti: utis});
