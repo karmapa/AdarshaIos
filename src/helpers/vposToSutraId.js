@@ -6,8 +6,8 @@ export default function vposToSutraId(vpos) {
   return new Promise((resolve, reject) => {
 
     fetch({vpos, fields: 'sutra'})
-      .then(rows => {
-        let sutraId = _.first(_.first(rows).values);
+      .then(res => {
+        let sutraId = _.get(res, '[0].values[0]', null);
         resolve(sutraId);
       })
       .catch(err => {
