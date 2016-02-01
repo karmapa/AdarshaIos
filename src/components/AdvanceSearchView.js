@@ -15,13 +15,11 @@ const biography = require('../../biography.json');
 const divisionNames = biography.divisions.map(division => division.divisionName);
 
 @connect(state => ({
-  advanceSearchSettings: state.advanceSearch.toObject(),
-  sutraMap: state.main.get('sutraMap')
+  advanceSearchSettings: state.advanceSearch.toObject()
 }), {setFieldsData})
 class AdvanceSearchView extends Component {
 
   static PropTypes = {
-    sutraMap: PropTypes.object.isRequired,
     advanceSearchSettings: PropTypes.object.isRequired,
     setFieldsData: PropTypes.func.isRequired,
     navigator: PropTypes.array.isRequired
@@ -98,12 +96,6 @@ class AdvanceSearchView extends Component {
         return (value.length > 0) && (-1 !== value.indexOf(row.value));
       });
     }
-  };
-
-  attachVpos = sutraRows => {
-    return sutraRows.map(sutraRow => Object.assign(sutraRow, {
-      vpos: _.get(this.props.sutraMap[sutraRow.sutraid], 'vpos')
-    }));
   };
 
   setLoading = loading => this.setState({loading});

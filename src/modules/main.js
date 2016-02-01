@@ -34,7 +34,6 @@ const initialState = Immutable.Map(Object.assign({
   keyboardHeight: 0,
   keyboardOn: false,
   selectedTab: 'category',
-  sutraMap: {},
   orientation: 'PROTRAIT',    // PROTRAIT or LANDSCAPE
   deviceWidth: 0,
   deviceHeight: 0
@@ -59,8 +58,6 @@ const actionsMap = {
   [SET_SELECTED_TAB]: (state, action) => state.set('selectedTab', action.selectedTab),
 
   [SET_SIDE_MENU_STATUS]: (state, action) => state.set('isSideMenuOpen', action.isSideMenuOpen),
-
-  [SET_SUTRA_MAP]: (state, action) => state.set('sutraMap', action.sutraMap),
 
   [SET_WYLIE_STATUS]: (state, action) => state.set('wylieOn', action.wylieStatus),
 
@@ -98,13 +95,6 @@ export function openDb() {
 
     return open()
       .then(db => {
-
-        db.get([['fields', 'sutra'], ['fields', 'sutra_vpos'], ['fields', 'head']], fields => {
-          let [sutraIds, sutraVposs, heads] = fields;
-          let rows = sutraVposs.map((vpos, index) => ({vpos, head: heads[index]}));
-          let sutraMap = _.object(sutraIds, rows);
-          dispatch(setSutraMap(sutraMap));
-        });
         dispatch(setDb(db));
         return db;
       })
@@ -154,13 +144,6 @@ export function setSideMenuStatus(isSideMenuOpen) {
   return {
     type: SET_SIDE_MENU_STATUS,
     isSideMenuOpen
-  };
-}
-
-export function setSutraMap(sutraMap) {
-  return {
-    type: SET_SUTRA_MAP,
-    sutraMap
   };
 }
 
