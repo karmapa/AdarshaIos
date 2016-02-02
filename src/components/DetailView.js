@@ -178,6 +178,11 @@ class DetailView extends Component {
     let vposEnd = _.get(_.first(this.props.rows), 'vpos_end');
 
     if (vposEnd) {
+
+      // don't ask me why adding this 300 vpos to fetch sutra name, ask yap
+      // https://github.com/karmapa/AdarshaIos/issues/82
+      vposEnd += 300;
+
       let data = await toc({vpos: vposEnd});
       let title = _.get(data, 'breadcrumb[3].t');
       this.props.setTitle(title);
