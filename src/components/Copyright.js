@@ -1,6 +1,8 @@
-import React, {Component, View, ScrollView} from 'react-native';
+import React, {Component, View, ScrollView, LinkingIOS} from 'react-native';
 import {Background, TibetanText} from '.';
 import {styles} from './Copyright.style';
+
+const sourceCodeLink = 'https://github.com/karmapa/AdarshaIos';
 
 class Biography extends Component {
 
@@ -37,6 +39,8 @@ class Biography extends Component {
 
             <TibetanText style={styles.center}>Copyright (C) 2016</TibetanText>
 
+            <TibetanText onPress={() => LinkingIOS.openURL(sourceCodeLink)} style={styles.link}>{sourceCodeLink}</TibetanText>
+
 
             <TibetanText style={[styles.center, {marginTop: 120, fontSize: 16}]}>ADARSHA 簡介</TibetanText>
             <TibetanText style={[styles.center, {fontSize: 16}]}>《 遠古經典，全新風貌 》</TibetanText>
@@ -57,6 +61,8 @@ class Biography extends Component {
             <TibetanText style={styles.center}>contact us:dharma.treasure.corp@gmail.com</TibetanText>
             <TibetanText style={styles.center}>https://adarsha.dharma-treasure.org</TibetanText>
             <TibetanText style={styles.center}>Copyright (C) 2016</TibetanText>
+
+            <TibetanText onPress={() => LinkingIOS.openURL(sourceCodeLink)} style={styles.link}>{sourceCodeLink}</TibetanText>
 
           </View>
         </ScrollView>
