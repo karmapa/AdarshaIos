@@ -154,13 +154,21 @@ class KeyboardSearchView extends Component {
     }
   }
 
-  onRowClicked = _.throttle(row => {
-    this.props.navigator.push({
+  onRowClicked = row => {
+
+    let {navigator} = this.props;
+
+    // https://github.com/karmapa/AdarshaIos/issues/85
+    if (navigator.getCurrentRoutes().length > 1) {
+      return;
+    }
+
+    navigator.push({
       name: 'DetailView',
       keyword: this.props.keyword,
       rows: [row]
     });
-  }, 1000);
+  };
 
   renderText = row => {
 
