@@ -158,8 +158,10 @@ class KeyboardSearchView extends Component {
 
     let {navigator} = this.props;
 
+    var currentRoute = _.last(navigator.getCurrentRoutes());
+
     // https://github.com/karmapa/AdarshaIos/issues/85
-    if (navigator.getCurrentRoutes().length > 1) {
+    if ('DetailView' === currentRoute.name) {
       return;
     }
 
