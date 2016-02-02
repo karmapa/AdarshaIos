@@ -13,16 +13,16 @@ export default function fetchBySutraId(sutraIds) {
       return [];
     }
 
-    let vposEnds = _.map(rows, row => {
-      return row[1];
+    let vpos = _.map(rows, row => {
+      return row[0];
     });
 
-    return vposToUti(vposEnds);
+    return vposToUti(vpos);
   })
   .then(utis => {
     if (_.isEmpty(utis)) {
       return [];
     }
-    return fetch({uti: utis});
+    return fetch({uti: utis, fields: 'sutra'});
   });
 }
