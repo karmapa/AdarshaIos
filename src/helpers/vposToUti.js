@@ -5,7 +5,7 @@ export default function vposToUti(vpos) {
 
   return new Promise((resolve, reject) => {
 
-    options = Object.assign({db: DB_NAME}, {vpos});
+    let options = Object.assign({db: DB_NAME}, {vpos});
 
     ksa.vpos2uti(options, (err, uti) => {
       if (err) {
