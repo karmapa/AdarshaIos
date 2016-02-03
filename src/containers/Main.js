@@ -39,7 +39,7 @@ class Main extends Component {
       this.props.setDeviceSize();
       Orientation.addOrientationListener(this._orientationDidChange);
       this.preload();
-    }, 0);
+    }, 1000);
   }
 
   componentWillUnmount() {
