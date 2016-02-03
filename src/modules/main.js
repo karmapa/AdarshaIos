@@ -29,7 +29,7 @@ const defaultReaderSettings = {
 const initialState = Immutable.Map(Object.assign({
   db: null,
   dbError: null,
-  isLoading: true,
+  isLoading: false,
   isSideMenuOpen: false,
   keyboardHeight: 0,
   keyboardOn: false,
