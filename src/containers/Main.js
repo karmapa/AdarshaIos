@@ -32,12 +32,11 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    this.preload()
-      .then(() => {
-        this.props.setDeviceSize();
-        this.props.setDeviceOrientation();
-        Orientation.addOrientationListener(this._orientationDidChange);
-      });
+
+    this.props.setDeviceSize()
+      .then(() => this.props.setDeviceOrientation())
+      .then(() => Orientation.addOrientationListener(this._orientationDidChange))
+      .then(() => this.preload());
   }
 
   componentWillUnmount() {
