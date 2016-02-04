@@ -11,8 +11,6 @@ import {styles} from './Main.style';
 import Orientation from 'react-native-orientation';
 import {MENU_WIDTH} from '../constants/AppConstants';
 
-import TimerMixin from 'react-timer-mixin';
-
 @connect(state => ({
   isLoading: state.main.get('isLoading'),
   isSideMenuOpen: state.main.get('isSideMenuOpen')
@@ -34,12 +32,10 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    TimerMixin.setTimeout(() => {
-      this.props.setDeviceOrientation();
-      this.props.setDeviceSize();
-      Orientation.addOrientationListener(this._orientationDidChange);
-      this.preload();
-    }, 3000);
+    this.preload()
+      .then(() => {
+        Orientation.addOrientationListener(this._orientationDidChange);
+      });
   }
 
   componentWillUnmount() {
@@ -50,10 +46,13 @@ class Main extends Component {
 
   async preload() {
 
-    let {openDb, openToc, setLoading, loadStorage} = this.props;
+    let {openDb, openToc, setLoading, setDeviceOrientation,
+      setDeviceSize, loadStorage} = this.props;
 
     try {
       setLoading(true);
+      await setDeviceSize();
+      await setDeviceOrientation();
       await loadStorage();
       await openToc();
       await openDb();
