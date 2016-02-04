@@ -1,4 +1,4 @@
-import {openDb, setLoading, setSideMenuStatus, loadStorage, setDeviceSize,
+import {openDb, setSideMenuStatus, loadStorage, setDeviceSize,
   setOrientation, setDeviceOrientation} from '../modules/main';
 import {openToc} from '../modules/category';
 import SideMenu from 'react-native-side-menu';
@@ -14,7 +14,7 @@ import {MENU_WIDTH} from '../constants/AppConstants';
 @connect(state => ({
   isLoading: state.main.get('isLoading'),
   isSideMenuOpen: state.main.get('isSideMenuOpen')
-}), {openDb, openToc, loadStorage, setLoading, setSideMenuStatus,
+}), {openDb, openToc, loadStorage, setSideMenuStatus,
   setDeviceOrientation, setOrientation, setDeviceSize})
 @attachKeyboard
 class Main extends Component {
@@ -27,16 +27,11 @@ class Main extends Component {
     setOrientation: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isSideMenuOpen: PropTypes.bool.isRequired,
-    setLoading: PropTypes.func.isRequired,
     setDeviceSize: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-
-    this.props.setDeviceSize()
-      .then(() => this.props.setDeviceOrientation())
-      .then(() => Orientation.addOrientationListener(this._orientationDidChange))
-      .then(() => this.preload());
+    this.preload();
   }
 
   componentWillUnmount() {
@@ -47,14 +42,16 @@ class Main extends Component {
 
   async preload() {
 
-    let {openDb, openToc, setLoading, loadStorage} = this.props;
+    let {openDb, openToc, loadStorage, setDeviceOrientation, setDeviceSize} = this.props;
 
     try {
-      setLoading(true);
+      await setDeviceSize();
+      await setDeviceOrientation();
+      Orientation.addOrientationListener(this._orientationDidChange);
+
       await loadStorage();
       await openToc();
       await openDb();
-      setLoading(false);
     }
     catch (e) {
       console.error('preload err: ', e);
