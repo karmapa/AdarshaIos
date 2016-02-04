@@ -34,6 +34,8 @@ class Main extends Component {
   componentDidMount() {
     this.preload()
       .then(() => {
+        this.props.setDeviceSize();
+        this.props.setDeviceOrientation();
         Orientation.addOrientationListener(this._orientationDidChange);
       });
   }
@@ -46,13 +48,10 @@ class Main extends Component {
 
   async preload() {
 
-    let {openDb, openToc, setLoading, setDeviceOrientation,
-      setDeviceSize, loadStorage} = this.props;
+    let {openDb, openToc, setLoading, loadStorage} = this.props;
 
     try {
       setLoading(true);
-      await setDeviceSize();
-      await setDeviceOrientation();
       await loadStorage();
       await openToc();
       await openDb();
