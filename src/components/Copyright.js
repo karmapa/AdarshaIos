@@ -35,7 +35,7 @@ class Biography extends Component {
             <TibetanText style={styles.center}>Development Team</TibetanText>
             <TibetanText style={styles.center}>Dharma Treasure Corp.</TibetanText>
             <TibetanText style={styles.center}>contact us:dharma.treasure.corp@gmail.com</TibetanText>
-            <TibetanText style={styles.center}>https://adarsha.dharma-treasure.org</TibetanText>
+            <TibetanText style={styles.center}>http://adarsha.dharma-treasure.org</TibetanText>
 
             <TibetanText style={styles.center}>Copyright (C) 2016</TibetanText>
 
@@ -59,7 +59,7 @@ class Biography extends Component {
 
             <TibetanText style={[styles.center, {marginTop: 14}]}>Dharma Treasure Corp.</TibetanText>
             <TibetanText style={styles.center}>contact us:dharma.treasure.corp@gmail.com</TibetanText>
-            <TibetanText style={styles.center}>https://adarsha.dharma-treasure.org</TibetanText>
+            <TibetanText style={styles.center}>http://adarsha.dharma-treasure.org</TibetanText>
             <TibetanText style={styles.center}>Copyright (C) 2016</TibetanText>
 
             <TibetanText onPress={() => LinkingIOS.openURL(sourceCodeLink)} style={styles.link}>{sourceCodeLink}</TibetanText>
