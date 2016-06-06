@@ -58,7 +58,7 @@ class MasterView extends Component {
             selected={'category' === selectedTab} onPress={this.onTabPress.bind(this, 'category')}>
             <CategoryView navigator={navigator} tocRows={tocRows} title={title} />
           </TabBarIOS.Item>
-          <TabBarIOS.Item title={'Keyboard Search'} icon={require('image!ion-ios-search')} accessibilityLabel="Keyboard Search"
+          <TabBarIOS.Item title={'Keyword Search'} icon={require('image!ion-ios-search')} accessibilityLabel="Keyword Search"
             selected={'keyboardSearch' === selectedTab} onPress={this.onTabPress.bind(this, 'keyboardSearch')}>
             <KeyboardSearchView navigator={navigator} />
           </TabBarIOS.Item>
