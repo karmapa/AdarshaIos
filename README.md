@@ -3,8 +3,10 @@ It has a search engine with an intuitive front-end that facilitates searching an
 
 ![evernote camera roll 20151215 212838](https://cloud.githubusercontent.com/assets/880569/11811953/a8713b84-a373-11e5-9830-f1debd44a7bd.png)
 
+# Documentation
+- [Adarsha iOS Techinical Documentation v1](https://github.com/karmapa/AdarshaIos/blob/master/docs/Adarsha%20iOS%20Techinical%20Documentation%20v1.pdf)
 
-## Installing
+## Installation
 
 Tested on xcode Version 6.4 (6E35b)
 
