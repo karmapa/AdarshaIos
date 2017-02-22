@@ -46,6 +46,10 @@ npm run build
 * ལོ་ཙཱ་བ།  譯師  translator
 * ཞུ་དག་པ།   校對者  revisor
 
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
 ## Authors
 
 * **kmsheng** - *Initial work* - [kmsheng](https://github.com/kmsheng)
