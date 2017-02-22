@@ -4,7 +4,7 @@ It has a search engine with an intuitive front-end that facilitates searching an
 ![evernote camera roll 20151215 212838](https://cloud.githubusercontent.com/assets/880569/11811953/a8713b84-a373-11e5-9830-f1debd44a7bd.png)
 
 
-## Setup
+## Installing
 
 Tested on xcode Version 6.4 (6E35b)
 
@@ -21,14 +21,14 @@ Add jiangkangur.kdb file to project in xcode
 Make sure to check Adarsha as target, this is very important.
 ![xcode-add-target](https://cloud.githubusercontent.com/assets/880569/12003325/86eaacaa-ab54-11e5-8e98-00904641e117.jpg)
 
-# Do this before deploying to iphone
+## Deploying to iphone
 
 ```
 npm install -g react-native-cli    # if you don't have react-native command
 npm run build
 ```
 
-# Terminology
+## Terminology
 
 * སྡེ་ཚན། 部 division
 * མདོ་མིང་།   經名  tname
@@ -45,3 +45,12 @@ npm run build
 * རྒལ་ལན།  爭議  debate
 * ལོ་ཙཱ་བ།  譯師  translator
 * ཞུ་དག་པ།   校對者  revisor
+
+## Authors
+
+* **kmsheng** - *Initial work* - [kmsheng](https://github.com/kmsheng)
+
+See also the list of [contributors](https://github.com/karmapa/AdarshaIos/contributors) who participated in this project.
+
+## License
+[GPL](https://github.com/karmapa/AdarshaIos/blob/master/LICENSE)
